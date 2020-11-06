@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -316,7 +316,7 @@
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
-    <strong>Farmacia Avellaneda Norte</strong> - Salud y Atencion de Calidad
+    <strong>Farmacia San Cayetano</strong> - Salud y Atencion de Calidad
   </footer>
 
   <!-- Control Sidebar -->

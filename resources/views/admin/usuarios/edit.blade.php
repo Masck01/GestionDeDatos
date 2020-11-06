@@ -1,120 +1,89 @@
 @extends('layouts.app')
 @section('content')
-@php
-    $s = '';
 
-@endphp
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-            <div class="col-md-10">
-              <h4>Actualizar Usuario</h4>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Actualizar Empleado</h3>
             </div>
-            <div class="col-md-2">
-                  <a href="{{ route('usuarios.index') }}" class="btn btn-primary btn-block">Volver</a>
-            </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <br/>
-                <form method="post" action="{{ route('usuarios.update', $usuario->id)}}">
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form method="post" action="{{ route('usuarios.update',$usuario->id)}}" role="form">
                   {{ csrf_field() }}
                   {{ method_field('PUT') }}
-                  <div class="form-group d-flex">
 
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <label>Nombre y Apellido:</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $usuario->name }}">
-                        @if ($errors->has('name'))
-                        <small class="form-text text-danger">
-                            {{ $errors->first('name') }}
-                         </small>
-                        @endif
-                    </div>
-
-                  </div>
-                  <div class="form-group d-flex">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                      <label>Correo:</label>
-                      <input type="text" class="form-control" id="email" name="email" value="{{ $usuario->email }}">
-                      @if ($errors->has('email'))
-                      <small class="form-text text-danger">
-                          {{ $errors->first('email') }}
-                       </small>
-                      @endif
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                      <label>Contraseña</label>
-                      <input type="text" class="form-control" id="password" name="password">
-                      @if ($errors->has('password'))
-                      <small class="form-text text-danger">
-                          {{ $errors->first('password') }}
-                       </small>
-                      @endif
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Nombre</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="nombre" name="nombre" value="{{$usuario->nombre}}">
                     </div>
                   </div>
-
-                  <hr> {{-- fin de usuario --}}
-
-                  <div class="form-group d-flex">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <label>Rol de Usuario:</label>
-                      <select name="rol" id="rol" class="form-control">
-                        <option value="0">Seleccione un Rol</option>
-                        @foreach ($roles as $rol)
-                          <option value="{{ $rol->id }}" @if ((isset($role_user)) && $rol->id == $role_user->role_id)
-                            {{ "selected" }}
-                          @endif>{{ $rol->name }}</option>
-                        @endforeach
-                      </select>
-                      @if ($errors->has('rol'))
-                      <small class="form-text text-danger">
-                          {{ $errors->first('rol') }}
-                       </small>
-                      @endif
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Apellido</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="apellido" name="apellido"  value="{{$usuario->apellido}}">
                     </div>
                   </div>
+                </div>
 
-                  <hr>
-
-                  <div class="form-group d-flex">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <label for="">Precione Ctrl + clic para seleccionar varias Unidad de Negocios</label>
-                      <select multiple class="custom-select" name="idUnidad_Negocio[]" id="idUnidad_Negocio">
-                        @foreach ($unidadNegocios as $u)
-                          @foreach ($userUnidadNegocios as $urs)
-                            @if ($u->idUnidad_Negocio == $urs->idUnidad_Negocio)                          
-                            @php
-                                $s = "selected";
-                            @endphp
-                            @endif 
-                          @endforeach
-                          <option value="{{$u->idUnidad_Negocio}}" {{$s}}>{{$u->nombre}}</option>
-                          @php
-                           $s = "";
-                          @endphp
-                        @endforeach
-                      </select>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Tel&eacute;fono Celular</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono_celular" name="telefono_celular"  value="{{$usuario->telefono_celular}}">
                     </div>
                   </div>
-
-                  <div class="col-md-2 float-right">
-                    <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Tel&eacute;fono Fijo</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono_fijo" name="telefono_fijo"  value="{{$usuario->telefono_fijo}}">
+                    </div>
                   </div>
-                  
-                </form>
-              </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>E-mail</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="email" name="email"  value="{{$usuario->email}}">
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Domicilio</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="domicilio" name="domicilio"  value="{{$usuario->domicilio}}">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Cuil/Cuit</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="email" name="cuit_cuil"  value="{{$usuario->cuil_cuit}}">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
+                  </div>
+                </div>
+
+              </form>
             </div>
+            <!-- /.card-body -->
           </div>
+
+
         </div>
-      </div>
     </div>
-  </div>
-@endsection
-@section('script')
-<script type="text/javascript">
-</script>
+</div>
 @endsection

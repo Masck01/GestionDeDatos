@@ -17,10 +17,10 @@
                 <div class="col-md-12">
                   <br>
                   <p><b>Nombre y Apellido: </b>{{$usuario->apellido}} {{$usuario->nombre}}</p>
-                  <p><b>CUIT / CUIL: </b>{{$usuario->cuit_cuil}}</p>
+                  <p><b>CUIT / CUIL: </b>{{$usuario->cuil_cuit}}</p>
                   <p><b>E-mail: </b>{{$usuario->email}}</p>
-                  <p><b>Telefono Celular: </b>{{$usuario->telefino_celular}}</p>
-                  <p><b>Telefono Fijo: </b>{{$usuario->telefino_fijo}}</p>
+                  <p><b>Telefono Celular: </b>{{$usuario->telefono_celular}}</p>
+                  <p><b>Telefono Fijo: </b>{{$usuario->telefono_fijo}}</p>
                   <p><b>Domicilio: </b>{{$usuario->domicilio}}</p>
                   <p><b>Tipo de Usuario </b>{{$usuario->tipo}}</p>
 

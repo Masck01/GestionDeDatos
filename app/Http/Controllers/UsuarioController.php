@@ -99,13 +99,16 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $usuario = User::findOrFail($id);
-        $usuario->name = $request->name;
-        $usuario->email = $request->email;
-        if (isset($request->password) && $request->password != "") {
-            $usuario->password = bcrypt($request->password);
-        }
-        $usuario->save();
+        $user = User::findOrFail($id);
+        $user->nombre = $request->nombre;
+        $user->apellido = $request->apellido;
+        $user->email = $request->email;
+        $user->telefono_celular = $request->telefono_celular;
+        $user->telefono_fijo = $request->telefono_fijo;
+        $user->domicilio = $request->domicilio;
+        $user->cuil_cuit = $request->cuit_cuil;
+        $user->pagina_principal = 'home';
+        $user->save();
 
         return redirect()->route('usuarios.index')->with('success','Usuario Editado correctamente');
     }
