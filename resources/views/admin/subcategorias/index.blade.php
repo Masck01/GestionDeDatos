@@ -47,14 +47,14 @@
                     <td style="text-align:center;">{{$cat->categoria->nombre}} </td>
                     <td style="text-align:center;">{{$cat->estado}} </td>
                     <td style="text-align:right;">
-                      <a href="#" class="btn btn-link" data-toggle="modal" data-target="#modal" onclick="seleccionarContacto()" title="Editar Categoria" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i>
+                      <a href="#" class="btn btn-link" data-toggle="modal" data-target="#modal" onclick="seleccionarContacto()" title="Editar Sub-Categoria" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i>
                     </td>
                     <td>
                       @if ($cat->estado == 'Activo')
                       <form class="" action="{{ route('subcategorias.eliminar', $cat->id)}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        <button type="submit" onclick="return confirm('Esta acción no podrá deshacerse. ¿Desactivar SubCategoria?')"  class="btn btn-link" data-toggle="tooltip" title="Desactivar Categoria" data-original-title="Editar Cliente"><i class="fas fa-trash-alt" style="color:red; font-size: 20px;"></i></button>
+                        <button type="submit" onclick="return confirm('Esta acción no podrá deshacerse. ¿Desactivar SubCategoria?')"  class="btn btn-link" data-toggle="tooltip" title="Desactivar Sub-Categoria" data-original-title="Editar Cliente"><i class="fas fa-trash-alt" style="color:red; font-size: 20px;"></i></button>
                       </form>
                       
                       @else

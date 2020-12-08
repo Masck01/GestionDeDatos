@@ -51,7 +51,7 @@
                       <form class="" action="{{ route('marcas.eliminar', $marca->id)}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        <button type="submit" onclick="return confirm('Esta acción no podrá deshacerse. ¿Desactivar Marca?')"  class="btn btn-link" data-toggle="tooltip" title="Desactivar Categoria" data-original-title="Editar Cliente"><i class="fas fa-trash-alt" style="color:red; font-size: 20px;"></i></button>
+                        <button type="submit" onclick="return confirm('Esta acción no podrá deshacerse. ¿Desactivar Marca?')"  class="btn btn-link" data-toggle="tooltip" title="Desactivar Marca" data-original-title="Editar Cliente"><i class="fas fa-trash-alt" style="color:red; font-size: 20px;"></i></button>
                       </form>
                       
                       @else

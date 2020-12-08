@@ -281,7 +281,7 @@
 		<div class="modal-content">
 			
 			<div class="modal-header">
-        		<h4 class="modal-title">Listado de Proveedores</h4>
+        		<h4 class="modal-title">Lista De Empleados</h4>
 					
 				<form> <input class="btn btn-default" id="searchTerm" type="text" onkeyup="doSearch()" /> 
 				<button type="button" class="btn btn-success" id="btnBuscarProveedorModal"><i class="fa fa-search"></i></button>

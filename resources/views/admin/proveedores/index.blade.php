@@ -38,7 +38,7 @@
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                        <th style="text-align:center"><a href="{{ route('proveedores.create') }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Producto" data-original-title="Ver Detalle"><i class="fas fa-plus"></i></a></th>
+                        <th style="text-align:center"><a href="{{ route('proveedores.create') }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Proveedor" data-original-title="Ver Detalle"><i class="fas fa-plus"></i></a></th>
                         <th>Razon Social</th>
                         <th>Tel&eacute;fono</th>
                         <th>Provincia</th>

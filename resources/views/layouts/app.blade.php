@@ -316,7 +316,7 @@
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
-    <strong>Farmacia San Cayetano</strong> - Salud y Atencion de Calidad
+    <strong>Farmacia Avellaneda Norte</strong> - Salud y Atencion de Calidad
   </footer>
 
   <!-- Control Sidebar -->
