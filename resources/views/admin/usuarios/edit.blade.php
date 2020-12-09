@@ -67,7 +67,48 @@
                       <input type="text" class="form-control" placeholder="Enter ..." id="email" name="cuit_cuil"  value="{{$usuario->cuil_cuit}}">
                     </div>
                   </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+              
+                      <div class="form-group">
+                        
+                          <label>Categoria</label>
+
+                          <select class="form-control select2" style="width: 100%;" id="categoria" name="categoria">
+                          
+                              <option value="{{$usuario->categorias->id}}">{{$usuario->categorias->nombre}}</option>
+                              
+                              @foreach ($categorias as $categoria)
+                              
+                              <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+
+                              @endforeach
+
+                          </select>
+                          
+                        </div>
+
+                  </div>
+                
+                  </div>
+
+                <div class="row">
+                
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Cuenta Bancaria</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="cuenta" name="cuenta" value="{{$usuario->cuenta}}">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Fecha de Ingreso</label>
+                      <input type="date" class="form-control" placeholder="Enter ..." id="ingreso" name="ingreso" value="{{$usuario->fechaIngreso}}">
+                    </div>
+                  </div>
                 </div>
+
 
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

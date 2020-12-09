@@ -16,7 +16,7 @@ class CreateTablaCarrito extends Migration
         Schema::create('carrito', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('producto_id')->unsigned();
-            $table->bigInteger('cliente_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->string('cantidad');
             $table->string('precio');
             $table->string('subTotal');
@@ -28,9 +28,9 @@ class CreateTablaCarrito extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->foreign('cliente_id')
+            $table->foreign('user_id')
             ->references('id')
-            ->on('clientes')
+            ->on('users')
             ->onUpdate('cascade')
             ->onDelete('cascade');
 

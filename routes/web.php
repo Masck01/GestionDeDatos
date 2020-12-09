@@ -175,9 +175,11 @@ Route::middleware(['auth'])->group(function(){
 
           //Liquidacion
 
+          Route::get('listado_Empleados/{categoria}', 'LiquidacionController@list')->name('liquidacion.lista');
+
           Route::get('liquidacion', 'LiquidacionController@index')->name('liquidacion.index');
 
-          Route::get('liquidacion/create', 'LiquidacionController@create')->name('liquidacion.create');
+          Route::get('liquidacion/create/{empleado}', 'LiquidacionController@create')->name('liquidacion.create');
     
           Route::post('liquidacion/store', 'LiquidacionController@store')->name('liquidacion.store');
     
@@ -259,10 +261,45 @@ Route::middleware(['auth'])->group(function(){
 
   Route::put('cajas/abrirCerrar', 'CajasController@abrirCerrar')->name('cajas.abrirCerrar');
 
-  // CONTACTOS //
+  // FAMILIAR //
 
   Route::post('grupo/store', 'FamiliarController@store')->name('familias.store');
 
   Route::put('grupo/update', 'FamiliarController@update')->name('familias.update');
 
-});
+  
+  // CONCEPTOS //
+
+  Route::get('conceptos', 'ConceptoController@index')->name('conceptos.index');
+
+  Route::get('conceptos/create', 'ConceptoController@create')->name('conceptos.create');
+
+  Route::post('conceptos/store', 'ConceptoController@store')->name('conceptos.store');
+
+  Route::get('conceptos/edit/{id}', 'ConceptoController@edit')->name('conceptos.edit');
+
+  Route::put('conceptos/{concepto}', 'ConceptoController@update')->name('conceptos.update');
+
+    // CATEGORIAS EMPLEADOS //
+
+    Route::get('categoriasEmpleados', 'CategoriaEmpleadoController@index')->name('categoriasEmpleados.index');
+
+    Route::get('categoriasEmpleados/create', 'CategoriaEmpleadoController@create')->name('categoriasEmpleados.create');
+  
+    Route::post('categoriasEmpleados/store', 'CategoriaEmpleadoController@store')->name('categoriasEmpleados.store');
+  
+    Route::get('categoriasEmpleados/edit/{id}', 'CategoriaEmpleadoController@edit')->name('categoriasEmpleados.edit');
+  
+    Route::put('categoriasEmpleados/{concepto}', 'CategoriaEmpleadoController@update')->name('categoriasEmpleados.update');
+    
+    Route::get('categoriasEmpleados/agregar/{id}', 'CategoriaEmpleadoController@agregar')->name('categoriasEmpleados.agregar');
+  
+    Route::post('categoriasEmpleados/storeConcepto/{id}', 'CategoriaEmpleadoController@storeConcepto')->name('categoriasEmpleados.storeConcepto');
+
+    //Route::get('categoriasEmpleado/edit/{concepto}','CategoriaEmpleadoController@editConcepto')->name('categoriasEmpl.editConcepto');
+    
+    Route::get('categoriasEmpleado/editConcepto/{id}', 'CategoriaEmpleadoController@editConcepto')->name('categoriasEmpl.editConcepto');
+    
+    Route::put('categoriasEmpleado/updateConcepto/{id}', 'CategoriaEmpleadoController@updateConcepto')->name('categoriasEmpleados.updateConcepto');
+    
+  });

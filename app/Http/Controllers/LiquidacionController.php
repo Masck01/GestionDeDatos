@@ -10,11 +10,13 @@ use App\Concepto;
 use App\Detalle_Liquidacion;
 use App\Deposito;
 use App\User;
+use App\CategoriaEmpleado;
 use App\Liquidacion;
 use App\DepositoProducto;
 use App\MovimientoDeposito;
 use App\Cajas;
 use App\MovimientoCaja;
+use App\CategoriaConcepto;
 use DB;
 use Session;
 use Carbon\Carbon;
@@ -36,13 +38,42 @@ class LiquidacionController extends Controller
 
     }
 
-    public function create(){
+    public function create($id){
+ 
+            $usuarios = User::findOrFail($id);
 
-            $conceptos = Concepto::all();
-    
-            $usuarios = User::orderBy('id', 'ASC')->paginate(5);
+            $conceptos = CategoriaConcepto::where('categoria_id','=',$usuarios->categoria_id)->get();
 
-            return view('admin.liquidacion.create',['conceptos'=> $conceptos,'usuarios'=>$usuarios]);
+            $haberes = CategoriaConcepto::where('categoria_id','=',$usuarios->categoria_id)->sum('montoFijo');
+
+            $cuenta = CategoriaConcepto::where('categoria_id','=',$usuarios->categoria_id)->sum('montoVariable');
+
+            $basico = Concepto::join('categorias_conceptos','conceptos.id','=','categorias_conceptos.concepto_id')
+            ->select('categorias_conceptos.montoFijo AS monto')
+            ->where('conceptos.descripcion','like','Basico')
+            ->where('categorias_conceptos.categoria_id','=',$usuarios->categoria_id)->first();
+
+            $antiguedad = Concepto::join('categorias_conceptos','conceptos.id','=','categorias_conceptos.concepto_id')
+            ->select('categorias_conceptos.montoFijo AS monto')
+            ->where('conceptos.descripcion','like','Antiguedad')
+            ->where('categorias_conceptos.categoria_id','=',$usuarios->categoria_id)->first();
+
+            list($ano,$mes,$dia) = explode("-",$usuarios->fechaIngreso);
+            $ano_diferencia  = date("Y") - $ano;
+            $mes_diferencia = date("m") - $mes;
+            $dia_diferencia   = date("d") - $dia;
+            if ($dia_diferencia < 0 || $mes_diferencia < 0)
+              $ano_diferencia--;
+            
+            $antiguedadTotal = $ano_diferencia * $antiguedad->monto;
+
+            $haberest = $haberes + $antiguedadTotal;
+            
+            $retenciones = $cuenta * $basico->monto;
+
+            $collection = collect($conceptos);
+        
+            return view('admin.liquidacion.create',['conceptos'=> $conceptos,'usuarios'=>$usuarios,'haberest'=>$haberest,'retenciones'=>$retenciones,'collection'=>$collection,'$ano_diferencia'=>$ano_diferencia]);
         
     }
     
@@ -64,45 +95,74 @@ class LiquidacionController extends Controller
                 
                 $liquidacion = new Liquidacion();
                                 
-                $liquidacion->usuario_id = $request->get('usuario_id');
+                $liquidacion->usuario_id = $request->get('empleado_id');
                                                 
-                $liquidacion->fechaDesde = '1/' . date("n", strtotime($fecha)) . '/2020';
+                $liquidacion->fechaDesde = $request->get('fechaDesde');
  
-                $liquidacion->fechaHasta = '30/' . date("n", strtotime($fecha))  . '/2020';
+                $liquidacion->fechaHasta = $request->get('fechaHasta');
 
-                $liquidacion->periodo = '10/20';
+                $liquidacion->periodo = $request->get('periodo');
                 
-                $liquidacion->salarioNeto = $request->get('total_h');
+                $liquidacion->salarioNeto = $request->get('neto');
 
-                $liquidacion->salarioBruto = $request->get('total_n');
+                $liquidacion->salarioBruto = $request->get('bruto');
 
-                $liquidacion->retenciones = $request->get('total_retencion');
+                $liquidacion->retenciones = $request->get('retencion');
                 
                 $liquidacion->save();
+
+                $usuario = User::findOrFail($request->get('empleado_id'));
+
+                list($ano,$mes,$dia) = explode("-",$usuario->fechaIngreso);
+
+                $ano_diferencia  = date("Y") - $ano;
+                
+                $mes_diferencia = date("m") - $mes;
+                
+                $dia_diferencia   = date("d") - $dia;
+                
+                if ($dia_diferencia < 0 || $mes_diferencia < 0)
+                  $ano_diferencia--;
     
-                if (count( json_decode($request->productosEnCompra,true) ) > 0) {
+               if (count( json_decode($request->productosEnPedidos,true) ) > 0) {
     
-                   $proEnPedido = json_decode($request->productosEnCompra,true);
+                  $proEnPedido = json_decode($request->productosEnPedidos,true);
                     
-                   for ($i=0; $i < count($proEnPedido); $i++) { 
+                  for ($i=0; $i < count($proEnPedido); $i++) { 
                        
-                       $detalle = new Detalle_Liquidacion();
+                      $detalle = new Detalle_Liquidacion();
                         
-                       $detalle->liquidacion_id = $liquidacion->id;
+                      $detalle->liquidacion_id = $liquidacion->id;
 
-                       $detalle->concepto_id =  $proEnPedido[$i]['idProducto'];
-                        
-                       $detalle->unidad = $proEnPedido[$i]['unidad'];
-                        
-                       $detalle->haberes = $proEnPedido[$i]['haberes'];
-                        
-                       $detalle->save();
+                      $detalle->concepto_id =  $proEnPedido[$i]['concepto_id'];
+                      
+                      $concepto = Concepto::find($detalle->concepto_id);
 
+                      if($concepto->descripcion == 'Antiguedad')  
+                      {
+                        $detalle->cantidad =  $ano_diferencia;
+                      }
+                      else{
+                        $detalle->cantidad = $proEnPedido[$i]['unidad'];
+                      }
+                      
+                      if($concepto->descripcion == 'Antiguedad')  
+                      {
+                        $detalle->montoFijo =  $ano_diferencia * $proEnPedido[$i]['montoFijo'];
+                      }
+                      else{
+                        $detalle->montoFijo = $proEnPedido[$i]['montoFijo'];
+                      } 
+                    
+                      $detalle->montoVariable = $proEnPedido[$i]['montoVariable'];
+                        
+                      $detalle->save();
                             
-                   }
-               }
+                  }
+              }
 
-          
+                
+
                 DB::commit();
             }
     
@@ -111,8 +171,10 @@ class LiquidacionController extends Controller
             
                 DB::rollback();
             }
-    
-            return redirect()->route('liquidacion.index')->with('success','Presupuesto agregado correctamente');
+
+          
+
+            return redirect()->route('liquidacion.lista',$usuario->categoria_id);
         
         else:
 
@@ -129,8 +191,26 @@ class LiquidacionController extends Controller
         $liquidacion = Liquidacion::find($id);
 
         $detalle = $liquidacion->detalle_liquidacion()->get();
+
+        $usuario= User::findOrFail($liquidacion->usuario_id);
+
+        $basico = Concepto::join('categorias_conceptos','conceptos.id','=','categorias_conceptos.concepto_id')
+        ->select('categorias_conceptos.montoFijo AS monto')
+        ->where('conceptos.descripcion','like','Basico')
+        ->where('categorias_conceptos.categoria_id','=',$usuario->categoria_id)->first();
+
+        list($ano,$mes,$dia) = explode("-",$usuario->fechaIngreso);
+
+        $ano_diferencia  = date("Y") - $ano;
+        
+        $mes_diferencia = date("m") - $mes;
+        
+        $dia_diferencia   = date("d") - $dia;
+        
+        if ($dia_diferencia < 0 || $mes_diferencia < 0)
+          $ano_diferencia--;
    
-        return view('admin.liquidacion.show', ['liquidacion'=>$liquidacion,'detalle'=>$detalle]);
+        return view('admin.liquidacion.show', ['liquidacion'=>$liquidacion,'detalle'=>$detalle,'basico'=>$basico,'ano_diferencia'=>$ano_diferencia]);
     }
 
     public function recivo ($id)
@@ -139,9 +219,27 @@ class LiquidacionController extends Controller
 
         $detalle = $liquidacion->detalle_liquidacion()->get();
 
-        $pdf = PDF::loadView('pdf.reciboSueldo',['liquidacion'=>$liquidacion,'detalle'=>$detalle])->setPaper('a4', 'landscape');
+        $usuario= User::findOrFail($liquidacion->usuario_id);
+
+        $basico = Concepto::join('categorias_conceptos','conceptos.id','=','categorias_conceptos.concepto_id')
+        ->select('categorias_conceptos.montoFijo AS monto')
+        ->where('conceptos.descripcion','like','Basico')
+        ->where('categorias_conceptos.categoria_id','=',$usuario->categoria_id)->first();
+
+
+        $pdf = PDF::loadView('pdf.reciboSueldo',['liquidacion'=>$liquidacion,'detalle'=>$detalle,'basico'=>$basico])->setPaper('a4', 'landscape');
     
         return $pdf->stream();
+    }
+
+    public function list($id){
+        
+        $categoria = CategoriaEmpleado::find($id);
+
+        $usuarios = User::where('categoria_id','=',$id)->orderBy('apellido', 'ASC')->paginate(10);
+        
+        return view('admin.liquidacion.listUser', compact('usuarios','categoria'));
+
     }
 
 

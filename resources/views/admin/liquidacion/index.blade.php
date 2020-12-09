@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
 <div class="container">
@@ -31,11 +30,11 @@
                   <table class="table table-hover text-nowrap" id="datos">
                     <thead>
                       <tr>
-                      <th style="text-align:center;"><a href="{{ route('liquidacion.create') }}" class="btn btn-link" data-toggle="tooltip" title="NUEVA LIQUIDACION" data-original-title="Generar Presupuesto"><i class="fas fa-plus"></i></a></th>
+                          <th>#</th>
                           <th>Empleado</th>
                           <th>Periodo</th>
                           <th>Salario Neto</th>
-                          <th></th>
+                          <th>Opciones</th>
                       </tr>
                     </thead>
                     <tbody>

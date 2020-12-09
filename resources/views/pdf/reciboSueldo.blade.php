@@ -212,7 +212,8 @@ footer {
   <body>
     <header class="clearfix">
       <div id="logo">
-        <img src="img/home.jpg">
+        <h1>- Boleta de  Sueldo -</h1>
+        <h3>- Comprobante para el Empleado -</h3>
       </div>
       <div id="company">
         <h2 class="name">FARMACIA AVELLANEDA NORTE</h2>
@@ -227,9 +228,10 @@ footer {
         <div id="client">
           <h2 class="name">Empleado:{{$liquidacion->usuario->apellido}} {{$liquidacion->usuario->nombre}}</h2>
           <div class="address">Direccion: {{$liquidacion->usuario->domicilio}}</div>
+          <div class="address">Fecha Ingreso: {{$liquidacion->usuario->fechaIngreso}}</div>
+          <div class="address">Cuenta Bancaria: {{$liquidacion->usuario->cuenta}}</div>
         </div>
         <div id="invoice">
-          <h1>- Boleta de  Sueldo -</h1>
           <div class="date">Fecha: {{$liquidacion->getFromDateAttribute($liquidacion->fecha)}}</div>
           <div class="date">Periodo: {{$liquidacion->periodo}}</div>
           <div class="date">Desde: {{$liquidacion->fechaDesde}} Hasta:  {{$liquidacion->fechaHasta}}</div>
@@ -250,21 +252,17 @@ footer {
                   <tr>
                     <td  class="desc">{{$loop->iteration}}</td>
                     <td  class="desc">{{$det->concepto->descripcion }}</td>
-                    <td  class="unit">{{$det->unidad }}</td>
-                    @if(($det->concepto->tipo == 'Haberes')) 
-                      @if(($det->haberes == 0))
-                       <td class="qty"> AR$ {{$det->concepto->montofijo * 23000}} </td>
-                       <td class="qty"> AR$ 0  </td>       
-                       @else
-                      <td class="qty"> AR$ {{$det->haberes }} </td>
-                      <td class="qty"> AR$ 0  </td>
-                       @endif
+                    @if($det->montoFijo == 0)
+                    <td class="desc"> {{$det->montoVariable * 100}} [%]</td>
                     @else
-                    <td class="qty"> AR$ 0  </td>
-                    @endif 
-                    @if(($det->concepto->tipo == 'Retenciones'))
-                        <td class="qty"> AR$ {{$det->concepto->montoVariable  * 23000}} </td> 
-                    @endif   
+                        @if($det->concepto->descripcion == 'Antiguedad')
+                          <td class="desc"> {{$det->cantidad}} [Años]</td>	
+                        @else
+                        <td class="desc"> {{$det->cantidad}}[u]</td>	
+                        @endif	
+                    @endif	
+                    <td class="desc"> AR$ {{$det->montoFijo}} </td>
+                    <td class="desc"> AR$ {{$det->montoVariable * $basico->monto }} </td>  
                   </tr>
           @endforeach
         </tbody>
@@ -278,6 +276,80 @@ footer {
           </tr>
         </tfoot>
       </table>
+      <img src="img/firma.jpg" width="150" height="80"  style ="margin-left: 730px;" >
+    </main>
+    <footer>
+
+    </footer>
+
+<br>
+<br>
+<br>
+    <header class="clearfix">
+      <div id="logo">
+      </div>
+      <div id="company">
+      <h2 class="name">Boleta de Sueldo</h2>
+        <h2 class="name">FARMACIA AVELLANEDA NORTE</h2>
+        <div>Av. Sarmiento 199 | 4000 | Tucumán</div>
+        <div>Tel / Fax. 0381. 4219399 </div>
+        <div><a href="mailto:dhsay@arnet.com.ar">favellanedanorte@arnet.com.ar</a></div>
+      </div>
+      </div>
+    </header>
+    <main>
+    <div id="details" class="clearfix">
+        <div id="client">
+          <h2 class="name">Empleado:{{$liquidacion->usuario->apellido}} {{$liquidacion->usuario->nombre}}</h2>
+          <div class="address">Direccion: {{$liquidacion->usuario->domicilio}}</div>
+          <div class="address">Fecha Ingreso: {{$liquidacion->usuario->fechaIngreso}}</div>
+        </div>
+        <div id="invoice">
+          <div class="date">Fecha: {{$liquidacion->getFromDateAttribute($liquidacion->fecha)}}</div>
+          <div class="date">Periodo: {{$liquidacion->periodo}}</div>
+          <div class="date">Desde: {{$liquidacion->fechaDesde}} Hasta:  {{$liquidacion->fechaHasta}}</div>
+        </div>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="desc">#</th>
+            <th class="desc">Concepto</th>
+                  <th class="desc">Unidades</th>
+                  <th class="qty">Haberes</th>
+                  <th class="qty">Retenciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        @foreach ($detalle as $det)
+                  <tr>
+                    <td  class="desc">{{$loop->iteration}}</td>
+                    <td  class="desc">{{$det->concepto->descripcion }}</td>
+                    @if($det->montoFijo == 0)
+                    <td class="desc"> {{$det->montoVariable * 100}} [%]</td>
+                    @else
+                        @if($det->concepto->descripcion == 'Antiguedad')
+                          <td class="desc"> {{$det->cantidad}} [Años]</td>	
+                        @else
+                        <td class="desc"> {{$det->cantidad}}[u]</td>	
+                        @endif	
+                    @endif	
+                    <td class="desc"> AR$ {{$det->montoFijo}} </td>
+                    <td class="desc"> AR$ {{$det->montoVariable * $basico->monto }} </td>  
+                  </tr>
+          @endforeach
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td style="text-align: center"> Salario Bruto AR$ {{$liquidacion->salarioBruto}}</td>
+            <td style="text-align: center"> Retenciones AR$ {{$liquidacion->salarioBruto - $liquidacion->salarioNeto}}</td>
+            <td style="text-align: center"> Salario Neto AR$ {{$liquidacion->salarioNeto}}</td>
+          </tr>
+        </tfoot>
+      </table>
+      <img src="img/firma.jpg" width="150" height="80"  style ="margin-left: 730px;" >
     </main>
     <footer>
     </footer>

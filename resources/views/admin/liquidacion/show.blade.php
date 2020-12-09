@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
   <div class="container">
@@ -39,21 +38,13 @@
                   <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$det->concepto->descripcion }}</td>
-                    <td style="text-aling:center">{{$det->unidad }}</td>
-                    @if(($det->concepto->tipo == 'Haberes')) 
-                      @if(($det->haberes == 0))
-                       <td> AR$ {{$det->concepto->montofijo * 23000}} </td>
-                       <td> AR$ 0  </td>       
-                       @else
-                      <td> AR$ {{$det->haberes }} </td>
-                      <td> AR$ 0  </td>
-                       @endif
-                    @else
-                    <td> AR$ 0  </td>
-                    @endif 
-                    @if(($det->concepto->tipo == 'Retenciones'))
-                        <td> AR$ {{$det->concepto->montoVariable  * 23000}} </td> 
-                    @endif   
+                    @if($det->concepto->descripcion == 'Antiguedad')
+                      <td> {{$ano_diferencia}} [Años]</td>	
+										@else
+										<td>{{$det->cantidad}}[u]</td>	
+										@endif	
+                    <td> AR$ {{$det->montoFijo}} </td>
+                    <td> AR$ {{$det->montoVariable * $basico->monto }} </td>  
                   </tr>
                 @endforeach
               </tbody>

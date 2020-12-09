@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Familiar;
+use App\CategoriaEmpleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -33,8 +34,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-
-        return view('admin.usuarios.create');
+        $categorias = CategoriaEmpleado::orderBy('nombre', 'DESC')->paginate(10);
+        
+        return view('admin.usuarios.create',compact('categorias'));
     }
 
     /**
@@ -56,6 +58,9 @@ class UsuarioController extends Controller
         $user->domicilio = $request->domicilio;
         $user->cuil_cuit = $request->cuit_cuil;
         $user->pagina_principal = 'home';
+        $user->categoria_id =  $request->categoria;
+        $user->cuenta = $request->cuenta;
+        $user->fechaIngreso = $request->ingreso;
         $user->save();
         
         return redirect()->route('usuarios.index');
@@ -85,8 +90,10 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         $usuario = User::findOrFail($id);
+
+        $categorias = CategoriaEmpleado::orderBy('nombre', 'DESC')->paginate(10);
         
-        return view('admin.usuarios.edit',compact('usuario'));
+        return view('admin.usuarios.edit',compact('usuario','categorias'));
 
     }
 
@@ -108,6 +115,9 @@ class UsuarioController extends Controller
         $user->domicilio = $request->domicilio;
         $user->cuil_cuit = $request->cuit_cuil;
         $user->pagina_principal = 'home';
+        $user->categoria_id =  $request->categoria;
+        $user->cuenta = $request->cuenta;
+        $user->fechaIngreso = $request->ingreso;
         $user->save();
 
         return redirect()->route('usuarios.index')->with('success','Usuario Editado correctamente');

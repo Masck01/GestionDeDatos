@@ -20,6 +20,9 @@ class CreateTablaMovimientoCajas extends Migration
             $table->string('fecha');
             $table->string('entrada');
             $table->string('salida');
+            $table->string('moneda');
+            $table->string('saldoparcialpesos');
+            $table->string('saldoparcialdolares');
             $table->timestamps();
 
             $table->foreign('cajas_id')

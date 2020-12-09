@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Detalle_Liquidacion extends Model
 {
-    protected $table = "detalle_liquidaciones";
+    protected $table = "linea_liquidacion";
 
     protected $primaryKey = 'id';
 

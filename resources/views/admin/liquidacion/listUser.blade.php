@@ -30,12 +30,8 @@
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                      <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 12px;">                     
-                        <a href="{{ route('usuarios.create') }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Producto" data-original-title="Ver Detalle"><i class="fas fa-plus" style="color: blue; font-size: 20px;"></i></a>
-                        <a style="display:none;" href="#" class="btn btn-link" data-toggle="modal"  data-target="#ModalImportProduct" title="Importar Archivo Excel" data-original-title="Ver Detalle"><i class="fas fa-cloud-upload-alt" style="color: blue;  font-size: 20px;"></i></a>                   
-                      </th>
+                      <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 12px;">#</th>
                       <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 92px; text-align:center;">Nombre</th>
-                      <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 92px; text-align:center;">Tipo</th>
                       <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 42px; text-align:center;">Cuil</th>
                       <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 42px; text-align:center;"></th>
                       </tr>
@@ -45,7 +41,6 @@
                         <tr>
                         <th rowspan="1" colspan="1" style="text-align:center;">#</th>
                         <th rowspan="1" colspan="1" style="text-align:center;">Nombre</th>
-                        <th rowspan="1" colspan="1" style="text-align:center;">Tipo</th>
                         <th rowspan="1" colspan="1" style="text-align:center;">Cuil</th>
                         <th rowspan="1" colspan="1" style="text-align:center;"></th>
 							          </tr>
@@ -55,11 +50,9 @@
                         <tr>
                           <td style="text-align:center;">{{$loop->iteration}}</td>
                           <td style="text-align:center;">{{ $usuario->apellido}} {{ $usuario->nombre}}</td>
-                          <td style="text-align:center;">{{ $usuario->tipo}}</td>
                           <td style="text-align:center;">{{ $usuario->cuil_cuit }}</td>
                           <td>
-                            <a href="{{ route('usuarios.show', $usuario->id) }}" class="btn btn-link" data-toggle="tooltip" title="Ver usuario" data-original-title="Ver Detalle" style="text-align:center;" ><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
-                            <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-link" data-toggle="tooltip" title="Editar usuario" data-original-title="Editar Producto" style="text-align:center;" ><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
+                          <a href="{{ route('liquidacion.create',$usuario->id) }}" class="btn btn-link" data-toggle="tooltip" title="Liquidar Sueldo" data-original-title="Agregar Concepto"><i class="fas fa-money-bill-wave" style="color:black; font-size: 20px;"></i></a>
                           </td>
                         </tr>
                       @endforeach
