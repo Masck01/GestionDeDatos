@@ -76,7 +76,7 @@ class UsuarioController extends Controller
     {
         $usuario = User::findOrFail($id);
 
-        $clientes = Familiar::orderBy('id', 'ASC')->paginate(10);
+        $clientes = Familiar::where('usuario_id','like',$usuario->id)->orderBy('id', 'ASC')->paginate(10);
 
         return view('admin.usuarios.show',compact('usuario','clientes'));
     }
