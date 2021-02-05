@@ -1,11 +1,10 @@
 <?php
 
+use App\Usuario;
 use Illuminate\Database\Seeder;
-use App\User;
 use Illuminate\Support\Facades\Hash;
 
-
-class UsersTableSeeder extends Seeder
+class UsuarioSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name'=>'Pablo',
+        Usuario::create([
             'email'=>'pablo@gmail.com',
             'username'=>'ppablo',
             'password'=>Hash::make('1234'),
