@@ -15,6 +15,7 @@ class EmpleadoSeeder extends Seeder
         Empleado::create([
             'nombre'=>'Pablo',
             'apellido'=>'Beckker',
+            'cuit'=>'202222232',
             'fecha_ingreso'=>'2020-02-02',
             'categoria_id'=>'1',
             'cajadeahorro_id'=>'1',

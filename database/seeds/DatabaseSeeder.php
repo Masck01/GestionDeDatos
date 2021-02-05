@@ -1,6 +1,5 @@
 <?php
 
-use App\CajaDeAhorro;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,9 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call(SucursalSeeder::class);
         $this->call(BancoSeeder::class);
         $this->call(CategoriaSeeder::class);
-        $this->call(CajaDeAhorro::class);
+        $this->call(CajaDeAhorroSeeder::class);
         $this->call(EmpleadoSeeder::class);
-        $this->call(UsersTableSeeder::class);
+        $this->call(UsuarioSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
         //$this->call(UsersTableSeeder::class);
         // $this->call(PermissionsTableSeeder::class);
         // $this->call(ProvinciasTableSeeder::class);

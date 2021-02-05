@@ -15,7 +15,7 @@ class SucursalSeeder extends Seeder
         Sucursal::create([
             'razon_social'=>'Farmacia Avellaneda',
             'direccion'=>'Esquina Norte',
-            'telefonos'=>'3219999',
+            'telefono'=>'3219999',
             'cuit'=>'2022224332',
         ]);
         //

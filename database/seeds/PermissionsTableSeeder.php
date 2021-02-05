@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\User;
+use App\Usuario;
 use Illuminate\Support\Facades\Hash;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegrationAssertPostConditions;
 
@@ -29,7 +30,7 @@ class PermissionsTableSeeder extends Seeder
         $role_admin = Role::create(['name' => 'Super Administrador']);
         $role_admin->syncPermissions($permissions_admin);
 
-        $userpablo = User::find(1);
+        $userpablo = Usuario::find(1);
 
 
         // $userrtorfe = User::create([

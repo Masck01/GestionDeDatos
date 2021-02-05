@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class CajaDeAhorro extends Model
 {
-    protected $table = 'cajasdeahorro';
+    protected $table = 'cajadeahorro';
+
+    protected $fillable = [
+        'codigo','banco_id'
+    ];
 }
