@@ -69,6 +69,8 @@ return [
          */
 
         'role_has_permissions' => 'role_has_permissions',
+
+        'usuario' => 'usuario'
     ],
 
     'column_names' => [
@@ -81,7 +83,7 @@ return [
          * that case, name this `model_uuid`.
          */
 
-        'model_morph_key' => 'model_id',
+        'model_morph_key' => 'usuario_id',
     ],
 
     /*
