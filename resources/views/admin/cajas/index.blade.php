@@ -12,7 +12,7 @@
                 </div>
 
               </div>
-            </div><!-- /.container-fluid -->
+            </div>
           </section>
 
           @if ( count($errors) > 0 )
@@ -40,8 +40,9 @@
                 <div class="col-md-12">
                   <br>
                   <p><b> Nombre </b>{{$cajas->nombre}}</p>
-                  <p><b> Saldo AR$ </b> {{$cajas->saldoPesos}}</p>
-                  <p><b> Saldo U$D </b> {{$cajas->saldoDolares}}</p>
+                 <!--<p><b> Saldo AR$ </b> {{$cajas->saldoPesos}}</p>
+                  <p><b> Saldo U$D </b> {{$cajas->saldoDolares}}</p> /.container-fluid -->
+                  <p><b> Saldo AR$ </b> {{$cajas->saldo}}</p>
                   <p><b> Estado </b>{{$cajas->estado}}</p>
                 </div>
                 <div class="col-lg-6 col-md-6 col-dm-6 col-xs-12" id="guardar1">

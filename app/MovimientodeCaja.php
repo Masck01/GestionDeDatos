@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MovimientoCaja extends Model
+class MovimientodeCaja extends Model
 {
-    protected $table = "movimientos_cajas";
+    protected $table = "movimientodecaja";
 
     protected $fillable = [
-        'cajas_id',
+        'caja_id',
         'descripcion',
         'entrada',
         'salida'

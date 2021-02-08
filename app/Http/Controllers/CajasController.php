@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Categoria;
-use App\Cajas;
-use App\MovimientoCaja;
+use App\Caja;
+use App\MovimientodeCaja;
 use Carbon\Carbon;
 use Validator;
 
@@ -13,9 +13,9 @@ class CajasController extends Controller
 {
     public function index()
     {
-        $cajas = cajas::find(1);
+        $cajas = caja::find(1);
 
-        $movimientos = MovimientoCaja::where('cajas_id','like','1')->orderBy('id','DESC')->paginate('10');
+        $movimientos = MovimientodeCaja::where('caja_id','like','1')->orderBy('id','DESC')->paginate('10');
 
         return view('admin.cajas.index', compact('cajas','movimientos'));
 
@@ -48,7 +48,7 @@ class CajasController extends Controller
 
         else:
 
-            $cajas = cajas::find(1);
+            $cajas = caja::find(1);
 
             if($request->moneda == 'Pesos'):
 
@@ -64,7 +64,7 @@ class CajasController extends Controller
             
             endif;
 
-            $movimiento = new MovimientoCaja();
+            $movimiento = new MovimientodeCaja();
 
             $movimiento->cajas_id = 1;
 
@@ -117,7 +117,7 @@ class CajasController extends Controller
 
         else:
 
-            $cajas = cajas::find(1);
+            $cajas = caja::find(1);
 
             if($request->moneda == 'Pesos'):
 
@@ -133,7 +133,7 @@ class CajasController extends Controller
             
             endif;
 
-            $movimiento = new MovimientoCaja();
+            $movimiento = new MovimientodeCaja();
 
             $movimiento->cajas_id = 1;
 
@@ -186,7 +186,7 @@ class CajasController extends Controller
 
         else:
 
-            $cajas = cajas::find(1);
+            $cajas = caja::find(1);
 
             if($request->moneda == 'Pesos'):
 
@@ -202,7 +202,7 @@ class CajasController extends Controller
             
             endif;
 
-            $movimiento = new MovimientoCaja();
+            $movimiento = new MovimientodeCaja();
 
             $movimiento->cajas_id = 1;
 
@@ -232,7 +232,7 @@ class CajasController extends Controller
     {
         $mytime = Carbon::now('America/Argentina/Tucuman');
 
-        $cajas = cajas::find(1);
+        $cajas = caja::find(1);
 
         if($cajas->estado == 'abierta'):
 
@@ -240,7 +240,7 @@ class CajasController extends Controller
 
             $cajas->save();
 
-            $movimiento = new MovimientoCaja();
+            $movimiento = new MovimientodeCaja();
 
             $movimiento->cajas_id = 1;
 
@@ -267,7 +267,7 @@ class CajasController extends Controller
 
             $cajas->save();
 
-            $movimiento = new MovimientoCaja();
+            $movimiento = new MovimientodeCaja();
 
             $movimiento->cajas_id = 1;
 

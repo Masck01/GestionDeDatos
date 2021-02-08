@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cajas extends Model
+class Caja extends Model
 {
-    protected $table = "cajas";
+    protected $table = "caja";
 
     protected $fillable = [
         'nombre',
+        'saldo',
         'estado'
     ];
     
