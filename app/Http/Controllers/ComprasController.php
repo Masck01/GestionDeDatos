@@ -10,8 +10,8 @@ use App\Detalle_Compra;
 use App\Deposito;
 use App\DepositoProducto;
 use App\MovimientoDeposito;
-use App\Cajas;
-use App\MovimientoCaja;
+use App\Caja;
+use App\MovimientodeCaja;
 use DB;
 use Session;
 use Carbon\Carbon;
@@ -34,7 +34,7 @@ class ComprasController extends Controller
 
     public function create(){
 
-        $cajas = Cajas::find(1);
+        $cajas = Caja::find(1);
 
         if($cajas->estado == 'abierta'):
 
@@ -56,7 +56,7 @@ class ComprasController extends Controller
     
     public function store(Request $request)
     {
-        $cajas = Cajas::find(1);
+        $cajas = Caja::find(1);
 
         if($cajas->estado == 'abierta'):
 
@@ -134,7 +134,7 @@ class ComprasController extends Controller
 
     private function crearLineaCaja(Compra $compra){
 
-        $cajas = cajas::find(1);
+        $cajas = caja::find(1);
 
         $proveedor = Proveedor::find($compra->proveedor_id);
 
@@ -144,7 +144,7 @@ class ComprasController extends Controller
                 
         $cajas->save();
 
-        $movimiento = new MovimientoCaja();
+        $movimiento = new MovimientodeCaja();
 
         $movimiento->cajas_id = 1;
 
