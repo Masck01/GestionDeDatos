@@ -77,7 +77,7 @@
               <a href="#" class="nav-link">
                 <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                 <p>
-                  &nbsp;{{ Auth::user()->apellido }}, {{ Auth::user()->nombre }}
+                  &nbsp;{{ Empleado::empleado()->apellido }}, {{ Empleado::empleado()->nombre }}
                 </p>
                 <i class="right fas fa-angle-left mt-1"></i>
               </a>
