@@ -7,7 +7,7 @@ use App\Venta;
 use App\Cliente;
 use App\Producto;
 use App\Linea_Venta;
-use App\Cajas;
+use App\Caja;
 use App\Pago;
 use App\MovimientoCaja;
 use DB;
@@ -30,15 +30,15 @@ class VentaController extends Controller
 
     public function create(){
 
-        $cajas = Cajas::find(1);
+        $cajas = Caja::find(1);
 
-        if($cajas->estado == 'abierta'):
+        if($cajas->estado == 'Activo'):
 
             $productos = Producto::orderBy('nombre','ASC')->get();
             
-            $clientes = Cliente::orderBy('id', 'ASC')->get();
+            //$clientes = Cliente::orderBy('id', 'ASC')->get();
 
-            return view('admin.ventas.create',["clientes"=>$clientes,"productos"=>$productos]);    
+            return view('admin.ventas.create',["productos"=>$productos]);    
         
         else:
 
@@ -54,11 +54,11 @@ class VentaController extends Controller
     {
         $mytime = Carbon::now('America/Argentina/Tucuman');
 
-        $cajas = Cajas::find(1);
+        $cajas = Caja::find(1);
         
         $distinto = false;
 
-        if($cajas->estado == 'abierta'):
+        if($cajas->estado == 'Activo'):
 
             try{
 
@@ -114,9 +114,9 @@ class VentaController extends Controller
         
         else:
 
-            Session::flash('error', 'Error: No hay ninguna Caja Abierta');
+            Session::flash('error', 'Error: No hay ninguna Caja activa');
 
-            return back()->with('message','Ninguna Caja Abierta')->with('typealert','danger');
+            return back()->with('message','Ninguna Caja activa')->with('typealert','danger');
         
         endif;
 
@@ -156,7 +156,7 @@ class VentaController extends Controller
 
     private function crearLineaCaja(Venta $pedido){
 
-        $cajas = cajas::find(1);
+        $cajas = caja::find(1);
 
         $mytime = Carbon::now('America/Argentina/Tucuman');
 

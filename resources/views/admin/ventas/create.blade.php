@@ -173,55 +173,6 @@
 
 <!-- FIN Modal Productos-->	
 
-<!-- Modal Clientes-->
-
-<div class="modal fade bd-example-modal-lg" id="ModalCliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-		<div class="modal-header">
-        	<h5 class="modal-title" id="exampleModalLongTitle">Listado de Clientes</h5>		
-     	 </div>
-        <form>
-        	Cliente a buscar <input id="searchTerm" type="text" onkeyup="doSearch()" />
-       	</form>
-      <div class="modal-body">
-	  <div class="card-body table-responsive p-0">
-                  <table class="table table-hover text-nowrap" id="tablecliente">
-                    <thead>
-                      <tr>
-					      <th>#</th>
-                          <th>Nombre</th>
-                          <th>Dni</th>
-						  <th>Opcion</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($clientes as $cli)
-                  	<tr>
-					<td>{{ $cli->id }}</td>
-                    <td>{{ $cli->nombre_Fantasia }}</td>
-                    <td>{{ $cli->cuit_cuil }}</td>                 
-
-                    <td><button type="button" class="btn btn-success" id="bt_añadir"  data-dismiss="modal" onclick="SeleccionarCliente()">Añadir</button></td>    
-                	</tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                  
-                </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
-
-<!-- FIN Modal Clientes-->	
-
 @endsection
 
 @push ('scripts')
@@ -253,7 +204,7 @@
 			});
 		}
 
-		function SeleccionarCliente(){
+		/*function SeleccionarCliente(){
 			$("#tablecliente tr").click(function() {
 			$(this).addClass('selected').siblings().removeClass('selected');
 		 	 var filaid= $(this).find("td:eq(0)").text();
@@ -262,9 +213,10 @@
 			$("#idCliente").val(filaid);
 			$("#pnombreCli").val(filaNombre);
 			$("#pdniCli").val(filaDni);
-			});
+			});*/
 		}
 			
+		/*
 		function evaluar(){
 		 
 		 	var indice = 1;
@@ -280,7 +232,7 @@
 				state = 0;
 				agregar();
 			}
-		}
+		}*/
 
 		function agregar(){
 

@@ -8,7 +8,7 @@ use App\Producto_en_Servicio;
 
 class Producto extends Model
 {
-    protected $table = "productos";
+    protected $table = "producto";
 
     protected $fillable = [
       'codigo','categoria_id' ,'nombre', 'descripcion', 'imagen', 'costo_p', 'costo_d', 'p_flete_p', 'p_flete_d',
