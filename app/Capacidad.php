@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Capacidad extends Model
 {
-    protected $table = "capacidades";
+    protected $table = "capacidad";
 
     protected $fillable = [
-        'nombre'
+        'cantidad','estado'
     ];
     
     public function productos()

@@ -30,7 +30,7 @@
                   <i class="fas fa-plus"></i></a>
                   </button>
                   </th>
-                  <th style="text-align:center;">Nombre</th>
+                  <th style="text-align:center;">Cantidad</th>
                   <th style="text-align:center;">Estado</th>
                   <th colspan="2" style="text-align:center;">Opciones</th>
                   <th></th>
@@ -41,29 +41,17 @@
               <tr>
                     <td style="text-align:center;">{{$loop->iteration}}</td>
                     <td style="display:none; text-align:center;">{{$cat->id}} </td>
-                    <td style="text-align:center;">{{$cat->nombre}} </td>
+                    <td style="text-align:center;">{{$cat->cantidad}} </td>
                     <td style="text-align:center;">{{$cat->estado}} </td>
                     <td style="text-align:right;">
-                      <a href="#" class="btn btn-link" data-toggle="modal" data-target="#modal" onclick="seleccionarContacto()" title="Editar Capacidad" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i>
+                      <a href="#" class="btn btn-link" data-toggle="modal" data-target="#modal" onclick="rowSeleccion()" title="Editar Capacidad" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i>
                     </td>
                     <td>
-                      @if ($cat->estado == 'Activo')
                       <form class="" action="{{ route('capacidades.eliminar', $cat->id)}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        <button type="submit" onclick="return confirm('Esta acción no podrá deshacerse. ¿Desactivar Capacidad?')"  class="btn btn-link" data-toggle="tooltip" title="Desactivar Categoria" data-original-title="Editar Cliente"><i class="fas fa-trash-alt" style="color:red; font-size: 20px;"></i></button>
+                        <button type="submit" onclick="return confirm('¿Desea eliminar esta capacidad?')"  class="btn btn-link" data-toggle="tooltip" title="Desactivar Categoria" data-original-title="Editar Cliente"><i class="fas fa-trash-alt" style="color:red; font-size: 20px;"></i></button>
                       </form>
-                      
-                      @else
-
-                      <form class="" action="{{ route('capacidades.activar', $cat->id)}}" method="post">
-                        {{ csrf_field() }}
-                        {{ method_field('PUT') }}
-                        <button type="submit" onclick="return confirm('Esta acción no podrá deshacerse. ¿Activar Capacidad?')"  class="btn btn-link" data-toggle="tooltip" title="Activar Categoria" data-original-title="Editar Cliente"><i class="fas fa-check" style="color:green; font-size: 20px;"></i></button>
-                      </form>
-
-
-                      @endif
                     </td> 
               </tr>       
               @endforeach   
@@ -75,13 +63,11 @@
               </div>
             </div>
           </div>
-
-
         </div>
     </div>
 </div>
 
-<!-- Modal Agregar Categoria-->
+<!-- Modal Agregar Capacidad-->
 
 <div class="modal fade bd-example-modal-lg" id="ModalCliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -98,7 +84,7 @@
 
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
-                      <label>Nombre</label>
+                      <label>Cantidad</label>
                       <div class="input-group">
 
                         <div class="input-group-prepend">
@@ -107,7 +93,24 @@
 
                         </div>
                           
-                        <input type="text" class="form-control" placeholder="Enter ..." id="nombre" name="nombre">
+                        <input type="text" class="form-control" placeholder="Enter ..." id="cantidad" name="cantidad">
+
+                      </div>
+                     
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>Estado</label>
+                      <div class="input-group">
+
+                        <div class="input-group-prepend">
+                          
+                          <span class="input-group-text" id="basic-addon1"><i class="far fa-keyboard"></i></span>
+
+                        </div>
+                          
+                        <input type="text" class="form-control" placeholder="Enter ..." id="estado" name="estado">
 
                       </div>
                      
@@ -138,10 +141,10 @@
 </div>
 
 
-<!-- FIN Modal Agregar Contacto-->	
+<!-- FIN Modal Agregar Capacidad-->	
 
 
-<!-- Modal Actualizar Contacto-->
+<!-- Modal Actualizar Capacidad-->
 
 <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -159,8 +162,14 @@
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
                       <input type="hidden" class="form-control" placeholder="Enter ..." id="idUpdate" name="id">
-                      <label>Nombre</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="nombreUpdate" name="nombre">
+                      <label>Cantidad</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="nombreUpdate" name="cantidad">
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>Estado</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="estadoUpdate" name="estado">
                     </div>
                   </div>
                 </div>
@@ -194,12 +203,14 @@
 
 <script>
 
-function seleccionarContacto(){
+function rowSeleccion(){
   $("table tbody tr").click(function() {
-		 		var filaid= $(this).find("td:eq(1)").text();
-	     	var filaNombre = $(this).find("td:eq(2)").text();
-        $("#idUpdate").val(filaid);
+		 		var filaId= $(this).find("td:eq(1)").text();
+		 		var filaNombre= $(this).find("td:eq(2)").text();
+	     	var filaEstado = $(this).find("td:eq(3)").text();
+        $("#idUpdate").val(filaId);
         $("#nombreUpdate").val(filaNombre);
+        $("#estadoUpdate").val(filaEstado);
 			});
 		}
 
