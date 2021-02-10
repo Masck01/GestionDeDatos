@@ -12,3 +12,5 @@ class Concepto extends Model
     'descripcion', 'tipo', 'montoFijo', 'montoVariable'
   ];
 }
+
+//dsas
