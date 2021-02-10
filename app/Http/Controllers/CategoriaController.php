@@ -12,7 +12,7 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        $categorias = Categoria::orderBy('nombre', 'DESC')->paginate(5);
+        $categorias = Categoria::orderBy('descripcion', 'DESC')->paginate(5);
 
         return view('admin.categorias.index', compact('categorias'));
 

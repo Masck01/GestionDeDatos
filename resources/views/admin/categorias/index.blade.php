@@ -30,7 +30,7 @@
                   <i class="fas fa-plus"></i></a>
                   </button>
                   </th>
-                  <th style="text-align:center;">Nombre</th>
+                  <th style="text-align:center;">descripcion</th>
                   <th style="text-align:center;">Estado</th>
                   <th colspan="2" style="text-align:center;">Opciones</th>
                   <th></th>
@@ -41,7 +41,7 @@
               <tr>
                     <td style="text-align:center;">{{$loop->iteration}}</td>
                     <td style="display:none; text-align:center;">{{$cat->id}} </td>
-                    <td style="text-align:center;">{{$cat->nombre}} </td>
+                    <td style="text-align:center;">{{$cat->descripcion}} </td>
                     <td style="text-align:center;">{{$cat->estado}} </td>
                     <td style="text-align:right;">
                       <a href="#" class="btn btn-link" data-toggle="modal" data-target="#modal" onclick="seleccionarContacto()" title="Editar Categoria" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i>
@@ -98,7 +98,7 @@
 
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
-                      <label>Nombre</label>
+                      <label>descripcion</label>
                       <div class="input-group">
 
                         <div class="input-group-prepend">
@@ -107,7 +107,7 @@
 
                         </div>
                           
-                        <input type="text" class="form-control" placeholder="Enter ..." id="nombre" name="nombre">
+                        <input type="text" class="form-control" placeholder="Enter ..." id="descripcion" name="descripcion">
 
                       </div>
                      
@@ -159,8 +159,8 @@
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
                       <input type="hidden" class="form-control" placeholder="Enter ..." id="idUpdate" name="id">
-                      <label>Nombre</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="nombreUpdate" name="nombre">
+                      <label>descripcion</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="descripcionUpdate" name="descripcion">
                     </div>
                   </div>
                 </div>
@@ -197,9 +197,9 @@
 function seleccionarContacto(){
   $("table tbody tr").click(function() {
 		 		var filaid= $(this).find("td:eq(1)").text();
-	     	var filaNombre = $(this).find("td:eq(2)").text();
+	     	var filadescripcion = $(this).find("td:eq(2)").text();
         $("#idUpdate").val(filaid);
-        $("#nombreUpdate").val(filaNombre);
+        $("#descripcionUpdate").val(filadescripcion);
 			});
 		}
 
