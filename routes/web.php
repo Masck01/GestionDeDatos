@@ -97,7 +97,7 @@ Route::middleware(['auth'])->group(function(){
   Route::put('productos/galeria/eliminar/{productos}', 'ProductosController@eliminarImagen')->name('productos.eliminarImagen');
 
 
-  // EMPLEADOS //
+ // USUARIOS //
 
   Route::get('usuarios', 'UsuarioController@index')->name('usuarios.index');
 
@@ -109,7 +109,21 @@ Route::middleware(['auth'])->group(function(){
 
   Route::put('usuarios/{user}', 'UsuarioController@update')->name('usuarios.update');
 
-  Route::get('usuarios/{usuario}', 'UsuarioController@show')->name('usuarios.show');
+  Route::get('usuarios/{usuario}', 'UsuarioController@show')->name('usuarios.show'); 
+
+   // EMPLEADOS //
+
+   Route::get('empleados', 'EmpleadoController@index')->name('empleados.index');
+
+   Route::get('empleados/create', 'EmpleadoController@create')->name('empleados.create');
+ 
+   Route::post('empleados/store', 'EmpleadoController@store')->name('empleados.store');
+ 
+   Route::get('empleados/edit/{empleado}', 'EmpleadoController@edit')->name('empleados.edit');
+ 
+   Route::put('empleados/update', 'EmpleadoController@update')->name('empleados.update');
+ 
+   Route::get('empleados/show/{id}', 'EmpleadoController@show')->name('empleados.show'); 
 
   // VENTAS
 
