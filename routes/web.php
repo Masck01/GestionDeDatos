@@ -121,7 +121,7 @@ Route::middleware(['auth'])->group(function(){
  
    Route::get('empleados/edit/{empleado}', 'EmpleadoController@edit')->name('empleados.edit');
  
-   Route::put('empleados/update', 'EmpleadoController@update')->name('empleados.update');
+   Route::put('empleados/update/', 'EmpleadoController@update')->name('empleados.update');
  
    Route::get('empleados/show/{id}', 'EmpleadoController@show')->name('empleados.show'); 
 

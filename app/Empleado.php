@@ -10,7 +10,7 @@ class Empleado extends Model
     protected $table = 'empleado';
 
     protected $fillable = [
-        'nombre', 'apellido', 'cuit', 'fecha_ingreso', 'categoria', 'cajadeahorro', 'sucursal_id'
+        'apellido', 'nombre', 'cuit', 'email', 'telefono_celular', 'telefono_fijo', 'domicilio','estado', 'fecha_ingreso', 'categoria_id', 'cajadeahorro_id', 'sucursal_id'
     ];
 
     public static function empleado(){

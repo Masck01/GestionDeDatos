@@ -9,8 +9,8 @@
               <h3 class="card-title">Agregar Empleado</h3>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
-              <form method="post" action="{{ route('empleados.store')}}" role="form">
+              <div class="card-body">
+                <form method="post" action="{{ route('empleados.store')}}" role="form">
                 {{ csrf_field() }}
 
                 <div class="row">
@@ -28,7 +28,7 @@
                   </div>
                 </div>
 
-                <div class="row">
+               <!--  <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Empleado</label>
@@ -41,7 +41,7 @@
                       <input type="text" class="form-control" placeholder="Enter ..." id="password" name="password">
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -76,40 +76,72 @@
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                      <label>Cuil/Cuit</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="email" name="cuit_cuil">
+                      <label>Cuit</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="cuit" name="cuit">
                     </div>
                   </div>
                 
                 
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-              
-              <div class="form-group">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
                 
-                <label>Categoria</label>
+                    <label>Categoria</label>
 
-                <select class="form-control select2" style="width: 100%;" id="categoria" name="categoria">
+                    <select class="form-control select2" style="width: 100%;" id="categoria" name="categoria">
                 
-                    @foreach ($categorias as $categoria)
+                      @foreach ($categorias as $categoria)
                     
-                    <option value="{{$categoria->id}}">{{$categoria->descripcion}}</option>
+                      <option value="{{$categoria->id}}">{{$categoria->descripcion}}</option>
 
-                    @endforeach
+                      @endforeach
 
-                </select>
+                    </select>
+                  </div>
+                </div>
               </div>
-              </div>
-            </div>
+
 
                 <div class="row">
                 
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+              
                     <div class="form-group">
-                      <label>Cuenta Bancaria</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="cuenta" name="cuenta">
-                    </div>
+                    <label>Caja de Ahorro</label>
+
+                    <select class="form-control select2" style="width: 100%;" id="cajadeahorro" name="cajadeahorro">
+                
+                      @foreach ($cajasdeahorro as $cajadeahorro)
+                    
+                      <option value="{{$cajadeahorro->id}}">{{$cajadeahorro->codigo}}</option>
+
+                      @endforeach
+
+                    </select>
+                  </div>
                   </div>
 
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+              
+                    <div class="form-group">
+                    <label>Sucursal</label>
+
+                    <select class="form-control select2" style="width: 100%;" id="sucursal" name="sucursal">
+                
+                     @foreach ($sucursales as $sucursal)
+                    
+                      <option value="{{$sucursal->id}}">{{$sucursal->razon_social}}</option>
+
+                      @endforeach
+
+                    </select>
+                  </div>
+                  </div>
+                </div> 
+
+                <div class="row">
+                
+                
+               
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Fecha de Ingreso</label>
@@ -117,7 +149,7 @@
                     </div>
                   </div>
                 </div>
-
+                
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">

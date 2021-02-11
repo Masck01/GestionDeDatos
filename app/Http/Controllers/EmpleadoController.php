@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Empleado;
 use App\Familiar;
+use App\Sucursal;
+use App\CajadeAhorro;
 use App\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,8 +37,10 @@ class EmpleadoController extends Controller
     public function create()
     {
         $categorias = Categoria::orderBy('descripcion', 'DESC')->paginate(10);
+        $sucursales = Sucursal::orderBy('razon_social', 'DESC')->paginate(10);
+        $cajasdeahorro = CajadeAhorro::orderby('codigo','DESC')->paginate(10);
         
-        return view('admin.empleados.create',compact('categorias'));
+        return view('admin.empleados.create',compact('categorias','sucursales','cajasdeahorro'));
     }
 
     /**
@@ -55,10 +59,10 @@ class EmpleadoController extends Controller
         $empleado->telefono_fijo = $request->telefono_fijo;
         $empleado->domicilio = $request->domicilio;
         $empleado->cuit = $request->cuit;
-        $empleado->pagina_principal = 'home';
+        $empleado->sucursal_id = $request->sucursal;
         $empleado->categoria_id =  $request->categoria;
-        $empleado->cuenta = $request->cuenta;
-        $empleado->fechaIngreso = $request->ingreso;
+        $empleado->cajadeahorro_id = $request->cajadeahorro;
+        $empleado->fecha_Ingreso = $request->ingreso;
         $empleado->save();
         
         return redirect()->route('empleados.index');
@@ -90,8 +94,10 @@ class EmpleadoController extends Controller
         $empleado = Empleado::findOrFail($id);
 
         $categorias = Categoria::orderBy('descripcion', 'DESC')->paginate(10);
+        $sucursales = Sucursal::orderBy('razon_social', 'DESC')->paginate(10);
+        $cajasdeahorro = CajadeAhorro::orderby('codigo','DESC')->paginate(10);
         
-        return view('admin.empleados.edit',compact('empleado','categorias'));
+        return view('admin.empleados.edit',compact('empleado','categorias', 'sucursales', 'cajasdeahorro'));
 
     }
 
@@ -103,19 +109,20 @@ class EmpleadoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $empleado = Empleado::findOrFail($id);
+    {   
+        $empleado = Empleado::find($id);
+        
         $empleado->nombre = $request->nombre;
         $empleado->apellido = $request->apellido;
         $empleado->email = $request->email;
-        $empleado->telefono_celular = $request->telefono_celular;
-        $empleado->telefono_fijo = $request->telefono_fijo;
+        $empleado->telefonocelular = $request->telefono_celular;
+        $empleado->telefonofijo = $request->telefono_fijo;
         $empleado->domicilio = $request->domicilio;
-        $empleado->cuil_cuit = $request->cuit;
-        $empleado->pagina_principal = 'home';
-        $empleado->categoria_id =  $request->categoria_id;
-        $empleado->cuenta = $request->cuenta;
-        $empleado->fechaIngreso = $request->ingreso;
+        $empleado->cuit = $request->cuit;
+        $empleado->sucursal_id = $request->sucursal;
+        $empleado->categoria_id =  $request->categoria;
+        $empleado->cajadeahorro_id = $request->cajadeahorro;
+        $empleado->fecha_Ingreso = $request->ingreso;
         $empleado->save();
 
         return redirect()->route('empleados.index')->with('success','Empleado Editado correctamente');

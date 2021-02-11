@@ -41,15 +41,7 @@
                       </tr>
                     </thead>
 
-                    <tfoot>
-                        <tr>
-                        <th rowspan="1" colspan="1" style="text-align:center;">#</th>
-                        <th rowspan="1" colspan="1" style="text-align:center;">Nombre</th>
-                        <th rowspan="1" colspan="1" style="text-align:center;">email</th>
-                        <th rowspan="1" colspan="1" style="text-align:center;">Cuit</th>
-                        <th rowspan="1" colspan="1" style="text-align:center;"></th>
-							          </tr>
-                    	</tfoot>
+                    
                     <tbody>
                       @foreach ($empleados as $empleado)
                         <tr>
