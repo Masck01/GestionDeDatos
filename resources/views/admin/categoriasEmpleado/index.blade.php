@@ -23,11 +23,11 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($categorias as $categoria)
+                @foreach ($categoria as $cate)
                   <tr>
                     <td style="text-align:center">{{$loop->iteration}}</td>
-                    <td>{{ $categoria->nombre }}</td>
-                    <td>{{ $categoria->estado }}</td>
+                    <td>{{ $cate->nombre }}</td>
+                    <td>{{ $cate->estado }}</td>
                     <td>
                     <a href="{{ route('categoriasEmpleados.edit', $categoria->id) }}" class="btn btn-link" data-toggle="tooltip" title="Editar Categoria" data-original-title="Editar Producto"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
                     <a href="{{ route('categoriasEmpleados.agregar', $categoria->id) }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Concepto" data-original-title="Agregar Concepto"><i class="fas fa-address-book" style="color:black; font-size: 20px;"></i></a>
