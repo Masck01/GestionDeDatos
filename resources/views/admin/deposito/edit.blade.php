@@ -77,8 +77,8 @@
                       <label>Provincia</label>
                       <select class="form-control select2" style="width: 100%;" id="provincia_id" name="provincia_id">
                         <option value="{{ $deposito->provincia->id }}">{{ $deposito->provincia->nombre }}</option>
-                        @foreach($provincias as $provincia)
-                        <option value="{{$provincia->id}}">{{$provincia->nombre}}</option>
+                        @foreach($provincia as $provin)
+                        <option value="{{$provin->id}}">{{$provin->nombre}}</option>
                         @endforeach
                       </select>
                     </div>

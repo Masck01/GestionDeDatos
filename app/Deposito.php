@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Deposito extends Model
 {
-  protected $table = "depositos";
+  protected $table = "almacendemedicamento";
 
   protected $fillable = [
     'nombre', 'telefonos', 'direccion', 'ciudad', 'codigo_postal', 'provincia_id'

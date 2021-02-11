@@ -7,7 +7,7 @@ use App\Unidad_Negocio;
 
 class Provincia extends Model
 {
-  protected $table = "provincias";
+  protected $table = "provincia";
 
   protected $fillable = [
       'nombre'

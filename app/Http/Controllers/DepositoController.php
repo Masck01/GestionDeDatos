@@ -18,16 +18,16 @@ class DepositoController extends Controller
 {
     public function index(Request $request){
         
-        $depositos = Deposito::orderBy('id', 'DESC')->paginate(10);
+        $depositos = Deposito::orderBy('nombre', 'DESC')->paginate(10);
         
-        return view('admin.deposito.index', compact('depositos'));
+        return view('admin.deposito.index', compact('deposito'));
 
     }
 
     public function create()
     {
 
-        $provincias = Provincia::orderBy('nombre', 'ASC')
+        $provincia = Provincia::orderBy('nombre', 'ASC')
                       ->select('nombre as nombre', 'id as id')
                       ->get();
 
