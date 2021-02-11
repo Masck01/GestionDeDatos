@@ -18,7 +18,7 @@ use Str;
 use Session;
 use Config;
 
-class ProductosController extends Controller
+class ProductoController extends Controller
 {
 
     public function index()
