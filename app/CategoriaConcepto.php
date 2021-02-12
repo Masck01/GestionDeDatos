@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CategoriaConcepto extends Model
 {
-    protected $table = "categorias_conceptos";
+    protected $table = "configuracioncategoria";
 
     protected $fillable = [
         'categoria_id','concepto_id','montoFijo','montoVariable'
@@ -20,10 +20,10 @@ class CategoriaConcepto extends Model
     
     public function calcular($monto,$categoria_id)
     {
-        $basico = Concepto::join('categorias_conceptos','conceptos.id','=','categorias_conceptos.concepto_id')
-        ->select('categorias_conceptos.montoFijo AS monto')
+        $basico = Concepto::join('configuracioncategoria','conceptos.id','=','configuracioncategoria.concepto_id')
+        ->select('configuracioncategoria.montoFijo AS monto')
         ->where('conceptos.descripcion','like','Basico')
-        ->where('categorias_conceptos.categoria_id','=',$categoria_id)->first();
+        ->where('configuracioncategoria.categoria_id','=',$categoria_id)->first();
        
         return $total = $monto * $basico->monto;
     }

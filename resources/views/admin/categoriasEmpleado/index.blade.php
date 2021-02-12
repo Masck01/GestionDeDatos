@@ -23,15 +23,15 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($categoria as $cate)
+                @foreach ($categorias as $cate)
                   <tr>
                     <td style="text-align:center">{{$loop->iteration}}</td>
-                    <td>{{ $cate->nombre }}</td>
+                    <td>{{ $cate->descripcion }}</td>
                     <td>{{ $cate->estado }}</td>
                     <td>
-                    <a href="{{ route('categoriasEmpleados.edit', $categoria->id) }}" class="btn btn-link" data-toggle="tooltip" title="Editar Categoria" data-original-title="Editar Producto"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
-                    <a href="{{ route('categoriasEmpleados.agregar', $categoria->id) }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Concepto" data-original-title="Agregar Concepto"><i class="fas fa-address-book" style="color:black; font-size: 20px;"></i></a>
-                    <a href="{{ route('liquidacion.lista',$categoria->id) }}" class="btn btn-link" data-toggle="tooltip" title="Liquidar Sueldo" data-original-title="Agregar Concepto"><i class="fas fa-money-bill-wave" style="color:black; font-size: 20px;"></i></a>
+                    <a href="{{ route('categoriasEmpleados.edit', $cate->id) }}" class="btn btn-link" data-toggle="tooltip" title="Editar Categoria" data-original-title="Editar Producto"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
+                    <a href="{{ route('categoriasEmpleados.agregar', $cate->id) }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Concepto" data-original-title="Agregar Concepto"><i class="fas fa-address-book" style="color:black; font-size: 20px;"></i></a>
+                    <a href="{{ route('liquidacion.lista',$cate->id) }}" class="btn btn-link" data-toggle="tooltip" title="Liquidar Sueldo" data-original-title="Agregar Concepto"><i class="fas fa-money-bill-wave" style="color:black; font-size: 20px;"></i></a>
                     </td>
                   </tr>
                 @endforeach

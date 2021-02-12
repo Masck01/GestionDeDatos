@@ -14,7 +14,7 @@ class CategoriaEmpleadoController extends Controller
 {
     public function index()
     {
-        $categorias = CategoriaEmpleado::orderBy('nombre', 'DESC')->paginate(10);
+        $categorias = CategoriaEmpleado::orderBy('descripcion', 'DESC')->paginate(10);
 
         return view('admin.categoriasEmpleado.index', compact('categorias'));
 

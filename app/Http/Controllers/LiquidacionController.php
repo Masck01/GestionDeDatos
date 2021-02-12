@@ -9,7 +9,7 @@ use App\Producto;
 use App\Concepto;
 use App\Detalle_Liquidacion;
 use App\Deposito;
-use App\User;
+use App\Usuario;
 use App\CategoriaEmpleado;
 use App\Liquidacion;
 use App\DepositoProducto;
@@ -40,7 +40,7 @@ class LiquidacionController extends Controller
 
     public function create($id){
  
-            $usuarios = User::findOrFail($id);
+            $usuarios = Usuario::findOrFail($id);
 
             $conceptos = CategoriaConcepto::where('categoria_id','=',$usuarios->categoria_id)->get();
 
@@ -111,7 +111,7 @@ class LiquidacionController extends Controller
                 
                 $liquidacion->save();
 
-                $usuario = User::findOrFail($request->get('empleado_id'));
+                $usuario = Usuario::findOrFail($request->get('empleado_id'));
 
                 list($ano,$mes,$dia) = explode("-",$usuario->fechaIngreso);
 
@@ -192,7 +192,7 @@ class LiquidacionController extends Controller
 
         $detalle = $liquidacion->detalle_liquidacion()->get();
 
-        $usuario= User::findOrFail($liquidacion->usuario_id);
+        $usuario= Usuario::findOrFail($liquidacion->usuario_id);
 
         $basico = Concepto::join('categorias_conceptos','conceptos.id','=','categorias_conceptos.concepto_id')
         ->select('categorias_conceptos.montoFijo AS monto')
@@ -236,7 +236,7 @@ class LiquidacionController extends Controller
         
         $categoria = CategoriaEmpleado::find($id);
 
-        $usuarios = User::where('categoria_id','=',$id)->orderBy('apellido', 'ASC')->paginate(10);
+        $usuarios = Usuario::where('empleado_id','=',$id)->orderBy('username', 'ASC')->paginate(10);
         
         return view('admin.liquidacion.listUser', compact('usuarios','categoria'));
 
