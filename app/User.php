@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function categorias()
     {
-        return $this->belongsTo(CategoriaEmpleado::class,'categoria_id','id');
+        return $this->belongsTo(Categoria::class,'categoria_id','id');
     }
 
 

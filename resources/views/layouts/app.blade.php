@@ -120,7 +120,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-            
+
               <li class="nav-item">
                 <a href="{{ route('ventas.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -160,7 +160,7 @@
 
 
           @can('inventario_list')
-          
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-warehouse"></i>
@@ -190,7 +190,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              
+
 
               <li class="nav-item">
                 <a href="{{ route('productos.index') }}" class="nav-link">
@@ -271,10 +271,10 @@
               </li>
             </ul>
 
-            
+
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('categoriasEmpleados.index') }}" class="nav-link">
+                <a href="{{ route('categorias.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Categorias</p>
                 </a>
@@ -322,7 +322,7 @@
                 </a>
               </li>
 
-            
+
             </ul>
           </li>
           @endcan
