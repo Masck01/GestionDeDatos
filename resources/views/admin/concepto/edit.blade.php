@@ -63,7 +63,7 @@
                       
                     <select class="form-control select2" style="width: 100%;" id="tipo" name="tipo">
                       <option value="{{$concepto->tipo}}">{{$concepto->tipo}}</option>
-                      <option value="Haberes">Haberes</option>
+                      <option value="Haber">Haberes</option>
                       <option value="Retencion">Retencion</option>
                     </select>
                 
