@@ -15,7 +15,7 @@ class SubCategoriaController extends Controller
     {
         $subcategorias = SubCategoria::orderBy('nombre', 'DESC')->paginate(5);
 
-        $categorias = Categoria::where('estado','LIKE','Activo')->orderBy('nombre', 'ASC')->get();
+        $categorias = Categoria::where('estado','LIKE','Activo')->orderBy('descripcion', 'ASC')->get();
         
         return view('admin.subcategorias.index', compact('subcategorias','categorias'));
 
@@ -46,7 +46,7 @@ class SubCategoriaController extends Controller
 
             $subcategoria->nombre = $request->nombre;
 
-            $subcategoria->categoria_id = $request->categoria_id;
+            $subcategoria->categoria_id = $request->categoria;
             
             $subcategoria->save();
             
@@ -80,7 +80,7 @@ class SubCategoriaController extends Controller
 
             $subcategoria = SubCategoria::find($id);
 
-            $subcategoria->categoria_id = $request->categoria_id;
+            $subcategoria->categoria_id = $request->categoria;
 
             $subcategoria->nombre = $request->nombre;
       
