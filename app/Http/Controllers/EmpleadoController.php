@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Validator;
 
 class EmpleadoController extends Controller
 {
@@ -108,7 +109,7 @@ class EmpleadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    /* public function update(Request $request, $id)
     {   
         $empleado = Empleado::find($id);
         
@@ -126,6 +127,50 @@ class EmpleadoController extends Controller
         $empleado->save();
 
         return redirect()->route('empleados.index')->with('success','Empleado Editado correctamente');
+    } */
+
+
+    public function update(Request $request)
+    {
+        $rules = [
+            'nombre' => 'required|max:255',
+        ];
+
+        $message = [
+            
+            'nombre.required' => 'Ingrese Marca del Producto',
+
+            'nombre.max' =>'El nombre de la Marca no puede ser mayor a :max caracteres.'
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$message);
+
+        if( $validator->fails()):
+            
+            return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
+
+        else:
+
+            $id = $request->id;
+
+            $empleado = Empleado::find($id);
+        
+            $empleado->nombre = $request->nombre;
+            $empleado->apellido = $request->apellido;
+            $empleado->email = $request->email;
+            $empleado->telefono_celular = $request->telefono_celular;
+            $empleado->telefono_fijo = $request->telefono_fijo;
+            $empleado->domicilio = $request->domicilio;
+            $empleado->cuit = $request->cuit;
+            $empleado->sucursal_id = $request->sucursal;
+            $empleado->categoria_id =  $request->categoria;
+            $empleado->cajadeahorro_id = $request->cajadeahorro;
+            $empleado->fecha_Ingreso = $request->ingreso;
+            $empleado->save();
+                        
+            return redirect()->route('empleados.index')->with('success','Empleado Editado correctamente');
+                 
+        endif;
     }
 
     /**

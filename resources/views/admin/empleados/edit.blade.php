@@ -12,13 +12,14 @@
             <!-- /.card-header -->
             
             <div class="card-body">
-                <form method="post" action="{{ route('empleados.update',$empleado->id)}}" role="form">
+                <form method="post" action="{{ route('empleados.update')}}" role="form">
                   {{ csrf_field() }}
                   {{ method_field('PUT') }}
 
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
+                      <input type="hidden" class="form-control" placeholder="Enter ..." id="idUpdate" name="id" value={{$empleado->id}}>
                          <label>Nombre</label>
                       <input type="text" class="form-control" placeholder="Enter ..." id="nombreUpdate" name="nombre" value={{$empleado->nombre}}>
                     </div>
@@ -50,13 +51,13 @@
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Tel&eacute;fono Celular</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono_celularUpdate" value={{$empleado->telefono_celular}}>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono_celularUpdate" name="telefono_celular" value={{$empleado->telefono_celular}}>
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Tel&eacute;fono Fijo</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono_fijoUpdate"  value={{$empleado->telefono_fijo}}>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono_fijoUpdate" name="telefono_fijo" value={{$empleado->telefono_fijo}}>
                     </div>
                   </div>
                 </div>
