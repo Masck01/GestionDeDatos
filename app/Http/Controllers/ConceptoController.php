@@ -30,7 +30,7 @@ class ConceptoController extends Controller
         $concepto = new Concepto();
 
         $concepto->descripcion =  $request->descripcion;
-
+  
         $concepto->tipo =  $request->tipo;
         
         $concepto->save();
