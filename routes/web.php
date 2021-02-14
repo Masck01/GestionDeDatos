@@ -3,7 +3,7 @@ use App\RoleUser;
 
 Route::get('/', function () {
   return redirect()->route('login');
-}); 
+});
 
 //Auth::routes();
 
@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function(){
    Route::get('pdf/remitox/{pedido}', 'PdfController@imprimirRemito')->name('pdf.imprimirRemito');
 
   // PRODUCTOS //
-  
+
   Route::get('productos', 'ProductosController@index')->name('productos.index');
 
   Route::get('productos/create', 'ProductosController@create')->name('productos.create');
@@ -109,21 +109,21 @@ Route::middleware(['auth'])->group(function(){
 
   Route::put('usuarios/{user}', 'UsuarioController@update')->name('usuarios.update');
 
-  Route::get('usuarios/{usuario}', 'UsuarioController@show')->name('usuarios.show'); 
+  Route::get('usuarios/{usuario}', 'UsuarioController@show')->name('usuarios.show');
 
    // EMPLEADOS //
 
    Route::get('empleados', 'EmpleadoController@index')->name('empleados.index');
 
    Route::get('empleados/create', 'EmpleadoController@create')->name('empleados.create');
- 
+
    Route::post('empleados/store', 'EmpleadoController@store')->name('empleados.store');
- 
+
    Route::get('empleados/edit/{empleado}', 'EmpleadoController@edit')->name('empleados.edit');
- 
+
    Route::put('empleados/update/', 'EmpleadoController@update')->name('empleados.update');
- 
-   Route::get('empleados/show/{id}', 'EmpleadoController@show')->name('empleados.show'); 
+
+   Route::get('empleados/show/{id}', 'EmpleadoController@show')->name('empleados.show');
 
   // VENTAS
 
@@ -146,11 +146,11 @@ Route::middleware(['auth'])->group(function(){
      Route::get('venta/pdf', 'VentaController@listadoventas')->name('ventas.downloadPdf');
 
      Route::get('venta/Impimir/Factura/{presupuesto}', 'VentaController@recivo')->name('ventas.imprimir');
-    
+
      Route::get('venta/pagar/{id}', 'VentaController@pagarVenta')->name('venta.pague');
 
      Route::post('venta/pagos/guardar', 'VentaController@guardarPago')->name('pago.store');
-     
+
      // Depositos
 
      Route::get('depositos', 'DepositoController@index')->name('depositos.index');
@@ -194,13 +194,13 @@ Route::middleware(['auth'])->group(function(){
           Route::get('liquidacion', 'LiquidacionController@index')->name('liquidacion.index');
 
           Route::get('liquidacion/create/{empleado}', 'LiquidacionController@create')->name('liquidacion.create');
-    
+
           Route::post('liquidacion/store', 'LiquidacionController@store')->name('liquidacion.store');
-    
+
           Route::get('liquidacion/{liquidacion}', 'LiquidacionController@show')->name('liquidacion.show');
-          
+
           Route::get('liquidacion/Impimir/Factura/{liquidacion}', 'LiquidacionController@recivo')->name('liquidacion.imprimir');
-    
+
   // ROLES
 
   Route::get('roles', 'RoleController@index')->name('roles.index');
@@ -219,6 +219,10 @@ Route::middleware(['auth'])->group(function(){
   // CATEGORIAS //
 
   Route::get('categorias', 'CategoriaController@index')->name('categorias.index');
+
+  Route::post('categorias/create', 'CategoriaController@create')->name('categorias.create');
+
+  Route::post('categorias/agregar', 'CategoriaController@agregar')->name('categorias.agregar');
 
   Route::post('categorias/store', 'CategoriaController@store')->name('categorias.store');
 
@@ -256,13 +260,13 @@ Route::middleware(['auth'])->group(function(){
     Route::get('marcas', 'MarcasController@index')->name('marcas.index');
 
     Route::post('marcas/store', 'MarcasController@store')->name('marcas.store');
-  
+
     Route::put('marcas/edit', 'MarcasController@update')->name('marcas.update');
-  
+
     Route::put('marcas/eliminar/{id}', 'MarcasController@eliminar')->name('marcas.eliminar');
-  
+
     Route::put('marcas/activar/{id}', 'MarcasController@activar')->name('marcas.activar');
-  
+
   // CAJAS //
 
   Route::get('cajas', 'CajasController@index')->name('cajas.index');
@@ -281,7 +285,7 @@ Route::middleware(['auth'])->group(function(){
 
   Route::put('grupo/update', 'FamiliarController@update')->name('familias.update');
 
-  
+
   // CONCEPTOS //
 
   Route::get('conceptos', 'ConceptoController@index')->name('conceptos.index');
@@ -294,26 +298,4 @@ Route::middleware(['auth'])->group(function(){
 
   Route::put('conceptos/{concepto}', 'ConceptoController@update')->name('conceptos.update');
 
-    // CATEGORIAS EMPLEADOS //
-
-    Route::get('categoriasEmpleados', 'CategoriaEmpleadoController@index')->name('categoriasEmpleados.index');
-
-    Route::get('categoriasEmpleados/create', 'CategoriaEmpleadoController@create')->name('categoriasEmpleados.create');
-  
-    Route::post('categoriasEmpleados/store', 'CategoriaEmpleadoController@store')->name('categoriasEmpleados.store');
-  
-    Route::get('categoriasEmpleados/edit/{id}', 'CategoriaEmpleadoController@edit')->name('categoriasEmpleados.edit');
-  
-    Route::put('categoriasEmpleados/{concepto}', 'CategoriaEmpleadoController@update')->name('categoriasEmpleados.update');
-    
-    Route::get('categoriasEmpleados/agregar/{id}', 'CategoriaEmpleadoController@agregar')->name('categoriasEmpleados.agregar');
-  
-    Route::post('categoriasEmpleados/storeConcepto/{id}', 'CategoriaEmpleadoController@storeConcepto')->name('categoriasEmpleados.storeConcepto');
-
-    //Route::get('categoriasEmpleado/edit/{concepto}','CategoriaEmpleadoController@editConcepto')->name('categoriasEmpl.editConcepto');
-    
-    Route::get('categoriasEmpleado/editConcepto/{id}', 'CategoriaEmpleadoController@editConcepto')->name('categoriasEmpl.editConcepto');
-    
-    Route::put('categoriasEmpleado/updateConcepto/{id}', 'CategoriaEmpleadoController@updateConcepto')->name('categoriasEmpleados.updateConcepto');
-    
   });

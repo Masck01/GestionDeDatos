@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CategoriaConcepto;
+use App\ConfiguracionCategoria;
 use Validator;
 use Session;
 use Str;
 
-class CategoriaConceptoController extends Controller
+class ConfiguracionCategoriaController extends Controller
 {
 
     public function store(Request $request,$id)
     {
 
-            $categoria = new CategoriaConcepto();
+            $categoria = new ConfiguracionCategoria();
 
             $categoria->categoria_id = $id;
 
@@ -23,9 +23,9 @@ class CategoriaConceptoController extends Controller
             $categoria->montoFijo = $request->montoFijo;
 
             $categoria->montoVariable = $request->montoVariable;
-            
+
             $categoria->save();
-            
+
             return back()->with('message','Categoria Registrada con exito')->with('typealert','success');
 
     }
@@ -37,7 +37,7 @@ class CategoriaConceptoController extends Controller
         ];
 
         $message = [
-            
+
             'nombre.requiered' => 'Ingrese Nombre de la Categoria',
 
             'nombre.max' =>'El Nombre no puede ser mayor a :max caracteres.'
@@ -46,7 +46,7 @@ class CategoriaConceptoController extends Controller
         $validator = Validator::make($request->all(),$rules,$message);
 
         if( $validator->fails()):
-            
+
             return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
 
         else:
@@ -56,11 +56,11 @@ class CategoriaConceptoController extends Controller
             $categoria = Categoria::find($id);
 
             $categoria->nombre = $request->nombre;
-      
+
             $categoria->save();
-                        
+
             return back()->with('message','Categoria Actualizada con exito')->with('typealert','success');
-                 
+
         endif;
     }
 
@@ -69,9 +69,9 @@ class CategoriaConceptoController extends Controller
             $categoria = Categoria::find($id);
 
             $categoria->estado = 'Inactivo';
-            
+
             $categoria->save();
-                        
+
             return back();
     }
 
@@ -80,9 +80,9 @@ class CategoriaConceptoController extends Controller
             $categoria = Categoria::find($id);
 
             $categoria->estado = 'Activo';
-            
+
             $categoria->save();
-                        
+
             return back();
     }
 

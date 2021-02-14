@@ -15,7 +15,12 @@ class CategoriaController extends Controller
         $categorias = Categoria::orderBy('descripcion', 'DESC')->paginate(5);
 
         return view('admin.categorias.index', compact('categorias'));
+    }
 
+    public function create()
+    {
+
+        return view('admin.categorias.create');
     }
 
     public function store(Request $request)
@@ -25,28 +30,28 @@ class CategoriaController extends Controller
         ];
 
         $message = [
-            
+
             'nombre.requiered' => 'Ingrese Nombre de la Categoria',
 
-            'nombre.max' =>'El nombre del estudiante no puede ser mayor a :max caracteres.'
+            'nombre.max' => 'El nombre del estudiante no puede ser mayor a :max caracteres.'
         ];
 
-        $validator = Validator::make($request->all(),$rules,$message);
+        $validator = Validator::make($request->all(), $rules, $message);
 
-        if( $validator->fails()):
-            
-            return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
+        if ($validator->fails()) :
 
-        else:
+            return back()->withErrors($validator)->with('message', 'Se ha Producido un Error')->with('typealert', 'danger');
+
+        else :
 
             $categoria = new Categoria();
 
             $categoria->nombre = $request->nombre;
-            
+
             $categoria->save();
-            
-            return back()->with('message','Categoria Registrada con exito')->with('typealert','success');
-                 
+
+            return back()->with('message', 'Categoria Registrada con exito')->with('typealert', 'success');
+
         endif;
     }
 
@@ -57,53 +62,52 @@ class CategoriaController extends Controller
         ];
 
         $message = [
-            
+
             'nombre.requiered' => 'Ingrese Nombre de la Categoria',
 
-            'nombre.max' =>'El Nombre no puede ser mayor a :max caracteres.'
+            'nombre.max' => 'El Nombre no puede ser mayor a :max caracteres.'
         ];
 
-        $validator = Validator::make($request->all(),$rules,$message);
+        $validator = Validator::make($request->all(), $rules, $message);
 
-        if( $validator->fails()):
-            
-            return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
+        if ($validator->fails()) :
 
-        else:
+            return back()->withErrors($validator)->with('message', 'Se ha Producido un Error')->with('typealert', 'danger');
+
+        else :
 
             $id = $request->id;
 
             $categoria = Categoria::find($id);
 
             $categoria->nombre = $request->nombre;
-      
+
             $categoria->save();
-                        
-            return back()->with('message','Categoria Actualizada con exito')->with('typealert','success');
-                 
+
+            return back()->with('message', 'Categoria Actualizada con exito')->with('typealert', 'success');
+
         endif;
     }
 
     public function eliminar($id)
     {
-            $categoria = Categoria::find($id);
+        $categoria = Categoria::find($id);
 
-            $categoria->estado = 'Inactivo';
-            
-            $categoria->save();
-                        
-            return back();
+        $categoria->estado = 'Inactivo';
+
+        $categoria->save();
+
+        return back();
     }
 
     public function activar($id)
     {
-            $categoria = Categoria::find($id);
+        $categoria = Categoria::find($id);
 
-            $categoria->estado = 'Activo';
-            
-            $categoria->save();
-                        
-            return back();
+        $categoria->estado = 'Activo';
+
+        $categoria->save();
+
+        return back();
     }
-
 }

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CategoriaConcepto extends Model
+class ConfiguracionCategoria extends Model
 {
     protected $table = "configuracioncategoria";
 
@@ -17,14 +17,14 @@ class CategoriaConcepto extends Model
         return $this->belongsTo(Concepto::class,'concepto_id','id');
     }
 
-    
+
     public function calcular($monto,$categoria_id)
     {
         $basico = Concepto::join('configuracioncategoria','conceptos.id','=','configuracioncategoria.concepto_id')
         ->select('configuracioncategoria.montoFijo AS monto')
         ->where('conceptos.descripcion','like','Basico')
         ->where('configuracioncategoria.categoria_id','=',$categoria_id)->first();
-       
+
         return $total = $monto * $basico->monto;
     }
 
@@ -38,5 +38,5 @@ class CategoriaConcepto extends Model
               $ano_diferencia--;
             return $ano_diferencia;
     }
-    
+
 }

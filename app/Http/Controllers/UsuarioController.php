@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Usuario;
 use App\Familiar;
-use App\CategoriaEmpleado;
+use App\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -22,7 +22,7 @@ class UsuarioController extends Controller
     {
         $usuarios = Usuario::orderBy('apellido', 'ASC')->paginate(10);
 
-        
+
 
         return view('admin.usuarios.index',compact('usuarios'));
     }
@@ -34,8 +34,8 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $categorias = CategoriaEmpleado::orderBy('nombre', 'DESC')->paginate(10);
-        
+        $categorias = Categoria::orderBy('nombre', 'DESC')->paginate(10);
+
         return view('admin.usuarios.create',compact('categorias'));
     }
 
@@ -62,7 +62,7 @@ class UsuarioController extends Controller
         $user->cuenta = $request->cuenta;
         $user->fechaIngreso = $request->ingreso;
         $user->save();
-        
+
         return redirect()->route('usuarios.index');
     }
 
@@ -91,8 +91,8 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::findOrFail($id);
 
-        $categorias = CategoriaEmpleado::orderBy('nombre', 'DESC')->paginate(10);
-        
+        $categorias = Categoria::orderBy('nombre', 'DESC')->paginate(10);
+
         return view('admin.usuarios.edit',compact('usuario','categorias'));
 
     }
