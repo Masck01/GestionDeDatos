@@ -16,32 +16,32 @@ class CreateTablaLineaLiquidacion extends Migration
         Schema::create('linealiquidacion', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('cantidad');
-            $table->decimal('montofijo',7,2);
-            $table->decimal('montovariable',7,2);
+            $table->decimal('montofijo', 7, 2);
+            $table->decimal('montovariable', 7, 2);
             //$table->string('haberes');
-            //$table->bigInteger('concepto_id')->unsigned();
+            $table->bigInteger('concepto_id')->unsigned();
             $table->bigInteger('liquidacion_id')->unsigned();
-            $table->bigInteger('configuracioncategoria_id')->unsigned();
+            // $table->bigInteger('configuracioncategoria_id')->unsigned();
             $table->timestamps();
 
-           
-           /* $table->foreign('concepto_id')
-                  ->references('id')
-                  ->on('conceptos')
-                  ->onUpdate('cascade')
-                  ->onDelete('cascade');*/
+
+            $table->foreign('concepto_id')
+                ->references('id')
+                ->on('concepto')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->foreign('liquidacion_id')
-                  ->references('id')
-                  ->on('liquidacion')
-                  ->onUpdate('cascade')
-                  ->onDelete('cascade');
+                ->references('id')
+                ->on('liquidacion')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
-            $table->foreign('configuracioncategoria_id')
-                  ->references('id')
-                  ->on('configuracioncategoria')
-                  ->onUpdate('cascade')
-                  ->onDelete('cascade');
+            // $table->foreign('configuracioncategoria_id')
+            //     ->references('id')
+            //     ->on('configuracioncategoria')
+            //     ->onUpdate('cascade')
+            //     ->onDelete('cascade');
         });
     }
 

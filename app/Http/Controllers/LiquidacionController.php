@@ -2,26 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Compra;
 use Illuminate\Http\Request;
-use App\Proveedor;
-use App\Producto;
 use App\Concepto;
 use App\Detalle_Liquidacion;
-use App\Deposito;
-use App\Usuario;
-use App\Categoria;
 use App\Liquidacion;
-use App\DepositoProducto;
-use App\MovimientoDeposito;
 use App\Cajas;
-use App\MovimientoCaja;
+use App\Categoria;
 use App\ConfiguracionCategoria;
+use App\Empleado;
 use DB;
 use Session;
 use Carbon\Carbon;
-use Response;
-use App\HistorialMovimientos;
 use Illuminate\Support\Collection;
 use Luecano\NumeroALetras\NumeroALetras;
 use Illuminate\Support\Facades\Auth;
@@ -30,60 +21,43 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class LiquidacionController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
         $liquidacion = Liquidacion::orderBy('id', 'DESC')->paginate(10);
 
         return view('admin.liquidacion.index', compact('liquidacion'));
-
     }
 
-    public function create($id){
+    public function create($id)
+    {
 
-            $usuarios = Usuario::findOrFail($id);
+        $empleado = Empleado::find($id);
+        $conceptos = Concepto::all();
+        // $cuenta = CategoriaConcepto::where('categoria_id','=',$usuarios->categoria_id)->sum('montoVariable');
+        $configuracion_categoria = ConfiguracionCategoria::join('categoria', 'categoria.id', '=', 'configuracioncategoria.categoria_id')
+            ->join('concepto', 'concepto.id', '=', 'configuracioncategoria.concepto_id')->where('concepto.estado', 'activo')->get();
+        $categoria = Categoria::find($empleado->categoria_id);
+        $salario_basico = $categoria->salario_basico;
+        list($ano, $mes, $dia) = explode("-", date("Y-m-d"));
+        $ano_diferencia  = date("Y") - $ano;
+        $mes_diferencia = date("m") - $mes;
+        $dia_diferencia   = date("d") - $dia;
+        if ($dia_diferencia < 0 || $mes_diferencia < 0)
+            $ano_diferencia--;
 
-            $conceptos = ConfiguracionCategoria::where('categoria_id','=',$usuarios->categoria_id)->get();
+        $antiguedadTotal = $ano_diferencia;
 
-            $haberes = ConfiguracionCategoria::where('categoria_id','=',$usuarios->categoria_id)->sum('montoFijo');
-
-            $cuenta = ConfiguracionCategoria::where('categoria_id','=',$usuarios->categoria_id)->sum('montoVariable');
-
-            $basico = Concepto::join('categorias_conceptos','conceptos.id','=','categorias_conceptos.concepto_id')
-            ->select('categorias_conceptos.montoFijo AS monto')
-            ->where('conceptos.descripcion','like','Basico')
-            ->where('categorias_conceptos.categoria_id','=',$usuarios->categoria_id)->first();
-
-            $antiguedad = Concepto::join('categorias_conceptos','conceptos.id','=','categorias_conceptos.concepto_id')
-            ->select('categorias_conceptos.montoFijo AS monto')
-            ->where('conceptos.descripcion','like','Antiguedad')
-            ->where('categorias_conceptos.categoria_id','=',$usuarios->categoria_id)->first();
-
-            list($ano,$mes,$dia) = explode("-",$usuarios->fechaIngreso);
-            $ano_diferencia  = date("Y") - $ano;
-            $mes_diferencia = date("m") - $mes;
-            $dia_diferencia   = date("d") - $dia;
-            if ($dia_diferencia < 0 || $mes_diferencia < 0)
-              $ano_diferencia--;
-
-            $antiguedadTotal = $ano_diferencia * $antiguedad->monto;
-
-            $haberest = $haberes + $antiguedadTotal;
-
-            $retenciones = $cuenta * $basico->monto;
-
-            $collection = collect($conceptos);
-
-            return view('admin.liquidacion.create',['conceptos'=> $conceptos,'usuarios'=>$usuarios,'haberest'=>$haberest,'retenciones'=>$retenciones,'collection'=>$collection,'$ano_diferencia'=>$ano_diferencia]);
-
+        return view('admin.liquidacion.create', compact('empleado', 'ano_diferencia', 'conceptos', 'salario_basico', 'configuracion_categoria', 'categoria'));
     }
 
     public function store(Request $request)
     {
         $cajas = Cajas::find(1);
 
-        if($cajas->estado == 'abierta'):
+        if ($cajas->estado == 'abierta') :
 
-            try{
+            try {
 
                 $mytime = Carbon::now('America/Argentina/Tucuman');
 
@@ -113,7 +87,7 @@ class LiquidacionController extends Controller
 
                 $usuario = Usuario::findOrFail($request->get('empleado_id'));
 
-                list($ano,$mes,$dia) = explode("-",$usuario->fechaIngreso);
+                list($ano, $mes, $dia) = explode("-", $usuario->fechaIngreso);
 
                 $ano_diferencia  = date("Y") - $ano;
 
@@ -122,51 +96,44 @@ class LiquidacionController extends Controller
                 $dia_diferencia   = date("d") - $dia;
 
                 if ($dia_diferencia < 0 || $mes_diferencia < 0)
-                  $ano_diferencia--;
+                    $ano_diferencia--;
 
-               if (count( json_decode($request->productosEnPedidos,true) ) > 0) {
+                if (count(json_decode($request->productosEnPedidos, true)) > 0) {
 
-                  $proEnPedido = json_decode($request->productosEnPedidos,true);
+                    $proEnPedido = json_decode($request->productosEnPedidos, true);
 
-                  for ($i=0; $i < count($proEnPedido); $i++) {
+                    for ($i = 0; $i < count($proEnPedido); $i++) {
 
-                      $detalle = new Detalle_Liquidacion();
+                        $detalle = new Detalle_Liquidacion();
 
-                      $detalle->liquidacion_id = $liquidacion->id;
+                        $detalle->liquidacion_id = $liquidacion->id;
 
-                      $detalle->concepto_id =  $proEnPedido[$i]['concepto_id'];
+                        $detalle->concepto_id =  $proEnPedido[$i]['concepto_id'];
 
-                      $concepto = Concepto::find($detalle->concepto_id);
+                        $concepto = Concepto::find($detalle->concepto_id);
 
-                      if($concepto->descripcion == 'Antiguedad')
-                      {
-                        $detalle->cantidad =  $ano_diferencia;
-                      }
-                      else{
-                        $detalle->cantidad = $proEnPedido[$i]['unidad'];
-                      }
+                        if ($concepto->descripcion == 'Antiguedad') {
+                            $detalle->cantidad =  $ano_diferencia;
+                        } else {
+                            $detalle->cantidad = $proEnPedido[$i]['unidad'];
+                        }
 
-                      if($concepto->descripcion == 'Antiguedad')
-                      {
-                        $detalle->montoFijo =  $ano_diferencia * $proEnPedido[$i]['montoFijo'];
-                      }
-                      else{
-                        $detalle->montoFijo = $proEnPedido[$i]['montoFijo'];
-                      }
+                        if ($concepto->descripcion == 'Antiguedad') {
+                            $detalle->montoFijo =  $ano_diferencia * $proEnPedido[$i]['montoFijo'];
+                        } else {
+                            $detalle->montoFijo = $proEnPedido[$i]['montoFijo'];
+                        }
 
-                      $detalle->montoVariable = $proEnPedido[$i]['montoVariable'];
+                        $detalle->montoVariable = $proEnPedido[$i]['montoVariable'];
 
-                      $detalle->save();
-
-                  }
-              }
+                        $detalle->save();
+                    }
+                }
 
 
 
                 DB::commit();
-            }
-
-            catch(Exception $e){
+            } catch (Exception $e) {
 
 
                 DB::rollback();
@@ -174,13 +141,13 @@ class LiquidacionController extends Controller
 
 
 
-            return redirect()->route('liquidacion.lista',$usuario->categoria_id);
+            return redirect()->route('liquidacion.lista', $usuario->categoria_id);
 
-        else:
+        else :
 
             Session::flash('error', 'Error: No hay ninguna Caja Abierta');
 
-            return back()->with('message','Ninguna Caja Abierta')->with('typealert','danger');
+            return back()->with('message', 'Ninguna Caja Abierta')->with('typealert', 'danger');
 
         endif;
     }
@@ -192,14 +159,14 @@ class LiquidacionController extends Controller
 
         $detalle = $liquidacion->detalle_liquidacion()->get();
 
-        $usuario= Usuario::findOrFail($liquidacion->usuario_id);
+        $usuario = Usuario::findOrFail($liquidacion->usuario_id);
 
-        $basico = Concepto::join('categorias_conceptos','conceptos.id','=','categorias_conceptos.concepto_id')
-        ->select('categorias_conceptos.montoFijo AS monto')
-        ->where('conceptos.descripcion','like','Basico')
-        ->where('categorias_conceptos.categoria_id','=',$usuario->categoria_id)->first();
+        $basico = Concepto::join('categorias_conceptos', 'conceptos.id', '=', 'categorias_conceptos.concepto_id')
+            ->select('categorias_conceptos.montoFijo AS monto')
+            ->where('conceptos.descripcion', 'like', 'Basico')
+            ->where('categorias_conceptos.categoria_id', '=', $usuario->categoria_id)->first();
 
-        list($ano,$mes,$dia) = explode("-",$usuario->fechaIngreso);
+        list($ano, $mes, $dia) = explode("-", $usuario->fechaIngreso);
 
         $ano_diferencia  = date("Y") - $ano;
 
@@ -208,39 +175,37 @@ class LiquidacionController extends Controller
         $dia_diferencia   = date("d") - $dia;
 
         if ($dia_diferencia < 0 || $mes_diferencia < 0)
-          $ano_diferencia--;
+            $ano_diferencia--;
 
-        return view('admin.liquidacion.show', ['liquidacion'=>$liquidacion,'detalle'=>$detalle,'basico'=>$basico,'ano_diferencia'=>$ano_diferencia]);
+        return view('admin.liquidacion.show', ['liquidacion' => $liquidacion, 'detalle' => $detalle, 'basico' => $basico, 'ano_diferencia' => $ano_diferencia]);
     }
 
-    public function recivo ($id)
+    public function recivo($id)
     {
         $liquidacion = Liquidacion::find($id);
 
         $detalle = $liquidacion->detalle_liquidacion()->get();
 
-        $usuario= User::findOrFail($liquidacion->usuario_id);
+        $usuario = User::findOrFail($liquidacion->usuario_id);
 
-        $basico = Concepto::join('categorias_conceptos','conceptos.id','=','categorias_conceptos.concepto_id')
-        ->select('categorias_conceptos.montoFijo AS monto')
-        ->where('conceptos.descripcion','like','Basico')
-        ->where('categorias_conceptos.categoria_id','=',$usuario->categoria_id)->first();
+        $basico = Concepto::join('categorias_conceptos', 'conceptos.id', '=', 'categorias_conceptos.concepto_id')
+            ->select('categorias_conceptos.montoFijo AS monto')
+            ->where('conceptos.descripcion', 'like', 'Basico')
+            ->where('categorias_conceptos.categoria_id', '=', $usuario->categoria_id)->first();
 
 
-        $pdf = PDF::loadView('pdf.reciboSueldo',['liquidacion'=>$liquidacion,'detalle'=>$detalle,'basico'=>$basico])->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('pdf.reciboSueldo', ['liquidacion' => $liquidacion, 'detalle' => $detalle, 'basico' => $basico])->setPaper('a4', 'landscape');
 
         return $pdf->stream();
     }
 
-    public function list($id){
+    public function list($id)
+    {
 
         $categoria = Categoria::find($id);
 
-        $usuarios = Usuario::where('empleado_id','=',$id)->orderBy('username', 'ASC')->paginate(10);
+        $usuarios = Usuario::where('empleado_id', '=', $id)->orderBy('username', 'ASC')->paginate(10);
 
-        return view('admin.liquidacion.listUser', compact('usuarios','categoria'));
-
+        return view('admin.liquidacion.listUser', compact('usuarios', 'categoria'));
     }
-
-
 }

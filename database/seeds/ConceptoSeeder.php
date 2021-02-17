@@ -1,9 +1,9 @@
 <?php
 
-use App\Categoria;
+use App\Concepto;
 use Illuminate\Database\Seeder;
 
-class CategoriaSeeder extends Seeder
+class ConceptoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,9 +12,9 @@ class CategoriaSeeder extends Seeder
      */
     public function run()
     {
-        Categoria::create([
-            'descripcion'=>'Administrador',
-            'salario_basico' => '60000',
+        Concepto::create([
+            'descripcion' => 'salario basico',
+            'tipo' => 'haber',
             'estado' => 'activo'
         ]);
     }

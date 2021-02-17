@@ -14,11 +14,14 @@ class DatabaseSeeder extends Seeder
         $this->call(SucursalSeeder::class);
         $this->call(BancoSeeder::class);
         $this->call(CategoriaSeeder::class);
+        $this->call(ConceptoSeeder::class);
         $this->call(CajaDeAhorroSeeder::class);
         $this->call(EmpleadoSeeder::class);
         $this->call(UsuarioSeeder::class);
         $this->call(PermissionsTableSeeder::class);
         $this->call(CajaSeeder::class);
+        $this->call(ConfiguracionCategoriaSeeder::class);
+        factory(App\ConfiguracionCategoria::class,20)->create();
         //$this->call(UsersTableSeeder::class);
         // $this->call(PermissionsTableSeeder::class);
         // $this->call(ProvinciasTableSeeder::class);

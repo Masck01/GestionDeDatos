@@ -12,7 +12,7 @@
 
           <div class="row">
             <div class="col-12">
-              <div class="card">
+              <div class="card card-secondary">
               <div class="card-header">
                   <h3 class="card-title">Liquidacion de Salarios</h3>
 
@@ -30,25 +30,41 @@
                   <table class="table table-hover text-nowrap" id="datos">
                     <thead>
                       <tr>
-                          <th>#</th>
+                          <th>
+                              <button type="button" class="btn btn-link" data-toggle="modal" data-target="#ModalCliente">
+                              <i class="fas fa-plus"></i></a>
+                              </button>
+                            </th>
                           <th>Empleado</th>
                           <th>Periodo</th>
                           <th>Salario Neto</th>
+                          <th>Retenciones</th>
+                          <th>Salario Bruto</th>
                           <th>Opciones</th>
                       </tr>
                     </thead>
                     <tbody>
-                    @foreach ($liquidacion as $liqui)
+                    @foreach ($liquidacion as $l)
                   <tr>
                     <td style="text-align: center">{{$loop->iteration}}</td>
-                    <td>{{ $liqui->usuario->apellido}} {{ $liqui->usuario->nombre}}</td>   
-                    <td>{{ $liqui->periodo}}</td>                 
-                    <td>AR$ {{ $liqui->salarioNeto}}</td>
+                    <td>{{ $l->usuario->apellido}} {{ $l->usuario->nombre}}</td>   
+                    <td>{{ $l->periodo}}</td>                 
+                    <td>AR$ {{ $l->salarioNeto}}</td>
                     <td>
-                        <a href="{{ route('liquidacion.show', $liqui->id) }}"  class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Venta" data-original-title="Ver Presupuesto"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
-                        <a href="{{ route('liquidacion.imprimir', $liqui->id) }}" class="btn btn-link" data-toggle="tooltip" title="Imprimir Comprobante" data-original-title="Imprimir Comprobante"><i class="fas fa-print" style="color:#578DA4; font-size: 20px;"></i></a>
+                      {{$l->retenciones}}
                     </td>
-
+                    <td>
+                      {{$l->salario_bruto}}
+                      
+                    </td>
+                    <td>
+                      {{$l->estado}}
+                      
+                    </td>
+                    <td>
+                        <a href="{{ route('liquidacion.show', $l->id) }}"  class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Venta" data-original-title="Ver Presupuesto"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
+                        <a href="{{ route('liquidacion.imprimir', $l->id) }}" class="btn btn-link" data-toggle="tooltip" title="Imprimir Comprobante" data-original-title="Imprimir Comprobante"><i class="fas fa-print" style="color:#578DA4; font-size: 20px;"></i></a>
+                    </td>
                         </tr>
                       @endforeach
                     </tbody>

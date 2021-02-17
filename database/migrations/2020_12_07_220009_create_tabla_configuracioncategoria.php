@@ -15,8 +15,8 @@ class CreateTablaConfiguracionCategoria extends Migration
     {
         Schema::create('configuracioncategoria', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->decimal('montofijo',7,2);
-            $table->decimal('montovariable',7,2);
+            $table->decimal('montofijo',7,2)->nullable();
+            $table->decimal('montovariable',7,2)->nullable();
             $table->integer('unidad');
             $table->bigInteger('concepto_id')->unsigned();
             $table->bigInteger('categoria_id')->unsigned();
