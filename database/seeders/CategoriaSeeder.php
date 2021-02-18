@@ -1,9 +1,11 @@
 <?php
 
-use App\CajaDeAhorro;
+namespace Database\Seeders;
+
+use App\Categoria;
 use Illuminate\Database\Seeder;
 
-class CajaDeAhorroSeeder extends Seeder
+class CategoriaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,9 +14,8 @@ class CajaDeAhorroSeeder extends Seeder
      */
     public function run()
     {
-        CajaDeAhorro::create([
-            'codigo'=>'11111',
-            'banco_id'=>'1'
+        Categoria::create([
+            'descripcion'=>'Administrador',
         ]);
     }
 }

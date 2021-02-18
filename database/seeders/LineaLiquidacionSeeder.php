@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Caja;
+namespace Database\Seeders;
 
-class CajaSeeder extends Seeder
+use Illuminate\Database\Seeder;
+
+class LineaLiquidacionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +14,5 @@ class CajaSeeder extends Seeder
     public function run()
     {
         //
-        Caja::create([
-            'nombre'=>'Caja 1'
-            ]);
     }
 }
