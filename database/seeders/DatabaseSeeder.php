@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\ConfiguracionCategoria;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,7 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionsTableSeeder::class);
         $this->call(CajaSeeder::class);
         $this->call(ConfiguracionCategoriaSeeder::class);
-        factory(App\ConfiguracionCategoria::class,20)->create();
         //$this->call(UsersTableSeeder::class);
         // $this->call(PermissionsTableSeeder::class);
         // $this->call(ProvinciasTableSeeder::class);
