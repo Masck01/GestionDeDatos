@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //Seeders
         $this->call(SucursalSeeder::class);
         $this->call(BancoSeeder::class);
         $this->call(CategoriaSeeder::class);
@@ -24,14 +25,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionsTableSeeder::class);
         $this->call(CajaSeeder::class);
         $this->call(ConfiguracionCategoriaSeeder::class);
-        //$this->call(UsersTableSeeder::class);
-        // $this->call(PermissionsTableSeeder::class);
-        // $this->call(ProvinciasTableSeeder::class);
-        // $this->call(RubrosTableSeeder::class);
-        // $this->call(UnidadesNegocioTableSeeder::class);
-        //$this->call(DepositosTableSeeder::class);
-        //$this->call(ProductosTableSeeder::class);
-        //$this->call(DepositoProductoTableSeeder::class);
-        // $this->call(TiposTareasTableSeeder::class);
+
+        // Factorys
+        ConfiguracionCategoria::factory()->count(20)->create();
+
     }
 }

@@ -16,6 +16,8 @@ class CategoriaSeeder extends Seeder
     {
         Categoria::create([
             'descripcion'=>'Administrador',
+            'salario_basico' => '60000',
+            'estado' => 'activo'
         ]);
     }
 }

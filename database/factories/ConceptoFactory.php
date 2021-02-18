@@ -5,6 +5,7 @@ namespace Database\factories;
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Concepto;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ConceptoFactory extends Factory
 {

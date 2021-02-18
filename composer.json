@@ -21,7 +21,9 @@
         "spatie/laravel-permission": "^3.16"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.9",
         "facade/ignition": "^2.3.6",
+        "fzaninotto/faker": "^1.9",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.0"
