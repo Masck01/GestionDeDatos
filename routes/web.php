@@ -193,7 +193,7 @@ Route::middleware(['auth'])->group(function(){
 
           Route::get('liquidacion', 'LiquidacionController@index')->name('liquidacion.index');
 
-          Route::get('liquidacion/create/{empleado}', 'LiquidacionController@create')->name('liquidacion.create');
+          Route::get('liquidacion/create/{id}', 'LiquidacionController@create')->name('liquidacion.create');
 
           Route::post('liquidacion/store', 'LiquidacionController@store')->name('liquidacion.store');
 
