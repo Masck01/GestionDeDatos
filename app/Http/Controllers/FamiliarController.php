@@ -11,6 +11,7 @@ use App\Deposito;
 use App\DepositoProducto;
 use App\MovimientoDeposito;
 use App\Familiar;
+use Validator;
 use App\MovimientoCaja;
 use DB;
 use Session;
@@ -24,32 +25,55 @@ use Illuminate\Support\Facades\Auth;
 
 class FamiliarController extends Controller
 {
+
     public function store(Request $request)
     {
         $familiar = new Familiar;
-        $familiar->usuario_id = $request->id;
-        $familiar->nombre = $request->nombre;
-        $familiar->fechaNacimiento = $request->fechaNacimiento;
-        $familiar->parentesco = $request->parentesco;
+        $familiar->empleado_id = $request->id;
         $familiar->dni = $request->dni;
+        $familiar->apellido = $request->apellido;
+        $familiar->nombre = $request->nombre;
+        $familiar->fecha_Nacimiento = $request->fecha_Nacimiento;
+        $familiar->parentesco = $request->parentesco;
         $familiar->save();
 
-        return redirect()->route('usuarios.show',$familiar->usuario_id);
-
+        return redirect()->route('empleados.show',$familiar->empleado_id);
     }
 
     public function update(Request $request)
     {
-        $id = $request->idContacto;
-        $contacto = Familiar::find($id);
-        $contacto->proveedor_id = $request->id;
-        $contacto->nombre = $request->nombre;
-        $contacto->telefonos = $request->telefonos;
-        $contacto->email = $request->email;
-        $contacto->sector = $request->sector;
-        $contacto->save();
+        $rules = [
+            'nombre' => 'required|max:255',
+        ];
 
-        return redirect()->route('usuarios.show',$request->id)->with('success','Proveedores actualizado correctamente');
+        $message = [
+
+            'nombre.required' => 'Ingrese Marca del Producto',
+
+            'nombre.max' =>'El nombre de la Marca no puede ser mayor a :max caracteres.'
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$message);
+
+        if( $validator->fails()):
+
+            return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
+
+        else:
+
+        $id = $request->id;
+        $familiar = Familiar::find($id);
+        $familiar->empleado_id = $request->id;
+        $familiar->dni = $request->dni;
+        $familiar->apellido = $request->apellido;
+        $familiar->nombre = $request->nombre;
+        $familiar->fecha_Nacimiento = $request->fecha_Nacimiento;
+        $familiar->parentesco = $request->parentesco;
+        $familiar->save();
+
+
+        return redirect()->route('empleados.show',$request->id)->with('success','Grupo Familiar actualizado correctamente');
+        endif;
     }
 
 

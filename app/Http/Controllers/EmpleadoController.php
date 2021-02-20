@@ -25,7 +25,7 @@ class EmpleadoController extends Controller
     {
         $empleados = Empleado::orderBy('apellido', 'ASC')->paginate(10);
 
-        
+
 
         return view('admin.empleados.index',compact('empleados'));
     }
@@ -40,7 +40,7 @@ class EmpleadoController extends Controller
         $categorias = Categoria::orderBy('descripcion', 'DESC')->paginate(10);
         $sucursales = Sucursal::orderBy('razon_social', 'DESC')->paginate(10);
         $cajasdeahorro = CajadeAhorro::orderby('codigo','DESC')->paginate(10);
-        
+
         return view('admin.empleados.create',compact('categorias','sucursales','cajasdeahorro'));
     }
 
@@ -65,7 +65,7 @@ class EmpleadoController extends Controller
         $empleado->cajadeahorro_id = $request->cajadeahorro;
         $empleado->fecha_Ingreso = $request->ingreso;
         $empleado->save();
-        
+
         return redirect()->route('empleados.index');
     }
 
@@ -79,9 +79,9 @@ class EmpleadoController extends Controller
     {
         $empleado = Empleado::findOrFail($id);
 
-        $clientes = Familiar::where('empleado_id','like',$empleado->id)->orderBy('id', 'ASC')->paginate(10);
+        $grupofamiliares = Familiar::where('empleado_id','like',$empleado->id)->orderBy('id', 'ASC')->paginate(10);
 
-        return view('admin.empleados.show',compact('empleado','clientes'));
+        return view('admin.empleados.show',compact('empleado','grupofamiliares'));
     }
 
     /**
@@ -92,12 +92,12 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        $empleado = Empleado::findOrFail($id);
+        $empleado = Empleado::find($id);
 
         $categorias = Categoria::orderBy('descripcion', 'DESC')->paginate(10);
         $sucursales = Sucursal::orderBy('razon_social', 'DESC')->paginate(10);
         $cajasdeahorro = CajadeAhorro::orderby('codigo','DESC')->paginate(10);
-        
+
         return view('admin.empleados.edit',compact('empleado','categorias', 'sucursales', 'cajasdeahorro'));
 
     }
@@ -110,9 +110,9 @@ class EmpleadoController extends Controller
      * @return \Illuminate\Http\Response
      */
     /* public function update(Request $request, $id)
-    {   
+    {
         $empleado = Empleado::find($id);
-        
+
         $empleado->nombre = $request->nombre;
         $empleado->apellido = $request->apellido;
         $empleado->email = $request->email;
@@ -137,7 +137,7 @@ class EmpleadoController extends Controller
         ];
 
         $message = [
-            
+
             'nombre.required' => 'Ingrese Marca del Producto',
 
             'nombre.max' =>'El nombre de la Marca no puede ser mayor a :max caracteres.'
@@ -146,7 +146,7 @@ class EmpleadoController extends Controller
         $validator = Validator::make($request->all(),$rules,$message);
 
         if( $validator->fails()):
-            
+
             return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
 
         else:
@@ -154,7 +154,7 @@ class EmpleadoController extends Controller
             $id = $request->id;
 
             $empleado = Empleado::find($id);
-        
+
             $empleado->nombre = $request->nombre;
             $empleado->apellido = $request->apellido;
             $empleado->email = $request->email;
@@ -167,9 +167,9 @@ class EmpleadoController extends Controller
             $empleado->cajadeahorro_id = $request->cajadeahorro;
             $empleado->fecha_Ingreso = $request->ingreso;
             $empleado->save();
-                        
+
             return redirect()->route('empleados.index')->with('success','Empleado Editado correctamente');
-                 
+
         endif;
     }
 
