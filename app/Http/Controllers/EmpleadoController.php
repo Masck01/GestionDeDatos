@@ -78,10 +78,11 @@ class EmpleadoController extends Controller
     public function show($id)
     {
         $empleado = Empleado::findOrFail($id);
+        $grupofamilia = Familiar::findOrFail($id);
 
         $grupofamiliares = Familiar::where('empleado_id','like',$empleado->id)->orderBy('id', 'ASC')->paginate(10);
 
-        return view('admin.empleados.show',compact('empleado','grupofamiliares'));
+        return view('admin.empleados.show',compact('empleado','grupofamiliares','grupofamilia'));
     }
 
     /**

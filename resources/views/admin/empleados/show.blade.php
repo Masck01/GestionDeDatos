@@ -86,6 +86,7 @@
                 <div class="row">
                 <input type="hidden" class="form-control" placeholder="Enter ..." id="id" name="id" value="{{$empleado->id}}">
 
+
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
@@ -180,8 +181,8 @@
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="row">
-                    <input type="hidden" class="form-control" placeholder="Enter ..." id="idEmpleado" name="idEmpleado" value="{{$empleado->empleado_id}}">
-                <input type="hidden" class="form-control" placeholder="Enter ..." id="idUpdate" name="id" value={{$grupofamilia->id}}>
+                    <input type="hidden" class="form-control" placeholder="Enter ..." id="id" name="id" value="{{$empleado->id}}">
+
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Nombre</label>
