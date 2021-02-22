@@ -45,12 +45,12 @@
                 </tr>
               </thead>
               <tbody>
-              @foreach($grupofamiliares as $grupofamilia)
+              @foreach($grupofamiliares as $familia)
               <tr>
-              <td style="text-align:center;">{{$grupofamilia->id}} </td>
-              <td> {{$grupofamilia->nombre}} </td>
-              <td>{{$grupofamilia->dni}} </td>
-              <td>{{$grupofamilia->parentesco}} </td>
+              <td style="text-align:center;">{{$familia->id}} </td>
+              <td> {{$familia->nombre}} </td>
+              <td>{{$familia->dni}} </td>
+              <td>{{$familia->parentesco}} </td>
               <td>
                 <button class="btn btn-link" data-toggle="modal" data-target="#ModalClienteUpdate" title="Editar empleado" data-original-title="Editar Producto" style="text-align:center;" ><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
               </td>
@@ -181,7 +181,7 @@
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="row">
-                    <input type="hidden" class="form-control" placeholder="Enter ..." id="id" name="id" value="{{$empleado->id}}">
+                    <input type="hidden" class="form-control" placeholder="Enter ..." id="idUpdate" name="id" value="{{$grupofamilia->id}}">
 
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">

@@ -40,6 +40,15 @@ class FamiliarController extends Controller
         return redirect()->route('empleados.show',$familiar->empleado_id);
     }
 
+
+    public function edit($id)
+    {
+        $grupofamilia = Familiar::find($id);
+
+       return view('admin.empleados.show',compact('grupofamilia'));
+
+    }
+
     public function update(Request $request)
     {
         $rules = [

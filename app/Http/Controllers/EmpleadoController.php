@@ -146,11 +146,11 @@ class EmpleadoController extends Controller
 
         $validator = Validator::make($request->all(),$rules,$message);
 
-        if( $validator->fails()):
+        if( $validator->fails()){
 
             return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
-
-        else:
+        }
+        else {
 
             $id = $request->id;
 
@@ -171,7 +171,7 @@ class EmpleadoController extends Controller
 
             return redirect()->route('empleados.index')->with('success','Empleado Editado correctamente');
 
-        endif;
+        }
     }
 
     /**
