@@ -224,6 +224,7 @@ Route::middleware(['auth'])->group(function(){
 
   Route::post('categorias/agregar', 'CategoriaController@agregar')->name('categorias.agregar');
 
+
   Route::post('categorias/store', 'CategoriaController@store')->name('categorias.store');
 
   Route::put('categorias/edit', 'CategoriaController@update')->name('categorias.update');
@@ -231,6 +232,28 @@ Route::middleware(['auth'])->group(function(){
   Route::put('categorias/eliminar/{id}', 'CategoriaController@eliminar')->name('categorias.eliminar');
 
   Route::put('categorias/activar/{id}', 'CategoriaController@activar')->name('categorias.activar');
+
+
+// CONFIGURACION CATEGORIAS//
+
+
+Route::get('configuracioncategoria', 'ConfiguracionCategoriaController@index')->name('configuracioncategoria.index');
+
+Route::get('configuracioncategoria/create', 'ConfiguracionCategoriaController@create')->name('configuracioncategoria.create');
+
+Route::post('configuracioncategoria/agregar', 'ConfiguracionCategoriaController@agregar')->name('configuracioncategoria.agregar');
+
+Route::get('configuracioncategoria/edit/{id}', 'ConfiguracionCategoriaController@edit')->name('configuracioncategoria.edit');
+
+Route::put('configuracioncategoria/update/', 'ConfiguracionCategoriaController@update')->name('configuracioncategoria.update');
+
+Route::post('configuracioncategoria/store', 'ConfiguracionCategoriaController@store')->name('configuracioncategoria.store');
+
+Route::put('configuracioncategoria/eliminar/{id}', 'ConfiguracionCategoriaController@eliminar')->name('configuracioncategoria.eliminar');
+
+Route::put('configuracioncategoria/activar/{id}', 'ConfiguracionCategoriaController@activar')->name('configuracioncategoria.activar');
+
+
 
     // SUB CATEGORIAS //
 

@@ -26,14 +26,14 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'nombre' => 'required|max:20',
+            'descripcion' => 'required|max:20',
         ];
 
         $message = [
 
-            'nombre.requiered' => 'Ingrese Nombre de la Categoria',
+            'descripcion.requiered' => 'Ingrese Nombre de la Categoria',
 
-            'nombre.max' => 'El nombre del estudiante no puede ser mayor a :max caracteres.'
+            'descripcion.max' => 'El nombre del estudiante no puede ser mayor a :max caracteres.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -46,7 +46,10 @@ class CategoriaController extends Controller
 
             $categoria = new Categoria();
 
-            $categoria->nombre = $request->nombre;
+            $categoria->descripcion = $request->descripcion;
+
+            $categoria->salario_basico = $request->salario_basico;
+
 
             $categoria->save();
 
@@ -58,14 +61,14 @@ class CategoriaController extends Controller
     public function update(Request $request)
     {
         $rules = [
-            'nombre' => 'required|max:20',
+            'descripcion' => 'required|max:20',
         ];
 
         $message = [
 
-            'nombre.requiered' => 'Ingrese Nombre de la Categoria',
+            'descripcion.requiered' => 'Ingrese Nombre de la Categoria',
 
-            'nombre.max' => 'El Nombre no puede ser mayor a :max caracteres.'
+            'descripcion.max' => 'El Nombre no puede ser mayor a :max caracteres.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -80,7 +83,9 @@ class CategoriaController extends Controller
 
             $categoria = Categoria::find($id);
 
-            $categoria->nombre = $request->nombre;
+            $categoria->descripcion = $request->descripcion;
+
+            $categoria->salario_basico = $request->salario_basico;
 
             $categoria->save();
 

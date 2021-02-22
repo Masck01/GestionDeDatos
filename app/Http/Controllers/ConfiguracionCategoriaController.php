@@ -4,86 +4,132 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ConfiguracionCategoria;
+use App\Categoria;
+use App\Concepto;
 use Validator;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Session;
 use Str;
 
 class ConfiguracionCategoriaController extends Controller
+/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 {
+    public function index()
+    {
+        $configuracioncategorias = ConfiguracionCategoria::orderBy('id', 'DESC')->paginate(5);
 
-    public function store(Request $request,$id)
+        return view('admin.configuracioncategoria.index', compact('configuracioncategorias'));
+    }
+
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $categorias = Categoria::orderBy('id', 'DESC')->paginate(10);
+        $conceptos = Concepto::orderBy('id', 'DESC')->paginate(10);
+
+        return view('admin.configuracioncategoria.create',compact('categorias','conceptos'));
+    }
+
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
 
-            $categoria = new ConfiguracionCategoria();
+            $configuracioncategorias = new ConfiguracionCategoria();
 
-            $categoria->categoria_id = $id;
+            $configuracioncategorias->concepto_id = $request->concepto;
 
-            $categoria->concepto_id = $request->concepto;
+            $configuracioncategorias->categoria_id = $request->categoria;
 
-            $categoria->montoFijo = $request->montoFijo;
+            $configuracioncategorias->montofijo = $request->montofijo;
 
-            $categoria->montoVariable = $request->montoVariable;
+            $configuracioncategorias->montovariable = $request->montovariable;
 
-            $categoria->save();
+            $configuracioncategorias->unidad = $request->unidad;
 
-            return back()->with('message','Categoria Registrada con exito')->with('typealert','success');
+            $configuracioncategorias->save();
+
+            return redirect()->route('configuracioncategoria.index');
+
+    }
+
+        public function edit($id)
+
+    {
+        $configuracioncategorias = ConfiguracionCategoria::findOrFail($id);
+
+        $categorias = Categoria::orderBy('id', 'DESC')->paginate(10);
+        $conceptos = Concepto::orderBy('id', 'DESC')->paginate(10);
+
+        return view('admin.configuracioncategoria.edit',compact('configuracioncategorias','categorias','conceptos'));
+
 
     }
 
     public function update(Request $request)
     {
-        $rules = [
-            'nombre' => 'required|max:20',
-        ];
 
-        $message = [
-
-            'nombre.requiered' => 'Ingrese Nombre de la Categoria',
-
-            'nombre.max' =>'El Nombre no puede ser mayor a :max caracteres.'
-        ];
-
-        $validator = Validator::make($request->all(),$rules,$message);
-
-        if( $validator->fails()):
-
-            return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
-
-        else:
 
             $id = $request->id;
 
-            $categoria = Categoria::find($id);
+            $configuracioncategorias = ConfiguracionCategoria::find($id);
 
-            $categoria->nombre = $request->nombre;
+            $configuracioncategorias->concepto_id = $request->concepto;
 
-            $categoria->save();
+            $configuracioncategorias->categoria_id = $request->categoria;
 
-            return back()->with('message','Categoria Actualizada con exito')->with('typealert','success');
+            $configuracioncategorias->montofijo = $request->montofijo;
 
-        endif;
+            $configuracioncategorias->montovariable = $request->montovariable;
+
+            $configuracioncategorias->unidad = $request->unidad;
+
+
+            $configuracioncategorias->save();
+
+            return redirect()->route('configuracioncategoria.index')->with('success','configuracion categorias Editado correctamente');
+
+
+
     }
 
     public function eliminar($id)
     {
-            $categoria = Categoria::find($id);
+            $configuracioncategorias = ConfiguracionCategoria::find($id);
 
-            $categoria->estado = 'Inactivo';
+            $configuracioncategorias->estado = 'Inactivo';
 
-            $categoria->save();
+            $configuracioncategorias->save();
 
             return back();
     }
 
     public function activar($id)
     {
-            $categoria = Categoria::find($id);
+            $configuracioncategorias = ConfiguracionCategoria::find($id);
 
-            $categoria->estado = 'Activo';
+            $configuracioncategorias->estado = 'Activo';
 
-            $categoria->save();
+            $configuracioncategorias->save();
 
             return back();
     }
+
+
+
 
 }

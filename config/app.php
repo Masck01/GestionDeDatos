@@ -232,6 +232,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Empleado' => App\Empleado::class
+        'Configuracioncategoria' => App\ConfiguracionCategoria::class
 
 
     ],

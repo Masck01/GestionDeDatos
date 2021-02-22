@@ -7,15 +7,15 @@
           @if ( count($errors) > 0 )
 
             <div class="alert alert-danger">
-              
+
               <ul>
                   @foreach($errors->all() as $error)
                   <li>{{ $error }}</li>
                   @endforeach
               </ul>
-            
+
             </div>
-          
+
           @endif
 
           <div class="card card-secondary">
@@ -25,12 +25,13 @@
             <table class="table table-hover text-nowrap" id="tablecliente">
               <thead>
                 <tr>
-                  <th style="text-align:center;">                  
+                  <th style="text-align:center;">
                   <button type="button" class="btn btn-link" data-toggle="modal" data-target="#ModalCliente">
                   <i class="fas fa-plus"></i></a>
                   </button>
                   </th>
                   <th style="text-align:center;">descripcion</th>
+                  <th style="text-align:center;">Salario basico</th>
                   <th style="text-align:center;">Estado</th>
                   <th colspan="2" style="text-align:center;">Opciones</th>
                   <th></th>
@@ -42,10 +43,16 @@
                     <td style="text-align:center;">{{$loop->iteration}}</td>
                     <td style="display:none; text-align:center;">{{$cat->id}} </td>
                     <td style="text-align:center;">{{$cat->descripcion}} </td>
+                    <td style="text-align:center;">{{$cat->salario_basico}} </td>
                     <td style="text-align:center;">{{$cat->estado}} </td>
                     <td style="text-align:right;">
                       <a href="#" class="btn btn-link" data-toggle="modal" data-target="#modal" onclick="seleccionarContacto()" title="Editar Categoria" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i>
                     </td>
+
+                    <td style="text-align:right;">
+                        <a href="{{ route('categorias.agregar',$cat->id) }}" class="btn btn-link" data-toggle="tooltip" title="Configuracion Categoria" data-original-title="Editar Producto"><i class="fas fa-plus-square" style="color:black; font-size: 20px;"></i></a></td>
+                      </td>
+
                     <td>
                       @if ($cat->estado == 'Activo')
                       <form class="" action="{{ route('categorias.eliminar', $cat->id)}}" method="post">
@@ -53,7 +60,7 @@
                         {{ method_field('PUT') }}
                         <button type="submit" onclick="return confirm('Esta acción no podrá deshacerse. ¿Desactivar Categoria?')"  class="btn btn-link" data-toggle="tooltip" title="Desactivar Categoria" data-original-title="Editar Cliente"><i class="fas fa-trash-alt" style="color:red; font-size: 20px;"></i></button>
                       </form>
-                      
+
                       @else
 
                       <form class="" action="{{ route('categorias.activar', $cat->id)}}" method="post">
@@ -64,10 +71,10 @@
 
 
                       @endif
-                    </td> 
-              </tr>       
-              @endforeach   
-              </tbody>    
+                    </td>
+              </tr>
+              @endforeach
+              </tbody>
             </table>
             {{$categorias->render()}}
           </div>
@@ -87,7 +94,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 		<div class="modal-header">
-        	<h5 class="modal-title" id="titulo">Agregar Categoria</h5>		
+        	<h5 class="modal-title" id="titulo">Agregar Categoria</h5>
      	    </div>
           <div class="modal-body">
 	            <div class="card-body">
@@ -102,20 +109,34 @@
                       <div class="input-group">
 
                         <div class="input-group-prepend">
-                          
+
                           <span class="input-group-text" id="basic-addon1"><i class="far fa-keyboard"></i></span>
 
                         </div>
-                          
+
                         <input type="text" class="form-control" placeholder="Enter ..." id="descripcion" name="descripcion">
 
                       </div>
-                     
+
+                      <label>salario basico</label>
+                      <div class="input-group">
+
+                        <div class="input-group-prepend">
+
+                          <span class="input-group-text" id="basic-addon1"><i class="far fa-keyboard"></i></span>
+
+                        </div>
+
+                        <input type="text" class="form-control" placeholder="Enter ..." id="salario_basico" name="salario_basico">
+
+                      </div>
+
+
                     </div>
                   </div>
 
                 </div>
-                  
+
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
@@ -126,8 +147,8 @@
                 </div>
 
 
-              </form>  
-                  
+              </form>
+
               </div>
             </div>
       <div class="modal-footer">
@@ -138,7 +159,7 @@
 </div>
 
 
-<!-- FIN Modal Agregar Contacto-->	
+<!-- FIN Modal Agregar Contacto-->
 
 
 <!-- Modal Actualizar Contacto-->
@@ -147,11 +168,11 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 		<div class="modal-header">
-        	<h5 class="modal-title" id="tituloUpdate">Actualizar Categoria</h5>		
+        	<h5 class="modal-title" id="tituloUpdate">Actualizar Categoria</h5>
      	    </div>
           <div class="modal-body">
 	            <div class="card-body">
-              
+
               <form method="post" action="{{ route('categorias.update')}}" role="form" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
@@ -161,6 +182,9 @@
                       <input type="hidden" class="form-control" placeholder="Enter ..." id="idUpdate" name="id">
                       <label>descripcion</label>
                       <input type="text" class="form-control" placeholder="Enter ..." id="descripcionUpdate" name="descripcion">
+
+                      <label>salario basico</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="salario_basicoUpdate" name="salario_basico">
                     </div>
                   </div>
                 </div>
@@ -175,8 +199,8 @@
                 </div>
 
 
-              </form>  
-                  
+              </form>
+
               </div>
             </div>
             <div class="modal-footer">
@@ -187,7 +211,7 @@
 </div>
 
 
-<!-- FIN Modal Actualizar Contacto-->	
+<!-- FIN Modal Actualizar Contacto-->
 @endsection
 
 @push ('scripts')
@@ -204,5 +228,5 @@ function seleccionarContacto(){
 		}
 
     </script>
-    
+
 @endpush

@@ -280,6 +280,17 @@
                 </a>
               </li>
             </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('configuracioncategoria.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Configuracion categorias</p>
+                  </a>
+                </li>
+              </ul>
+
+
           </li>
           @endcan
 
