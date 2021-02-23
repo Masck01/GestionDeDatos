@@ -16,21 +16,21 @@
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- daterange picker -->
-  <link rel="stylesheet" href="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.css') }}"> --}}
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
   <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}"> --}}
   <!-- Tempusdominus Bbootstrap 4 -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
   <!-- Select2 -->
-  <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2/css/select2.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2/css/select2.min.css') }}"> --}}
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
   <!-- Bootstrap4 Duallistbox -->
-  <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}"> --}}
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
@@ -378,21 +378,21 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
+{{-- <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script> --}}
 <!-- ChartJS -->
-<script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script>
+{{-- <script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script> --}}
 
 <!-- Select2 -->
-<script src="{{ asset('adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
+{{-- <script src="{{ asset('adminlte/plugins/select2/js/select2.full.min.js') }}"></script> --}}
 <!-- Bootstrap4 Duallistbox -->
-<script src="{{ asset('adminlte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+{{-- <script src="{{ asset('adminlte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script> --}}
 <!-- InputMask -->
 <script src="{{ asset('adminlte/plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/inputmask/jquery.inputmask.min.js') }}"></script>
 <!-- date-range-picker -->
-<script src="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.js') }}"></script>
+{{-- <script src="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.js') }}"></script> --}}
 <!-- bootstrap color picker -->
-<script src="{{ asset('adminlte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+{{-- <script src="{{ asset('adminlte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script> --}}
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <!-- Bootstrap Switch -->
@@ -657,7 +657,6 @@
 
   })
 </script>
-
 
 </body>
 </html>

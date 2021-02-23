@@ -8,7 +8,7 @@
 
         <!-- Comienza la tabla -->
 
-        <div class="card card-secondary flex-grow-1">
+        <div class="card card-secondary flex-grow-1 mt-4">
             <div class="card-header">
                 <h1 class="display-4">Liquidacion de Salarios</h1>
                 <div class="card-tools">
@@ -28,7 +28,7 @@
                         <tr>
                             <th>
                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#EmpleadoModal">
-                                    <i class="fas fa-plus"></i></a>
+                                    <i class="fas fa-user-plus fa-2x"></i></a>
                                 </button>
                             </th>
                             <th>Empleado</th>
@@ -43,9 +43,9 @@
                         @foreach ($liquidacion as $l)
                             <tr>
                                 <td style="text-align: center">{{ $loop->iteration }}</td>
-                                <td>{{ $l->usuario->apellido }} {{ $l->usuario->nombre }}</td>
-                                <td>{{ $l->periodo }}</td>
-                                <td>AR$ {{ $l->salarioNeto }}</td>
+                                <td>{{ $l->apellido }} {{ $l->nombre }}</td>
+                                <td>{{ $l->periodo_liquidacion }}</td>
+                                <td>AR$ {{ $l->salario_neto }}</td>
                                 <td>
                                     {{ $l->retenciones }}
                                 </td>

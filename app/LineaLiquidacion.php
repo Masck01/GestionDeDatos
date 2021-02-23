@@ -9,11 +9,11 @@ class LineaLiquidacion extends Model
     protected $table = 'linealiquidacion';
 
     protected $fillable = [
-        'cantidad','mmontofijo','montovariable','liquidacion_id','concepto_id'
+        'unidad', 'mmontofijo', 'montovariable', 'concepto_id', 'liquidacion_id'
     ];
 
     public function liquidacion()
     {
-        return $this->hasMany(Liquidacion::class,'id','liquidacion_id');
+        return $this->hasMany(Liquidacion::class, 'id', 'liquidacion_id');
     }
 }

@@ -15,9 +15,9 @@ class CreateTablaLineaLiquidacion extends Migration
     {
         Schema::create('linealiquidacion', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('cantidad');
-            $table->decimal('montofijo', 7, 2);
-            $table->decimal('montovariable', 7, 2);
+            $table->integer('unidad');
+            $table->decimal('montofijo', 7, 2)->nullable();
+            $table->decimal('montovariable', 7, 2)->nullable();
             //$table->string('haberes');
             $table->bigInteger('concepto_id')->unsigned();
             $table->bigInteger('liquidacion_id')->unsigned();

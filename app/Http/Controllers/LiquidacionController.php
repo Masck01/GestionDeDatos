@@ -24,7 +24,7 @@ class LiquidacionController extends Controller
     public function index(Request $request)
     {
 
-        $liquidacion = Liquidacion::orderBy('id', 'DESC')->paginate(10);
+        $liquidacion = Liquidacion::join('empleado', 'empleado.id', '=', 'liquidacion.empleado_id')->select('liquidacion.*', 'empleado.apellido', 'empleado.nombre')->paginate(10);
 
         return view('admin.liquidacion.index', compact('liquidacion'));
     }
