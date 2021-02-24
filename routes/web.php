@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\LiquidacionController;
+use App\Http\Controllers\FamiliarController;
 use App\Http\Livewire\Liquidacion\CrearLiquidacion;
 
 Route::get('/', function () {
@@ -321,9 +322,10 @@ Route::middleware(['auth'])->group(function () {
 
     // FAMILIAR //
 
-    Route::post('grupo/store', 'FamiliarController@store')->name('familias.store');
+    Route::post('grupo/store', [FamiliarController::class, 'store'])->name('familias.store');
 
-    Route::put('grupo/update', 'FamiliarController@update')->name('familias.update');
+    Route::put('grupo/update', [FamiliarController::class, 'update'])->name('familias.update');
+
 
 
     // CONCEPTOS //
