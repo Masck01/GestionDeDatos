@@ -13,6 +13,12 @@ class CreateTablaAlmacendeMedicamento extends Migration
      */
     public function up()
     {
+        Schema::create('provincia', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->timestamps();
+        });
+
         Schema::create('almacendemedicamento', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
@@ -22,6 +28,7 @@ class CreateTablaAlmacendeMedicamento extends Migration
             $table->string('codigo_postal');
             $table->enum('estado', ['Activo', 'Inactivo'])->default('Activo');
             $table->bigInteger('sucursal_id')->unsigned();
+            $table->foreignId('provincia_id')->constrained('provincia');
             $table->timestamps();
 
             $table->foreign('sucursal_id')
