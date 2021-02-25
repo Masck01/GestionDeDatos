@@ -85,33 +85,33 @@ Route::middleware(['auth'])->group(function () {
 
     // PRODUCTOS //
 
-    Route::get('productos', 'ProductoController@index')->name('productos.index');
+    Route::get('productos', [ProductoController::class, 'index'])->name('productos.index');
 
-    Route::get('productos/create', 'ProductoController@create')->name('productos.create');
+    Route::get('productos/create',[ProductoController::class, 'create'])->name('productos.create');
 
-    Route::post('productos/store', 'ProductoController@store')->name('productos.store');
+    Route::post('productos/store', [ProductoController::class, 'store'])->name('productos.store');
 
-    Route::get('productos/{productos}', 'ProductoController@show')->name('productos.show');
+    Route::get('productos/{productos}', [ProductoController::class, 'show'])->name('productos.show');
 
-    Route::get('productos/{productos}/edit', 'ProductoController@edit')->name('productos.edit');
+    Route::get('productos/{productos}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
 
-    Route::put('productos/{productos}', 'ProductoController@update')->name('productos.update');
+    Route::put('productos/{productos}', [ProductoController::class, 'update'])->name('productos.update');
 
-    Route::delete('productos/{productos}', 'ProductoController@destroy')->name('productos.destroy');
+    Route::delete('productos/{productos}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
-    Route::get('producto/cargar', 'ProductoController@cargar')->name('productos.cargar');
+    Route::get('producto/cargar', [ProductoController::class, 'cargar'])->name('productos.cargar');
 
-    Route::post('producto/import', 'ProductoController@importExcel')->name('productos.importar.excel');
+    Route::post('producto/import', [ProductoController::class, 'importExcel'])->name('productos.importar.excel');
 
-    Route::get('producto/download', 'ProductoController@getDownload')->name('productos.download');
+    Route::get('producto/download', [ProductoController::class, 'getDownload'])->name('productos.download');
 
-    Route::get('producto/exportar', 'ProductoController@exportExcel')->name('productos.exportar.excel');
+    Route::get('producto/exportar', [ProductoController::class, 'exportExcel'])->name('productos.exportar.excel');
 
-    Route::get('producto/pdf', 'ProductoController@listadoProductos')->name('productos.downloadPdf');
+    Route::get('producto/pdf', [ProductoController::class, 'listadoProductos'])->name('productos.downloadPdf');
 
-    Route::post('producto/galeria/{producto}', 'ProductoController@galeria')->name('producto.galeria');
+    Route::post('producto/galeria/{producto}', [ProductoController::class, 'galeria'])->name('producto.galeria');
 
-    Route::put('productos/galeria/eliminar/{productos}', 'ProductoController@eliminarImagen')->name('productos.eliminarImagen');
+    Route::put('productos/galeria/eliminar/{productos}', [ProductoController::class, 'eliminarImagen'])->name('productos.eliminarImagen');
 
 
     // USUARIOS //
