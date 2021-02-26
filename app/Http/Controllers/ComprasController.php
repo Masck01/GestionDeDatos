@@ -25,9 +25,9 @@ use Illuminate\Support\Facades\Auth;
 class ComprasController extends Controller
 {
     public function index(Request $request){
-        
+
         $compras = Compra::orderBy('id', 'DESC')->paginate(10);
-        
+
         return view('admin.compras.index', compact('compras'));
 
     }
@@ -36,24 +36,15 @@ class ComprasController extends Controller
 
         $cajas = Caja::find(1);
 
-        if($cajas->estado == 'abierta'):
 
             $productos = Producto::all();
-    
+
             $proveedores = Proveedor::orderBy('id', 'ASC')->get();
 
             return view('admin.compras.create',['productos'=> $productos,'proveedores'=>$proveedores]);
-        
-        else:
-
-            Session::flash('error', 'Error: No hay ninguna Caja Abierta');
-
-            return back()->with('message','Ninguna Caja Abierta')->with('typealert','danger');
-        
-        endif;
 
     }
-    
+
     public function store(Request $request)
     {
         $cajas = Caja::find(1);
@@ -61,42 +52,42 @@ class ComprasController extends Controller
         if($cajas->estado == 'abierta'):
 
             try{
-                
+
                 DB::beginTransaction();
-                
+
                 $mytime = Carbon::now('America/Argentina/Tucuman');
-                
+
                 $compra = new Compra();
-                
+
                 $compra->proveedor_id = $request->get('idProveedor');
-                
+
                 $compra->usuario_id = Auth::user()->id;
-                                                
+
                 $compra->fecha = $mytime->toDateTimeString();
 
                 $compra->hora = $mytime->toDateTimeString();
-                
+
                 $compra->total = $request->get('total_compra');
-                
+
                 $compra->save();
-    
+
                 if (count( json_decode($request->productosEnCompra,true) ) > 0) {
-    
+
                    $proEnPedido = json_decode($request->productosEnCompra,true);
-                    
-                   for ($i=0; $i < count($proEnPedido); $i++) { 
-    
+
+                   for ($i=0; $i < count($proEnPedido); $i++) {
+
                         //CARGA LA LINEA DE PEDIDO
                         $detalle = new Detalle_Compra();
-                        
+
                         $detalle->compra_id = $compra->id;
-                        
+
                         $detalle->producto_id = $proEnPedido[$i]['idProducto'];
-                        
+
                         $detalle->cantidad = $proEnPedido[$i]['cantidad'];
-                        
+
                         $detalle->costo = $proEnPedido[$i]['precio'];
-                        
+
                         $detalle->save();
 
                         $producto = Producto::find($detalle->producto_id);
@@ -104,31 +95,31 @@ class ComprasController extends Controller
                         $producto->stock = $producto->stock +  $detalle->cantidad;
 
                         $producto->save();
-                            
+
                     }
                 }
 
                 //CREAR EL MOVIMIENTO EN CAJA//
 
                 $this->crearLineaCaja($compra);
-             
+
                 DB::commit();
             }
-    
+
             catch(Exception $e){
-            
-            
+
+
                 DB::rollback();
             }
-    
+
             return redirect()->route('compras.index')->with('success','Presupuesto agregado correctamente');
-        
+
         else:
 
             Session::flash('error', 'Error: No hay ninguna Caja Abierta');
 
             return back()->with('message','Ninguna Caja Abierta')->with('typealert','danger');
-        
+
         endif;
     }
 
@@ -141,7 +132,7 @@ class ComprasController extends Controller
         $mytime = Carbon::now('America/Argentina/Tucuman');
 
         $cajas->saldoPesos = $cajas->saldoPesos - $compra->total;
-                
+
         $cajas->save();
 
         $movimiento = new MovimientodeCaja();
@@ -170,7 +161,7 @@ class ComprasController extends Controller
         $compra = Compra::find($id);
 
         $detalle = $compra->detalle_compra()->get();
-   
+
         return view('admin.compras.show', ['compra'=>$compra,'detalle'=>$detalle]);
     }
 

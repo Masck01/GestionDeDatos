@@ -49,10 +49,6 @@
                       <a href="#" class="btn btn-link" data-toggle="modal" data-target="#modal" onclick="seleccionarContacto()" title="Editar Categoria" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i>
                     </td>
 
-                    <td style="text-align:right;">
-                        <a href="{{ route('categorias.agregar',$cat->id) }}" class="btn btn-link" data-toggle="tooltip" title="Configuracion Categoria" data-original-title="Editar Producto"><i class="fas fa-plus-square" style="color:black; font-size: 20px;"></i></a></td>
-                      </td>
-
                     <td>
                       @if ($cat->estado == 'Activo')
                       <form class="" action="{{ route('categorias.eliminar', $cat->id)}}" method="post">

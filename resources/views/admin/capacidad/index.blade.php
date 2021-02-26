@@ -7,15 +7,15 @@
           @if ( count($errors) > 0 )
 
             <div class="alert alert-danger">
-              
+
               <ul>
                   @foreach($errors->all() as $error)
                   <li>{{ $error }}</li>
                   @endforeach
               </ul>
-            
+
             </div>
-          
+
           @endif
 
           <div class="card card-secondary">
@@ -25,7 +25,7 @@
             <table class="table table-hover text-nowrap" id="tablecliente">
               <thead>
                 <tr>
-                  <th style="text-align:center;">                  
+                  <th style="text-align:center;">
                   <button type="button" class="btn btn-link" data-toggle="modal" data-target="#ModalCliente">
                   <i class="fas fa-plus"></i></a>
                   </button>
@@ -52,10 +52,10 @@
                         {{ method_field('PUT') }}
                         <button type="submit" onclick="return confirm('¿Desea eliminar esta capacidad?')"  class="btn btn-link" data-toggle="tooltip" title="Desactivar Categoria" data-original-title="Editar Cliente"><i class="fas fa-trash-alt" style="color:red; font-size: 20px;"></i></button>
                       </form>
-                    </td> 
-              </tr>       
-              @endforeach   
-              </tbody>    
+                    </td>
+              </tr>
+              @endforeach
+              </tbody>
             </table>
             {{$capacidad->render()}}
           </div>
@@ -73,7 +73,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 		<div class="modal-header">
-        	<h5 class="modal-title" id="titulo">Agregar Capacidad</h5>		
+        	<h5 class="modal-title" id="titulo">Agregar Capacidad</h5>
      	    </div>
           <div class="modal-body">
 	            <div class="card-body">
@@ -88,37 +88,18 @@
                       <div class="input-group">
 
                         <div class="input-group-prepend">
-                          
+
                           <span class="input-group-text" id="basic-addon1"><i class="far fa-keyboard"></i></span>
 
                         </div>
-                          
+
                         <input type="text" class="form-control" placeholder="Enter ..." id="cantidad" name="cantidad">
 
                       </div>
-                     
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <div class="form-group">
-                      <label>Estado</label>
-                      <div class="input-group">
 
-                        <div class="input-group-prepend">
-                          
-                          <span class="input-group-text" id="basic-addon1"><i class="far fa-keyboard"></i></span>
-
-                        </div>
-                          
-                        <input type="text" class="form-control" placeholder="Enter ..." id="estado" name="estado">
-
-                      </div>
-                     
                     </div>
                   </div>
 
-                </div>
-                  
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
@@ -129,8 +110,8 @@
                 </div>
 
 
-              </form>  
-                  
+              </form>
+
               </div>
             </div>
       <div class="modal-footer">
@@ -141,7 +122,7 @@
 </div>
 
 
-<!-- FIN Modal Agregar Capacidad-->	
+<!-- FIN Modal Agregar Capacidad-->
 
 
 <!-- Modal Actualizar Capacidad-->
@@ -150,11 +131,11 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 		<div class="modal-header">
-        	<h5 class="modal-title" id="tituloUpdate">Actualizar Capacidad</h5>		
+        	<h5 class="modal-title" id="tituloUpdate">Actualizar Capacidad</h5>
      	    </div>
           <div class="modal-body">
 	            <div class="card-body">
-              
+
               <form method="post" action="{{ route('capacidades.update')}}" role="form" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
@@ -184,8 +165,8 @@
                 </div>
 
 
-              </form>  
-                  
+              </form>
+
               </div>
             </div>
             <div class="modal-footer">
@@ -196,7 +177,7 @@
 </div>
 
 
-<!-- FIN Modal Actualizar Contacto-->	
+<!-- FIN Modal Actualizar Contacto-->
 @endsection
 
 @push ('scripts')
@@ -215,5 +196,5 @@ function rowSeleccion(){
 		}
 
     </script>
-    
+
 @endpush

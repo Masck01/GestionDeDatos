@@ -14,6 +14,8 @@ use App\Http\Controllers\CapacidadController;
 use App\Http\Controllers\SubCategoriaController;
 use App\Http\Controllers\CajasController;
 use App\Http\Controllers\VentaController;
+use App\Http\Controllers\ProductoController;
+
 
 Route::get('/', function () {
     return redirect()->route('login');
