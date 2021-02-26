@@ -16,4 +16,19 @@ class Producto extends Model
     protected $fillable = [
         'nombre', 'descripcion', 'imagen,', 'fecha_vencimiento', 'precio_compra', 'precio_venta', 'estado', 'stock', 'almacen_id', 'categoria_id', 'marca_id', 'proveedor_id'
     ];
+    public function categoria()
+    {
+        return $this->hasOne(CategoriadeProducto::class,'id','categoria_id');
+    }
+    public function capacidad()
+    {
+        return $this->hasOne(Capacidad::class,'id','capacidad_id');
+    }
+
+    public function almacen()
+    {
+        return $this->hasOne(AlmacenDeMedicamentos::class,'id','almacen_id');
+    }
+
 }
+

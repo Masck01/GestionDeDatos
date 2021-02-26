@@ -13,4 +13,9 @@ class AlmacenDeMedicamentos extends Model
     protected $fillable = [
         'nombre', 'telefono', 'direccion', 'ciudad', 'codigo_postal', 'estado', 'sucursal_id', 'provincia_id'
     ];
+    public function productos()
+    {
+        return $this->hasMany(Producto::class);
+    }
+
 }

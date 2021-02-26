@@ -126,7 +126,7 @@
 
                         </div>
 
-                      {!! Form::number('precioCompra',0.00,['class'=>'form-control']) !!}
+                      {!! Form::number('precio_compra',0.00,['class'=>'form-control']) !!}
 
                       </div>
 
@@ -144,7 +144,7 @@
 
                         </div>
 
-                      {!! Form::number('precioVenta',0.00,['class'=>'form-control','min'=>'0.00','step' => 'any']) !!}
+                      {!! Form::number('precio_venta',0.00,['class'=>'form-control','min'=>'0.00','step' => 'any']) !!}
 
                       </div>
 
@@ -184,7 +184,7 @@
 
                         </div>
 
-                        <input type="date" id="start" name="fechaVencimiento" value="2020-10-21" min="2020-10-01" max="2030-12-31">
+                        <input type="date" id="start" name="fecha_vencimiento" value="2020-10-21" min="2020-10-01" max="2030-12-31">
 
                       </div>
 
@@ -206,7 +206,7 @@
 
                       </div>
 
-                    {!! Form::select('deposito_id',$almacen,0,['class'=>'form-control']) !!}
+                    {!! Form::select('almacen_id',$almacen,0,['class'=>'form-control']) !!}
 
                     </div>
 

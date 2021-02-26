@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AlmacenDeMedicamentos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Producto;
@@ -10,6 +11,7 @@ use App\SubCategoria;
 use App\Proveedor;
 use App\Marca;
 use App\Capacidad;
+use App\CategoriadeProducto;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
@@ -34,15 +36,15 @@ class ProductoController extends Controller
 
     public function create()
     {
-        $almacen = Sucursal::orderBy('razon_social', 'ASC')->pluck('razon_social', 'id');
+        $almacen = AlmacenDeMedicamentos::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
 
         $proveedor = Proveedor::orderBy('razon_social', 'ASC')->pluck('razon_social', 'id');
 
         $marcas = Marca::where('estado','like','Activo')->pluck('nombre','id');
 
-        $categorias = SubCategoria::where('estado','like','Activo')->pluck('nombre', 'id');
+        $categorias = CategoriadeProducto::where('estadocategoria','like','Activo')->pluck('nombre', 'id');
 
-        $capacidad = Capacidad::where('estado','like','Activo');
+        $capacidad = Capacidad::where('estado','like','Activo')->pluck('cantidad', 'id');
 
         return view('admin.productos.create', compact('categorias','marcas','almacen','proveedor','capacidad'));
     }
@@ -112,7 +114,7 @@ class ProductoController extends Controller
 
             $producto->capacidad_id = $request->capacidad_id;
 
-            $producto->fechaVencimiento = $request->fechaVencimiento;
+            $producto->fecha_vencimiento = $request->fecha_vencimiento;
 
             $producto->save();
 
