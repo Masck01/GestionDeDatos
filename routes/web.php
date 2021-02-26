@@ -13,9 +13,12 @@ use App\Http\Controllers\MarcasController;
 use App\Http\Controllers\CapacidadController;
 use App\Http\Controllers\SubCategoriaController;
 use App\Http\Controllers\CajasController;
+use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ProductoController;
-
+use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\ConceptoController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -39,57 +42,43 @@ Route::middleware(['auth'])->group(function () {
 
     // CLIENTES
 
-    Route::get('clientes', 'ClienteController@index')->name('clientes.index');
-
-    Route::get('clientes/create', 'ClienteController@create')->name('clientes.create');
-
-    Route::post('clientes/store', 'ClienteController@store')->name('clientes.store');
-
-    Route::get('clientes/{cliente}', 'ClienteController@show')->name('clientes.show');
-
-    Route::get('clientes/{cliente}/edit', 'ClienteController@edit')->name('clientes.edit');
-
-    Route::put('clientes/{clientes}', 'ClienteController@update')->name('clientes.update');
-
-    Route::get('cliente/exportar', 'ClienteController@exportCliente')->name('cliente.downloadExcel');
-
-    Route::get('cliente/pdf', 'PdfController@listadoClientes')->name('cliente.downloadPdf');
-
     // PROVEEDORES
 
-    Route::get('proveedores', 'ProveedorController@index')->name('proveedores.index');
+    // Route::get('proveedores', 'ProveedorController@index')->name('proveedores.index');
 
-    Route::get('proveedores/create', 'ProveedorController@create')->name('proveedores.create');
+    // Route::get('proveedores/create', 'ProveedorController@create')->name('proveedores.create');
 
-    Route::post('proveedores/store', 'ProveedorController@store')->name('proveedores.store');
+    // Route::post('proveedores/store', 'ProveedorController@store')->name('proveedores.store');
 
-    Route::get('proveedores/{proveedores}', 'ProveedorController@show')->name('proveedores.show');
+    // Route::get('proveedores/{proveedores}', 'ProveedorController@show')->name('proveedores.show');
 
-    Route::get('proveedores/{proveedores}/edit', 'ProveedorController@edit')->name('proveedores.edit');
+    // Route::get('proveedores/{proveedores}/edit', 'ProveedorController@edit')->name('proveedores.edit');
 
-    Route::put('proveedores/{proveedores}', 'ProveedorController@update')->name('proveedores.update');
+    // Route::put('proveedores/{proveedores}', 'ProveedorController@update')->name('proveedores.update');
 
-    Route::delete('proveedores/{proveedores}', 'ProveedorController@destroy')->name('proveedores.destroy');
+    // Route::delete('proveedores/{proveedores}', 'ProveedorController@destroy')->name('proveedores.destroy');
 
-    Route::get('proveedor/pdf', 'ProveedorController@listadoProveedores')->name('proveedores.downloadPdf');
+    Route::get('proveedor/pdf', [ProveedorController::class, 'listadoProveedores'])->name('proveedores.downloadPdf');
+
+    Route::resource('proveedores', ProveedorController::class);
 
     // PDFS
 
-    Route::get('pdf/listadoDepositosPdf', 'PdfController@listadoDepositos')->name('pdf.ListadoDepositosPdf');
+    Route::get('pdf/listadoDepositosPdf', [PdfController::class, 'listadoDepositos'])->name('pdf.ListadoDepositosPdf');
 
-    Route::get('pdf/listadoPdf', 'PdfController@listadoEmpresas')->name('pdf.ListadoClientePdf');
+    Route::get('pdf/listadoPdf', [PdfController::class, 'listadoEmpresas'])->name('pdf.ListadoClientePdf');
 
-    Route::get('pdf/impimirPresupuesto/{presupuesto}', 'PdfController@presupuesto')->name('pdf.impimirPresupuesto');
+    Route::get('pdf/impimirPresupuesto/{presupuesto}', [PdfController::class, 'presupuesto'])->name('pdf.impimirPresupuesto');
 
-    Route::get('pdf/impimirMovimientoPedido/{pedido}', 'PdfController@movimientoPedido')->name('pdf.impimirMovimientoPedido');
+    Route::get('pdf/impimirMovimientoPedido/{pedido}', [PdfController::class, 'movimientoPedido'])->name('pdf.impimirMovimientoPedido');
 
-    Route::get('pdf/remitox/{pedido}', 'PdfController@imprimirRemito')->name('pdf.imprimirRemito');
+    Route::get('pdf/remitox/{pedido}', [PdfController::class, 'imprimirRemito'])->name('pdf.imprimirRemito');
 
     // PRODUCTOS //
 
     Route::get('productos', [ProductoController::class, 'index'])->name('productos.index');
 
-    Route::get('productos/create',[ProductoController::class, 'create'])->name('productos.create');
+    Route::get('productos/create', [ProductoController::class, 'create'])->name('productos.create');
 
     Route::post('productos/store', [ProductoController::class, 'store'])->name('productos.store');
 
@@ -150,65 +139,67 @@ Route::middleware(['auth'])->group(function () {
 
     // VENTAS
 
-    Route::get('ventas', [VentaController::class,'index'])->name('ventas.index');
+    Route::get('ventas', [VentaController::class, 'index'])->name('ventas.index');
 
-    Route::get('ventas/create', [VentaController::class,'create'])->name('ventas.create');
+    Route::get('ventas/create', [VentaController::class, 'create'])->name('ventas.create');
 
-    Route::post('ventas/store', [VentaController::class,'store'])->name('ventas.store');
+    Route::post('ventas/store', [VentaController::class, 'store'])->name('ventas.store');
 
-    Route::get('ventas/{ventas}', [VentaController::class,'show'])->name('ventas.show');
+    Route::get('ventas/{ventas}', [VentaController::class, 'show'])->name('ventas.show');
 
-    Route::get('ventas/movimiento/{id}', [VentaController::class,'movimientoVenta'])->name('ventas.movimiento');
+    Route::get('ventas/movimiento/{id}', [VentaController::class, 'movimientoVenta'])->name('ventas.movimiento');
 
-    Route::get('ventas/preparar/{id}/{Venta}', [VentaController::class,'preparar'])->name('ventas.preparar');
+    Route::get('ventas/preparar/{id}/{Venta}', [VentaController::class, 'preparar'])->name('ventas.preparar');
 
-    Route::get('venta/entregar', [VentaController::class,'ventasaentregar'])->name('ventas.entregar');
+    Route::get('venta/entregar', [VentaController::class, 'ventasaentregar'])->name('ventas.entregar');
 
-    Route::get('venta/finalizar/{id}', [VentaController::class,'ventasfinalizar'])->name('ventas.finalizar');
+    Route::get('venta/finalizar/{id}', [VentaController::class, 'ventasfinalizar'])->name('ventas.finalizar');
 
-    Route::get('venta/pdf', [VentaController::class,'listadoventas'])->name('ventas.downloadPdf');
+    Route::get('venta/pdf', [VentaController::class, 'listadoventas'])->name('ventas.downloadPdf');
 
-    Route::get('venta/Impimir/Factura/{presupuesto}', [VentaController::class,'recivo'])->name('ventas.imprimir');
+    Route::get('venta/Impimir/Factura/{presupuesto}', [VentaController::class, 'recivo'])->name('ventas.imprimir');
 
-    Route::get('venta/pagar/{id}', [VentaController::class,'pagarVenta'])->name('venta.pague');
+    Route::get('venta/pagar/{id}', [VentaController::class, 'pagarVenta'])->name('venta.pague');
 
-    Route::post('venta/pagos/guardar', [VentaController::class,'guardarPago'])->name('pago.store');
+    Route::post('venta/pagos/guardar', [VentaController::class, 'guardarPago'])->name('pago.store');
 
     // Depositos
 
-    Route::get('depositos', 'DepositoController@index')->name('depositos.index');
+    // Route::get('depositos', 'DepositoController@index')->name('depositos.index');
 
-    Route::get('depositos/create', 'DepositoController@create')->name('depositos.create');
+    // Route::get('depositos/create', 'DepositoController@create')->name('depositos.create');
 
-    Route::post('depositos/store', 'DepositoController@store')->name('depositos.store');
+    // Route::post('depositos/store', 'DepositoController@store')->name('depositos.store');
 
-    Route::get('depositos/{depositos}/edit', 'DepositoController@edit')->name('depositos.edit');
+    // Route::get('depositos/{depositos}/edit', 'DepositoController@edit')->name('depositos.edit');
 
-    Route::get('depositos/{id}/listadoPedido', 'DepositoController@listadoPedido')->name('deposito.listadoPedido');
+    // Route::get('depositos/{id}/listadoPedido', 'DepositoController@listadoPedido')->name('deposito.listadoPedido');
 
-    Route::put('depositos/{depositos}', 'DepositoController@update')->name('depositos.update');
+    // Route::put('depositos/{depositos}', 'DepositoController@update')->name('depositos.update');
 
-    Route::get('depositos/{depositos}', 'DepositoController@show')->name('depositos.show');
+    // Route::get('depositos/{depositos}', 'DepositoController@show')->name('depositos.show');
 
-    Route::delete('depositos/{depositos}', 'DepositoController@destroy')->name('depositos.destroy');
+    // Route::delete('depositos/{depositos}', 'DepositoController@destroy')->name('depositos.destroy');
 
-    Route::put('deposito/stock', 'DepositoController@stock')->name('depositos.stock');
+    // Route::put('deposito/stock', 'DepositoController@stock')->name('depositos.stock');
 
-    Route::get('deposito/{depositos}/exportProducto', 'DepositoController@exportProducto')->name('deposito.downloadProductos');
+    // Route::get('deposito/{depositos}/exportProducto', 'DepositoController@exportProducto')->name('deposito.downloadProductos');
 
-    Route::post('deposito/import', 'DepositoController@importExcel')->name('depositos.importar.excel');
+    // Route::post('deposito/import', 'DepositoController@importExcel')->name('depositos.importar.excel');
 
-    Route::post('deposito/producto', 'DepositoController@agregarProductos')->name('depositos.importarProductos');
+    // Route::post('deposito/producto', 'DepositoController@agregarProductos')->name('depositos.importarProductos');
 
     //Compras
 
-    Route::get('compras', 'ComprasController@index')->name('compras.index');
+    // Route::get('compras', 'ComprasController@index')->name('compras.index');
 
-    Route::get('compras/create', 'ComprasController@create')->name('compras.create');
+    // Route::get('compras/create', 'ComprasController@create')->name('compras.create');
 
-    Route::post('compras/store', 'ComprasController@store')->name('compras.store');
+    // Route::post('compras/store', 'ComprasController@store')->name('compras.store');
 
-    Route::get('compras/{compra}', 'ComprasController@show')->name('compras.show');
+    // Route::get('compras/{compra}', 'ComprasController@show')->name('compras.show');
+
+    Route::resource('compras', ComprasController::class);
 
     //Liquidacion
 
@@ -228,17 +219,17 @@ Route::middleware(['auth'])->group(function () {
 
     // ROLES
 
-    Route::get('roles', 'RoleController@index')->name('roles.index');
+    // Route::get('roles', 'RoleController@index')->name('roles.index');
 
-    Route::get('roles/create', 'RoleController@create')->name('roles.create');
+    // Route::get('roles/create', 'RoleController@create')->name('roles.create');
 
-    Route::post('roles/store', 'RoleController@store')->name('roles.store');
+    // Route::post('roles/store', 'RoleController@store')->name('roles.store');
 
-    Route::get('roles/{rol}', 'RoleController@show')->name('roles.show');
+    // Route::get('roles/{rol}', 'RoleController@show')->name('roles.show');
 
-    Route::get('roles/{rol}/edit', 'RoleController@edit')->name('roles.edit');
+    // Route::get('roles/{rol}/edit', 'RoleController@edit')->name('roles.edit');
 
-    Route::put('roles/{roles}', 'RoleController@update')->name('roles.update');
+    // Route::put('roles/{roles}', 'RoleController@update')->name('roles.update');
 
 
     // CATEGORIAS //
@@ -249,13 +240,13 @@ Route::middleware(['auth'])->group(function () {
 
     // Route::post('categorias/store', 'CategoriaController@store')->name('categorias.store');
 
-    // Route::put('categorias/edit', 'CategoriaController@update')->name('categorias.update');
+    Route::put('categorias/edit', [CategoriaController::class, 'update'])->name('categorias.update');
 
     Route::put('categorias/eliminar/{id}', [CategoriaController::class, 'eliminar'])->name('categorias.eliminar');
 
     Route::put('categorias/activar/{id}', [CategoriaController::class, 'activar'])->name('categorias.activar');
 
-    Route::resource('categorias', CategoriaController::class);
+    Route::resource('categorias', CategoriaController::class)->except(['update']);
 
 
     // CONFIGURACION CATEGORIAS//
@@ -282,50 +273,50 @@ Route::middleware(['auth'])->group(function () {
 
     // SUB CATEGORIAS //
 
-    Route::get('subcategorias', [SubCategoriaController::class,'index'])->name('subcategorias.index');
+    // Route::get('subcategorias', [SubCategoriaController::class, 'index'])->name('subcategorias.index');
 
-    Route::post('subcategorias/store', [SubCategoriaController::class,'store'])->name('subcategorias.store');
+    // Route::post('subcategorias/store', [SubCategoriaController::class, 'store'])->name('subcategorias.store');
 
-    Route::put('subcategorias/edit', [SubCategoriaController::class,'update'])->name('subcategorias.update');
+    // Route::put('subcategorias/edit', [SubCategoriaController::class, 'update'])->name('subcategorias.update');
 
-    Route::put('subcategorias/eliminar/{id}', [SubCategoriaController::class,'eliminar'])->name('subcategorias.eliminar');
+    // Route::put('subcategorias/eliminar/{id}', [SubCategoriaController::class, 'eliminar'])->name('subcategorias.eliminar');
 
-    Route::put('subcategorias/activar/{id}', [SubCategoriaController::class,'activar'])->name('subcategorias.activar');
+    // Route::put('subcategorias/activar/{id}', [SubCategoriaController::class, 'activar'])->name('subcategorias.activar');
 
     // CAPACIDAD //
 
-    Route::get('capacidades', [CapacidadController::class,'index'])->name('capacidades.index');
+    Route::get('capacidades', [CapacidadController::class, 'index'])->name('capacidades.index');
 
-    Route::post('capacidades/store', [CapacidadController::class,'store'])->name('capacidades.store');
+    Route::post('capacidades/store', [CapacidadController::class, 'store'])->name('capacidades.store');
 
-    Route::put('capacidades/edit', [CapacidadController::class,'update'])->name('capacidades.update');
+    Route::put('capacidades/edit', [CapacidadController::class, 'update'])->name('capacidades.update');
 
-    Route::put('capacidades/eliminar/{id}', [CapacidadController::class,'eliminar'])->name('capacidades.eliminar');
+    Route::put('capacidades/eliminar/{id}', [CapacidadController::class, 'eliminar'])->name('capacidades.eliminar');
 
-    Route::put('capacidades/activar/{id}', [CapacidadController::class,'activar'])->name('capacidades.activar');
+    Route::put('capacidades/activar/{id}', [CapacidadController::class, 'activar'])->name('capacidades.activar');
     // MARCAS //
 
-    Route::get('marcas', [MarcasController::class,'index'])->name('marcas.index');
+    Route::get('marcas', [MarcasController::class, 'index'])->name('marcas.index');
 
-    Route::post('marcas/store', [MarcasController::class,'store'])->name('marcas.store');
+    Route::post('marcas/store', [MarcasController::class, 'store'])->name('marcas.store');
 
-    Route::put('marcas/edit', [MarcasController::class,'update'])->name('marcas.update');
+    Route::put('marcas/edit', [MarcasController::class, 'update'])->name('marcas.update');
 
-    Route::put('marcas/eliminar/{id}', [MarcasController::class,'eliminar'])->name('marcas.eliminar');
+    Route::put('marcas/eliminar/{id}', [MarcasController::class, 'eliminar'])->name('marcas.eliminar');
 
-    Route::put('marcas/activar/{id}', [MarcasController::class,'activar'])->name('marcas.activar');
+    Route::put('marcas/activar/{id}', [MarcasController::class, 'activar'])->name('marcas.activar');
 
     // CAJAS //
 
-    Route::get('cajas', [CajasController::class,'index'])->name('cajas.index');
+    Route::get('cajas', [CajasController::class, 'index'])->name('cajas.index');
 
-    Route::post('cajas/store', [CajasController::class,'store'])->name('cajas.store');
+    Route::post('cajas/store', [CajasController::class, 'store'])->name('cajas.store');
 
-    Route::post('cajas/resta', [CajasController::class,'resta'])->name('cajas.resta');
+    Route::post('cajas/resta', [CajasController::class, 'resta'])->name('cajas.resta');
 
-    Route::post('cajas/ingresar', [CajasController::class,'sumar'])->name('cajas.sumar');
+    Route::post('cajas/ingresar', [CajasController::class, 'sumar'])->name('cajas.sumar');
 
-    Route::put('cajas/abrirCerrar', [CajasController::class,'abrirCerrar'])->name('cajas.abrirCerrar');
+    Route::put('cajas/abrirCerrar', [CajasController::class, 'abrirCerrar'])->name('cajas.abrirCerrar');
 
     // FAMILIAR //
 
@@ -337,13 +328,13 @@ Route::middleware(['auth'])->group(function () {
 
     // CONCEPTOS //
 
-    Route::get('conceptos', 'ConceptoController@index')->name('conceptos.index');
+    Route::get('conceptos', [ConceptoController::class, 'index'])->name('conceptos.index');
 
-    Route::get('conceptos/create', 'ConceptoController@create')->name('conceptos.create');
+    Route::get('conceptos/create', [ConceptoController::class, 'create'])->name('conceptos.create');
 
-    Route::post('conceptos/store', 'ConceptoController@store')->name('conceptos.store');
+    Route::post('conceptos/store', [ConceptoController::class, 'store'])->name('conceptos.store');
 
-    Route::get('conceptos/edit/{id}', 'ConceptoController@edit')->name('conceptos.edit');
+    Route::get('conceptos/edit/{id}', [ConceptoController::class, 'edit'])->name('conceptos.edit');
 
-    Route::put('conceptos/{concepto}', 'ConceptoController@update')->name('conceptos.update');
+    Route::put('conceptos/{concepto}', [ConceptoController::class, 'update'])->name('conceptos.update');
 });

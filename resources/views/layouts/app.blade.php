@@ -172,10 +172,10 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <a href="{{ route('depositos.index') }}" class="nav-link">
+                {{-- <a href="{{ route('depositos.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Sucursales</p>
-                </a>
+                </a> --}}
+                <p>Sucursales</p>
               </li>
 
             </ul>
@@ -327,10 +327,10 @@
               </li>
 
               <li class="nav-item">
-                <a href="{{ route('subcategorias.index') }}" class="nav-link">
+                {{-- <a href="{{ route('subcategorias.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Sub Categorias</p>
-                </a>
+                </a> --}}
+                <p>Sub Categorias</p>
               </li>
 
 

@@ -56,6 +56,11 @@
                             <input type="month" class="form-control" id="month" wire:model="month"
                                 wire:change="notify_fecha">
                         </div>
+                        @error('month')
+                            <div class="alert alert-danger" role="alert">
+                                <p>Fecha requerida</p>
+                            </div>
+                        @enderror
                     </blockquote>
                 </div>
             </div>

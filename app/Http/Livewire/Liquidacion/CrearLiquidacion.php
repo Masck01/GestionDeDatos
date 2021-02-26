@@ -31,6 +31,9 @@ class CrearLiquidacion extends Component
     public $fecha_hasta;
     public $periodo_liquidacion;
 
+    protected $rules = [
+        'month' => 'required|date'
+    ];
 
     public function mount($id_empleado)
     {
@@ -51,6 +54,7 @@ class CrearLiquidacion extends Component
 
     public function store()
     {
+        $this->validate();
         $col_names_liquidacion = Schema::getColumnListing('liquidacion');
         $this->fecha = Carbon::create();
         $fecha_desde = $this->fecha->startOfMonth();
@@ -62,14 +66,14 @@ class CrearLiquidacion extends Component
         $estado = 'pagado';
         $valores_liquidacion = collect(
             [
-                $this->id_empleado,
-                $estado,
                 $fecha_desde,
                 $fecha_hasta,
+                $salario_neto,
+                $salario_bruto,
                 $periodo_liquidacion,
                 $retenciones,
-                $salario_bruto,
-                $salario_neto
+                $estado,
+                $this->id_empleado
             ]
         );
 
@@ -109,6 +113,10 @@ class CrearLiquidacion extends Component
         $this->periodo_liquidacion = $this->fecha->monthName;
     }
 
+    public function updated($month)
+    {
+        $this->validateOnly($month);
+    }
     public function render()
     {
         return view('livewire.liquidacion.crear-liquidacion')
