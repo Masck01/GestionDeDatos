@@ -21,27 +21,34 @@
                       <input type="text" class="form-control" placeholder="Enter ..." id="razon_social" name="razon_social" value="{{$proveedor->razon_social}}">
                     </div>
                   </div>
-                </div>
 
-                <div class="row">
+
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>CUIT</label>
                       <input type="text" class="form-control" placeholder="Enter ..." id="cuit" name="cuit" value="{{$proveedor->cuit}}">
                     </div>
                   </div>
+                </div>
+
+                <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Telefono</label>
                       <input type="text" class="form-control" placeholder="Enter ..." id="telefono" name="telefono" value="{{$proveedor->telefono}}">
                     </div>
                   </div>
-                </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Estado</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="estado" name="estado" value="{{$proveedor->estado}}">
+
+                      <select class="form-control select2" style="width: 100%;" id="estado" name="estado">
+                        <option value="{{$proveedor->estado}}">{{$proveedor->estado}}</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                      </select>
                     </div>
                   </div>
                 </div>

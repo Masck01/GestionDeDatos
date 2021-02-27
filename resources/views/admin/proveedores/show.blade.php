@@ -16,8 +16,8 @@
                 <div class="col-md-12">
                   <p><b>Razon Social </b>{{$proveedor->razon_social}}</p>
                   <p><b>CUIT: </b>{{$proveedor->cuit}}</p>
-                  <p><b>Telefono: </b>{{$proveedor->telefono}}</p>
-                  <p><b>Direccion: </b>{{$proveedor->estado}}</p>
+                  <p><b>Teléfono: </b>{{$proveedor->telefono}}</p>
+                  <p><b>Estado: </b>{{$proveedor->estado}}</p>
 
                 </div>
               </div>
