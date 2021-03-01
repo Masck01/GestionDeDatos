@@ -11,7 +11,7 @@ class Detalle_Compra extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-      'compra_id', 'producto_id', 'cantidad','precio'
+       'subtotal', 'cantidad','producto_id','compra_id','proveedor_id'
     ];
 
     public function producto()

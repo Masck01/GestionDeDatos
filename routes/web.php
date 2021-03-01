@@ -191,13 +191,13 @@ Route::middleware(['auth'])->group(function () {
 
     //Compras
 
-    // Route::get('compras', 'ComprasController@index')->name('compras.index');
+    Route::get('compras', 'ComprasController@index')->name('compras.index');
 
-    // Route::get('compras/create', 'ComprasController@create')->name('compras.create');
+    Route::get('compras/create', 'ComprasController@create')->name('compras.create');
 
-    // Route::post('compras/store', 'ComprasController@store')->name('compras.store');
+    Route::post('compras/store', 'ComprasController@store')->name('compras.store');
 
-    // Route::get('compras/{compra}', 'ComprasController@show')->name('compras.show');
+    Route::get('compras/{compra}', 'ComprasController@show')->name('compras.show');
 
     Route::resource('compras', ComprasController::class);
 
