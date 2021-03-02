@@ -1,7 +1,4 @@
 <div class="container d-flex flex-column justify-content-center pt-4">
-    @if (Session::has('parameters'))
-        <p>{{ dd(Session::get('parameters')) }}</p>
-    @endif
     <div class="flex-grow-1">
         <div class="card card-secondary">
             <div class="card-header">

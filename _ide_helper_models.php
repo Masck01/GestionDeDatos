@@ -12,6 +12,41 @@
 
 namespace App{
 /**
+ * App\AlmacenDeMedicamentos
+ *
+ * @property int $id
+ * @property string $nombre
+ * @property string $telefono
+ * @property string $direccion
+ * @property string $ciudad
+ * @property string $codigo_postal
+ * @property string $estado
+ * @property int $sucursal_id
+ * @property int $provincia_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Producto[] $productos
+ * @property-read int|null $productos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereCiudad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereCodigoPostal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereDireccion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereEstado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereProvinciaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereSucursalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereTelefono($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AlmacenDeMedicamentos whereUpdatedAt($value)
+ */
+	class AlmacenDeMedicamentos extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\Banco
  *
  * @property int $id
@@ -127,6 +162,29 @@ namespace App{
 
 namespace App{
 /**
+ * App\CategoriadeProducto
+ *
+ * @property int $id
+ * @property string $nombre
+ * @property string $estadocategoria
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Producto[] $productos
+ * @property-read int|null $productos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|CategoriadeProducto newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CategoriadeProducto newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CategoriadeProducto query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CategoriadeProducto whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CategoriadeProducto whereEstadocategoria($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CategoriadeProducto whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CategoriadeProducto whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CategoriadeProducto whereUpdatedAt($value)
+ */
+	class CategoriadeProducto extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\Cliente
  *
  * @property-read \App\Provincia $provincia
@@ -231,6 +289,7 @@ namespace App{
  * @property string $codigo_postal
  * @property string $estado
  * @property int $sucursal_id
+ * @property int $provincia_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Producto[] $productos
@@ -246,6 +305,7 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|Deposito whereEstado($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Deposito whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Deposito whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Deposito whereProvinciaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Deposito whereSucursalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Deposito whereTelefono($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Deposito whereUpdatedAt($value)
@@ -326,6 +386,7 @@ namespace App{
  * @property int $cajadeahorro_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Categoria|null $categoria
  * @method static \Illuminate\Database\Eloquent\Builder|Empleado newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Empleado newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Empleado query()
@@ -382,25 +443,24 @@ namespace App{
  * App\LineaLiquidacion
  *
  * @property int $id
- * @property int $cantidad
- * @property string $montofijo
- * @property string $montovariable
+ * @property int $unidad
+ * @property float|null $montofijo
+ * @property string|null $montovariable
  * @property int $concepto_id
  * @property int $liquidacion_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Liquidacion[] $liquidacion
- * @property-read int|null $liquidacion_count
+ * @property-read \App\Liquidacion|null $liquidacion
  * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion query()
- * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion whereCantidad($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion whereConceptoId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion whereLiquidacionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion whereMontofijo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion whereMontovariable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion whereUnidad($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LineaLiquidacion whereUpdatedAt($value)
  */
 	class LineaLiquidacion extends \Eloquent {}
@@ -433,10 +493,10 @@ namespace App{
  * @property int $empleado_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Empleado[] $empleado
- * @property-read int|null $empleado_count
+ * @property-read \App\Empleado|null $empleado
  * @property-read mixed $from_date
- * @property-read \App\LineaLiquidacion $linea_liquidacion
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\LineaLiquidacion[] $linea_liquidacion
+ * @property-read int|null $linea_liquidacion_count
  * @method static \Illuminate\Database\Eloquent\Builder|Liquidacion newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Liquidacion newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Liquidacion query()
@@ -556,20 +616,18 @@ namespace App{
  * @property int $almacen_id
  * @property int $categoria_id
  * @property int $marca_id
+ * @property int $capacidad_id
  * @property int $proveedor_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\AlmacenDeMedicamentos|null $almacen
  * @property-read \App\Capacidad|null $capacidad
- * @property-read \App\SubCategoria|null $categoria
- * @property-read \App\Deposito|null $deposito
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Deposito[] $depositos
- * @property-read int|null $depositos_count
- * @property-read \App\Marca|null $marcas
- * @property-read \App\Proveedor|null $proveedor
+ * @property-read \App\CategoriadeProducto|null $categoria
  * @method static \Illuminate\Database\Eloquent\Builder|Producto newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Producto newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Producto query()
  * @method static \Illuminate\Database\Eloquent\Builder|Producto whereAlmacenId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Producto whereCapacidadId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Producto whereCategoriaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Producto whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Producto whereDescripcion($value)
@@ -599,7 +657,6 @@ namespace App{
  * @property string $estado
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Provincia $provincia
  * @method static \Illuminate\Database\Eloquent\Builder|Proveedor newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Proveedor newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Proveedor query()
@@ -618,15 +675,17 @@ namespace App{
 /**
  * App\Provincia
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Cliente[] $clientes
- * @property-read int|null $clientes_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Deposito[] $depositos
- * @property-read int|null $depositos_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Proveedor[] $proveedores
- * @property-read int|null $proveedores_count
+ * @property int $id
+ * @property string $nombre
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Provincia newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Provincia newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Provincia query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Provincia whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provincia whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provincia whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provincia whereUpdatedAt($value)
  */
 	class Provincia extends \Eloquent {}
 }

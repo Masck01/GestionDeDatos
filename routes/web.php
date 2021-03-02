@@ -211,7 +211,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Route::get('liquidacion/{liquidacion}', 'LiquidacionController@show')->name('liquidacion.show');
 
-    Route::get('liquidacion/Impimir/Factura/{liquidacion}', [LiquidacionController::class, 'recivo'])->name('liquidacion.imprimir');
+    Route::get('liquidacion/Impimir/Factura/{liquidacion}', [LiquidacionController::class, 'recibo'])->name('liquidacion.imprimir');
 
     Route::get('liquidacion/create/{id_empleado}', CrearLiquidacion::class)->name('liquidacion.create');
 

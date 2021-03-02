@@ -8,20 +8,21 @@ class Liquidacion extends Model
 {
     protected $table = "liquidacion";
     protected $fillable = [
-      'fecha_desde','fecha_hasta','salario_neto','salario_bruto','periodo_liquidacion','retenciones','estado','empleado_id'
+        'fecha_desde', 'fecha_hasta', 'salario_neto', 'salario_bruto', 'periodo_liquidacion', 'retenciones', 'estado', 'empleado_id'
     ];
 
-    public function getFromDateAttribute($value) {
+    public function getFromDateAttribute($value)
+    {
         return \Carbon\Carbon::parse($value)->format('d/m/Y');
     }
 
     public function empleado()
     {
-        return $this->hasMany(Empleado::class,'id','empleado_id');
+        return $this->hasOne(Empleado::class, 'id', 'empleado_id');
     }
 
     public function linea_liquidacion()
     {
-        return $this->belongsTo(LineaLiquidacion::class);
+        return $this->hasMany(LineaLiquidacion::class,'liquidacion_id','id');
     }
 }

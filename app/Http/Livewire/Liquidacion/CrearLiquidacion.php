@@ -56,7 +56,6 @@ class CrearLiquidacion extends Component
     {
         $this->validate();
         $col_names_liquidacion = Schema::getColumnListing('liquidacion');
-        $this->fecha = Carbon::create();
         $fecha_desde = $this->fecha->startOfMonth();
         $fecha_hasta = $this->fecha->endOfMonth();
         $periodo_liquidacion = $this->periodo_liquidacion;
@@ -66,24 +65,23 @@ class CrearLiquidacion extends Component
         $estado = 'pagado';
         $valores_liquidacion = collect(
             [
+                $this->id_empleado,
+                $estado,
                 $fecha_desde,
                 $fecha_hasta,
-                $salario_neto,
-                $salario_bruto,
                 $periodo_liquidacion,
                 $retenciones,
-                $estado,
-                $this->id_empleado
+                $salario_bruto,
+                $salario_neto
             ]
         );
-
         $valores_linealiquidacion = $this->valores_linealiquidacion();
-
         $atributo_valor_liquidacion = $this->atributo_valor_liquidacion($col_names_liquidacion, $valores_liquidacion);
         DB::transaction(function () use ($atributo_valor_liquidacion, $valores_linealiquidacion) {
             $liquidacion_id = Liquidacion::create($atributo_valor_liquidacion);
             $atributo_valor_linealiquidacion = $this->agregar_liquidacion_id($liquidacion_id->id, $valores_linealiquidacion);
-            $atributo_valor_linealiquidacion->each(fn ($arr, $val) => LineaLiquidacion::create($arr->toArray()));
+            $liquidacion_id->linea_liquidacion()->createMany($atributo_valor_linealiquidacion);
+            // $atributo_valor_linealiquidacion->each(fn ($arr, $val) => LineaLiquidacion::create($arr->toArray()));
         });
         return redirect()->route('liquidacion.index');
     }
@@ -97,12 +95,15 @@ class CrearLiquidacion extends Component
 
     private function agregar_liquidacion_id($liquidacion_id, $valores_linealiquidacion)
     {
-        return $valores_linealiquidacion->map(fn ($val, $key) => collect($val)->union(['liquidacion_id' => $liquidacion_id]));
+        return $valores_linealiquidacion->map(fn ($val, $key) => collect($val)->union(['liquidacion_id' => $liquidacion_id]))->toArray();
     }
 
     private function valores_linealiquidacion()
     {
-        return $this->configuracion_categoria->map(fn ($config) => $config->only(['unidad', 'montofijo', 'montovariable', 'concepto_id']));
+        return $this->configuracion_categoria
+            // ->each(fn ($i) => $i->montofijo = $i->montofijo == null ? null : (float)$i->montofijo)
+            // ->each(fn ($i) => $i->montovariable = $i->montovariable == null ? null : (float)$i->montovariable)
+            ->map(fn ($i) => $i->only(['montofijo', 'montovariable', 'unidad', 'concepto_id']));
     }
 
     public function notify_fecha()
@@ -113,10 +114,6 @@ class CrearLiquidacion extends Component
         $this->periodo_liquidacion = $this->fecha->monthName;
     }
 
-    public function updated($month)
-    {
-        $this->validateOnly($month);
-    }
     public function render()
     {
         return view('livewire.liquidacion.crear-liquidacion')
