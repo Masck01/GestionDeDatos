@@ -235,9 +235,9 @@ class CajasController extends Controller
 
         $cajas = caja::find(1);
 
-        if($cajas->estado == 'abierta'):
+        if($cajas->estado == 'Activo'):
 
-            $cajas->estado = "cerrada";
+            $cajas->estado = "Inactivo";
 
             $cajas->save();
 
@@ -264,7 +264,7 @@ class CajasController extends Controller
 
         else:
 
-            $cajas->estado = "abierta";
+            $cajas->estado = "Activo";
 
             $cajas->save();
 

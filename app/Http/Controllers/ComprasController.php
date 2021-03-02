@@ -49,7 +49,7 @@ class ComprasController extends Controller
     {
         $cajas = Caja::find(1);
 
-        if($cajas->estado == 'abierta'):
+        if($cajas->estado == 'Activo'):
 
             try{
 
@@ -61,7 +61,7 @@ class ComprasController extends Controller
 
                 $compra->proveedor_id = $request->get('idProveedor');
 
-                $compra->usuario_id = Auth::user()->id;
+                /* $compra->usuario_id = Auth::user->id; */
 
                 $compra->fecha = $mytime->toDateTimeString();
 
@@ -84,9 +84,12 @@ class ComprasController extends Controller
 
                         $detalle->producto_id = $proEnPedido[$i]['idProducto'];
 
+
+
                         $detalle->cantidad = $proEnPedido[$i]['cantidad'];
 
-                        $detalle->costo = $proEnPedido[$i]['precio'];
+                        $detalle->subtotal = $proEnPedido[$i]['precio'];
+
 
                         $detalle->save();
 
@@ -112,7 +115,7 @@ class ComprasController extends Controller
                 DB::rollback();
             }
 
-            return redirect()->route('compras.index')->with('success','Presupuesto agregado correctamente');
+            return redirect()->route('compras.index')->with('success','Compra agregada correctamente');
 
         else:
 
@@ -131,13 +134,13 @@ class ComprasController extends Controller
 
         $mytime = Carbon::now('America/Argentina/Tucuman');
 
-        $cajas->saldoPesos = $cajas->saldoPesos - $compra->total;
+        $cajas->saldo = $cajas->saldo - $compra->total;
 
         $cajas->save();
 
         $movimiento = new MovimientodeCaja();
 
-        $movimiento->cajas_id = 1;
+        $movimiento->caja_id = 1;
 
         $movimiento->descripcion = 'Compra de Productos a '. $proveedor->nombre;
 
@@ -149,9 +152,11 @@ class ComprasController extends Controller
 
         $movimiento->moneda = 'Pesos';
 
-        $movimiento->saldoparcialpesos =  $cajas->saldoPesos;
+        $movimiento->compra_id = $compra->id;
 
-        $movimiento->saldoparcialdolares =  '0';
+       /*  $movimiento->saldoparcialpesos =  $cajas->saldoPesos;
+
+        $movimiento->saldoparcialdolares =  '0'; */
 
         $movimiento->save();
     }

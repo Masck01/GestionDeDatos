@@ -36,7 +36,8 @@
                             <th>Salario Neto</th>
                             <th>Retenciones</th>
                             <th>Salario Bruto</th>
-                            <th>Opciones</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

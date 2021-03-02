@@ -59,7 +59,7 @@
         <td>#</td>
         <td>Razon Social</td>
         <td>Cuit</td>
-        <td>Telefono</td>
+        <td>Teléfono</td>
         <td>Estado</td>
       </tr>
       </thead>

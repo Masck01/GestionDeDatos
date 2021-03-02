@@ -43,7 +43,7 @@
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                      <label>Telefono</label>
+                      <label>Teléfono</label>
                       <input type="text" class="form-control" placeholder="Enter ..." id="telefono" name="telefono">
                     </div>
                   </div>

@@ -208,17 +208,19 @@
 		<div class="modal-header">
         	<h5 class="modal-title" id="exampleModalLongTitle">Listado de Productos</h5>
      	 </div>
-        <form>
-        	Producto a buscar <input id="searchTerm" type="text" onkeyup="doSearch()" />
-       	</form>
+          <form >
+            <label> Buscar Producto:</label>  <input id="searchTerm" type="text" onkeyup="doSearch()" />
+          </form>
+
+
       <div class="modal-body">
 	  <div class="card-body table-responsive p-0">
                   <table class="table table-hover text-nowrap" id="datos">
                     <thead>
                       <tr>
 					      <th>#</th>
-                          <th>Codigo</th>
                           <th>Nombre</th>
+                        <th>Precio Compra</th>
 						  <th>Opcion</th>
                       </tr>
                     </thead>
@@ -226,8 +228,8 @@
                     @foreach ($productos as $pro)
                   	<tr>
 					<td>{{ $pro->id }}</td>
-					<td>{{ $pro->codigo }}</td>
-                    <td>{{ $pro->nombre }}</td>
+					<td>{{ $pro->nombre }}</td>
+                    <td>{{ $pro->precio_compra}}</td>
                     <td><button type="button" class="btn btn-success" id="bt_añadir"  data-dismiss="modal" onclick="SeleccionarProducto()">Añadir</button></td>
                 	</tr>
                       @endforeach
@@ -323,7 +325,7 @@
 			$("table tbody tr").click(function() {
 
 				var filaid= $(this).find("td:eq(0)").text();
-	     		var filaNombre = $(this).find("td:eq(2)").text();
+	     		var filaNombre = $(this).find("td:eq(1)").text();
 				$("#pid").val(filaid);
 				$("#pdescripcion").val(filaNombre);
 			});

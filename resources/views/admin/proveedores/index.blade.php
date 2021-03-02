@@ -38,11 +38,11 @@
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                        <th style="text-align:center"><a href="{{ route('proveedores.create') }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Producto" data-original-title="Ver Detalle"><i class="fas fa-plus"></i></a></th>
+                        <th style="text-align:center"><a href="{{ route('proveedores.create') }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Proveedor" data-original-title="Ver Detalle"><i class="fas fa-plus"></i></a></th>
                         <th>Razon Social</th>
                         <th>CUIT</th>
-                        <th>Telefono</th>
-                        <th>estado</th>
+                        <th>Teléfono</th>
+                        <th>Estado</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -55,8 +55,8 @@
                           <td>{{ $proveedor->cuit }}</td>
                           <td>{{ $proveedor->estado }}</td>
                           <td>
-                            <a href="{{ route('proveedores.show', $proveedor->id) }}" class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Producto" data-original-title="Ver Detalle Cliente"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
-                            <a href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-link" data-toggle="tooltip" title="Editar Producto" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
+                            <a href="{{ route('proveedores.show', $proveedor->id) }}" class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Proveedor" data-original-title="Ver Detalle Cliente"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
+                            <a href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-link" data-toggle="tooltip" title="Editar Proveedor" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
                           </td>
                         </tr>
                       @endforeach
