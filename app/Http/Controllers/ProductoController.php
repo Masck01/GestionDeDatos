@@ -137,7 +137,7 @@ class ProductoController extends Controller
 
         $almacen = Deposito::orderBy('nombre','ASC')->get();
 
-        $proveedor = Proveedor::orderBy('razon_Social', 'ASC')->get();
+        $proveedor = Proveedor::orderBy('razon_social', 'ASC')->get();
 
         $marcas = Marca::where('estado','like','Activo')->get();
 
@@ -204,15 +204,15 @@ class ProductoController extends Controller
 
             $producto->descripcion = $request->descripcion;
 
-            $producto->precioVenta = $request->precioVenta;
+            $producto->precio_venta = $request->precio_venta;
 
-            $producto->precioCompra =   $request->precioCompra;
+            $producto->precio_compra =   $request->precio_compra;
 
             $producto->stock = $request->stock;
 
             $producto->capacidad_id = $request->capacidad_id;
 
-            $producto->fechaVencimiento = $request->fechaVencimiento;
+            $producto->fecha_vencimiento = $request->fecha_vencimiento;
 
             $producto->save();
 

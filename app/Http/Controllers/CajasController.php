@@ -33,7 +33,7 @@ class CajasController extends Controller
         ];
 
         $message = [
-            
+
             'descripcion.requiered' => 'Ingrese La descripcion Del Movimiento',
 
             'monto.requiered' => 'Ingrese el Monto Del Movimiento',
@@ -43,7 +43,7 @@ class CajasController extends Controller
         $validator = Validator::make($request->all(),$rules,$message);
 
         if( $validator->fails()):
-            
+
             return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
 
         else:
@@ -61,12 +61,12 @@ class CajasController extends Controller
                 $cajas->saldoDolares = $cajas->saldoDolares + $request->monto;
 
                 $cajas->save();
-            
+
             endif;
 
             $movimiento = new MovimientodeCaja();
 
-            $movimiento->cajas_id = 1;
+            $movimiento->caja_id = 1;
 
             $movimiento->descripcion = $request->descripcion;
 
@@ -78,15 +78,16 @@ class CajasController extends Controller
 
             $movimiento->moneda =  $request->moneda;
 
-            $movimiento->saldoparcialpesos =  $cajas->saldoPesos;
+            $movimiento->venta_id =  $request->venta;
 
-            $movimiento->saldoparcialdolares =  $cajas->saldoDolares;
+            $movimiento->compra_id =  $request->compra;
+
 
             $movimiento->save();
 
-            
+
             return back()->with('message','Caja Registrada con exito')->with('typealert','success');
-                 
+
         endif;
     }
 
@@ -102,7 +103,7 @@ class CajasController extends Controller
         ];
 
         $message = [
-            
+
             'descripcion.requiered' => 'Ingrese La descripcion Del Movimiento',
 
             'monto.requiered' => 'Ingrese el Monto Del Movimiento',
@@ -112,7 +113,7 @@ class CajasController extends Controller
         $validator = Validator::make($request->all(),$rules,$message);
 
         if( $validator->fails()):
-            
+
             return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
 
         else:
@@ -130,7 +131,7 @@ class CajasController extends Controller
                 $cajas->saldoDolares = $cajas->saldoDolares - $request->monto;
 
                 $cajas->save();
-            
+
             endif;
 
             $movimiento = new MovimientodeCaja();
@@ -153,9 +154,9 @@ class CajasController extends Controller
 
             $movimiento->save();
 
-            
+
             return back()->with('message','Caja Registrada con exito')->with('typealert','success');
-                 
+
         endif;
     }
 
@@ -171,7 +172,7 @@ class CajasController extends Controller
         ];
 
         $message = [
-            
+
             'descripcion.requiered' => 'Ingrese La descripcion Del Movimiento',
 
             'monto.requiered' => 'Ingrese el Monto Del Movimiento',
@@ -181,7 +182,7 @@ class CajasController extends Controller
         $validator = Validator::make($request->all(),$rules,$message);
 
         if( $validator->fails()):
-            
+
             return back()->withErrors($validator)->with('message','Se ha Producido un Error')->with('typealert','danger');
 
         else:
@@ -199,7 +200,7 @@ class CajasController extends Controller
                 $cajas->saldoDolares = $cajas->saldoDolares + $request->monto;
 
                 $cajas->save();
-            
+
             endif;
 
             $movimiento = new MovimientodeCaja();
@@ -222,9 +223,9 @@ class CajasController extends Controller
 
             $movimiento->save();
 
-            
+
             return back()->with('message','Caja Registrada con exito')->with('typealert','success');
-                 
+
         endif;
     }
 
@@ -262,14 +263,14 @@ class CajasController extends Controller
 
 
         else:
-            
+
             $cajas->estado = "abierta";
 
             $cajas->save();
 
             $movimiento = new MovimientodeCaja();
 
-            $movimiento->cajas_id = 1;
+            $movimiento->caja_id = 1;
 
             $movimiento->descripcion = 'Apertura de Caja';
 
@@ -281,9 +282,8 @@ class CajasController extends Controller
 
             $movimiento->moneda = 'Pesos';
 
-            $movimiento->saldoparcialpesos =  $cajas->saldoPesos;
+            $movimiento->saldo =  $cajas->saldo;
 
-            $movimiento->saldoparcialdolares =  $cajas->saldoDolares;
 
             $movimiento->save();
 

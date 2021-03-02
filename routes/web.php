@@ -15,6 +15,7 @@ use App\Http\Controllers\SubCategoriaController;
 use App\Http\Controllers\CajasController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\DepositoController;
 
 
 Route::get('/', function () {
