@@ -14849,6 +14849,13 @@
         class Empleado {
          
     }
+            /**
+     * 
+     *
+     */ 
+        class ConfiguracionCategoria {
+         
+    }
      
 }
 
@@ -19872,6 +19879,7 @@ namespace  {
             class PDF extends \Barryvdh\DomPDF\Facade {}
             class Excel extends \Maatwebsite\Excel\Facades\Excel {}
             class Empleado extends \App\Empleado {}
+            class ConfiguracionCategoria extends \App\ConfiguracionCategoria {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Form extends \Collective\Html\FormFacade {}
             class Html extends \Collective\Html\HtmlFacade {}
