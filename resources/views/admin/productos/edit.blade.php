@@ -180,7 +180,7 @@
 
                     <select class="form-control select2"  id="marcas" name="marcas_id">
 
-                        <option value="{{$producto->marcas_id}}"></option>
+                        <option value="{{$producto->marcas_id}}">{{$producto->marcas->nombre}}</option>
 
                         @foreach($marcas as $mac)
 
@@ -229,7 +229,7 @@
 
                                         <select class="form-control select2"  id="marcas" name="proveedor_id">
 
-                                            <option value="{{$producto->proveedor_id}}"></option>
+                                            <option value="{{$producto->proveedor_id}}">{{$producto->proveedor->razon_social}}</option>
 
                                             @foreach($proveedor as $prov)
 
