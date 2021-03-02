@@ -38,8 +38,8 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$det->producto->nombre }}</td>
                     <td>{{$det->cantidad }}</td>
-                    <td> AR$ {{$det->precio  }} </td>
-                    <td> AR$ {{$det->precio  * $det->cantidad }}</td>
+                    <td> AR$ {{$det->producto->precio_venta}} </td>
+                    <td> AR$ {{$det->producto->precio_venta *$det->cantidad }}</td>
                   </tr>
                 @endforeach
               </tbody>

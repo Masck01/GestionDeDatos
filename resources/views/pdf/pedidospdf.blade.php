@@ -22,33 +22,33 @@
     #div3{
       clear:both;
     }
-    
+
     table{
-	    width:100%; 
+	    width:100%;
 	    border-collapse:collapse;
     }
-    
+
     td{
 	    border:2px solid black;
     }
   </style>
-  
+
   <body>
-    
+
     <div id="div1">
 
     Farmacia Avellaneda Norte ©
 
     </div>
-    
+
     <div id="div2">
 
       <?php
         echo "Fecha: " . date("d") . "/" . date("m") . "/" . date("Y");
       ?>
-    
+
     </div>
-  
+
   <div id="div3">
   <br>
   <h2> Listado De Ventas Registradas </h2>
@@ -67,7 +67,7 @@
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</td>
-            <td>{{ $pedido->getFromHoraAttribute($pedido->fecha) }}</td>
+            <td>{{ $pedido->getFromHoraAttribute($pedido->hora) }}</td>
             <td> AR$ {{ $pedido->total }} </td>
         </tr>
         @endforeach

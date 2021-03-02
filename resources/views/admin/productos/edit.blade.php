@@ -72,9 +72,9 @@
 
                             <option value="{{$producto->categoria->id}}">{{$producto->categoria->nombre}}</option>
 
-                            @foreach($categorias as $categoria)
+                            @foreach($categorias as $cate)
 
-                            <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                            <option value="{{$cate->id}}">{{$cate->nombre}}</option>
 
                             @endforeach
 
@@ -251,7 +251,7 @@
 
                                         <select class="form-control select2"  id="marcas" name="capacidad_id">
 
-                                            <option value="{{$producto->capacidad_id}}"></option>
+                                            <option value="{{$producto->capacidad->id}}">{{$producto->capacidad->cantidad}}</option>
 
                                             @foreach($capacidad as $cap)
 

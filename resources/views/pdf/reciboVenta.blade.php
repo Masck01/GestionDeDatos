@@ -239,8 +239,8 @@ footer {
                         <td class="desc">{{$loop->iteration}}</td>
                         <td class="desc">{{ $det->producto->nombre }}</td>
                         <td class="unit">{{ $det->cantidad }}</td>
-                        <td class="qty"> AR$ {{ $det->precio }} </td>
-                        <td class="qty"> AR$ {{ $det->cantidad * $det->precio }}</td>
+                        <td class="qty"> AR$ {{ $det->producto->precio_venta }} </td>
+                        <td class="qty"> AR$ {{ $det->cantidad * $det->producto->precio_venta}}</td>
                       </tr>
                @endforeach
         </tbody>
