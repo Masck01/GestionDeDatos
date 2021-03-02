@@ -123,19 +123,19 @@ Route::middleware(['auth'])->group(function () {
 
     // EMPLEADOS //
 
-    // Route::get('empleados', 'EmpleadoController@index')->name('empleados.index');
+    Route::get('empleados', [EmpleadoController::class, 'index'])->name('empleados.index');
 
-    // Route::get('empleados/create', 'EmpleadoController@create')->name('empleados.create');
+    Route::get('empleados/create', [EmpleadoController::class, 'create'])->name('empleados.create');
 
-    // Route::post('empleados/store', 'EmpleadoController@store')->name('empleados.store');
+    Route::post('empleados/store', [EmpleadoController::class, 'store'])->name('empleados.store');
 
-    // Route::get('empleados/edit/{empleado}', 'EmpleadoController@edit')->name('empleados.edit');
+    Route::get('empleados/edit/{empleado}', [EmpleadoController::class, 'edit'])->name('empleados.edit');
 
-    // Route::put('empleados/update/', 'EmpleadoController@update')->name('empleados.update');
+    Route::put('empleados/update/', [EmpleadoController::class, 'update'])->name('empleados.update');
 
-    // Route::get('empleados/show/{id}', 'EmpleadoController@show')->name('empleados.show');
+    Route::get('empleados/show/{id}', [EmpleadoController::class, 'show'])->name('empleados.show');
 
-    Route::resource('empleados', EmpleadoController::class);
+/*     Route::resource('empleados', EmpleadoController::class); */
 
     // VENTAS
 

@@ -16,16 +16,16 @@ class CreateTablaMovimientodeCaja extends Migration
         Schema::create('movimientodecaja', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion');
-            $table->date('fecha');
+            $table->dateTime('fecha');
             $table->decimal('entrada', 9, 2)->default(0.00);
             $table->decimal('salida', 9, 2)->default(0.00);
             $table->string('moneda');
-            $table->bigInteger('venta_id')->unsigned();
+            $table->bigInteger('venta_id')->nullable();
             $table->bigInteger('caja_id')->unsigned();
-            $table->bigInteger('compra_id')->unsigned();
+            $table->bigInteger('compra_id')->nullable();
             $table->timestamps();
 
-           
+
             $table->foreign('venta_id')
                   ->references('id')
                   ->on('venta')

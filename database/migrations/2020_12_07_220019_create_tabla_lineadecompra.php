@@ -19,7 +19,7 @@ class CreateTablaLineadeCompra extends Migration
             $table->integer('cantidad');
             $table->bigInteger('producto_id')->unsigned();
             $table->bigInteger('compra_id')->unsigned();
-            $table->bigInteger('proveedor_id')->unsigned();
+            $table->bigInteger('proveedor_id')->nullable();
             $table->timestamps();
 
             $table->foreign('producto_id')
