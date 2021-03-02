@@ -10,7 +10,7 @@ class Venta extends Model
     protected $table = "venta";
 
     protected $fillable = [
-      'usuario_id','fecha','total', 'estado'
+        'empleado_id','fecha','hora','total', 'estado'
     ];
 
     public function detalle_pedido()
@@ -20,7 +20,7 @@ class Venta extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'usuario_id');
+        return $this->belongsTo(User::class,'usuario_id','id');
     }
 
    /* public function cliente()

@@ -30,5 +30,13 @@ class Producto extends Model
         return $this->hasOne(AlmacenDeMedicamentos::class,'id','almacen_id');
     }
 
+    public function marcas()
+    {
+        return $this->hasOne(Marca::class,'id','marca_id');
+    }
+    public function proveedor()
+    {
+        return $this->hasOne(Proveedor::class,'id','proveedor_id');
+    }
 }
 
