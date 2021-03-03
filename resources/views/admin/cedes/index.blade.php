@@ -27,7 +27,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($cedes as $cede)
+                @foreach ($sucursal as $cede)
                   <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{ $cede->nombre }}</td>

@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Compra;
 use Illuminate\Http\Request;
-use App\Proveedor;
-use App\Producto;
 use App\Concepto;
 use App\Detalle_Liquidacion;
-use App\Deposito;
-use App\User;
 use App\Liquidacion;
-use App\DepositoProducto;
-use App\MovimientoDeposito;
 use App\Cajas;
-use App\MovimientoCaja;
+use App\Categoria;
+use App\ConfiguracionCategoria;
+use App\Empleado;
 use DB;
 use Session;
 use Carbon\Carbon;
-use Response;
-use App\HistorialMovimientos;
 use Illuminate\Support\Collection;
 use Luecano\NumeroALetras\NumeroALetras;
 use Illuminate\Support\Facades\Auth;
@@ -28,121 +21,47 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class LiquidacionController extends Controller
 {
-    public function index(Request $request){
-        
-        $liquidacion = Liquidacion::orderBy('id', 'DESC')->paginate(10);
-        
-        return view('admin.liquidacion.index', compact('liquidacion'));
-
-    }
-
-    public function create(){
-
-            $conceptos = Concepto::all();
-    
-            $usuarios = User::orderBy('id', 'ASC')->paginate(5);
-
-            return view('admin.liquidacion.create',['conceptos'=> $conceptos,'usuarios'=>$usuarios]);
-        
-    }
-    
-    public function store(Request $request)
+    public function index()
     {
-        $cajas = Cajas::find(1);
 
-        if($cajas->estado == 'abierta'):
+        $liquidacion = Liquidacion::join('empleado', 'empleado.id', '=', 'liquidacion.empleado_id')->select('liquidacion.*', 'empleado.apellido', 'empleado.nombre')->paginate(10);
 
-            try{
-                
-                $mytime = Carbon::now('America/Argentina/Tucuman');
+        return view('admin.liquidacion.index', compact('liquidacion'));
+    }
 
-                $fecha = $mytime->toDateTimeString();
-                
-                DB::beginTransaction();
-                
-                $mytime = Carbon::now('America/Argentina/Tucuman');
-                
-                $liquidacion = new Liquidacion();
-                                
-                $liquidacion->usuario_id = $request->get('usuario_id');
-                                                
-                $liquidacion->fechaDesde = '1/' . date("n", strtotime($fecha)) . '/2020';
- 
-                $liquidacion->fechaHasta = '30/' . date("n", strtotime($fecha))  . '/2020';
+    public function create()
+    {
 
-                $liquidacion->periodo = '10/20';
-                
-                $liquidacion->salarioNeto = $request->get('total_h');
+    }
 
-                $liquidacion->salarioBruto = $request->get('total_n');
+    public function store()
+    {
 
-                $liquidacion->retenciones = $request->get('total_retencion');
-                
-                $liquidacion->save();
-    
-                if (count( json_decode($request->productosEnCompra,true) ) > 0) {
-    
-                   $proEnPedido = json_decode($request->productosEnCompra,true);
-                    
-                   for ($i=0; $i < count($proEnPedido); $i++) { 
-                       
-                       $detalle = new Detalle_Liquidacion();
-                        
-                       $detalle->liquidacion_id = $liquidacion->id;
+    }
 
-                       $detalle->concepto_id =  $proEnPedido[$i]['idProducto'];
-                        
-                       $detalle->unidad = $proEnPedido[$i]['unidad'];
-                        
-                       $detalle->haberes = $proEnPedido[$i]['haberes'];
-                        
-                       $detalle->save();
+    public function lista_liquidacion($id)
+    {
+        $liquidacion = Liquidacion::findOrFail($id);
 
-                            
-                   }
-               }
+        $linea_liquidacion = $liquidacion->linea_liquidacion()->get();
 
-          
-                DB::commit();
-            }
-    
-            catch(Exception $e){
-            
-            
-                DB::rollback();
-            }
-    
-            return redirect()->route('liquidacion.index')->with('success','Presupuesto agregado correctamente');
-        
-        else:
+        $empleado = $liquidacion->empleado()->get()->first();
 
-            Session::flash('error', 'Error: No hay ninguna Caja Abierta');
+        $conceptos = Concepto::all();
 
-            return back()->with('message','Ninguna Caja Abierta')->with('typealert','danger');
-        
-        endif;
+        $salario_basico = $empleado->categoria()->get()->first()->salario_basico;
+
+        return compact('liquidacion', 'linea_liquidacion', 'empleado', 'conceptos', 'salario_basico');
     }
 
 
     public function show($id)
     {
-        $liquidacion = Liquidacion::find($id);
-
-        $detalle = $liquidacion->detalle_liquidacion()->get();
-   
-        return view('admin.liquidacion.show', ['liquidacion'=>$liquidacion,'detalle'=>$detalle]);
+        return view('admin.liquidacion.show', $this->lista_liquidacion($id));
     }
 
-    public function recivo ($id)
+    public function recibo($id)
     {
-        $liquidacion = Liquidacion::find($id);
-
-        $detalle = $liquidacion->detalle_liquidacion()->get();
-
-        $pdf = PDF::loadView('pdf.reciboSueldo',['liquidacion'=>$liquidacion,'detalle'=>$detalle])->setPaper('a4', 'landscape');
-    
-        return $pdf->stream();
+        return PDF::loadView('pdf.reciboSueldo', $this->lista_liquidacion($id))->setPaper('a4')->stream();
     }
-
-
 }

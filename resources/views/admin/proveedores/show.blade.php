@@ -14,14 +14,11 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <p><b>Razon Social </b>{{$proveedor->razon_Social}}</p>
-                  <p><b>CUIT / CUIL: </b>{{$proveedor->cuit_cuil}}</p>
-                  <p><b>Tel&eacute;fonos: </b>{{$proveedor->telefonos}}</p>
-                  <p><b>Direcci&oacute;n: </b>{{$proveedor->direccion}}</p>
-                  <p><b>Ciudad: </b>{{$proveedor->ciudad}}</p>
-                  <p><b>C.P.: </b>{{$proveedor->codigo_postal}}</p>
-                  <p><b>Provincia: </b>{{$proveedor->provincia->nombre}}</p>
-                  
+                  <p><b>Razon Social </b>{{$proveedor->razon_social}}</p>
+                  <p><b>CUIT: </b>{{$proveedor->cuit}}</p>
+                  <p><b>Teléfono: </b>{{$proveedor->telefono}}</p>
+                  <p><b>Estado: </b>{{$proveedor->estado}}</p>
+
                 </div>
               </div>
             </div>

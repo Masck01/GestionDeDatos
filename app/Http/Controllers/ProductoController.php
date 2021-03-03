@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AlmacenDeMedicamentos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Producto;
@@ -10,15 +11,17 @@ use App\SubCategoria;
 use App\Proveedor;
 use App\Marca;
 use App\Capacidad;
+use App\CategoriadeProducto;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
+use App\Sucursal;
 use Validator;
 use Str;
 use Session;
 use Config;
 
-class ProductosController extends Controller
+class ProductoController extends Controller
 {
 
     public function index()
@@ -26,22 +29,22 @@ class ProductosController extends Controller
         $productos = Producto::orderBy('nombre', 'ASC')->paginate(10);
 
         $total = Producto::count();
-        
+
         return view('admin.productos.index', compact('productos','total'));
     }
 
 
     public function create()
     {
-        $almacen = Deposito::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
+        $almacen = AlmacenDeMedicamentos::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
 
-        $proveedor = Proveedor::orderBy('razon_Social', 'ASC')->pluck('razon_Social', 'id');
+        $proveedor = Proveedor::orderBy('razon_social', 'ASC')->pluck('razon_social', 'id');
 
-        $marcas = Marca::where('estado','like','Activo')->pluck('nombre', 'id');
+        $marcas = Marca::where('estado','like','Activo')->pluck('nombre','id');
 
-        $categorias = SubCategoria::where('estado','like','Activo')->pluck('nombre', 'id');
+        $categorias = CategoriadeProducto::where('estadocategoria','like','Activo')->pluck('nombre', 'id');
 
-        $capacidad = Capacidad::where('estado','like','Activo')->pluck('nombre', 'id');
+        $capacidad = Capacidad::where('estado','like','Activo')->pluck('cantidad', 'id');
 
         return view('admin.productos.create', compact('categorias','marcas','almacen','proveedor','capacidad'));
     }
@@ -50,12 +53,12 @@ class ProductosController extends Controller
     {
         $rules = [
             'nombre' => 'required|max:255',
-            
+
             'descripcion' => 'required',
         ];
 
         $message = [
-            
+
             'nombre.requiered' => 'Ingrese Nombre de la Categoria',
 
             'nombre.max' =>'El nombre del producto no puede ser mayor a :max caracteres.',
@@ -66,7 +69,7 @@ class ProductosController extends Controller
         $validator = Validator::make($request->all(),$rules,$message);
 
         if( $validator->fails()):
-            
+
             return back()->withErrors($validator)->with('message','Se ha Producido un Error, No se Pudo Registrar el Producto')->with('typealert','danger');
 
         else:
@@ -78,45 +81,45 @@ class ProductosController extends Controller
                 $fileExt = trim($request->file('img')->getClientOriginalExtension());
 
                 $name = Str::slug(str_replace($fileExt,'',$request->file('img')->getClientOriginalName()));
-                               
+
                 $fileName = rand(1,9999).'-'.$name.'.'.$fileExt;
-                
+
                 $destino = public_path('img/productos');
-                
-                $request->img->move($destino,$fileName);         
-                
+
+                $request->img->move($destino,$fileName);
+
             }
 
             $producto = new Producto();
-            
-            $producto->nombre = $request->nombre;
-            
-            $producto->subcategoria_id = $request->categoria;
 
-            $producto->marcas_id = $request->marca;
+            $producto->nombre = $request->nombre;
+
+            $producto->categoria_id = $request->categoria;
+
+            $producto->marca_id = $request->marca;
 
             $producto->proveedor_id = $request->proveedor_id;
 
-            $producto->deposito_id = $request->deposito_id;
-            
+            $producto->almacen_id = $request->almacen_id;
+
             $producto->descripcion = $request->descripcion;
-        
+
             $producto->imagen = $fileName;
-            
-            $producto->precioVenta = $request->precioVenta;
-            
-            $producto->precioCompra =   $request->precioCompra;
-            
+
+            $producto->precio_venta = $request->precio_venta;
+
+            $producto->precio_compra =   $request->precio_compra;
+
             $producto->stock = $request->stock;
 
             $producto->capacidad_id = $request->capacidad_id;
 
-            $producto->fechaVencimiento = $request->fechaVencimiento;
-                
+            $producto->fecha_vencimiento = $request->fecha_vencimiento;
+
             $producto->save();
 
             return redirect()->route('productos.index')->with('message','Producto Registrado Correctamente');
-               
+
         endif;
     }
 
@@ -134,14 +137,14 @@ class ProductosController extends Controller
 
         $almacen = Deposito::orderBy('nombre','ASC')->get();
 
-        $proveedor = Proveedor::orderBy('razon_Social', 'ASC')->get();
+        $proveedor = Proveedor::orderBy('razon_social', 'ASC')->get();
 
         $marcas = Marca::where('estado','like','Activo')->get();
 
         $categorias = SubCategoria::where('estado','like','Activo')->get();
 
         $capacidad = Capacidad::where('estado','like','Activo')->get();
-        
+
         return view('admin.productos.edit', compact('producto','categorias','marcas','almacen','proveedor','capacidad'));
     }
 
@@ -155,7 +158,7 @@ class ProductosController extends Controller
         ];
 
         $message = [
-            
+
             'nombre.required' => 'Ingrese Nombre de la Categoria',
 
             'nombre.max' =>'El nombre del producto no puede ser mayor a :max caracteres.',
@@ -164,13 +167,13 @@ class ProductosController extends Controller
         $validator = Validator::make($request->all(),$rules,$message);
 
         if( $validator->fails()):
-            
+
             return back()->withErrors($validator)->with('message','Se ha Producido un Error, No se Pudo Registrar el Producto')->with('typealert','danger');
 
         else:
 
             $producto = Producto::find($id);
-            
+
             if($request->hasFile('img'))
             {
                 $file = $request->file('img');
@@ -178,43 +181,43 @@ class ProductosController extends Controller
                 $fileExt = trim($request->file('img')->getClientOriginalExtension());
 
                 $name = Str::slug(str_replace($fileExt,'',$request->file('img')->getClientOriginalName()));
-                               
-                $fileName = rand(1,9999).'-'.$name.'.'.$fileExt;
-                
-                $destino = public_path('img/productos');
-                
-                $request->img->move($destino,$fileName); 
-                
-                $producto->imagen = $fileName;
-                
-            }
-            
-            $producto->nombre = $request->nombre;
-            
-            $producto->subcategoria_id = $request->categoria;
 
-            $producto->marcas_id = $request->marcas_id;
+                $fileName = rand(1,9999).'-'.$name.'.'.$fileExt;
+
+                $destino = public_path('img/productos');
+
+                $request->img->move($destino,$fileName);
+
+                $producto->imagen = $fileName;
+
+            }
+
+            $producto->nombre = $request->nombre;
+
+            $producto->categoria_id = $request->categoria;
+
+            $producto->marca_id = $request->marcas_id;
 
             $producto->proveedor_id = $request->proveedor_id;
 
-            $producto->deposito_id = $request->deposito_id;
-            
+            $producto->almacen_id = $request->almacen_id;
+
             $producto->descripcion = $request->descripcion;
-                
-            $producto->precioVenta = $request->precioVenta;
-            
-            $producto->precioCompra =   $request->precioCompra;
-            
+
+            $producto->precio_venta = $request->precio_venta;
+
+            $producto->precio_compra =   $request->precio_compra;
+
             $producto->stock = $request->stock;
 
             $producto->capacidad_id = $request->capacidad_id;
 
-            $producto->fechaVencimiento = $request->fechaVencimiento;
+            $producto->fecha_vencimiento = $request->fecha_vencimiento;
 
             $producto->save();
 
             return redirect()->route('productos.index')->with('message','Producto Actualizado Correctamente');
-               
+
         endif;
     }
 
@@ -226,7 +229,7 @@ class ProductosController extends Controller
     public function exportExcel(){
 
         return excel::download(new ProductsExport,'Productos-Lista.xlsx');
-        
+
     }
 
     public function listadoProductos()
@@ -234,7 +237,7 @@ class ProductosController extends Controller
         $productos = Producto::orderBy('nombre', 'ASC')->get();
 
         $pdf = PDF::loadView('pdf.productospdf',['productos'=>$productos])->setPaper('a4', 'landscape');
-    
+
         return $pdf->stream();
     }
 

@@ -10,7 +10,7 @@
           <div class="panel-body">
             <div class="row">
             <div class="col-md-10">
-              <h4>Editar Deposito</h4>
+              <h4>Editar Sucursal</h4>
             </div>
             <div class="col-md-2">
                   <a href="{{ route('depositos.index') }}" class="btn btn-primary btn-block">Volver</a>
@@ -23,18 +23,18 @@
                   {{ csrf_field() }}
                   {{ method_field('PUT') }}
                   <div class="form-group">
-                    <label for="lbnombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $deposito->nombre }}">
-                    @if ($errors->has('nombre'))
+                    <label for="lbnombre">Razon social</label>
+                    <input type="text" class="form-control" id="razon_social" name="razon_social" value="{{ $deposito->razon_social }}">
+                    @if ($errors->has('razon_social'))
                     <small class="form-text text-danger">
-                        {{ $errors->first('nombre') }}
+                        {{ $errors->first('razon_social') }}
                      </small>
                     @endif
                   </div>
 
                   <div class="form-group">
-                    <label for="lbtelefono">Tel&eacute;fono</label>
-                    <input type="text" class="form-control" id="telefonos" name="telefonos" value="{{ $deposito->telefonos }}">
+                    <label for="lbtelefono">Telefono</label>
+                    <input type="text" class="form-control" id="telefono" name="telefono" value="{{ $deposito->telefono }}">
                     @if ($errors->has('telefono'))
                     <small class="form-text text-danger">
                         {{ $errors->first('telefono') }}
@@ -53,36 +53,27 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="lbtelefono">Ciudad</label>
-                    <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $deposito->ciudad }}">
-                    @if ($errors->has('ciudad'))
+                    <label for="lbtelefono">cuit</label>
+                    <input type="text" class="form-control" id="cuit" name="cuit" value="{{ $deposito->cuit }}">
+                    @if ($errors->has('cuit'))
                     <small class="form-text text-danger">
-                        {{ $errors->first('ciudad') }}
+                        {{ $errors->first('cuit') }}
                      </small>
                     @endif
                   </div>
+
 
                   <div class="form-group">
-                    <label for="lbtelefono">C.P</label>
-                    <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" value="{{ $deposito->codigo_postal }}">
-                    @if ($errors->has('codigo_postal'))
+                    <label for="lbtelefono">estado</label>
+                    <input type="text" class="form-control" id="estado" name="estado" value="{{ $deposito->estado }}">
+                    @if ($errors->has('estado'))
                     <small class="form-text text-danger">
-                        {{ $errors->first('codigo_postal') }}
+                        {{ $errors->first('estado') }}
                      </small>
                     @endif
                   </div>
 
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Provincia</label>
-                      <select class="form-control select2" style="width: 100%;" id="provincia_id" name="provincia_id">
-                        <option value="{{ $deposito->provincia->id }}">{{ $deposito->provincia->nombre }}</option>
-                        @foreach($provincias as $provincia)
-                        <option value="{{$provincia->id}}">{{$provincia->nombre}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                  </div>
+                  
 
                   <hr>
 

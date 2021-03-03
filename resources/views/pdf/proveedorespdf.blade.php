@@ -22,33 +22,33 @@
     #div3{
       clear:both;
     }
-    
+
     table{
-	    width:100%; 
+	    width:100%;
 	    border-collapse:collapse;
     }
-    
+
     td{
 	    border:2px solid black;
     }
   </style>
-  
+
   <body>
-    
+
     <div id="div1">
 
       Farmacia Avellaneda Norte
 
     </div>
-    
+
     <div id="div2">
 
       <?php
         echo "Fecha: " . date("d") . "/" . date("m") . "/" . date("Y");
       ?>
-    
+
     </div>
-  
+
   <div id="div3">
   <br>
   <h4> Listado de Proveedores Registrados </h4>
@@ -58,21 +58,19 @@
       <tr style="background-color: black; color:white">
         <td>#</td>
         <td>Razon Social</td>
-        <td>Cuil</td>
-        <td>Telefonos</td>
-        <td>E-Mail</td>
-        <td>Direccion</td>
+        <td>Cuit</td>
+        <td>Teléfono</td>
+        <td>Estado</td>
       </tr>
       </thead>
       <tbody>
         @foreach ($proveedores as $proveedor)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{ $proveedor->razon_Social }}</td>
-            <td>{{ $proveedor->cuit_cuil }}</td>
-            <td>{{ $proveedor->telefonos }}</td>
-            <td>{{ $proveedor->email }}</td>
-            <td>{{ $proveedor->direccion }} {{ $proveedor->ciudad }} {{ $proveedor->provincia->nombre }}</td>
+            <td>{{ $proveedor->razon_social }}</td>
+            <td>{{ $proveedor->cuit }}</td>
+            <td>{{ $proveedor->telefono }}</td>
+            <td>{{ $proveedor->estado }}</td>
         </tr>
         @endforeach
       </tbody>

@@ -2,35 +2,35 @@
 @section('content')
 
 <div class="container">
-    
+
 	<div class="row justify-content-center">
-	
+
 		<div class="col-md-12">
-	    	
+
           	<div class="card card-secondary">
-            	
+
 				<div class="card-header">
-              		
+
 					<h3 class="card-title"> Nueva Venta </h3>
-            	
+
 				</div>
 
 				<div class="card-body">
 
 					<form method="post" action="{{ route('ventas.store')}}" name="formulario">
-            
+
 					{{ csrf_field() }}
 
 					</br>
 
 					<div class="input-group">
-							
+
 							<input type="text"  readonly name="pdescripcion" id="pdescripcion" class="form-control" placeholder="Seleccione un Producto">
-							
+
 							<input type="hidden" readonly name="pid" id="pid" class="form-control" placeholder="">
-							
+
 							<span class="input-group-btn">
-							
+
 								<button type="button" class="btn btn-success" id="btnBuscarPducto" data-toggle="modal" data-target="#ModalProductos"><i class="fa fa-search"></i></button>
 
 							</span>
@@ -40,41 +40,41 @@
 						<br>
 
 						<div class="row">
-				
+
 							<div class="col-xs-4 col-sm-4 col-md-6 col-lg-4 col-xl-4">
-								
+
 								<label>Precio</label>
-								
+
 								<input type="number"  readonly name="pprecio" id="pprecio" class="form-control" placeholder="precio">
-							
+
 							</div>
 
 							<div class="col-xs-4 col-sm-4 col-md-6 col-lg-4 col-xl-4">
-							
+
 								<div class="form-group">
-									
+
 									<label for="cantidad">Cantidad</label>
-									
+
 									<input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="Cantidad">
-								
+
 								</div>
 
 							</div>
 
 							<div class="col-lg-12 col-md-12 col-dm-12 col-xs-12">
-								
+
 								<div class="form-group">
-									
+
 									<label for="cantidad"></label>
-									
+
 									<button class="btn btn-success" data-toggle="tooltip" type="button"  id="bt_agregar" onclick="evaluar()" title="Agregar Producto" data-original-title="Agregar Producto">  Agregar </i></button>
 
 								</div>
-							
+
 							</div>
 
         </div>
-	
+
 	</div>
 
 
@@ -93,7 +93,7 @@
 				<th></th>
 				<th></th>
 				<th></th>
-				<th><h4 id="total">$/. 0.00</h4> <input type="hidden" name="total_venta_pesos" id="total_venta_pesos"></th>
+				<th><h4 id="total">$/. 0.00</h4> <input type="hidden" name="total_venta" id="total_venta"></th>
 			</tfoot>
 		<tbody></tbody>
 		</table>
@@ -119,7 +119,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 		<div class="modal-header">
-        	<h5 class="modal-title" id="exampleModalLongTitle">Listado de Productos</h5>		
+        	<h5 class="modal-title" id="exampleModalLongTitle">Listado de Productos</h5>
      	 </div>
         <form>
         	Buscar <input id="searchTerm" type="text" onkeyup="doSearch()" />
@@ -144,23 +144,23 @@
 			<th style="display:none;" rowspan="1" colspan="1">#</th>
 			<th rowspan="1" colspan="1">Producto</th>
 			<th rowspan="1" colspan="1">Stock</th>
-			<th rowspan="1" colspan="1">Precio Venta</th>							
+			<th rowspan="1" colspan="1">Precio Venta</th>
 		</tr>
 		</tfoot>
 
 		<tbody>
 		@foreach ($productos as $pro)
 			<tr>
-			<td><button type="button" class="btn btn-success" id="bt_añadir"  data-dismiss="modal"  onclick="SeleccionarProducto()"><i class="fa fa-check"></i> </button></td>    
+			<td><button type="button" class="btn btn-success" id="bt_añadir"  data-dismiss="modal"  onclick="SeleccionarProducto()"><i class="fa fa-check"></i> </button></td>
 			<td style="display:none;">{{ $pro->id }}</td>
 			<td>{{ $pro->nombre }}</td>
 			<td>{{ $pro->stock }}</td>
-			<td>{{ $pro->precioVenta }}</td> 
+			<td>{{ $pro->precio_venta }}</td>
 		</tr>
 			@endforeach
 		</tbody>
-		</table> 
-                  
+		</table>
+
                 </div>
       </div>
       <div class="modal-footer">
@@ -171,72 +171,23 @@
 </div>
 
 
-<!-- FIN Modal Productos-->	
-
-<!-- Modal Clientes-->
-
-<div class="modal fade bd-example-modal-lg" id="ModalCliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-		<div class="modal-header">
-        	<h5 class="modal-title" id="exampleModalLongTitle">Listado de Clientes</h5>		
-     	 </div>
-        <form>
-        	Cliente a buscar <input id="searchTerm" type="text" onkeyup="doSearch()" />
-       	</form>
-      <div class="modal-body">
-	  <div class="card-body table-responsive p-0">
-                  <table class="table table-hover text-nowrap" id="tablecliente">
-                    <thead>
-                      <tr>
-					      <th>#</th>
-                          <th>Nombre</th>
-                          <th>Dni</th>
-						  <th>Opcion</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($clientes as $cli)
-                  	<tr>
-					<td>{{ $cli->id }}</td>
-                    <td>{{ $cli->nombre_Fantasia }}</td>
-                    <td>{{ $cli->cuit_cuil }}</td>                 
-
-                    <td><button type="button" class="btn btn-success" id="bt_añadir"  data-dismiss="modal" onclick="SeleccionarCliente()">Añadir</button></td>    
-                	</tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                  
-                </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
-
-<!-- FIN Modal Clientes-->	
+<!-- FIN Modal Productos-->
 
 @endsection
 
 @push ('scripts')
-  
+
   <script>
-    
+
     	var total=0;
 		cont=0;
 		total=0;
 		subtotal=[];
 		var arrProductos = new Array();
         var state =0;
-		
+
 		document.getElementById('select_sh').style.display = "none";
-		
+
     	function SeleccionarProducto(){
 
 			$("table tbody tr").click(function() {
@@ -253,7 +204,7 @@
 			});
 		}
 
-		function SeleccionarCliente(){
+		/*function SeleccionarCliente(){
 			$("#tablecliente tr").click(function() {
 			$(this).addClass('selected').siblings().removeClass('selected');
 		 	 var filaid= $(this).find("td:eq(0)").text();
@@ -262,21 +213,22 @@
 			$("#idCliente").val(filaid);
 			$("#pnombreCli").val(filaNombre);
 			$("#pdniCli").val(filaDni);
-			});
-		}
-			
+			});*/
+
+
+
 		function evaluar(){
-		 
+
 		 	var indice = 1;
 
-		 	if(indice<=0)	 
+		 	if(indice<=0)
 			{
 				state =0;
 				alert("Debe seleccionar un cliente")
 				$("#guardar").hide();
 			}
 			else
-			{	
+			{
 				state = 0;
 				agregar();
 			}
@@ -295,7 +247,7 @@
 				var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td> <td class= "idProducto" style="display:none;"><input type="hidden" name="idProducto[]" value="'+idarticulo+'">'+idarticulo+'</td>  <td  class ="cantidad"><input type="hidden" name="cantidad[]" value="'+cantidad+'">'+cantidad+'</td> <td  class ="precio"><input type="hidden" name="precio[]" value="'+precio+'">'+ precio +'</td> <td> $ '+subtotal[cont]+'</td></tr>';
 				cont++;
 		    	$('#total').html("$/ " + total);
-		    	$('#total_venta_pesos').val(total);
+		    	$('#total_venta').val(total);
 		  		$('#detalles').append(fila);
 		  		limpiar();
 				$("#guardar").show();
@@ -306,7 +258,7 @@
 				alert("Error al ingresar el detalle del presuuesto, revise los datos del producto");
 			}
 		}
-	
+
 	function limpiar(){
 		$("#pid").val("");
 		$("#pdescripcion").val("");
@@ -328,14 +280,14 @@
             const tableReg = document.getElementById('datos');
             const searchText = document.getElementById('searchTerm').value.toLowerCase();
             let total = 0;
- 
+
             // Recorremos todas las filas con contenido de la tabla
             for (let i = 1; i < tableReg.rows.length; i++) {
                 // Si el td tiene la clase "noSearch" no se busca en su cntenido
                 if (tableReg.rows[i].classList.contains("noSearch")) {
                     continue;
                 }
- 
+
                 let found = false;
                 const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
                 // Recorremos todas las celdas
@@ -355,7 +307,7 @@
                     tableReg.rows[i].style.display = 'none';
                 }
             }
- 
+
             // mostramos las coincidencias
             const lastTR=tableReg.rows[tableReg.rows.length-1];
             const td=lastTR.querySelector("td");
@@ -364,7 +316,7 @@
                 lastTR.classList.add("hide");
             }
 		}
-    
+
 
 	function cargar(){
 		let materiales = [];

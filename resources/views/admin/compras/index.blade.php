@@ -8,7 +8,7 @@
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>Ingresos</h1>
+                  <h1>Compras</h1>
                 </div>
 
 
@@ -27,7 +27,7 @@
             <div class="col-12">
               <div class="card">
               <div class="card-header">
-                  <h3 class="card-title">Listado de Ingresos</h3>
+                  <h3 class="card-title">Listado de Compras</h3>
 
                   <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -54,7 +54,7 @@
                     @foreach ($compras as $compra)
                   <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{ $compra->proveedor->razon_Social}}</td>                 
+                    <td>{{ $compra->proveedor->razon_social}}</td>
                     <td>{{ $compra->getFromDateAttribute($compra->fecha)}}</td>
                     <td> AR$ {{ $compra->total }} </td>
 
@@ -85,14 +85,14 @@ function doSearch(){
             const tableReg = document.getElementById('datos');
             const searchText = document.getElementById('searchTerm').value.toLowerCase();
             let total = 0;
- 
+
             // Recorremos todas las filas con contenido de la tabla
             for (let i = 1; i < tableReg.rows.length; i++) {
                 // Si el td tiene la clase "noSearch" no se busca en su cntenido
                 if (tableReg.rows[i].classList.contains("noSearch")) {
                     continue;
                 }
- 
+
                 let found = false;
                 const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
                 // Recorremos todas las celdas
@@ -112,7 +112,7 @@ function doSearch(){
                     tableReg.rows[i].style.display = 'none';
                 }
             }
- 
+
             // mostramos las coincidencias
             const lastTR=tableReg.rows[tableReg.rows.length-1];
             const td=lastTR.querySelector("td");

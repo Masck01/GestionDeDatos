@@ -2,16 +2,19 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Marca extends Model
 {
-    protected $table = "marcas";
+    use HasFactory;
+
+    protected $table = "marca";
 
     protected $fillable = [
-        'nombre'
+        'codigo', 'nombre', 'estado'
     ];
-    
+
     public function productos()
     {
         return $this->hasMany(Producto::class);

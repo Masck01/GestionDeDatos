@@ -20,25 +20,17 @@ class ProveedorController extends Controller
 
     public function create()
     {
-        $provincias = Provincia::orderBy('nombre', 'ASC')
-                      ->select('nombre as nombre', 'id as id')
-                      ->get();
-
-        return view('admin.proveedores.create',compact('provincias'));
+        return view('admin.proveedores.create');
     }
 
 
     public function store(Request $request)
     {
         $provedor = new Proveedor;
-        $provedor->razon_Social = $request->razonSocial;
-        $provedor->cuit_cuil = $request->cuit_cuil;
-        $provedor->telefonos = $request->telefonos;
-        $provedor->email = $request->email;
-        $provedor->direccion = $request->direccion;
-        $provedor->ciudad = $request->ciudad;
-        $provedor->codigo_postal = $request->codigo_postal;
-        $provedor->provincia_id = $request->provincia_id;
+        $provedor->razon_social = $request->razon_social;
+        $provedor->cuit = $request->cuit;
+        $provedor->telefono = $request->telefono;
+        $provedor->estado = 'Activo';
         $provedor->save();
 
         return redirect()->route('proveedores.index');
@@ -54,22 +46,17 @@ class ProveedorController extends Controller
     public function edit($id)
     {
         $proveedor = Proveedor::find($id);
-        
-        $provincias = Provincia::orderBy('nombre', 'ASC')->select('nombre as nombre', 'id as id')->get();
-        
-        return view('admin.proveedores.edit', compact('proveedor','provincias'));
+
+        return view('admin.proveedores.edit', compact('proveedor'));
     }
 
     public function update(Request $request, $id)
     {
         $provedor = Proveedor::find($id);
-        $provedor->razon_Social = $request->razonSocial;     
-        $provedor->cuit_cuil = $request->cuit_cuil;
-        $provedor->telefonos = $request->telefonos;
-        $provedor->direccion = $request->direccion;
-        $provedor->ciudad = $request->ciudad;
-        $provedor->codigo_postal = $request->codigo_postal;
-        $provedor->provincia_id = $request->provincia_id;
+        $provedor->razon_social = $request->razon_social;
+        $provedor->cuit = $request->cuit;
+        $provedor->telefono = $request->telefono;
+        $provedor->estado = $request->estado;
         $provedor->save();
         return redirect()->route('proveedores.index');
     }
@@ -79,7 +66,7 @@ class ProveedorController extends Controller
         $proveedores = Proveedor::orderBy('razon_Social', 'ASC')->get();
 
         $pdf = PDF::loadView('pdf.proveedorespdf',['proveedores'=>$proveedores])->setPaper('a4', 'landscape');
-    
+
         return $pdf->stream();
     }
 

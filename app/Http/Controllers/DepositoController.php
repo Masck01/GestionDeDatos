@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Deposito;
+use App\Sucursal;
 use App\DepositoProducto;
 use App\Provincia;
 use App\Producto;
@@ -18,7 +18,7 @@ class DepositoController extends Controller
 {
     public function index(Request $request){
         
-        $depositos = Deposito::orderBy('id', 'DESC')->paginate(10);
+        $depositos = Sucursal::orderBy('razon_social', 'DESC')->paginate(10);
         
         return view('admin.deposito.index', compact('depositos'));
 
@@ -26,12 +26,12 @@ class DepositoController extends Controller
 
     public function create()
     {
-
-        $provincias = Provincia::orderBy('nombre', 'ASC')
+/*
+        $provincia = Provincia::orderBy('nombre', 'ASC')
                       ->select('nombre as nombre', 'id as id')
                       ->get();
-
-        return view('admin.deposito.create',compact('provincias'));
+*/
+        return view('admin.deposito.create');
     }
 
     public function listadoPedido($id){
@@ -44,13 +44,12 @@ class DepositoController extends Controller
 
     public function store(Request $request)
     {
-        $deposito = new Deposito;
-        $deposito->nombre = $request->nombre;
-        $deposito->telefonos = $request->telefonos;
+        $deposito = new Sucursal;
+        $deposito->razon_social = $request->razon_social;
+        $deposito->telefono = $request->telefono;
         $deposito->direccion = $request->direccion;
-        $deposito->ciudad = $request->ciudad;
-        $deposito->codigo_postal = $request->codigo_postal;
-        $deposito->provincia_id = $request->provincia_id;
+        $deposito->cuit = $request->cuit;
+        $deposito->estado = 'Activo';
         $deposito->save();
 
         return redirect()->route('depositos.index');
@@ -59,7 +58,7 @@ class DepositoController extends Controller
     public function show($id)
     {
 
-        $deposito = Deposito::find($id);
+        $deposito = Sucursal::find($id);
         
         return view('admin.deposito.show', compact('deposito'));
 
@@ -68,26 +67,26 @@ class DepositoController extends Controller
     public function edit($id)
     {
 
-        $deposito = Deposito::find($id);
+        $deposito = Sucursal::find($id);
 
+        /*    
         $provincias = Provincia::orderBy('nombre', 'ASC')
         ->select('nombre as nombre', 'id as id')
         ->get();
-
-        return view('admin.deposito.edit', compact('deposito','provincias'));
+        */
+        return view('admin.deposito.edit', compact('deposito'));
 
     }
 
     public function update(Request $request, $id)
     {
 
-        $deposito = Deposito::find($id);
-        $deposito->nombre = $request->nombre;
-        $deposito->telefonos = $request->telefonos;
+        $deposito = Sucursal::find($id);
+        $deposito->razon_social = $request->razon_social;
+        $deposito->telefono = $request->telefono;
         $deposito->direccion = $request->direccion;
-        $deposito->ciudad = $request->ciudad;
-        $deposito->codigo_postal = $request->codigo_postal;
-        $deposito->provincia_id = $request->provincia_id;
+        $deposito->cuit = $request->cuit;
+        $deposito->estado = $request->estado;
         $deposito->save();
 
         return redirect()->route('depositos.index')->with('success','Deposito actualizado correctamente');
@@ -96,7 +95,7 @@ class DepositoController extends Controller
 
     public function destroy($id,$pedido)
     {
-        $deposito = Deposito::find($id);
+        $deposito = Sucursal::find($id);
         $deposito->delete();
         return redirect()->route('depositos.index');
     }

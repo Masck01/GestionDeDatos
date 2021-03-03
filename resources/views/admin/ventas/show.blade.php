@@ -13,7 +13,7 @@
             <div class="row">
               <div class="col-md-12">
                 <br>
-                <p><b>Empleado: </b> {{ $pedido->user->apellido}} {{ $pedido->user->nombre}} </p>
+                <p><b>Empleado: </b> {{ $pedido->empleado_id}} </p>
                 <p><b>Fecha: </b>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</p>
                 <p><b>Total: </b> AR$ {{ $pedido->total }} </p>
                 <p><b>Estado: </b> {{ $pedido->estado }} </p>
@@ -38,23 +38,23 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$det->producto->nombre }}</td>
                     <td>{{$det->cantidad }}</td>
-                    <td> AR$ {{$det->precio  }} </td>
-                    <td> AR$ {{$det->precio  * $det->cantidad }}</td>
+                    <td> AR$ {{$det->producto->precio_venta}} </td>
+                    <td> AR$ {{$det->producto->precio_venta *$det->cantidad }}</td>
                   </tr>
                 @endforeach
               </tbody>
             </table>
 
             <div class="form-group">
-        		
+
                 <a class="btn btn-danger" href="{{ route('ventas.index')}}" role="button">Volver </a>
-        
+
             </div>
-           
+
             </div>
 
           </div>
-                 
+
         </div>
       </div>
     </div>
