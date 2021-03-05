@@ -32,15 +32,16 @@
                       <input type="text" class="form-control" placeholder="Enter ..." id="razon_social" name="razon_social">
                     </div>
                   </div>
-                </div>
 
-                <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>CUIT </label>
                       <input type="text" class="form-control" placeholder="Enter ..." id="cuit" name="cuit">
                     </div>
                   </div>
+                </div>
+
+                <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Teléfono</label>

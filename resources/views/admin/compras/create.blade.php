@@ -220,7 +220,7 @@
                       <tr>
 					      <th>#</th>
                           <th>Nombre</th>
-                        <th>Precio Compra</th>
+
 						  <th>Opcion</th>
                       </tr>
                     </thead>
@@ -229,7 +229,7 @@
                   	<tr>
 					<td>{{ $pro->id }}</td>
 					<td>{{ $pro->nombre }}</td>
-                    <td>{{ $pro->precio_compra}}</td>
+
                     <td><button type="button" class="btn btn-success" id="bt_añadir"  data-dismiss="modal" onclick="SeleccionarProducto()">Añadir</button></td>
                 	</tr>
                       @endforeach
