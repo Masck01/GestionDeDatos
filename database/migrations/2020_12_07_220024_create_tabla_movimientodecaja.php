@@ -20,9 +20,9 @@ class CreateTablaMovimientodeCaja extends Migration
             $table->decimal('entrada', 9, 2)->default(0.00);
             $table->decimal('salida', 9, 2)->default(0.00);
             $table->string('moneda');
-            $table->bigInteger('venta_id')->nullable();
+            $table->bigInteger('venta_id')->unsigned()->nullable();
             $table->bigInteger('caja_id')->unsigned();
-            $table->bigInteger('compra_id')->nullable();
+            $table->bigInteger('compra_id')->unsigned()->nullable();
             $table->timestamps();
 
 

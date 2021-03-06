@@ -65,14 +65,14 @@ class CrearLiquidacion extends Component
         $estado = 'pagado';
         $valores_liquidacion = collect(
             [
-                $this->id_empleado,
-                $estado,
                 $fecha_desde,
                 $fecha_hasta,
+                $salario_neto,
+                $salario_bruto,
                 $periodo_liquidacion,
                 $retenciones,
-                $salario_bruto,
-                $salario_neto
+                $estado,
+                $this->id_empleado,
             ]
         );
         $valores_linealiquidacion = $this->valores_linealiquidacion();

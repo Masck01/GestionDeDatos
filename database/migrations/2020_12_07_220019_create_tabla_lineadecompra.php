@@ -19,7 +19,7 @@ class CreateTablaLineadeCompra extends Migration
             $table->integer('cantidad');
             $table->bigInteger('producto_id')->unsigned();
             $table->bigInteger('compra_id')->unsigned();
-            $table->bigInteger('proveedor_id')->nullable();
+            // $table->bigInteger('proveedor_id')->nullable();
             $table->timestamps();
 
             $table->foreign('producto_id')
@@ -34,11 +34,11 @@ class CreateTablaLineadeCompra extends Migration
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
 
-            $table->foreign('proveedor_id')
-                  ->references('proveedor_id')
-                  ->on('producto')
-                  ->onUpdate('cascade')
-                  ->onDelete('cascade');
+            // $table->foreign('proveedor_id')
+            //       ->references('proveedor_id')
+            //       ->on('producto')
+            //       ->onUpdate('cascade')
+            //       ->onDelete('cascade');
         });
     }
 
