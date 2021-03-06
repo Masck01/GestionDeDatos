@@ -6,23 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Liquidacion extends Model
 {
-    protected $table = "liquidacion";
+    protected $table = "liquidaciones";
+
+
     protected $fillable = [
-        'fecha_desde', 'fecha_hasta', 'salario_neto', 'salario_bruto', 'periodo_liquidacion', 'retenciones', 'estado', 'empleado_id'
+      'usuario_id','fechaDesde','fechaHasta','periodo','salarioNeto','retenciones','salarioBruto'
     ];
 
-    public function getFromDateAttribute($value)
-    {
+    public function getFromDateAttribute($value) {
         return \Carbon\Carbon::parse($value)->format('d/m/Y');
     }
 
-    public function empleado()
+    public function detalle_liquidacion()
     {
-        return $this->hasOne(Empleado::class, 'id', 'empleado_id');
+        return $this->hasMany(Detalle_Liquidacion::class,'liquidacion_id','id');
     }
 
-    public function linea_liquidacion()
+    public function usuario()
     {
-        return $this->hasMany(LineaLiquidacion::class,'liquidacion_id','id');
+        return $this->hasOne(User::class,'id','usuario_id');
     }
 }

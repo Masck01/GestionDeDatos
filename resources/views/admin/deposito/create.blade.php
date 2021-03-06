@@ -8,7 +8,7 @@
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>Sucursal</h1>
+                  <h1>Deposito</h1>
                 </div>
 
               </div>
@@ -19,7 +19,7 @@
 
           <div class="card card-secondary">
             <div class="card-header">
-              <h3 class="card-title">Agregar Sucursal</h3>
+              <h3 class="card-title">Agregar Deposito</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -28,15 +28,15 @@
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                      <label>Razon social</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="razon_social" name="razon_social">
+                      <label>Nombre</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="nombre" name="nombre">
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <div class="form-group">
-                        <label>Telefono</label>
-                        <input type="text" class="form-control" placeholder="Enter ..." id="telefono" name="telefono">
+                        <label>Telefonos</label>
+                        <input type="text" class="form-control" placeholder="Enter ..." id="telefonos" name="telefonos">
                       </div>
                     </div>
                   </div>
@@ -51,12 +51,29 @@
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                      <label>cuit</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="cuit" name="cuit">
+                      <label>Ciudad</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="ciudad" name="ciudad">
                     </div>
                   </div>
                 </div>
-            
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Codigo Postal</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="codigo_postal" name="codigo_postal">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Provincia</label>
+                      <select class="form-control select2" style="width: 100%;" id="provincia_id" name="provincia_id">
+                        <option value="0">Seleccione una Provincia</option>
+                        @foreach($provincias as $provincia)
+                        <option value="{{$provincia->id}}">{{$provincia->nombre}}</option>
+                        @endforeach
+                      </select>
                     </div>
                   </div>
 

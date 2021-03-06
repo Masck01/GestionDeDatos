@@ -6,22 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Linea_Venta extends Model
 {
-    protected $table = "lineadeventa";
+    protected $table = "linea_ventas";
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'subtotal','cantidad','producto_id','venta_id','proveedor_id'
+      'venta_id', 'producto_id', 'cantidad','precio'
     ];
 
     public function producto()
     {
         return $this->belongsTo(Producto::class);
-    }
-
-    public function proveedor()
-    {
-        return $this->belongsTo(Proveedor::class,'proveedor_id','id');
     }
 
 }

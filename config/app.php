@@ -231,8 +231,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Empleado' => App\Empleado::class,
-        'ConfiguracionCategoria' => App\ConfiguracionCategoria::class
 
 
     ],

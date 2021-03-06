@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Usuario;
+use App\User;
 use App\Familiar;
-use App\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -20,9 +19,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::orderBy('apellido', 'ASC')->paginate(10);
+        $usuarios = User::orderBy('apellido', 'ASC')->paginate(10);
 
-
+        
 
         return view('admin.usuarios.index',compact('usuarios'));
     }
@@ -34,9 +33,8 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::orderBy('nombre', 'DESC')->paginate(10);
 
-        return view('admin.usuarios.create',compact('categorias'));
+        return view('admin.usuarios.create');
     }
 
     /**
@@ -47,7 +45,7 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new Usuario();
+        $user = new User();
         $user->nombre = $request->nombre;
         $user->apellido = $request->apellido;
         $user->username = $request->username;
@@ -58,11 +56,8 @@ class UsuarioController extends Controller
         $user->domicilio = $request->domicilio;
         $user->cuil_cuit = $request->cuit_cuil;
         $user->pagina_principal = 'home';
-        $user->categoria_id =  $request->categoria;
-        $user->cuenta = $request->cuenta;
-        $user->fechaIngreso = $request->ingreso;
         $user->save();
-
+        
         return redirect()->route('usuarios.index');
     }
 
@@ -74,9 +69,9 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        $usuario = Usuario::findOrFail($id);
+        $usuario = User::findOrFail($id);
 
-        $clientes = Familiar::where('usuario_id','like',$usuario->id)->orderBy('id', 'ASC')->paginate(10);
+        $clientes = Familiar::orderBy('id', 'ASC')->paginate(10);
 
         return view('admin.usuarios.show',compact('usuario','clientes'));
     }
@@ -89,11 +84,9 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        $usuario = Usuario::findOrFail($id);
-
-        $categorias = Categoria::orderBy('nombre', 'DESC')->paginate(10);
-
-        return view('admin.usuarios.edit',compact('usuario','categorias'));
+        $usuario = User::findOrFail($id);
+        
+        return view('admin.usuarios.edit',compact('usuario'));
 
     }
 
@@ -106,19 +99,13 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = Usuario::findOrFail($id);
-        $user->nombre = $request->nombre;
-        $user->apellido = $request->apellido;
-        $user->email = $request->email;
-        $user->telefono_celular = $request->telefono_celular;
-        $user->telefono_fijo = $request->telefono_fijo;
-        $user->domicilio = $request->domicilio;
-        $user->cuil_cuit = $request->cuit_cuil;
-        $user->pagina_principal = 'home';
-        $user->categoria_id =  $request->categoria;
-        $user->cuenta = $request->cuenta;
-        $user->fechaIngreso = $request->ingreso;
-        $user->save();
+        $usuario = User::findOrFail($id);
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        if (isset($request->password) && $request->password != "") {
+            $usuario->password = bcrypt($request->password);
+        }
+        $usuario->save();
 
         return redirect()->route('usuarios.index')->with('success','Usuario Editado correctamente');
     }
@@ -131,7 +118,7 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        $usuario = Usuario::find($id);
+        $usuario = User::find($id);
         $usuario->delete();
         return redirect()->route('usuarios.index')->with('success','Usuario eliminado correctamente');
     }

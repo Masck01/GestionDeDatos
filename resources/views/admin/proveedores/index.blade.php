@@ -38,11 +38,10 @@
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                        <th style="text-align:center"><a href="{{ route('proveedores.create') }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Proveedor" data-original-title="Ver Detalle"><i class="fas fa-plus"></i></a></th>
+                        <th style="text-align:center"><a href="{{ route('proveedores.create') }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Producto" data-original-title="Ver Detalle"><i class="fas fa-plus"></i></a></th>
                         <th>Razon Social</th>
-                        <th>CUIT</th>
-                        <th>Teléfono</th>
-                        <th>Estado</th>
+                        <th>Tel&eacute;fono</th>
+                        <th>Provincia</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -50,13 +49,12 @@
                       @foreach ($proveedores as $proveedor)
                         <tr>
                           <td style="text-align:center">{{$loop->iteration}}</td>
-                          <td>{{ $proveedor->razon_social }}</td>
-                          <td>{{ $proveedor->telefono }}</td>
-                          <td>{{ $proveedor->cuit }}</td>
-                          <td>{{ $proveedor->estado }}</td>
+                          <td>{{ $proveedor->razon_Social }}</td>
+                          <td>{{ $proveedor->telefonos }}</td>
+                          <td>{{ $proveedor->provincia->nombre }}</td>
                           <td>
-                            <a href="{{ route('proveedores.show', $proveedor->id) }}" class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Proveedor" data-original-title="Ver Detalle Cliente"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
-                            <a href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-link" data-toggle="tooltip" title="Editar Proveedor" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
+                            <a href="{{ route('proveedores.show', $proveedor->id) }}" class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Producto" data-original-title="Ver Detalle Cliente"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
+                            <a href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-link" data-toggle="tooltip" title="Editar Producto" data-original-title="Editar Cliente"><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
                           </td>
                         </tr>
                       @endforeach
@@ -64,13 +62,13 @@
                   </table>
 
                   <div class="col-lg-12 col-md-12 col-dm-12 col-xs-12">
-
+								
 								<div class="form-group">
-
-                  <th><a href="{{ route('proveedores.downloadPdf') }}" class="btn btn-success" data-toggle="tooltip" title="Reporte PDF" data-original-title="Reporte PDF">Imprimir PDF</a></th>
-
+                  
+                  <th><a href="{{ route('proveedores.downloadPdf') }}" class="btn btn-success" data-toggle="tooltip" title="Reporte PDF" data-original-title="Reporte PDF">Imprimir PDF</a></th> 
+                
                 </div>
-
+							
 							</div>
 
                 </div>

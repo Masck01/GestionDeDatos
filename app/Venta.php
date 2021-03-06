@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Venta extends Model
 {
-    protected $table = "venta";
+    protected $table = "ventas";
+
 
     protected $fillable = [
-        'empleado_id','fecha','hora','total', 'estado'
+      'cliente_id','usuario_id','fecha','total', 'estado'
     ];
 
     public function detalle_pedido()
@@ -20,13 +21,13 @@ class Venta extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'usuario_id','id');
+        return $this->belongsTo(User::class,'usuario_id');
     }
 
-   /* public function cliente()
+    public function cliente()
     {
         return $this->belongsTo(Cliente::class);
-    }*/
+    }
 
     public function getFromDateAttribute($value) {
         return \Carbon\Carbon::parse($value)->format('d/m/Y');

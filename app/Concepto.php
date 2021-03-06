@@ -3,16 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Concepto extends Model
 {
-    use HasFactory;
-    protected $table = "concepto";
+  protected $table = "conceptos";
 
-    protected $fillable = [
-        'descripcion', 'tipo', 'estado'
-    ];
+  protected $fillable = [
+    'descripcion', 'tipo', 'montoFijo', 'montoVariable'
+  ];
 }
-
-//sa

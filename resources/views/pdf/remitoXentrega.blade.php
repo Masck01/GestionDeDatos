@@ -24,12 +24,12 @@ a {
 
 body {
   position: relative;
-  width: 16cm;
-  height: 29.7cm;
+  width: 16cm;  
+  height: 29.7cm; 
   color: #555555;
-  background: #FFFFFF;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 14px; 
   font-family: SourceSansPro;
 }
 
@@ -109,7 +109,7 @@ table td {
 }
 
 table th {
-  white-space: nowrap;
+  white-space: nowrap;        
   font-weight: normal;
 }
 
@@ -165,17 +165,17 @@ table tfoot td {
   background: #FFFFFF;
   border-bottom: none;
   font-size: 1.2em;
-  white-space: nowrap;
-  border-top: 1px solid #AAAAAA;
+  white-space: nowrap; 
+  border-top: 1px solid #AAAAAA; 
 }
 
 table tfoot tr:first-child td {
-  border-top: none;
+  border-top: none; 
 }
 
 table tfoot tr:last-child td {
   font-size: 1.4em;
-  border-top: 1px solid #57B223;
+  border-top: 1px solid #57B223; 
 
 }
 
@@ -190,7 +190,7 @@ table tfoot tr td:first-child {
 
 #notices{
   padding-left: 6px;
-  border-left: 6px solid #0087C3;
+  border-left: 6px solid #0087C3;  
 }
 
 #notices .notice {
@@ -225,12 +225,11 @@ footer {
     <main>
         <div id="details" class="clearfix">
         <div id="client">
-          <h2 class="name">Proveedor: {{$pedido->proveedor->razon_social}}</h2>
-
-          <div class="address">CUIT: {{$pedido->proveedor->cuit}} </div>
+          <h2 class="name">Proveedor: {{$pedido->proveedor->razon_Social}}</h2>
+          <div class="address">Direccion: {{$pedido->proveedor->direccion}} {{$pedido->proveedor->ciudad}} {{$pedido->proveedor->provincia->nombre}}</div>
         </div>
         <div id="invoice">
-          <h2>- Comprobante de Compra -</h2>
+          <h1>- Comprobante de Compra -</h1>
           <div class="date">Fecha: {{$pedido->getFromDateAttribute($pedido->fecha)}}</div>
         </div>
       </div>
@@ -250,8 +249,8 @@ footer {
                         <td class="desc">{{$loop->iteration}}</td>
                         <td class="desc">{{ $det->producto->nombre }}</td>
                         <td class="qty">{{ $det->cantidad }}</td>
-                        <td class="qty">AR$ {{ $det->subtotal }}</td>
-                        <td class="qty">AR$ {{ $det->cantidad * $det->subtotal }}</td>
+                        <td class="qty">AR$ {{ $det->costo }}</td>
+                        <td class="qty">AR$ {{ $det->cantidad * $det->costo }}</td>
                       </tr>
                @endforeach
         </tbody>

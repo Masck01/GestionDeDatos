@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Familiar extends Model
 {
-  protected $table = "grupofamiliar";
+  protected $table = "grupo_familiar";
 
   protected $fillable = [
-    'dni','apellido','nombre', 'fecha_nacimiento', 'parentesco','empleado_id'
+    'nombre', 'fechaNacimiento', 'parentesco', 'dni','usuario_id'
   ];
 }

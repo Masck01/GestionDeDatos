@@ -11,7 +11,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-
+                    
                 <h3 class="card-title">Listado de Productos</h3>
                   <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -23,15 +23,15 @@
                     </div>
                   </div>
                 </div>
-
+                 
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                      <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 12px;">
+                      <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 12px;">                     
                         <a href="{{ route('productos.create') }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Producto" data-original-title="Ver Detalle"><i class="fas fa-plus" style="color: blue; font-size: 20px;"></i></a>
-                        <a style="display:none;" href="#" class="btn btn-link" data-toggle="modal"  data-target="#ModalImportProduct" title="Importar Archivo Excel" data-original-title="Ver Detalle"><i class="fas fa-cloud-upload-alt" style="color: blue;  font-size: 20px;"></i></a>
+                        <a style="display:none;" href="#" class="btn btn-link" data-toggle="modal"  data-target="#ModalImportProduct" title="Importar Archivo Excel" data-original-title="Ver Detalle"><i class="fas fa-cloud-upload-alt" style="color: blue;  font-size: 20px;"></i></a>                   
                       </th>
                       <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 92px; text-align:center;">Producto</th>
                       <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 92px; text-align:center;">Stock</th>
@@ -59,12 +59,12 @@
                           <td style="text-align:center;">{{ $producto->stock}}</td>
                           <td style="text-align:center;">{{ $producto->categoria->nombre }}</td>
                           <td style="text-align:center;">
-                          @if(($producto->imagen != ""))
+                          @if(($producto->imagen != "")) 					              
                      			<img src="{{asset('img/productos/'.$producto->imagen)}}" width="50px" height="50px">
                         		@else
                         		<img src="{{asset('img/logos/imagenNoDisponible.jpg')}}" width="50px" height="50px">
-                      			@endif
-								          </td>
+                      			@endif 
+								          </td> 
                           <td>
                             <a href="{{ route('productos.show', $producto->id) }}" class="btn btn-link" data-toggle="tooltip" title="Ver Producto" data-original-title="Ver Detalle" style="text-align:center;" ><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
                             <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-link" data-toggle="tooltip" title="Editar Producto" data-original-title="Editar Producto" style="text-align:center;" ><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
@@ -72,11 +72,11 @@
                         </tr>
                       @endforeach
                     </tbody>
-
+                  
                   </table>
 
                   {{$productos->render()}}
-
+                  
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -93,9 +93,9 @@
 <div class="modal fade bd-example-modal-lg" id="ModalImportProduct" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 
     <div class="modal-dialog modal-lg">
-
+      
       <div class="modal-content">
-
+		      
           <div class="modal-header">
         	  <h5 class="modal-title" id="tituloUpdate">Carga de Productos</h5>
 
@@ -108,41 +108,41 @@
               @if(Session::has('message'))
 
                 <p class="text-info">{{Session::get('message')}}</p>
-
+              
               @endif
 
      	    </div>
-
+          
           <div class="modal-body">
 
           <p>Presione <a href="{{ route('productos.download') }}">Aqui</a> para descargar la plantilla a completar</p>
-
-          <p>Antes de realizar la carga es importante que:</p>
-          <p>1) No deje Columnas Vacias</p>
-	        <p>2) Borrar la fila de Encabesado</p>
+          
+          <p>Antes de realizar la carga es importante que:</p>	
+          <p>1) No deje Columnas Vacias</p>	 
+	        <p>2) Borrar la fila de Encabesado</p>	 
             <div class="card-body table-responsive p-0">
-
+            
               <form action="{{route('productos.importar.excel')}}" method="post" enctype="multipart/form-data">
-
+                    
                     @csrf
-
+                                 
                 <div class="row">
 
                     <div class="col-xs-24 col-sm-24 col-md-12 col-lg-12 col-xl-12">
-
+                      
                       <div class="form-group">
                         <label>Nombre</label>
                         <input type="file" class="form-control" name="file">
                       </div>
 
                     </div>
-
+                  
                 </div>
 
                 <div class="row">
-
+                    
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-
+                                 
                       <button type="submit" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i></button>
                       </div>
 
@@ -150,8 +150,8 @@
 
                 </div>
 
-              </form>
-
+              </form>  
+                  
             </div>
 
             <div class="modal-footer">
@@ -165,9 +165,9 @@
       </div>
 
     </div>
-
+    
 </div>
 
-<!-- FIN Modal Importar-->
+<!-- FIN Modal Importar-->	
 
 @endsection

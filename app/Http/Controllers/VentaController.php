@@ -7,11 +7,9 @@ use App\Venta;
 use App\Cliente;
 use App\Producto;
 use App\Linea_Venta;
-use App\Caja;
+use App\Cajas;
 use App\Pago;
 use App\MovimientoCaja;
-use App\MovimientodeCaja;
-use App\Proveedor;
 use DB;
 use Session;
 use Carbon\Carbon;
@@ -23,77 +21,75 @@ use Barryvdh\DomPDF\Facade as PDF;
 class VentaController extends Controller
 {
     public function index(Request $request){
-
+        
         $ventas = Venta::orderBy('id', 'DESC')->paginate(10);
-
+ 
         return view('admin.ventas.index', compact('ventas'));
 
     }
 
     public function create(){
 
-        $cajas = Caja::find(1);
+        $cajas = Cajas::find(1);
 
-        if($cajas->estado == 'Activo'):
+        if($cajas->estado == 'abierta'):
 
             $productos = Producto::orderBy('nombre','ASC')->get();
+            
+            $clientes = Cliente::orderBy('id', 'ASC')->get();
 
-            //$clientes = Cliente::orderBy('id', 'ASC')->get();
-
-            return view('admin.ventas.create',["productos"=>$productos]);
-
+            return view('admin.ventas.create',["clientes"=>$clientes,"productos"=>$productos]);    
+        
         else:
 
             Session::flash('error', 'Error: No hay ninguna Caja Abierta');
 
             return back()->with('message','Ninguna Caja Abierta')->with('typealert','danger');
-
+        
         endif;
 
     }
-
+    
     public function store(Request $request)
     {
         $mytime = Carbon::now('America/Argentina/Tucuman');
 
-        $cajas = Caja::find(1);
-
+        $cajas = Cajas::find(1);
+        
         $distinto = false;
 
-        if($cajas->estado == 'Activo'):
+        if($cajas->estado == 'abierta'):
 
             try{
 
                 DB::beginTransaction();
 
                 $mytime = Carbon::now('America/Argentina/Tucuman');
-
-                $venta = new Venta();
-
-                $venta->empleado_id = Auth::user()->id;
-
+                
+                $venta = new Venta;
+                            
+                $venta->usuario_id = Auth::user()->id;
+                        
                 $venta->fecha = $mytime->toDateTimeString();
-
-                $venta->hora = $mytime->toDateTimeString();
-
-                $venta->total = $request->get('total_venta');
-
-                $venta->estado = "Impago";
-
+                                
+                $venta->total = $request->get('total_venta_pesos');
+                                
+                $venta->estado = "Pendiente";
+                
                 $venta->save();
-
+    
                 if (count( json_decode($request->productosEnPedidos,true) ) > 0) {
-
+    
                    $proEnPedido = json_decode($request->productosEnPedidos,true);
-
-                   for ($i=0; $i < count($proEnPedido); $i++) {
-
+                    
+                   for ($i=0; $i < count($proEnPedido); $i++) { 
+    
                         //CARGA LA LINEA DE PEDIDO
                         $linea = new Linea_Venta();
                         $linea->venta_id = $venta->id;
                         $linea->producto_id = $proEnPedido[$i]['idProducto'];
                         $linea->cantidad = $proEnPedido[$i]['cantidad'];
-                        $linea->subtotal = $proEnPedido[$i]['precio'];
+                        $linea->precio = $proEnPedido[$i]['precio'];
                         $linea->save();
 
                         $producto = Producto::find($linea->producto_id);
@@ -104,27 +100,27 @@ class VentaController extends Controller
                 }
 
                 $this->crearLineaCaja($venta);
-
+             
                 DB::commit();
             }
-
+    
             catch(Exception $e){
-
-
+            
+            
                 DB::rollback();
             }
-
+    
             return redirect()->route('ventas.index')->with('success','Presupuesto agregado correctamente');
-
+        
         else:
 
-            Session::flash('error', 'Error: No hay ninguna Caja activa');
+            Session::flash('error', 'Error: No hay ninguna Caja Abierta');
 
-            return back()->with('message','Ninguna Caja activa')->with('typealert','danger');
-
+            return back()->with('message','Ninguna Caja Abierta')->with('typealert','danger');
+        
         endif;
 
-
+       
     }
 
     public function show($id)
@@ -140,10 +136,10 @@ class VentaController extends Controller
     {
         $pedidos = Venta::orderBy('id', 'DESC')->get();
 
-        $orders = DB::table("venta")->get()->sum("total");
+        $orders = DB::table("ventas")->get()->sum("total");
 
         $pdf = PDF::loadView('pdf.pedidospdf',['pedidos'=>$pedidos,'orders'=>$orders])->setPaper('a4', 'landscape');
-
+    
         return $pdf->stream();
     }
 
@@ -154,23 +150,33 @@ class VentaController extends Controller
         $detalle = $pedido->detalle_pedido()->get();
 
         $pdf = PDF::loadView('pdf.reciboVenta',['pedido'=>$pedido],['detalle'=>$detalle])->setPaper('a4', 'landscape');
-
+    
         return $pdf->stream();
     }
 
     private function crearLineaCaja(Venta $pedido){
 
-        $cajas = caja::find(1);
+        $cajas = cajas::find(1);
 
         $mytime = Carbon::now('America/Argentina/Tucuman');
 
-        $cajas->saldo = $cajas->saldo + $pedido->total;
+        if($pedido->tipo == 'Pesos'):
 
-        $cajas->save();
+            $cajas->saldoPesos = $cajas->saldoPesos + $pedido->total; 
 
-        $movimiento = new MovimientodeCaja();
+            $cajas->save();
 
-        $movimiento->caja_id = 1;
+        else:
+
+            $cajas->saldoDolares = $cajas->saldoDolares + $pedido->total + 0;
+
+            $cajas->save();
+        
+        endif;
+
+        $movimiento = new MovimientoCaja();
+
+        $movimiento->cajas_id = 1;
 
         $movimiento->descripcion = 'Venta Nº '. date("Ymd-his");
 
@@ -182,7 +188,9 @@ class VentaController extends Controller
 
         $movimiento->moneda = 'Pesos';
 
-        $movimiento->venta_id=$pedido->id;
+        $movimiento->saldoparcialpesos =  $cajas->saldoPesos;
+
+        $movimiento->saldoparcialdolares =  $cajas->saldoDolares;
 
         $movimiento->save();
     }

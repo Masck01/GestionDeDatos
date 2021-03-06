@@ -129,7 +129,7 @@
                             <option value="0">Seleccione una Categoria</option>
                               
                             @foreach($categorias as $cat)
-                            <option value="{{$cat->id}}">{{$cat->descripcion}}</option>
+                            <option value="{{$cat->id}}">{{$cat->nombre}}</option>
                             @endforeach
 
                           </select>

@@ -11,7 +11,7 @@
         
         <div class="card-header">
 
-          <h3 class="card-title">{{$deposito->razon_social}}</h3>
+          <h3 class="card-title">{{$deposito->nombre}}</h3>
         
         </div>
 
@@ -20,12 +20,12 @@
           <div class="row">
             
             <div class="col-md-12">
-              <p><b>Razon social: </b>{{$deposito->razon_social}}</p>
-              <p><b>Telefono: </b>{{$deposito->telefono}}</p>
+              
+              <p><b>Telefono: </b>{{$deposito->telefonos}}</p>
               <p><b>Direccion: </b>{{$deposito->direccion}}</p>
-              <p><b>Cuit: </b>{{$deposito->cuit}}</p>
-              <p><b>Estado: </b>{{$deposito->estado}}</p>
-             
+              <p><b>Ciudad: </b>{{$deposito->ciudad}}</p>
+              <p><b>C.P: </b>{{$deposito->codigo_postal}}</p>
+              <p><b>Provincia: </b>{{$deposito->provincia->nombre}}</p>
 
             </div>
 

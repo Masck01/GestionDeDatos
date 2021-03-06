@@ -38,26 +38,26 @@
                   <table class="table table-hover text-nowrap" id="datos">
                     <thead>
                       <tr>
-                        <th>Razon social</th>
-                        <th>Telefonos</th>
-                        <th>Direccion</th>
+                        <th>Nombre</th>
+                        <th>Tel&eacute;fonos</th>
+                        <th>Direcci&oacute;n</th>
                         <th>&nbsp;</th>
                         <th style="width: 5%">
-                          <a href="{{ route('sucursal.create') }}" class="btn btn-primary btn-block"><i class="fas fa-plus"></i></a>
+                          <a href="{{ route('unidadnegocio.create') }}" class="btn btn-primary btn-block"><i class="fas fa-plus"></i></a>
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($sucursales as $sucursal)
+                      @foreach ($unidadesnegocio as $unidadnegocio)
                         <tr>
-                          <td>{{ $sucursal->nombre }}</td>
-                          <td class="noSearch">{{ $sucursal->telefonos }}</td>
-                          <td>{{ ($sucursal->direccion == '')? "": $sucursal->direccion . ", " }}{{ ($sucursal->ciudad == '') ? "": $sucursal->ciudad . " - " }}{{$sucursal->provincia->nombre}}</td>
+                          <td>{{ $unidadnegocio->nombre }}</td>
+                          <td class="noSearch">{{ $unidadnegocio->telefonos }}</td>
+                          <td>{{ ($unidadnegocio->direccion == '')? "": $unidadnegocio->direccion . ", " }}{{ ($unidadnegocio->ciudad == '') ? "": $unidadnegocio->ciudad . " - " }}{{$unidadnegocio->provincia->nombre}}</td>
                           <td style="width: 5%">
-                            <a href="{{ route('sucursal.show', $sucursal->id) }}" class="btn btn-success btn-block"><i class="far fa-eye"></i></a>
+                            <a href="{{ route('unidadnegocio.show', $unidadnegocio->id) }}" class="btn btn-success btn-block"><i class="far fa-eye"></i></a>
                           </td>
                           <td style="width: 5%">
-                            <a href="{{ route('sucursal.edit', $sucursal->id) }}" class="btn btn-warning btn-block"><i class="fas fa-pencil-alt" style="color:white"></i></a>
+                            <a href="{{ route('unidadnegocio.edit', $unidadnegocio->id) }}" class="btn btn-warning btn-block"><i class="fas fa-pencil-alt" style="color:white"></i></a>
                           </td>
                         </tr>
                       @endforeach

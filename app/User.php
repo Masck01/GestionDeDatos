@@ -51,11 +51,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Unidad_Negocio::class,'unidad_negocio_usuario','usuario_id','unidadnegocio_id');
     }
 
-    public function categorias()
-    {
-        return $this->belongsTo(Categoria::class,'categoria_id','id');
-    }
-
 
     // Relacion con Movimientos de Tareas
 

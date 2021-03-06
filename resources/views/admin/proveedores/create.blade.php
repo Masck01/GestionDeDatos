@@ -29,7 +29,7 @@
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Razon Social</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="razon_social" name="razon_social">
+                      <input type="text" class="form-control" placeholder="Enter ..." id="razonSocial" name="razonSocial">
                     </div>
                   </div>
                 </div>
@@ -37,14 +37,49 @@
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                      <label>CUIT </label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="cuit" name="cuit">
+                      <label>CUIT / CUIL</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="cuit_cuil" name="cuit_cuil">
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                      <label>Teléfono</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono" name="telefono">
+                      <label>Tel&eacute;fonos</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="telefonos" name="telefonos">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Direcci&oacute;n</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="direccion" name="direccion">
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>C.P.</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="codigo_postal" name="codigo_postal">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Ciudad</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="ciudad" name="ciudad">
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label>Provincia</label>
+                      <select class="form-control select2" style="width: 100%;" id="provincia_id" name="provincia_id">
+                        <option value="0">Seleccione una Provincia</option>
+                        @foreach($provincias as $provincia)
+                        <option value="{{$provincia->id}}">{{$provincia->nombre}}</option>
+                        @endforeach
+                      </select>
                     </div>
                   </div>
                 </div>

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Detalle_Compra extends Model
 {
-    protected $table = "lineadecompra";
+    protected $table = "linea_compras";
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
-       'subtotal', 'cantidad','producto_id','compra_id','proveedor_id'
+      'compra_id', 'producto_id', 'cantidad','precio'
     ];
 
     public function producto()
