@@ -24,12 +24,12 @@ a {
 
 body {
   position: relative;
-  width: 16cm;  
-  height: 29.7cm; 
+  width: 16cm;
+  height: 29.7cm;
   color: #555555;
-  background: #FFFFFF; 
-  font-family: Arial, sans-serif; 
-  font-size: 14px; 
+  background: #FFFFFF;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
   font-family: SourceSansPro;
 }
 
@@ -109,7 +109,7 @@ table td {
 }
 
 table th {
-  white-space: nowrap;        
+  white-space: nowrap;
   font-weight: normal;
 }
 
@@ -165,17 +165,17 @@ table tfoot td {
   background: #FFFFFF;
   border-bottom: none;
   font-size: 1.2em;
-  white-space: nowrap; 
-  border-top: 1px solid #AAAAAA; 
+  white-space: nowrap;
+  border-top: 1px solid #AAAAAA;
 }
 
 table tfoot tr:first-child td {
-  border-top: none; 
+  border-top: none;
 }
 
 table tfoot tr:last-child td {
   font-size: 1.4em;
-  border-top: 1px solid #57B223; 
+  border-top: 1px solid #57B223;
 
 }
 
@@ -190,7 +190,7 @@ table tfoot tr td:first-child {
 
 #notices{
   padding-left: 6px;
-  border-left: 6px solid #0087C3;  
+  border-left: 6px solid #0087C3;
 }
 
 #notices .notice {
@@ -228,8 +228,8 @@ footer {
           <tr>
             <th class="desc">#</th>
             <th class="desc">PRODUCTO</th>
-            <th class="qty">PRECIO UNITARIO</th>
             <th class="qty">CANTIDAD</th>
+            <th class="qty">PRECIO UNITARIO</th>
             <th class="qty">SUBTOTAL</th>
           </tr>
         </thead>
@@ -239,8 +239,8 @@ footer {
                         <td class="desc">{{$loop->iteration}}</td>
                         <td class="desc">{{ $det->producto->nombre }}</td>
                         <td class="unit">{{ $det->cantidad }}</td>
-                        <td class="qty"> AR$ {{ $det->precio }} </td>
-                        <td class="qty"> AR$ {{ $det->cantidad * $det->precio }}</td>
+                        <td class="qty"> AR$ {{ $det->producto->precio_venta }} </td>
+                        <td class="qty"> AR$ {{ $det->cantidad * $det->producto->precio_venta}}</td>
                       </tr>
                @endforeach
         </tbody>

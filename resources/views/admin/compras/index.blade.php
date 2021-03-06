@@ -59,7 +59,7 @@
                     <td> AR$ {{ $compra->total }} </td>
 
                     <td>
-                        <a href="{{ route('compras.show', $compra->id) }}"  class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Venta" data-original-title="Ver Presupuesto"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
+                        <a href="{{ route('compras.show', $compra->id) }}"  class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Compra" data-original-title="Ver Presupuesto"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
                         <a href="{{ route('pdf.imprimirRemito', $compra->id) }}" class="btn btn-link" data-toggle="tooltip" title="Imprimir Comprobante" data-original-title="Imprimir Comprobante"><i class="fas fa-print" style="color:#578DA4; font-size: 20px;"></i></a>
                     </td>
 

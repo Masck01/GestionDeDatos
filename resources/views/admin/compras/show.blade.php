@@ -14,9 +14,9 @@
               <div class="col-md-12">
                 <br>
                 <p><b>Proveedor: </b> {{ $compra->proveedor->razon_social}} </p>
-                <p><b>Empleado: </b> {{ $compra->user->apellido}} {{ $compra->user->nombre}} </p>
+                {{-- <p><b>Empleado: </b> {{ $compra->user->apellido}} {{ $compra->user->nombre}} </p> --}}
                 <p><b>Fecha </b>{{ $compra->getFromDateAttribute($compra->fecha) }}</p>
-                <p><b>Total Presupuestado en Pesos: </b>$ {{ $compra->total }}</p>
+                <p><b>Total Compra en Pesos: </b>$ {{ $compra->total }}</p>
               </div>
             </div>
 
@@ -24,7 +24,7 @@
                 <table class="table">
               <thead>
                 <tr>
-                  <th>&nbsp;</th>
+                  <th>&nbsp;Nro</th>
                   <th>Producto</th>
                   <th>Cantidad</th>
                   <th>Precio</th>
@@ -36,7 +36,7 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$det->producto->nombre }}</td>
                     <td>{{$det->cantidad }}</td>
-                    <td>${{$det->costo }}</td>
+                    <td>${{$det->subtotal }}</td>
                   </tr>
                 @endforeach
               </tbody>
