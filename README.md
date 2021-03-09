@@ -1,13 +1,11 @@
 # Final Gestion de Datos 
 El siguiente repositorio se utilizo para fines de creacion del proyecto Farmacia Avellaneda Norte.
 
-## Contenido
-[TOC]
 ## Docentes
 Docentes de la Catedra: Juarez Gustavo, Lemir Carlos, Tejerizo Raul.
 
 ## Sobre el proyecto
-Enlace al proyecto : http://farmacianorte.azurewebsites.net/
+Enlace al proyecto : https://avellanedafarmacia.azurewebsites.net/
 
 - Framework Utilizado Laravel v8.
 - Lenguajes de programacion php y javascript.
