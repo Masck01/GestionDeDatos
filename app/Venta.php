@@ -10,7 +10,7 @@ class Venta extends Model
     protected $table = "venta";
 
     protected $fillable = [
-        'empleado_id','fecha','hora','total', 'estado'
+        'empleado_id','fecha','hora','total', 'subtotal','iva', 'estado'
     ];
 
     public function detalle_pedido()

@@ -75,8 +75,10 @@ class VentaController extends Controller
                 $venta->fecha = $mytime->toDateTimeString();
 
                 $venta->hora = $mytime->toDateTimeString();
-
+                $venta->subtotal = $request->get('subtotal_venta');
+                $venta->iva = $request->get('iva_venta');
                 $venta->total = $request->get('total_venta');
+
 
                 $venta->estado = "Impago";
 

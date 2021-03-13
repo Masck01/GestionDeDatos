@@ -87,18 +87,35 @@
 			<th>Cantidad</th>
 			<th>Precio Venta</th>
 			<th>Subtotal</th>
-		</thead>
-			<tfoot>
-				<th>Total</th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th><h4 id="total">$/. 0.00</h4> <input type="hidden" name="total_venta" id="total_venta"></th>
-			</tfoot>
-		<tbody></tbody>
-		</table>
-		</div>
 
+		</table>
+
+		</div>
+</thead>
+			<tfoot>
+				<th>Subtotal</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th><h4 id="subtotal">$/. 0.00</h4> <input type="hidden" name="subtotal_venta" id="subtotal_venta"></th>
+            </tfoot>
+            <tfoot>
+                <th>IVA</th>
+				<th></th>
+				<th></th>
+				<th></th>
+                <th><h4 id="iva">$/. 0.00</h4> <input type="hidden" name="iva_venta" id="iva_venta"></th>
+            </tfoot>
+            <tfoot>
+                <th>Total</th>
+				<th></th>
+				<th></th>
+				<th></th>
+                <th><h4 id="total">$/. 0.00</h4> <input type="hidden" name="total_venta" id="total_venta"></th>
+            </tfoot>
+
+
+		<tbody></tbody>
 	<br>
 		<div class="col-lg-6 col-md-6 col-dm-6 col-xs-12" id="guardar1">
 			<div class="form-group">
@@ -183,6 +200,8 @@
 		cont=0;
 		total=0;
 		subtotal=[];
+        sub=0;
+        iva=0;
 		var arrProductos = new Array();
         var state =0;
 
@@ -243,9 +262,15 @@
         	if (idarticulo!="" && cantidad!="" && cantidad>0 && precio!="")
         	{
 				subtotal[cont]=(cantidad*precio);
-				total=total+subtotal[cont];
+				sub=sub+subtotal[cont];
+                iva= sub*0.21;
+                total=sub+iva;
 				var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td> <td class= "idProducto" style="display:none;"><input type="hidden" name="idProducto[]" value="'+idarticulo+'">'+idarticulo+'</td>  <td  class ="cantidad"><input type="hidden" name="cantidad[]" value="'+cantidad+'">'+cantidad+'</td> <td  class ="precio"><input type="hidden" name="precio[]" value="'+precio+'">'+ precio +'</td> <td> $ '+subtotal[cont]+'</td></tr>';
 				cont++;
+                $('#subtotal').html("$/ " + sub);
+		    	$('#subtotal_venta').val(sub);
+                $('#iva').html("$/ " + iva);
+		    	$('#iva_venta').val(iva);
 		    	$('#total').html("$/ " + total);
 		    	$('#total_venta').val(total);
 		  		$('#detalles').append(fila);
