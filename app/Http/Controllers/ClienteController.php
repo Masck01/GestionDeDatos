@@ -17,35 +17,30 @@ class ClienteController extends Controller
 
     public function index()
     {
-        $clientes = Cliente::orderBy('nombre_fantasia', 'ASC')->paginate(10);
-        
+        $clientes = Cliente::orderBy('razon_social', 'ASC')->paginate(10);
+
         $total = Cliente::count();
-        
+
         return view('admin.clientes.index', compact('clientes','total'));
     }
 
     public function create()
     {
-        $provincias = Provincia::orderBy('nombre', 'ASC')
-                      ->select('nombre as nombre', 'id as id')
-                      ->get();
 
-        return view('admin.clientes.create',compact('provincias'));
+
+        return view('admin.clientes.create');
     }
 
     public function store(Request $request)
     {
         $cliente = new Cliente;
-        $cliente->nombre_Fantasia = $request->nombre;
-        $cliente->razon_Social = $request->nombre;
-        $cliente->cuit_cuil = $request->cuit_cuil;
-        $cliente->telefonos = $request->telefonos;
-        $cliente->email = $request->email;
+        $cliente->razon_social = $request->razon_social;
+        $cliente->cuit= $request->cuit;
+        $cliente->telefono = $request->telefono;
         $cliente->direccion = $request->direccion;
-        $cliente->ciudad = $request->ciudad;
-        $cliente->codigo_postal = $request->codigo_postal;
-        $cliente->genero = $request->genero;
-        $cliente->provincia_id = $request->provincia_id;
+        $cliente->tipo = 'responsableinscripto';
+        $cliente->estado = 'Activo';
+
         $cliente->save();
 
         return redirect()->route('clientes.index');
@@ -61,28 +56,20 @@ class ClienteController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::find($id);
-                  
-        $provincias = Provincia::orderBy('nombre', 'ASC')
-        ->select('nombre as nombre', 'id as id')
-        ->get();
 
-        return view('admin.clientes.edit', compact('cliente','provincias'));
+
+
+        return view('admin.clientes.edit', compact('cliente'));
     }
 
     public function update(Request $request, $id)
     {
         $cliente = Cliente::find($id);
-        $cliente->nombre_Fantasia = $request->nombre;
-        $cliente->razon_Social = $request->nombre;
-        $cliente->cuit_cuil = $request->cuit_cuil;
-        $cliente->telefonos = $request->telefonos;
-        $cliente->email = $request->email;
+        $cliente->razon_social = $request->razon_social;
+        $cliente->cuit = $request->cuit;
+        $cliente->telefono = $request->telefono;
         $cliente->direccion = $request->direccion;
-        $cliente->ciudad = $request->ciudad;
-        $cliente->codigo_postal = $request->codigo_postal;
-        $cliente->genero = $request->genero;
-        $cliente->tipo = $request->tipo;
-        $cliente->provincia_id = $request->provincia_id;
+
         $cliente->save();
 
         return redirect()->route('clientes.index')->with('success','Cliente actualizado correctamente');

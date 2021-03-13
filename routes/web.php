@@ -19,6 +19,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ConceptoController;
+use App\Http\Controllers\ClienteController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -40,27 +41,46 @@ Route::middleware(['auth'])->group(function () {
 
     // MENU VENTAS //
 
-    // CLIENTES
 
-    // PROVEEDORES
 
-    // Route::get('proveedores', 'ProveedorController@index')->name('proveedores.index');
+     //PROVEEDORES
 
-    // Route::get('proveedores/create', 'ProveedorController@create')->name('proveedores.create');
+     Route::get('proveedores','ProveedorController@index')->name('proveedores.index');
 
-    // Route::post('proveedores/store', 'ProveedorController@store')->name('proveedores.store');
+     Route::get('proveedores/create', 'ProveedorController@create')->name('proveedores.create');
 
-    // Route::get('proveedores/{proveedores}', 'ProveedorController@show')->name('proveedores.show');
+     Route::post('proveedores/store', 'ProveedorController@store')->name('proveedores.store');
 
-    // Route::get('proveedores/{proveedores}/edit', 'ProveedorController@edit')->name('proveedores.edit');
+     Route::get('proveedores/{proveedores}', 'ProveedorController@show')->name('proveedores.show');
 
-    // Route::put('proveedores/{proveedores}', 'ProveedorController@update')->name('proveedores.update');
+     Route::get('proveedores/{proveedores}/edit', 'ProveedorController@edit')->name('proveedores.edit');
 
-    // Route::delete('proveedores/{proveedores}', 'ProveedorController@destroy')->name('proveedores.destroy');
+     Route::put('proveedores/{proveedores}', 'ProveedorController@update')->name('proveedores.update');
+
+     Route::delete('proveedores/{proveedores}', 'ProveedorController@destroy')->name('proveedores.destroy');
 
     Route::get('proveedor/pdf', [ProveedorController::class, 'listadoProveedores'])->name('proveedores.downloadPdf');
 
     Route::resource('proveedores', ProveedorController::class);
+
+// CLIENTES
+Route::get('clientes', [ClienteController::class,'index'])->name('clientes.index');
+
+Route::get('clientes/create', [ClienteController::class,'create'])->name('clientes.create');
+
+Route::post('clientes/store', [ClienteController::class,'store'])->name('clientes.store');
+
+Route::get('clientes/{cliente}', 'ClienteController@show')->name('clientes.show');
+
+Route::get('clientes/{cliente}/edit', 'ClienteController@edit')->name('clientes.edit');
+
+Route::put('clientes/{clientes}', 'ClienteController@update')->name('clientes.update');
+
+Route::get('cliente/pdf', 'PdfController@listadoClientes')->name('cliente.downloadPdf');
+
+
+
+
 
     // PDFS
 
@@ -135,7 +155,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('empleados/show/{id}', [EmpleadoController::class, 'show'])->name('empleados.show');
 
-/*     Route::resource('empleados', EmpleadoController::class); */
+    Route::resource('empleados', EmpleadoController::class);
 
     // VENTAS
 
@@ -273,15 +293,15 @@ Route::middleware(['auth'])->group(function () {
 
     // SUB CATEGORIAS //
 
-    // Route::get('subcategorias', [SubCategoriaController::class, 'index'])->name('subcategorias.index');
+    Route::get('subcategorias', [SubCategoriaController::class, 'index'])->name('subcategorias.index');
 
-    // Route::post('subcategorias/store', [SubCategoriaController::class, 'store'])->name('subcategorias.store');
+    Route::post('subcategorias/store', [SubCategoriaController::class, 'store'])->name('subcategorias.store');
 
-    // Route::put('subcategorias/edit', [SubCategoriaController::class, 'update'])->name('subcategorias.update');
+    Route::put('subcategorias/edit', [SubCategoriaController::class, 'update'])->name('subcategorias.update');
 
-    // Route::put('subcategorias/eliminar/{id}', [SubCategoriaController::class, 'eliminar'])->name('subcategorias.eliminar');
+    Route::put('subcategorias/eliminar/{id}', [SubCategoriaController::class, 'eliminar'])->name('subcategorias.eliminar');
 
-    // Route::put('subcategorias/activar/{id}', [SubCategoriaController::class, 'activar'])->name('subcategorias.activar');
+    Route::put('subcategorias/activar/{id}', [SubCategoriaController::class, 'activar'])->name('subcategorias.activar');
 
     // CAPACIDAD //
 
