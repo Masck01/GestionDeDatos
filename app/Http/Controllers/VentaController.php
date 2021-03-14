@@ -34,13 +34,14 @@ class VentaController extends Controller
 
         $cajas = Caja::find(1);
 
+
         if($cajas->estado == 'Activo'):
 
             $productos = Producto::orderBy('nombre','ASC')->get();
 
-            //$clientes = Cliente::orderBy('id', 'ASC')->get();
+            $clientes = Cliente::orderBy('id', 'ASC')->get();
 
-            return view('admin.ventas.create',["productos"=>$productos]);
+            return view('admin.ventas.create',["productos"=>$productos, "clientes"=>$clientes]);
 
         else:
 
@@ -75,11 +76,10 @@ class VentaController extends Controller
                 $venta->fecha = $mytime->toDateTimeString();
 
                 $venta->hora = $mytime->toDateTimeString();
-                $venta->subtotal = $request->get('subtotal_venta');
+                $venta->subtotalventa = $request->get('subtotal_venta');
                 $venta->iva = $request->get('iva_venta');
                 $venta->total = $request->get('total_venta');
-
-
+                $venta->tipocliente = $request->tipocliente;
                 $venta->estado = "Impago";
 
                 $venta->save();

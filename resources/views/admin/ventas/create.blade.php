@@ -22,7 +22,49 @@
 					{{ csrf_field() }}
 
 					</br>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 
+                        <div class="form-group">
+
+                            <label>Tipo Cliente</label>
+
+                            <select class="form-control select2" style="width: 100%;" id="tipocliente" name="tipocliente">
+                              <option value="Consumidor Final"> Consumidor Final</option>
+                              <option value="Responsable Inscripto">Responsable Inscripto</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="input-group">
+
+                        <input type="text" readonly name="pnombreCliente" id="pnombreCliente" class="form-control" placeholder="Seleccione un Cliente">
+
+                        <input type="hidden" readonly name="idCliente" id="idCliente" class="form-control" placeholder="">
+
+                        <span class="input-group-btn">
+
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+
+                                <span class="input-group-text" id="basic-addon1"><i class="far fa-keyboard"></i></span>
+
+                            </div>
+
+                            <button type="button" class="btn btn-success" id="btnBuscarCliente"  data-toggle="modal"  data-target="#ModalCliente"><i class="fa fa-search"></i>
+
+                                Buscar
+
+                            </button>
+
+                        </div>
+
+
+
+                        </span>
+
+                    </div>
 					<div class="input-group">
 
 							<input type="text"  readonly name="pdescripcion" id="pdescripcion" class="form-control" placeholder="Seleccione un Producto">
@@ -87,35 +129,23 @@
 			<th>Cantidad</th>
 			<th>Precio Venta</th>
 			<th>Subtotal</th>
+        </thead>
+        <tfoot>
 
+
+       </tfoot>
+
+        <tbody></tbody>
 		</table>
+        <th>Subtotal</th>
 
+            <th><h4 id="subtotal">$/. 0.00</h4> <input type="hidden" name="subtotal_venta" id="subtotal_venta"></th>
+        <th>IVA</th>
+        <th><h4 id="iva">$/. 0.00</h4> <input type="hidden" name="iva_venta" id="iva_venta"></th>
+        <th>Total</th>
+        <th><h4 id="total">$/. 0.00</h4> <input type="hidden" name="total_venta" id="total_venta"></th>
 		</div>
-</thead>
-			<tfoot>
-				<th>Subtotal</th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th><h4 id="subtotal">$/. 0.00</h4> <input type="hidden" name="subtotal_venta" id="subtotal_venta"></th>
-            </tfoot>
-            <tfoot>
-                <th>IVA</th>
-				<th></th>
-				<th></th>
-				<th></th>
-                <th><h4 id="iva">$/. 0.00</h4> <input type="hidden" name="iva_venta" id="iva_venta"></th>
-            </tfoot>
-            <tfoot>
-                <th>Total</th>
-				<th></th>
-				<th></th>
-				<th></th>
-                <th><h4 id="total">$/. 0.00</h4> <input type="hidden" name="total_venta" id="total_venta"></th>
-            </tfoot>
 
-
-		<tbody></tbody>
 	<br>
 		<div class="col-lg-6 col-md-6 col-dm-6 col-xs-12" id="guardar1">
 			<div class="form-group">
@@ -189,6 +219,65 @@
 
 
 <!-- FIN Modal Productos-->
+
+<!--Modal Clientes-->
+<div class="modal fade bd-example-modal-lg" id="ModalCliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+	<div class="modal-dialog modal-lg">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+        		<h4 class="modal-title">Listado de Clientes</h4>
+
+				<form> <input class="btn btn-default" id="searchTerm" type="text" onkeyup="doSearch()" />
+				<button type="button" class="btn btn-success" id="btnBuscarClienteModal"><i class="fa fa-search"></i></button>
+				</form>
+     	 	</div>
+
+      		<div class="modal-body">
+
+				<div class="table-responsive">
+
+				  	<table class="table table-hover text-nowrap" id="tablecliente">
+
+					  	<thead>
+                        	<tr role="row">
+								<th class="sorting_asc" tabindex="0" aria-controls="tblSucursales" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Seleccione: activate to sort column descending" style="width: 74px;">Seleccione</th>
+								<th style="display:none;" class="sorting" tabindex="0" aria-controls="tblSucursales" rowspan="1" colspan="1" aria-label="#: activate to sort column ascending" style="width: 8px;">#</th>
+								<th class="sorting" tabindex="0" aria-controls="tblSucursales" rowspan="1" colspan="1" aria-label="Razón Social: activate to sort column ascending" style="width: 42px;">Razón Social</th>
+							</tr>
+						</thead>
+
+                    	<tfoot>
+                        	<tr>
+								<th rowspan="1" colspan="1">Seleccione</th>
+								<th style="display:none;" rowspan="1" colspan="1">#</th>
+								<th rowspan="1" colspan="1">Razón Social</th>
+							</tr>
+                    	</tfoot>
+
+                   		<tbody>
+                    		@foreach ($clientes as $cli)
+                  			<tr>
+								<td><button type="button" class="btn btn-success" id="bt_añadir"  data-dismiss="modal"  onclick="SeleccionarCliente()"><i class="fa fa-check"></i> </button></td>
+								<td style="display:none;">{{ $cli->id }}</td>
+								<td>{{ $cli->razon_social }}</td>
+                			</tr>
+                      		@endforeach
+                    	</tbody>
+                  	</table>
+
+                </div>
+				<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove"></i>Cerrar</button></div>
+
+      		</div>
+		</div>
+	</div>
+
+</div>
+
+<!--Fin Modal Clientes-->
 
 @endsection
 
@@ -267,13 +356,14 @@
                 total=sub+iva;
 				var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td> <td class= "idProducto" style="display:none;"><input type="hidden" name="idProducto[]" value="'+idarticulo+'">'+idarticulo+'</td>  <td  class ="cantidad"><input type="hidden" name="cantidad[]" value="'+cantidad+'">'+cantidad+'</td> <td  class ="precio"><input type="hidden" name="precio[]" value="'+precio+'">'+ precio +'</td> <td> $ '+subtotal[cont]+'</td></tr>';
 				cont++;
+
                 $('#subtotal').html("$/ " + sub);
 		    	$('#subtotal_venta').val(sub);
                 $('#iva').html("$/ " + iva);
 		    	$('#iva_venta').val(iva);
 		    	$('#total').html("$/ " + total);
 		    	$('#total_venta').val(total);
-		  		$('#detalles').append(fila);
+                $('#detalles').append(fila);
 		  		limpiar();
 				$("#guardar").show();
 				cargar();
@@ -357,6 +447,18 @@
 	});
 
 	}
+    function SeleccionarCliente(){
+
+$("#tablecliente tr").click(function() {
+    $(this).addClass('selected').siblings().removeClass('selected');
+      var filaid= $(this).find("td:eq(1)").text();
+      var filaNombre = $(this).find("td:eq(2)").text();
+    $("#pnombreCliente").val();
+    $("#idCliente").val(filaid);
+    $("#pnombreCliente").val(filaNombre);
+});
+
+}
 
 
 </script>
