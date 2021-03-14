@@ -18,8 +18,8 @@ class CreateTablaVenta extends Migration
             //$table->string('codigo')->default('0');;
             $table->date('fecha');
             $table->time('hora',0);
-            $table->float('subtotalventa', 9, 2);
-            $table->float('iva', 9, 2);
+            $table->float('subtotalventa', 9, 2)->default(0.00);
+            $table->float('iva', 9, 2)->default(0.00);
             $table->float('total', 9, 2)->default(0.00);
             $table->enum('estado', ['Pagado','Impago'])->default('Impago');
             $table->enum('tipocliente', ['Consumidor Final','Responsable Inscripto'])->default('Consumidor Final');

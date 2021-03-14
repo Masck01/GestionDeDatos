@@ -138,8 +138,7 @@
         <tbody></tbody>
 		</table>
         <th>Subtotal</th>
-
-            <th><h4 id="subtotal">$/. 0.00</h4> <input type="hidden" name="subtotal_venta" id="subtotal_venta"></th>
+        <th><h4 id="subtotal">$/. 0.00</h4> <input type="hidden" name="subtotal_venta" id="subtotal_venta"></th>
         <th>IVA</th>
         <th><h4 id="iva">$/. 0.00</h4> <input type="hidden" name="iva_venta" id="iva_venta"></th>
         <th>Total</th>

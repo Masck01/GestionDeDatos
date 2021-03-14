@@ -55,7 +55,7 @@ class VentaController extends Controller
     }
 
     public function store(Request $request)
-    {   $rules = [
+    {   /* $rules = [
 
         'tipocliente' => 'in:Responsable Inscripto'
         ];
@@ -71,7 +71,7 @@ class VentaController extends Controller
         return back()->withErrors($validator)->with('message', 'Se ha Producido un Error')->with('typealert', 'danger');
         else :
             return back()->with('message', 'Registro exitoso')->with('typealert', 'success');
-        endif;
+        endif; */
         $mytime = Carbon::now('America/Argentina/Tucuman');
 
         $cajas = Caja::find(1);
@@ -160,9 +160,11 @@ class VentaController extends Controller
     {
         $pedidos = Venta::orderBy('id', 'DESC')->get();
 
+        $subtotalventas = DB::table("venta")->get()->sum("subtotalventa");
+        $ivatotal = DB::table("venta")->get()->sum("iva");
         $orders = DB::table("venta")->get()->sum("total");
 
-        $pdf = PDF::loadView('pdf.pedidospdf',['pedidos'=>$pedidos,'orders'=>$orders])->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('pdf.pedidospdf',['pedidos'=>$pedidos,'subtotalventas'=>$subtotalventas,'ivatotal'=>$ivatotal,'orders'=>$orders])->setPaper('a4', 'landscape');
 
         return $pdf->stream();
     }
