@@ -33,7 +33,7 @@ class CapacidadController extends Controller
         else :
             $capacidad = new Capacidad();
             $capacidad->cantidad = $request->cantidad;
-            $capacidad->estado = 'Activo';
+            $capacidad->estado = $request->estado;
             $capacidad->save();
             return back()->with('message', 'Registro exitoso')->with('typealert', 'success');
         endif;

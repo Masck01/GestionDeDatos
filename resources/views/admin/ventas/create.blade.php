@@ -42,6 +42,7 @@
 
                         <input type="hidden" readonly name="idCliente" id="idCliente" class="form-control" placeholder="">
 
+
                         <span class="input-group-btn">
 
                         <div class="input-group">
@@ -65,6 +66,9 @@
                         </span>
 
                     </div>
+                    @error ('idCliente')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 					<div class="input-group">
 
 							<input type="text"  readonly name="pdescripcion" id="pdescripcion" class="form-control" placeholder="Seleccione un Producto">

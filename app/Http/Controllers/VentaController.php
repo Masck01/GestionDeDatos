@@ -55,23 +55,22 @@ class VentaController extends Controller
     }
 
     public function store(Request $request)
-    {   /* $rules = [
+    {   $rules = [
+        'idCliente' => 'required_unless:tipocliente,Consumidor Final'
 
-        'tipocliente' => 'in:Responsable Inscripto'
         ];
         $message = [
 
 
 
-        'tipocliente.in' => 'Debe seleccionar un cliente'
+        'idCliente' => 'Debe seleccionar un cliente'
         ];
         $validator = Validator::make($request->all(), $rules, $message);
 
-        if ($validator->fails()) :
+        if ($validator->fails()){
         return back()->withErrors($validator)->with('message', 'Se ha Producido un Error')->with('typealert', 'danger');
-        else :
-            return back()->with('message', 'Registro exitoso')->with('typealert', 'success');
-        endif; */
+        }
+
         $mytime = Carbon::now('America/Argentina/Tucuman');
 
         $cajas = Caja::find(1);
