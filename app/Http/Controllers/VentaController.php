@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class VentaController extends Controller
@@ -54,7 +55,23 @@ class VentaController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   $rules = [
+
+        'tipocliente' => 'in:Responsable Inscripto'
+        ];
+        $message = [
+
+
+
+        'tipocliente.in' => 'Debe seleccionar un cliente'
+        ];
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if ($validator->fails()) :
+        return back()->withErrors($validator)->with('message', 'Se ha Producido un Error')->with('typealert', 'danger');
+        else :
+            return back()->with('message', 'Registro exitoso')->with('typealert', 'success');
+        endif;
         $mytime = Carbon::now('America/Argentina/Tucuman');
 
         $cajas = Caja::find(1);
@@ -125,6 +142,7 @@ class VentaController extends Controller
             return back()->with('message','Ninguna Caja activa')->with('typealert','danger');
 
         endif;
+
 
 
     }

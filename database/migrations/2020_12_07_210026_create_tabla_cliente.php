@@ -37,6 +37,6 @@ class CreateTablaCliente extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('cliente');
     }
 }
