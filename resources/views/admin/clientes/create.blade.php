@@ -79,7 +79,7 @@
 
                   <label>Telefono</label>
 
-                  <input type="text" class="form-control" placeholder="Enter ..." id="telefonos" name="telefonos">
+                  <input type="text" class="form-control" placeholder="Enter ..." id="telefono" name="telefono">
 
                 </div>
 
@@ -103,6 +103,20 @@
             </div>
 
 
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                <div class="form-group">
+
+                    <label>Tipo</label>
+
+                    <select class="form-control select2" style="width: 100%;" id="tipo" name="tipo">
+                      <option value="Haber">consumidorfinal</option>
+                      <option value="Retencion">responsableinscripto</option>
+                    </select>
+
+                </div>
+
+            </div>
 
           <div class="row">
 

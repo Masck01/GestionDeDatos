@@ -75,9 +75,9 @@
                           <tr>
                               <td style="text-align:center;">{{$loop->iteration}}</td>
                               <td>{{ $cliente->razon_social }}</td>
-                              <td>{{ $cliente->cuit }}</td>
+                              <td>{{ $cliente->Cuit}}</td>
                               <td>{{ $cliente->direccion }}</td>
-                              <td>{{ $cliente->telefono }}</td>
+                              <td>{{ $cliente->telefono}}</td>
                               <td>{{ $cliente->tipo }}</td>
                               <td>{{ $cliente->estado }}</td>
 

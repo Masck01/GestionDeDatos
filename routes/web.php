@@ -70,11 +70,11 @@ Route::get('clientes/create', [ClienteController::class,'create'])->name('client
 
 Route::post('clientes/store', [ClienteController::class,'store'])->name('clientes.store');
 
-Route::get('clientes/{cliente}', 'ClienteController@show')->name('clientes.show');
+Route::get('clientes/{clientes}', [ClienteController::class,'show'])->name('clientes.show');
 
-Route::get('clientes/{cliente}/edit', 'ClienteController@edit')->name('clientes.edit');
+Route::get('clientes/{cliente}/edit', [ClienteController::class,'edit'])->name('clientes.edit');
 
-Route::put('clientes/{clientes}', 'ClienteController@update')->name('clientes.update');
+Route::put('clientes/{clientes}', [ClienteController::class,'update'])->name('clientes.update');
 
 Route::get('cliente/pdf', 'PdfController@listadoClientes')->name('cliente.downloadPdf');
 

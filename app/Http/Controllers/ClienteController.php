@@ -36,9 +36,9 @@ class ClienteController extends Controller
         $cliente = new Cliente;
         $cliente->razon_social = $request->razon_social;
         $cliente->cuit= $request->cuit;
+        $cliente->direccion= $request->direccion;
         $cliente->telefono = $request->telefono;
-        $cliente->direccion = $request->direccion;
-        $cliente->tipo = 'responsableinscripto';
+        $cliente->tipo = $request-> tipo;
         $cliente->estado = 'Activo';
 
         $cliente->save();
@@ -66,9 +66,11 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         $cliente->razon_social = $request->razon_social;
-        $cliente->cuit = $request->cuit;
+        $cliente->Cuit = $request->Cuit;
         $cliente->telefono = $request->telefono;
         $cliente->direccion = $request->direccion;
+        $cliente->tipo =$request->tipo ;
+        $cliente->estado = 'Activo';
 
         $cliente->save();
 

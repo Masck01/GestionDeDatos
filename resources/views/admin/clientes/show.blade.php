@@ -40,7 +40,7 @@
                 <div class="col-md-12">
                   <br>
                     <p><b>Razon Social </b>{{$cliente->razon_social}}</p>
-                    <p><b>Direccion </b>{{$cliente->cuit}}</p>
+                    <p><b>CUIT </b>{{$cliente->Cuit}}</p>
                     <p><b>Direccion </b>{{$cliente->direccion}}</p>
                     <p><b>Telefono: </b>{{$cliente->telefono}}</p>
                     <p><b>Tipo: </b>{{$cliente->tipo}}</p>
