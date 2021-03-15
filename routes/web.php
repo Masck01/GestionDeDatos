@@ -43,40 +43,39 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-     //PROVEEDORES
+    //PROVEEDORES
 
-     Route::get('proveedores','ProveedorController@index')->name('proveedores.index');
+    Route::get('proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
 
-     Route::get('proveedores/create', 'ProveedorController@create')->name('proveedores.create');
+    Route::get('proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create');
 
-     Route::post('proveedores/store', 'ProveedorController@store')->name('proveedores.store');
+    Route::post('proveedores/store', [ProveedorController::class, 'store'])->name('proveedores.store');
 
-     Route::get('proveedores/{proveedores}', 'ProveedorController@show')->name('proveedores.show');
+    Route::get('proveedores/{proveedores}', [ProveedorController::class, 'show'])->name('proveedores.show');
 
-     Route::get('proveedores/{proveedores}/edit', 'ProveedorController@edit')->name('proveedores.edit');
+    Route::get('proveedores/{proveedores}/edit', [ProveedorController::class, 'edit'])->name('proveedores.edit');
 
-     Route::put('proveedores/{proveedores}', 'ProveedorController@update')->name('proveedores.update');
+    Route::put('proveedores/{proveedores}', [ProveedorController::class, 'update'])->name('proveedores.update');
 
-     Route::delete('proveedores/{proveedores}', 'ProveedorController@destroy')->name('proveedores.destroy');
+    Route::delete('proveedores/{proveedores}', [ProveedorController::class, 'destroy'])->name('proveedores.destroy');
 
     Route::get('proveedor/pdf', [ProveedorController::class, 'listadoProveedores'])->name('proveedores.downloadPdf');
 
-    Route::resource('proveedores', ProveedorController::class);
 
-// CLIENTES
-Route::get('clientes', [ClienteController::class,'index'])->name('clientes.index');
+    // CLIENTES
+    Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index');
 
-Route::get('clientes/create', [ClienteController::class,'create'])->name('clientes.create');
+    Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
 
-Route::post('clientes/store', [ClienteController::class,'store'])->name('clientes.store');
+    Route::post('clientes/store', [ClienteController::class, 'store'])->name('clientes.store');
 
-Route::get('clientes/{clientes}', [ClienteController::class,'show'])->name('clientes.show');
+    Route::get('clientes/{clientes}', [ClienteController::class, 'show'])->name('clientes.show');
 
-Route::get('clientes/{cliente}/edit', [ClienteController::class,'edit'])->name('clientes.edit');
+    Route::get('clientes/{cliente}/edit', [ClienteController::class, 'edit'])->name('clientes.edit');
 
-Route::put('clientes/{clientes}', [ClienteController::class,'update'])->name('clientes.update');
+    Route::put('clientes/{clientes}', [ClienteController::class, 'update'])->name('clientes.update');
 
-Route::get('cliente/pdf', 'PdfController@listadoClientes')->name('cliente.downloadPdf');
+    Route::get('cliente/pdf', [PdfController::class, 'listadoClientes'])->name('cliente.downloadPdf');
 
 
 
@@ -155,7 +154,6 @@ Route::get('cliente/pdf', 'PdfController@listadoClientes')->name('cliente.downlo
 
     Route::get('empleados/show/{id}', [EmpleadoController::class, 'show'])->name('empleados.show');
 
-    Route::resource('empleados', EmpleadoController::class);
 
     // VENTAS
 
@@ -274,23 +272,22 @@ Route::get('cliente/pdf', 'PdfController@listadoClientes')->name('cliente.downlo
     // CONFIGURACION CATEGORIAS//
 
 
-    // Route::get('configuracioncategoria', 'ConfiguracionCategoriaController@index')->name('configuracioncategoria.index');
+    Route::get('configuracioncategoria', [ConfiguracionCategoriaController::class, 'index'])->name('configuracioncategoria.index');
 
-    // Route::get('configuracioncategoria/create', 'ConfiguracionCategoriaController@create')->name('configuracioncategoria.create');
+    Route::post('configuracioncategoria/create', [ConfiguracionCategoriaController::class, 'create'])->name('configuracioncategoria.create');
 
     Route::post('configuracioncategoria/agregar', [ConfiguracionCategoriaController::class, 'agregar'])->name('configuracioncategoria.agregar');
 
-    // Route::get('configuracioncategoria/edit/{id}', 'ConfiguracionCategoriaController@edit')->name('configuracioncategoria.edit');
+    Route::get('configuracioncategoria/edit/{id}', [ConfiguracionCategoriaController::class, 'edit'])->name('configuracioncategoria.edit');
 
-    // Route::put('configuracioncategoria/update/', 'ConfiguracionCategoriaController@update')->name('configuracioncategoria.update');
+    Route::put('configuracioncategoria/update', [ConfiguracionCategoriaController::class, 'update'])->name('configuracioncategoria.update');
 
-    // Route::post('configuracioncategoria/store', 'ConfiguracionCategoriaController@store')->name('configuracioncategoria.store');
+    Route::post('configuracioncategoria/store', [ConfiguracionCategoriaController::class, 'store'])->name('configuracioncategoria.store');
 
     Route::put('configuracioncategoria/eliminar/{id}', [ConfiguracionCategoriaController::class, 'eliminar'])->name('configuracioncategoria.eliminar');
 
     Route::put('configuracioncategoria/activar/{id}', [ConfiguracionCategoriaController::class, 'activar'])->name('configuracioncategoria.activar');
 
-    Route::resource('configuracioncategoria', ConfiguracionCategoriaController::class);
 
 
     // SUB CATEGORIAS //

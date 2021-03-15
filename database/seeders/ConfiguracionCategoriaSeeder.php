@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Categoria;
 use App\ConfiguracionCategoria;
 use App\Empleado;
+use App\Concepto;
 use Illuminate\Database\Seeder;
 
 class ConfiguracionCategoriaSeeder extends Seeder
@@ -23,5 +24,20 @@ class ConfiguracionCategoriaSeeder extends Seeder
             'concepto_id' => 1,
             'categoria_id' => 1,
         ]);
+
+        $concepto = Concepto::get()->skip(1);
+        $concepto->each(function ($concepto) {
+            $tipo = Concepto::find($concepto->id)->tipo;
+            ConfiguracionCategoria::create(
+
+                [
+                    'montofijo' => null,
+                    'montovariable' => rand(1, 5) ,
+                    'unidad' => 1,
+                    'concepto_id' => $concepto->id,
+                    'categoria_id' => '1',
+                ]
+            );
+        });
     }
 }
