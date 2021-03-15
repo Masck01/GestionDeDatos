@@ -16,14 +16,19 @@ class CreateTablaCompra extends Migration
         Schema::create('compra', function (Blueprint $table) {
             $table->bigIncrements('id');
             //$table->string('codigo')->default('0');;
-            $table->date('fecha');
+            $table->date('fechaalta');
+            $table->date('fechacompra');
             $table->time('hora',0);
             $table->float('total', 9, 2)->default(0.00);
             //$table->enum('estado', ['Activo','Inactivo'])->default('Activo');
-            $table->bigInteger('proveedor_id')->unsigned();
+            $table->float('subtotalcompra', 9, 2)->default(0.00);
+            $table->float('ivacompra', 9, 2)->default(0.00);
+            $table->enum('tipoproveedor', ['Consumidor Final','Responsable Inscripto'])->default('Consumidor Final');
+            $table->bigInteger('proveedor_id')->unsigned()->nullable();
+
             $table->timestamps();
 
-            
+
             $table->foreign('proveedor_id')
                   ->references('id')
                   ->on('proveedor')

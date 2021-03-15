@@ -68,7 +68,7 @@
                     </div>
                     @error ('idCliente')
                         <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                    @enderror
 					<div class="input-group">
 
 							<input type="text"  readonly name="pdescripcion" id="pdescripcion" class="form-control" placeholder="Seleccione un Producto">
@@ -135,18 +135,30 @@
 			<th>Subtotal</th>
         </thead>
         <tfoot>
-
+            <tr>
+                <th>Subtotal</th>
+                <th></th>
+                <th></th>
+                <th><h4 id="subtotal">$ 00.00</h4> <input type="hidden" name="subtotal_venta" id="subtotal_venta">
+            </tr>
+            <tr>
+                <th>IVA</th>
+                <th></th>
+                <th></th>
+                <th><h4 id="iva">$ 00.00</h4> <input type="hidden" name="iva_venta" id="iva_venta">
+            </tr>
+            <tr>
+                <th>Total</th>
+                <th></th>
+                <th></th>
+                <th><h4 id="total">$ 00.00</h4> <input type="hidden" name="total_venta" id="total_venta">
+            </tr>
 
        </tfoot>
 
         <tbody></tbody>
 		</table>
-        <th>Subtotal</th>
-        <th><h4 id="subtotal">$/. 0.00</h4> <input type="hidden" name="subtotal_venta" id="subtotal_venta"></th>
-        <th>IVA</th>
-        <th><h4 id="iva">$/. 0.00</h4> <input type="hidden" name="iva_venta" id="iva_venta"></th>
-        <th>Total</th>
-        <th><h4 id="total">$/. 0.00</h4> <input type="hidden" name="total_venta" id="total_venta"></th>
+
 		</div>
 
 	<br>

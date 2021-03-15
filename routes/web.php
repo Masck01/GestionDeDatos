@@ -219,6 +219,8 @@ Route::get('cliente/pdf', 'PdfController@listadoClientes')->name('cliente.downlo
 
     Route::get('compras/{compra}', 'ComprasController@show')->name('compras.show');
 
+    Route::get('compra/pdf', [ComprasController::class, 'listadocompras'])->name('compras.downloadPdf');
+
     Route::resource('compras', ComprasController::class);
 
     //Liquidacion

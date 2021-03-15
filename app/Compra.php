@@ -10,7 +10,7 @@ class Compra extends Model
 
 
     protected $fillable = [
-      'proveedor_id','usuario_id','hora','fecha','total'
+      'proveedor_id','usuario_id','hora','fechaalta', 'fechacompra','tipoproveedor','subtotalcompra','ivacompra','total'
     ];
 
     public function detalle_compra()
