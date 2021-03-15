@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reporte de Ventas</title>
+    <title>Reporte de Compras</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   </head>
 
@@ -51,16 +51,15 @@
 
   <div id="div3">
   <br>
-  <h2> Listado De Ventas Registradas </h2>
+  <h2> Listado De Compras Registradas </h2>
   <br>
     <table class="table table-bordered">
     <thead>
       <tr style="background-color: black; color:white">
         <td>#</td>
-        <td>Fecha</td>
-        <td>Hora</td>
+        <td>Fecha Alta</td>
         <td>Subtotal</td>
-        <td>IVA</td>
+        <td>IVA Compra</td>
         <td>Monto</td>
       </tr>
       </thead>
@@ -68,10 +67,9 @@
         @foreach ($pedidos as $pedido)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</td>
-            <td>{{ $pedido->getFromHoraAttribute($pedido->hora) }}</td>
-            <td> AR$ {{ $pedido->subtotalventa }} </td>
-            <td> AR$ {{ $pedido->iva }} </td>
+            <td>{{ $pedido->getFromDateAttribute($pedido->fechaalta) }}</td>
+            <td> AR$ {{ $pedido->subtotalcompra }} </td>
+            <td> AR$ {{ $pedido->ivacompra }} </td>
             <td> AR$ {{ $pedido->total }} </td>
         </tr>
         @endforeach
@@ -79,9 +77,8 @@
       <tfoot>
         <tr>
             <td></td>
-            <td></td>
             <td style="background-color: black; color:white"> Total </td>
-            <td style="background-color: black; color:white">  AR$  {{ $subtotalventas }}</td>
+            <td style="background-color: black; color:white">  AR$  {{ $subtotalcompras }}</td>
             <td style="background-color: black; color:white">  AR$  {{ $ivatotal }}</td>
             <td style="background-color: black; color:white">  AR$  {{ $orders }}</td>
         </tr>

@@ -13,10 +13,14 @@
             <div class="row">
               <div class="col-md-12">
                 <br>
-                <p><b>Proveedor: </b> {{ $compra->proveedor->razon_social}} </p>
+                {{-- <p><b>Proveedor: </b> {{ $compra->proveedor->razon_social}} </p> --}}
                 {{-- <p><b>Empleado: </b> {{ $compra->user->apellido}} {{ $compra->user->nombre}} </p> --}}
-                <p><b>Fecha </b>{{ $compra->getFromDateAttribute($compra->fecha) }}</p>
+                <p><b>Fecha de Alta</b>{{ $compra->getFromDateAttribute($compra->fechaalta) }}</p>
+                <p><b>Subtotal Compra: </b>$ {{ $compra->subtotalcompra }}</p>
+                <p><b>IVA Compra: </b>$ {{ $compra->ivacompra }}</p>
                 <p><b>Total Compra en Pesos: </b>$ {{ $compra->total }}</p>
+                <p><b>Fecha de Compra</b>{{ $compra->getFromDateAttribute($compra->fechacompra) }}</p>
+                <p><b>Tipo de Proveedor: </b>$ {{ $compra->tipoproveedor }}</p>
               </div>
             </div>
 

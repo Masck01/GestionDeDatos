@@ -11,9 +11,9 @@ class Categoria extends Model
     protected $fillable = [
         'descripcion','salario_basico','estado'
     ];
-    
-    public function productos()
+
+    public function empleado()
     {
-        return $this->hasMany(Producto::class);
+        return $this->hasMany(Empleado::class);
     }
 }

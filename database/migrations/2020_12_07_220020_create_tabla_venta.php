@@ -18,15 +18,25 @@ class CreateTablaVenta extends Migration
             //$table->string('codigo')->default('0');;
             $table->date('fecha');
             $table->time('hora',0);
+            $table->float('subtotalventa', 9, 2)->default(0.00);
+            $table->float('iva', 9, 2)->default(0.00);
             $table->float('total', 9, 2)->default(0.00);
             $table->enum('estado', ['Pagado','Impago'])->default('Impago');
+            $table->enum('tipocliente', ['Consumidor Final','Responsable Inscripto'])->default('Consumidor Final');
             $table->bigInteger('empleado_id')->unsigned();
+            $table->bigInteger('cliente_id')->unsigned()->nullable();
             $table->timestamps();
 
-            
+
             $table->foreign('empleado_id')
                   ->references('id')
                   ->on('empleado')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+
+            $table->foreign('cliente_id')
+                  ->references('id')
+                  ->on('cliente')
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
         });

@@ -38,11 +38,13 @@
             font-size: 10;
             width: 100%;
         }
-        th{
-            background-color:rgba(29, 185, 29, 0.452)
+
+        th {
+            background-color: rgba(29, 185, 29, 0.452)
         }
-        tr:nth-child(even){
-            background-color:rgba(30, 245, 155, 0.404)
+
+        tr:nth-child(even) {
+            background-color: rgba(30, 245, 155, 0.404)
         }
 
         aside p {
@@ -114,31 +116,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($linea_liquidacion as $config)
-                    @php
-                        $concepto_categoria = $conceptos->find($config->concepto_id);
-                        $total_parcial = (($config->montofijo ?? -abs($config->montovariable)) * $config->unidad * $salario_basico) / 100;
-                        $total_haberes = ($linea_liquidacion->skip(1)->sum('montofijo') * $salario_basico) / 100;
-                        $total_retenciones = -abs(($linea_liquidacion->skip(1)->sum('montovariable') * $salario_basico) / 100);
-                        $total_neto = $salario_basico + $total_haberes + $total_retenciones;
-                    @endphp
+                @foreach ($linea_liquidacion as $l)
                     <tr>
                         {{-- # --}}
                         <td>{{ $loop->iteration }}</td>
                         {{-- Concepto --}}
-                        <td>{{ $concepto_categoria->descripcion }}</td>
+                        <td>{{ $conceptos->find($l->concepto_id)->descripcion }}</td>
                         {{-- Unidades --}}
-                        <td>{{ $config->unidad }}</td>
+                        <td>{{ $l->unidad }}</td>
                         {{-- Haberes --}}
-                        <td>{{ $config->montofijo }}</td>
-                        {{-- Retenciones --}}
-                        <td>{{ $config->montovariable }}</td>
-                        {{-- Total Parcial --}}
-                        @if ($loop->first)
-                            <td>{{ $liquidacion->salario_bruto }}</td>
-                            @continue
+                        @if ($l->concepto()->first()->tipo == 'Haber')
+                            <td>{{ $l->montofijo ?? $l->montovariable }}</td>
+                            <td></td>
                         @endif
-                        <td>{{ $total_parcial }}</td>
+                        @if ($l->concepto()->first()->tipo == 'Retencion')
+                            <td></td>
+                            <td>{{ $l->montovariable }}</td>
+                        @endif
+                        {{-- Total Parcial --}}
+                        <td></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -146,8 +142,8 @@
                 <th>Totales</th>
                 <th></th>
                 <th></th>
-                <th>{{ $total_haberes }}</th>
-                <th>{{ $total_retenciones }}</th>
+                <th>{{ $liquidacion->salario_bruto }}</th>
+                <th>{{ $liquidacion->retenciones }}</th>
                 <th>{{ $liquidacion->salario_neto }}</th>
             </tfoot>
         </table>
@@ -201,31 +197,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($linea_liquidacion as $config)
-                    @php
-                        $concepto_categoria = $conceptos->find($config->concepto_id);
-                        $total_parcial = (($config->montofijo ?? -abs($config->montovariable)) * $config->unidad * $salario_basico) / 100;
-                        $total_haberes = ($linea_liquidacion->skip(1)->sum('montofijo') * $salario_basico) / 100;
-                        $total_retenciones = -abs(($linea_liquidacion->skip(1)->sum('montovariable') * $salario_basico) / 100);
-                        $total_neto = $salario_basico + $total_haberes + $total_retenciones;
-                    @endphp
+                @foreach ($linea_liquidacion as $l)
                     <tr>
                         {{-- # --}}
                         <td>{{ $loop->iteration }}</td>
                         {{-- Concepto --}}
-                        <td>{{ $concepto_categoria->descripcion }}</td>
+                        <td>{{ $conceptos->find($l->concepto_id)->descripcion }}</td>
                         {{-- Unidades --}}
-                        <td>{{ $config->unidad }}</td>
+                        <td>{{ $l->unidad }}</td>
                         {{-- Haberes --}}
-                        <td>{{ $config->montofijo }}</td>
-                        {{-- Retenciones --}}
-                        <td>{{ $config->montovariable }}</td>
-                        {{-- Total Parcial --}}
-                        @if ($loop->first)
-                            <td>{{ $liquidacion->salario_bruto }}</td>
-                            @continue
+                        @if ($l->concepto()->first()->tipo == 'Haber')
+                            <td>{{ $l->montofijo ?? $l->montovariable }}</td>
+                            <td></td>
                         @endif
-                        <td>{{ $total_parcial }}</td>
+                        @if ($l->concepto()->first()->tipo == 'Retencion')
+                            <td></td>
+                            <td>{{ $l->montovariable }}</td>
+                        @endif
+                        {{-- Total Parcial --}}
+                        <td></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -233,8 +223,8 @@
                 <th>Totales</th>
                 <th></th>
                 <th></th>
-                <th>{{ $total_haberes }}</th>
-                <th>{{ $total_retenciones }}</th>
+                <th>{{ $liquidacion->salario_bruto }}</th>
+                <th>{{ $liquidacion->retenciones }}</th>
                 <th>{{ $liquidacion->salario_neto }}</th>
             </tfoot>
         </table>

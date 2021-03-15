@@ -22,14 +22,17 @@ class ConfiguracionCategoriaFactory extends Factory
      */
     public function definition()
     {
-        $concepto = Concepto::factory()->create();
-        $tipo = Concepto::find($concepto->id)->tipo;
-        return [
-            'montofijo' => ($tipo == 'Haber') ? rand(1, 40) : null,
-            'montovariable' => ($tipo == 'Retencion') ? rand(1, 40) : null,
-            'unidad' => rand(1, 10),
-            'concepto_id' => $concepto->id,
-            'categoria_id' => '1',
-        ];
+        $concepto = Concepto::get();
+        dd($concepto);
+        $concepto->each(function ($concepto) {
+            $tipo = Concepto::find($concepto->id)->tipo;
+            return [
+                'montofijo' => ($tipo == 'Haber') ? rand(1, 40) : null,
+                'montovariable' => ($tipo == 'Retencion') ? rand(1, 40) : null,
+                'unidad' => rand(1, 10),
+                'concepto_id' => $concepto->id,
+                'categoria_id' => '1',
+            ];
+        });
     }
 }

@@ -21,7 +21,28 @@
 					<form method="post" action="{{ route('compras.store')}}" name="formulario">
 
 						{{ csrf_field() }}
+                        <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 
+                            <div class="form-group">
+
+                                <label>Tipo Proveedor</label>
+
+                                <select class="form-control select2" style="width: 100%;" id="tipoproveedor" name="tipoproveedor">
+                                  <option value="Consumidor Final"> Consumidor Final</option>
+                                  <option value="Responsable Inscripto">Responsable Inscripto</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                              <label>Fecha de Compra</label>
+                              <input type="date" class="form-control" placeholder="Enter ..." id="fechacompra" name="fechacompra">
+                            </div>
+                        </div>
+                        </div>
 						<div class="input-group">
 
 							<input type="text" readonly name="pnombrePro" id="pnombrePro" class="form-control" placeholder="Seleccione un Proveedor">
@@ -51,7 +72,9 @@
 							</span>
 
 						</div>
-
+                        @error ('idProveedor')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 						<br>
 
 						<div class="input-group">
@@ -157,10 +180,24 @@
 										<th>Costo</th>
 									</thead>
 									<tfoot>
-										<th>Total</th>
-										<th></th>
-										<th></th>
-										<th><h4 id="total">$ 00.00</h4> <input type="hidden" name="total_compra" id="total_venta">
+										<tr>
+                                            <th>Subtotal</th>
+										    <th></th>
+										    <th></th>
+										    <th><h4 id="subtotal">$ 00.00</h4> <input type="hidden" name="subtotal_compra" id="subtotal_compra">
+                                        </tr>
+                                        <tr>
+                                            <th>IVA</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th><h4 id="iva">$ 00.00</h4> <input type="hidden" name="iva_compra" id="iva_compra">
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th><h4 id="total">$ 00.00</h4> <input type="hidden" name="total_compra" id="total_compra">
+                                        </tr>
 									</tfoot>
 									<tbody></tbody>
 									</table>
@@ -168,8 +205,12 @@
 								</div>
 
 							</div>
-								<br>
 
+
+
+								<br>
+                    </div>
+                        <div class="row">
 							<div class="col-lg-6 col-md-6 col-dm-6 col-xs-12" id="guardar1">
 
 									<div class="form-group">
@@ -317,7 +358,9 @@
    		total = 0;
 		var cont=0;
 		var subtotal=[];
-		var arrProductos = new Array();
+        var iva=0;
+        var sub=0;
+        var arrProductos = new Array();
         var state =0;
 
     	function SeleccionarProducto(){
@@ -354,11 +397,17 @@
         	if (idarticulo!="" && cantidad!="" && cantidad>0 && costo!="")
         	{
 				subtotal[cont]= costo * cantidad;
-				total=total+subtotal[cont];
+				sub=sub+subtotal[cont];
+                iva= sub*0.21;
+                total=sub+iva;
 				var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td> <td class= "idProducto" style="display:none;"><input type="hidden" name="idProducto[]" value="'+idarticulo+'">'+idarticulo+'</td>  <td  class ="cantidad"><input type="hidden" name="cantidad[]" value="'+cantidad+'">'+cantidad+'</td> <td  class ="precio"><input type="hidden" name="precio[]" value="'+costo+'">'+ costo +'</td> </tr>';
 				cont++;
+                $('#subtotal').html("$/ " + sub);
+		    	$('#subtotal_compra').val(sub);
+                $('#iva').html("$/ " + iva);
+		    	$('#iva_compra').val(iva);
 				$('#total').html("$ " + total);
-				$('#total_venta').val(total);
+				$('#total_compra').val(total);
 		  		$('#detalles').append(fila);
 		  		limpiar();
 				$("#guardar").show();
