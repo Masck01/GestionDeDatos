@@ -223,6 +223,14 @@ footer {
       </div>
     </header>
     <main>
+        <div>Id Venta:{{ $pedido->id}}</div>
+        <div>Id empleado:{{ $pedido->empleado_id }}</div>
+        <div>Fecha:{{ $pedido->getFromDateAttribute($pedido->fecha)}}</div>
+        <div>Hora:{{ $pedido->getFromHoraAttribute($pedido->hora)}}</div>
+        <div>Cliente:{{ $pedido->tipocliente}}</div>
+        <div>Razon social:{{ Arr::get($pedido,'cliente.razon_social') }}</div>
+
+
       <table border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr>

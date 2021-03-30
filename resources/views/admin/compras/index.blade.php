@@ -45,8 +45,9 @@
                       <tr>
                       <th style="text-align:center;"><a href="{{ route('compras.create') }}" class="btn btn-link" data-toggle="tooltip" title="Nueva Compra" data-original-title="Generar Presupuesto"><i class="fas fa-plus"></i></a></th>
                           <th>Fecha Alta</th>
+                          <th>Total Bruto</th>
                           <th>IVA</th>
-                          <th>Total</th>
+                          <th>Total Neto</th>
                           <th>Fecha de Compra</th>
                           <th>Tipo Proveedor</th>
                           <th></th>
@@ -57,6 +58,7 @@
                   <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{ $compra->getFromDateAttribute($compra->fecha)}}</td>
+                    <td> AR$ {{ $compra->subtotalcompra }} </td>
                     <td> AR$ {{ $compra->ivacompra }} </td>
                     <td> AR$ {{ $compra->total }} </td>
                     <td> {{ $compra->fechacompra }} </td>

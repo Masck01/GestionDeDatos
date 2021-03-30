@@ -66,9 +66,12 @@
                       <th style="text-align:center;"><a href="{{ route('ventas.create') }}" class="btn btn-link" data-toggle="tooltip" title="Nueva Venta" data-original-title="Generar Presupuesto"><i class="fas fa-plus"></i></a></th>
                       <th>Fecha</th>
                       <th>Hora</th>
-                      <th>Estado</th>
+                      <th>Tipo Cliente</th>
+                      <th>Razon social Cliente</th>
+                      <th>Total Bruto</th>
                       <th>IVA</th>
-                      <th>Total</th>
+                      <th>Total Neto</th>
+                      <th>Estado</th>
                     </tr>
 
                   </thead>
@@ -80,9 +83,13 @@
                         <td style="text-align:center;">{{$loop->iteration}}</td>
                         <td>{{ $venta->getFromDateAttribute($venta->fecha) }}</td>
                         <td>{{ $venta->getFromHoraAttribute($venta->hora) }}</td>
-                        <td>{{ $venta->estado}}</td>
+                        <td>{{ $venta->tipocliente}}</td>
+                        <td>{{ Arr::get($venta,'cliente.razon_social')}}</td>
+                        <td>AR$ {{ $venta->subtotalventa }}  </td>
                         <td>AR$ {{ $venta->iva }}  </td>
                         <td> AR$ {{ $venta->total }} </td>
+                        <td>{{ $venta->estado}}</td>
+
                         <td>
                           <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Venta" data-original-title="Ver Presupuesto"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
                           <a href="{{route('ventas.imprimir', $venta->id)}}"class="btn btn-link" data-toggle="tooltip" title="Imprimir Comprobante" data-original-title="Imprimir Comprobante"><i class="fas fa-print" style="color:#578DA4; font-size: 20px;"></i></a>
