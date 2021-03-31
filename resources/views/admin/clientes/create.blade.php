@@ -112,8 +112,8 @@
                     <label>Tipo</label>
 
                     <select class="form-control select2" style="width: 100%;" id="tipo" name="tipo">
-                      <option value="Haber">consumidorfinal</option>
-                      <option value="Retencion">responsableinscripto</option>
+                      <option value="consumidorfinal">consumidorfinal</option>
+                      <option value="responsableinscripto">responsableinscripto</option>
                     </select>
 
                 </div>
@@ -135,6 +135,10 @@
             </div>
 
           </div>
+
+
+
+
 
         </form>
             </div>

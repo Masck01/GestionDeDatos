@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('clientes/{clientes}', [ClienteController::class, 'update'])->name('clientes.update');
 
-    Route::get('cliente/pdf', [PdfController::class, 'listadoClientes'])->name('cliente.downloadPdf');
+    Route::get('cliente/pdf', [ClienteController::class, 'listadoClientes'])->name('clientes.downloadPdf');
 
 
 

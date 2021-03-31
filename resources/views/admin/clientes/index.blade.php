@@ -112,6 +112,16 @@
 
               </div>
 
+              <div class="col-lg-12 col-md-12 col-dm-12 col-xs-12">
+
+                <div class="form-group">
+
+  <th><a href="{{ route('clientes.downloadPdf') }}" class="btn btn-success" data-toggle="tooltip" title="Reporte PDF" data-original-title="Reporte PDF">Imprimir PDF</a></th>
+
+</div>
+
+            </div>
+
           </div>
 
         </div>
