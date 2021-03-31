@@ -59,9 +59,10 @@
         <td>#</td>
         <td>Fecha</td>
         <td>Hora</td>
-        <td>Subtotal</td>
+        <td>Cliente</td>
+        <td>Total Bruto</td>
         <td>IVA</td>
-        <td>Monto</td>
+        <td>Total Neto</td>
       </tr>
       </thead>
       <tbody>
@@ -70,6 +71,7 @@
             <td>{{$loop->iteration}}</td>
             <td>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</td>
             <td>{{ $pedido->getFromHoraAttribute($pedido->hora) }}</td>
+            <td> {{ $pedido->tipocliente }} </td>
             <td> AR$ {{ $pedido->subtotalventa }} </td>
             <td> AR$ {{ $pedido->iva }} </td>
             <td> AR$ {{ $pedido->total }} </td>
@@ -78,6 +80,7 @@
       </tbody>
       <tfoot>
         <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td style="background-color: black; color:white"> Total </td>

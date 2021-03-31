@@ -231,7 +231,7 @@ footer {
         </div>
         <div id="invoice">
           <h2>- Comprobante de Compra -</h2>
-          <div class="date">Fecha: {{$pedido->getFromDateAttribute($pedido->fecha)}}</div>
+          <div class="date">Fecha de Compra: {{$pedido->getFromDateAttribute($pedido->fechacompra)}}</div>
         </div>
       </div>
       <table border="0" cellspacing="0" cellpadding="0">

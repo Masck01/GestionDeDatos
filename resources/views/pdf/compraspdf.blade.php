@@ -58,9 +58,10 @@
       <tr style="background-color: black; color:white">
         <td>#</td>
         <td>Fecha Alta</td>
-        <td>Subtotal</td>
+        <td>Proveedor</td>
+        <td>Total Bruto</td>
         <td>IVA Compra</td>
-        <td>Monto</td>
+        <td>Total Neto</td>
       </tr>
       </thead>
       <tbody>
@@ -68,6 +69,7 @@
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{ $pedido->getFromDateAttribute($pedido->fechaalta) }}</td>
+            <td>{{ $pedido->tipoproveedor }} </td>
             <td> AR$ {{ $pedido->subtotalcompra }} </td>
             <td> AR$ {{ $pedido->ivacompra }} </td>
             <td> AR$ {{ $pedido->total }} </td>
@@ -76,6 +78,7 @@
       </tbody>
       <tfoot>
         <tr>
+            <td></td>
             <td></td>
             <td style="background-color: black; color:white"> Total </td>
             <td style="background-color: black; color:white">  AR$  {{ $subtotalcompras }}</td>
