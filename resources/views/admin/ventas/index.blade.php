@@ -68,6 +68,7 @@
                       <th>Hora</th>
                       <th>Tipo Cliente</th>
                       <th>Razon social Cliente</th>
+                      <th>Cuit Cliente</th>
                       <th>Total Bruto</th>
                       <th>IVA</th>
                       <th>Total Neto</th>
@@ -85,6 +86,7 @@
                         <td>{{ $venta->getFromHoraAttribute($venta->hora) }}</td>
                         <td>{{ $venta->tipocliente}}</td>
                         <td>{{ Arr::get($venta,'cliente.razon_social')}}</td>
+                        <td>{{ Arr::get($venta,'cliente.Cuit')}}</td>
                         <td>AR$ {{ $venta->subtotalventa }}  </td>
                         <td>AR$ {{ $venta->iva }}  </td>
                         <td> AR$ {{ $venta->total }} </td>

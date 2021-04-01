@@ -47,6 +47,7 @@
                           <th>Fecha Alta</th>
                           <th>Tipo Proveedor</th>
                           <th>Razon social Proveedor</th>
+                          <th>Cuit Proveedor</th>
                           <th>Total Bruto</th>
                           <th>IVA</th>
                           <th>Total Neto</th>
@@ -62,6 +63,7 @@
                     <td>{{ $compra->getFromDateAttribute($compra->fecha)}}</td>
                     <td>{{ $compra->tipoproveedor }}</td>
                     <td>{{ Arr::get($compra,'proveedor.razon_social')}}</td>
+                    <td>{{ Arr::get($compra,'proveedor.cuit')}}</td>
                     <td> AR$ {{ $compra->subtotalcompra }} </td>
                     <td> AR$ {{ $compra->ivacompra }} </td>
                     <td> AR$ {{ $compra->total }} </td>

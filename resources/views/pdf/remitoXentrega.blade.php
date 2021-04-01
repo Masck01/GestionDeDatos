@@ -225,9 +225,11 @@ footer {
     <main>
         <div id="details" class="clearfix">
         <div id="client">
-          <h2 class="name">Proveedor: {{$pedido->proveedor->razon_social}}</h2>
+          <h2 class="name">Proveedor: {{ Arr::get($pedido,'proveedor.razon_social') }}</h2>
 
-          <div class="address">CUIT: {{$pedido->proveedor->cuit}} </div>
+          <div class="adress">Tipo: {{ $pedido->tipoproveedor }}</div>
+
+          <div class="address">CUIT: {{ Arr::get($pedido,'proveedor.cuit') }} </div>
         </div>
         <div id="invoice">
           <h2>- Comprobante de Compra -</h2>
@@ -258,7 +260,7 @@ footer {
         <tfoot>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="2">SUBTOTAL</td>
+                <td colspan="2">TOTAL BRUTO</td>
                 <td style="text-align: center">AR$ {{$pedido->subtotalcompra}}</td>
             </tr>
             <tr>
@@ -268,7 +270,7 @@ footer {
             </tr>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="2">TOTAL</td>
+                <td colspan="2">TOTAL NETO</td>
                 <td style="text-align: center">AR$ {{$pedido->total}}</td>
             </tr>
         </tfoot>

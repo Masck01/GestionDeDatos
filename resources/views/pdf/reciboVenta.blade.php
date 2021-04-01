@@ -255,7 +255,7 @@ footer {
         <tfoot>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="2">SUBTOTAL</td>
+                <td colspan="2">TOTAL BRUTO</td>
                 <td style="text-align: center">AR$ {{$pedido->subtotalventa}}</td>
             </tr>
             <tr>
@@ -265,7 +265,7 @@ footer {
             </tr>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="2">TOTAL</td>
+                <td colspan="2">TOTAL NETO</td>
                 <td style="text-align: center">AR$ {{$pedido->total}}</td>
             </tr>
         </tfoot>

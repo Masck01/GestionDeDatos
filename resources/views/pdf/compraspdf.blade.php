@@ -59,6 +59,8 @@
         <td>#</td>
         <td>Fecha Alta</td>
         <td>Proveedor</td>
+        <td>Tipo Proveedor</td>
+        <td>Cuit Proveedor</td>
         <td>Total Bruto</td>
         <td>IVA Compra</td>
         <td>Total Neto</td>
@@ -69,7 +71,9 @@
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{ $pedido->getFromDateAttribute($pedido->fechaalta) }}</td>
+            <td>{{ Arr::get($pedido,'proveedor.razon_social') }} </td>
             <td>{{ $pedido->tipoproveedor }} </td>
+            <td>{{ Arr::get($pedido,'proveedor.cuit')}} </td>
             <td> AR$ {{ $pedido->subtotalcompra }} </td>
             <td> AR$ {{ $pedido->ivacompra }} </td>
             <td> AR$ {{ $pedido->total }} </td>
@@ -80,6 +84,9 @@
         <tr>
             <td></td>
             <td></td>
+            <td></td>
+            <td></td>
+
             <td style="background-color: black; color:white"> Total </td>
             <td style="background-color: black; color:white">  AR$  {{ $subtotalcompras }}</td>
             <td style="background-color: black; color:white">  AR$  {{ $ivatotal }}</td>
