@@ -20,7 +20,7 @@ class AlmacenDeMedicamentosSeeder extends Seeder
             'direccion' => 'Esq Norte 355',
             'ciudad' => 'Tucuman',
             'codigo_postal' => '4000',
-            'estado' => 'activo',
+            'estado' => 'Activo',
             'sucursal_id' => 1,
             'provincia_id' => 1
         ]);
