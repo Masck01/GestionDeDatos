@@ -53,7 +53,7 @@
   <br>
   <h2> Listado De Ventas Registradas </h2>
   <br>
-    <table class="table table-bordered">
+    <table class="table table-success table-sm">
     <thead>
       <tr style="background-color: black; color:white">
         <td>#</td>

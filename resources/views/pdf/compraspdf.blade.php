@@ -53,7 +53,7 @@
   <br>
   <h2> Listado De Compras Registradas </h2>
   <br>
-    <table class="table table-bordered">
+    <table class="table table-success table-sm">
     <thead>
       <tr style="background-color: black; color:white">
         <td>#</td>
