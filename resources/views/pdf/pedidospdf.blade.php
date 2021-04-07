@@ -59,6 +59,7 @@
         <td>#</td>
         <td>Fecha</td>
         <td>Hora</td>
+        <td>Codigo Venta</td>
         <td> Cliente</td>
         <td>Tipo Cliente</td>
         <td>Cuit Cliente</td>
@@ -73,6 +74,7 @@
             <td>{{$loop->iteration}}</td>
             <td>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</td>
             <td>{{ $pedido->getFromHoraAttribute($pedido->hora) }}</td>
+            <td> {{ 'PV0'.$pedido->empleado_id."-".'0000000'.$pedido->id}}</td>
             <td> {{ Arr::get($pedido,'cliente.razon_social')}} </td>
             <td> {{ $pedido->tipocliente }} </td>
             <td> {{ Arr::get($pedido,'cliente.Cuit' )}} </td>
@@ -89,6 +91,9 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
+
+
 
             <td style="background-color: black; color:white"> Total </td>
             <td style="background-color: black; color:white">  AR$  {{ $subtotalventas }}</td>

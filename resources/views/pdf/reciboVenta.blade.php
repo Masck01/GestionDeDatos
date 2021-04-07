@@ -223,7 +223,9 @@ footer {
       </div>
     </header>
     <main>
-        <div>Id Venta:{{ $pedido->id}}</div>
+
+
+        <div>Id Venta: {{ 'PV0'.$pedido->empleado_id."-".'0000000'.$pedido->id}} </div>
         <div>Id empleado:{{ $pedido->empleado_id }}</div>
         <div>Fecha:{{ $pedido->getFromDateAttribute($pedido->fecha)}}</div>
         <div>Hora:{{ $pedido->getFromHoraAttribute($pedido->hora)}}</div>

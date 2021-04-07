@@ -225,6 +225,8 @@ footer {
     <main>
         <div id="details" class="clearfix">
         <div id="client">
+          <h2 class "name"> Compra: {{'PP0'.$pedido->proveedor_id."-".'0000000'.$pedido->id}}</h2>
+
           <h2 class="name">Proveedor: {{ Arr::get($pedido,'proveedor.razon_social') }}</h2>
 
           <div class="adress">Tipo: {{ $pedido->tipoproveedor }}</div>

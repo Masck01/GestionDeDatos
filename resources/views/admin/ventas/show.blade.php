@@ -14,6 +14,7 @@
               <div class="col-md-12">
                 <br>
                 <p><b>Empleado: </b> {{ $pedido->empleado_id}} </p>
+                <p><b>Codigo Venta: </b>{{'PV0'.$pedido->empleado_id."-".'0000000'.$pedido->id}}</td>
                 <p><b>Fecha: </b>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</p>
                 <p><b>Subtotal: </b> AR$ {{ $pedido->subtotalventa }} </p>
                 <p><b>IVA: </b> AR$ {{ $pedido->iva }} </p>

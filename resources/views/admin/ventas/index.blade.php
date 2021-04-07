@@ -66,6 +66,7 @@
                       <th style="text-align:center;"><a href="{{ route('ventas.create') }}" class="btn btn-link" data-toggle="tooltip" title="Nueva Venta" data-original-title="Generar Presupuesto"><i class="fas fa-plus"></i></a></th>
                       <th>Fecha</th>
                       <th>Hora</th>
+                      <th>Codigo Vta</th>
                       <th>Tipo Cliente</th>
                       <th>Razon social Cliente</th>
                       <th>Cuit Cliente</th>
@@ -84,6 +85,7 @@
                         <td style="text-align:center;">{{$loop->iteration}}</td>
                         <td>{{ $venta->getFromDateAttribute($venta->fecha) }}</td>
                         <td>{{ $venta->getFromHoraAttribute($venta->hora) }}</td>
+                        <td>{{'PV0'.$venta->empleado_id."-".'0000000'.$venta->id}}</td>
                         <td>{{ $venta->tipocliente}}</td>
                         <td>{{ Arr::get($venta,'cliente.razon_social')}}</td>
                         <td>{{ Arr::get($venta,'cliente.Cuit')}}</td>
