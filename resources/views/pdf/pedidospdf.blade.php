@@ -59,6 +59,8 @@
         <td>#</td>
         <td>Fecha</td>
         <td>Hora</td>
+        <td>Subtotal</td>
+        <td>IVA</td>
         <td>Monto</td>
       </tr>
       </thead>
@@ -68,6 +70,8 @@
             <td>{{$loop->iteration}}</td>
             <td>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</td>
             <td>{{ $pedido->getFromHoraAttribute($pedido->hora) }}</td>
+            <td> AR$ {{ $pedido->subtotalventa }} </td>
+            <td> AR$ {{ $pedido->iva }} </td>
             <td> AR$ {{ $pedido->total }} </td>
         </tr>
         @endforeach
@@ -77,6 +81,8 @@
             <td></td>
             <td></td>
             <td style="background-color: black; color:white"> Total </td>
+            <td style="background-color: black; color:white">  AR$  {{ $subtotalventas }}</td>
+            <td style="background-color: black; color:white">  AR$  {{ $ivatotal }}</td>
             <td style="background-color: black; color:white">  AR$  {{ $orders }}</td>
         </tr>
     </tfoot>

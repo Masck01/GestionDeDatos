@@ -67,6 +67,7 @@
                       <th>Fecha</th>
                       <th>Hora</th>
                       <th>Estado</th>
+                      <th>IVA</th>
                       <th>Total</th>
                     </tr>
 
@@ -80,6 +81,7 @@
                         <td>{{ $venta->getFromDateAttribute($venta->fecha) }}</td>
                         <td>{{ $venta->getFromHoraAttribute($venta->hora) }}</td>
                         <td>{{ $venta->estado}}</td>
+                        <td>AR$ {{ $venta->iva }}  </td>
                         <td> AR$ {{ $venta->total }} </td>
                         <td>
                           <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Venta" data-original-title="Ver Presupuesto"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
@@ -121,7 +123,7 @@
 
                 </div>
 
-							</div>
+				</div>
             </div>
 
           </div>

@@ -44,9 +44,11 @@
                     <thead>
                       <tr>
                       <th style="text-align:center;"><a href="{{ route('compras.create') }}" class="btn btn-link" data-toggle="tooltip" title="Nueva Compra" data-original-title="Generar Presupuesto"><i class="fas fa-plus"></i></a></th>
-                          <th>Proveedor</th>
-                          <th>Fecha</th>
+                          <th>Fecha Alta</th>
+                          <th>IVA</th>
                           <th>Total</th>
+                          <th>Fecha de Compra</th>
+                          <th>Tipo Proveedor</th>
                           <th></th>
                       </tr>
                     </thead>
@@ -54,9 +56,11 @@
                     @foreach ($compras as $compra)
                   <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{ $compra->proveedor->razon_social}}</td>
                     <td>{{ $compra->getFromDateAttribute($compra->fecha)}}</td>
+                    <td> AR$ {{ $compra->ivacompra }} </td>
                     <td> AR$ {{ $compra->total }} </td>
+                    <td> {{ $compra->fechacompra }} </td>
+                    <td>{{ $compra->tipoproveedor }}</td>
 
                     <td>
                         <a href="{{ route('compras.show', $compra->id) }}"  class="btn btn-link" data-toggle="tooltip" title="Ver Detalle Compra" data-original-title="Ver Presupuesto"><i class="far fa-eye" style="color:green; font-size: 20px;"></i></a>
@@ -73,7 +77,13 @@
               <!-- /.card -->
             </div>
           </div>
+          <div class="col-lg-12 col-md-12 col-dm-12 col-xs-12">
 
+            <div class="form-group">
+
+            <th><a href="{{ route('compras.downloadPdf') }}" class="btn btn-success" data-toggle="tooltip" title="Reporte PDF" data-original-title="Reporte PDF">Imprimir PDF</a></th>
+
+        </div>
         </div>
     </div>
 </div>

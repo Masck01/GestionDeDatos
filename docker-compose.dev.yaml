@@ -1,0 +1,60 @@
+version: '3.8'
+services:
+  farmacia-dev:
+      build:
+        context: .
+        dockerfile: ./php-fpm/dev.Dockerfile
+      container_name: farmacia-dev
+      image: farmacia-dev:v1
+      volumes:
+           - .:/var/www
+
+      environment:
+          APP_KEY: "base64:E/oCA2KJzSygqS+pAhxp0h+SOGZed18KvDsyWMFp1lg="
+          APP_DEBUG: "true"
+          DB_CONNECTION: mysql
+          DB_HOST: db-mysql-dev
+          DB_PORT: 3306
+          DB_DATABASE: dbfarmacia
+          DB_USERNAME: gestordb
+          DB_PASSWORD: mysqlgestorpwd
+
+      depends_on:
+        - db-mysql-dev
+
+
+  nginx-laravel-dev:
+      build:
+         context: .
+         dockerfile: ./nginx/dev.Dockerfile
+         args:
+          PHP_UPSTREAM_CONTAINER: "farmacia-dev"
+      volumes:
+          - .:/var/www
+      depends_on:
+         - farmacia-dev
+      ports:
+          - "9600:80" 
+      container_name: nginx-laravel-dev
+      image: nginx-laravel-dev:v1
+
+      environment:
+           - "APP_KEY=base64:E/oCA2KJzSygqS+pAhxp0h+SOGZed18KvDsyWMFp1lg="
+           - "APP_DEBUG=true"
+
+#  db-postgres-dev:
+#      image: postgres:13.2-alpine
+#      environment:
+#          POSTGRES_USER: "gestordb"
+#          POSTGRES_PASSWORD: "mypostgresdb"
+#          POSTGRES_DB: "dbfarmacia"
+#      container_name: db-postgres-dev
+
+  db-mysql-dev:
+      image: mysql:8
+      environment:
+          MYSQL_ROOT_PASSWORD: "mysqldb"
+          MYSQL_DATABASE: "dbfarmacia"
+          MYSQL_USER: "gestordb"
+          MYSQL_PASSWORD: "mysqlgestorpwd"
+      container_name: db-mysql-dev

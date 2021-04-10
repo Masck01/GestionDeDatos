@@ -33,10 +33,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ConfiguracionCategoriaSeeder::class);
 
         // Factorys
-        ConfiguracionCategoria::factory()->count(20)->create();
-        Proveedor::factory()->count(3)->create();
-        Capacidad::factory()->count(10)->create();
-        Marca::factory()->count(20)->create();
-        Producto::factory()->count(20)->create();
+        // ConfiguracionCategoria::factory()->count(20)->create();
+        // Proveedor::factory()->count(3)->create();
+        // Capacidad::factory()->count(10)->create();
+        // Marca::factory()->count(20)->create();
+        // Producto::factory()->count(20)->create();
     }
 }

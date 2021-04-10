@@ -30,6 +30,7 @@ class CrearLiquidacion extends Component
     public $fecha_desde;
     public $fecha_hasta;
     public $periodo_liquidacion;
+    public $linea_liquidacion;
 
     protected $rules = [
         'month' => 'required|date'
@@ -41,21 +42,24 @@ class CrearLiquidacion extends Component
         $this->empleado = Empleado::find($id_empleado);
         $this->conceptos = Concepto::all();
         $this->categoria = Categoria::find($this->empleado->categoria_id);
-        $this->configuracion_categoria = ConfiguracionCategoria::join('categoria', 'categoria.id', '=', 'configuracioncategoria.categoria_id')
-            ->join('concepto', 'concepto.id', '=', 'configuracioncategoria.concepto_id')
-            ->where('concepto.estado', 'activo')
-            ->where('categoria.id', $this->categoria->id)
-            ->get();
+        $this->configuracion_categoria = ConfiguracionCategoria::where('categoria_id', $this->categoria->id)
+            ->get()->filter(fn ($con) => $con->concepto()->first()->estado === "Activo");
         $this->salario_basico = $this->categoria->salario_basico;
-        $this->total_haberes = ($this->configuracion_categoria->skip(1)->sum('montofijo') * $this->salario_basico) / 100;
-        $this->total_retenciones = -abs($this->configuracion_categoria->skip(1)->sum('montovariable') * $this->salario_basico / 100);
-        $this->salario_neto = $this->salario_basico + $this->total_haberes + $this->total_retenciones;
+        $this->linea_liquidacion = $this->linea_liquidacion();
+        $this->total_haberes = $this->calculo_haberes();
+        $this->total_retenciones = $this->calculo_retencion();
+        $this->salario_neto = $this->total_haberes - $this->total_retenciones;
+    }
+
+    public function hydrate()
+    {
+        $this->linea_liquidacion = $this->linea_liquidacion();
     }
 
     public function store()
     {
         $this->validate();
-        $col_names_liquidacion = Schema::getColumnListing('liquidacion');
+        $col_names_liquidacion = collect(Schema::getColumnListing('liquidacion'))->sort();
         $fecha_desde = $this->fecha->startOfMonth();
         $fecha_hasta = $this->fecha->endOfMonth();
         $periodo_liquidacion = $this->periodo_liquidacion;
@@ -65,14 +69,14 @@ class CrearLiquidacion extends Component
         $estado = 'pagado';
         $valores_liquidacion = collect(
             [
+                $this->id_empleado,
+                $estado,
                 $fecha_desde,
                 $fecha_hasta,
-                $salario_neto,
-                $salario_bruto,
                 $periodo_liquidacion,
                 $retenciones,
-                $estado,
-                $this->id_empleado,
+                $salario_bruto,
+                $salario_neto,
             ]
         );
         $valores_linealiquidacion = $this->valores_linealiquidacion();
@@ -112,6 +116,30 @@ class CrearLiquidacion extends Component
         $this->fecha_desde = $this->fecha->startOfMonth()->format('d-m-Y');
         $this->fecha_hasta = $this->fecha->endOfMonth()->format('d-m-Y');
         $this->periodo_liquidacion = $this->fecha->monthName;
+    }
+
+    public function linea_liquidacion()
+    {
+        return $this->configuracion_categoria->map(function (ConfiguracionCategoria $config) {
+            $config->montovariable = $config->hasFormula($config) ?? $config->montovariable;
+            return $config;
+        });
+    }
+
+    public function calculo_retencion()
+    {
+        return $this->configuracion_categoria
+            ->filter(fn ($concepto) => $concepto->concepto()->first()->tipo == 'Retencion')
+            ->map(fn ($config) => $config->montofijo + $config->montovariable)
+            ->sum();
+    }
+
+    public function calculo_haberes()
+    {
+        return $this->configuracion_categoria
+            ->filter(fn ($concepto) => $concepto->concepto()->first()->tipo == 'Haber')
+            ->map(fn ($config) => $config->montofijo + $config->montovariable)
+            ->sum();
     }
 
     public function render()

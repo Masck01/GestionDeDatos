@@ -16,4 +16,9 @@ class LineaLiquidacion extends Model
     {
         return $this->hasOne(Liquidacion::class, 'id', 'liquidacion_id');
     }
+
+    public function concepto()
+    {
+        return $this->hasMany(Concepto::class, 'id', 'concepto_id');
+    }
 }

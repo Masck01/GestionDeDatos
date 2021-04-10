@@ -15,6 +15,8 @@
                 <br>
                 <p><b>Empleado: </b> {{ $pedido->empleado_id}} </p>
                 <p><b>Fecha: </b>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</p>
+                <p><b>Subtotal: </b> AR$ {{ $pedido->subtotalventa }} </p>
+                <p><b>IVA: </b> AR$ {{ $pedido->iva }} </p>
                 <p><b>Total: </b> AR$ {{ $pedido->total }} </p>
                 <p><b>Estado: </b> {{ $pedido->estado }} </p>
               </div>

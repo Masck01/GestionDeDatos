@@ -15,11 +15,13 @@ use App\MovimientodeCaja;
 use DB;
 use Session;
 use Carbon\Carbon;
+use Validator;
 use Response;
 use App\HistorialMovimientos;
 use Illuminate\Support\Collection;
 use Luecano\NumeroALetras\NumeroALetras;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
 
 
 class ComprasController extends Controller
@@ -46,7 +48,21 @@ class ComprasController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   $rules = [
+        'idProveedor' => 'required_unless:tipoproveedor,Consumidor Final'
+
+        ];
+        $message = [
+
+
+
+        'idProveedor' => 'Debe seleccionar un proveedor'
+        ];
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if ($validator->fails()){
+        return back()->withErrors($validator)->with('message', 'Se ha Producido un Error')->with('typealert', 'danger');
+        }
         $cajas = Caja::find(1);
 
         if($cajas->estado == 'Activo'):
@@ -60,14 +76,16 @@ class ComprasController extends Controller
                 $compra = new Compra();
 
                 $compra->proveedor_id = $request->get('idProveedor');
-
                 /* $compra->usuario_id = Auth::user->id; */
-
-                $compra->fecha = $mytime->toDateTimeString();
-
+                $compra->tipoproveedor = $request->tipoproveedor;
+                $compra->fechaalta = $mytime->toDateTimeString();
                 $compra->hora = $mytime->toDateTimeString();
-
+                $compra->subtotalcompra = $request->get('subtotal_compra');
+                $compra->ivacompra = $request->get('iva_compra');
                 $compra->total = $request->get('total_compra');
+                $compra->fechacompra = $request->fechacompra;
+
+
 
                 $compra->save();
 
@@ -142,7 +160,7 @@ class ComprasController extends Controller
 
         $movimiento->caja_id = 1;
 
-        $movimiento->descripcion = 'Compra de Productos a '. $proveedor->nombre;
+        $movimiento->descripcion = 'Compra de Productos a Proveedor';
 
         $movimiento->fecha = $mytime->toDateTimeString();
 
@@ -168,6 +186,18 @@ class ComprasController extends Controller
         $detalle = $compra->detalle_compra()->get();
 
         return view('admin.compras.show', ['compra'=>$compra,'detalle'=>$detalle]);
+    }
+    public function listadocompras()
+    {
+        $pedidos = Compra::orderBy('id', 'DESC')->get();
+
+        $subtotalcompras = DB::table("compra")->get()->sum("subtotalcompra");
+        $ivatotal = DB::table("compra")->get()->sum("ivacompra");
+        $orders = DB::table("compra")->get()->sum("total");
+
+        $pdf = PDF::loadView('pdf.compraspdf',['pedidos'=>$pedidos,'subtotalcompras'=>$subtotalcompras,'ivatotal'=>$ivatotal,'orders'=>$orders])->setPaper('a4', 'landscape');
+
+        return $pdf->stream();
     }
 
 

@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class VentaController extends Controller
@@ -34,13 +35,14 @@ class VentaController extends Controller
 
         $cajas = Caja::find(1);
 
+
         if($cajas->estado == 'Activo'):
 
             $productos = Producto::orderBy('nombre','ASC')->get();
 
-            //$clientes = Cliente::orderBy('id', 'ASC')->get();
+            $clientes = Cliente::orderBy('id', 'ASC')->get();
 
-            return view('admin.ventas.create',["productos"=>$productos]);
+            return view('admin.ventas.create',["productos"=>$productos, "clientes"=>$clientes]);
 
         else:
 
@@ -53,7 +55,22 @@ class VentaController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   $rules = [
+        'idCliente' => 'required_unless:tipocliente,Consumidor Final'
+
+        ];
+        $message = [
+
+
+
+        'idCliente' => 'Debe seleccionar un cliente'
+        ];
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if ($validator->fails()){
+        return back()->withErrors($validator)->with('message', 'Se ha Producido un Error')->with('typealert', 'danger');
+        }
+
         $mytime = Carbon::now('America/Argentina/Tucuman');
 
         $cajas = Caja::find(1);
@@ -75,9 +92,10 @@ class VentaController extends Controller
                 $venta->fecha = $mytime->toDateTimeString();
 
                 $venta->hora = $mytime->toDateTimeString();
-
+                $venta->subtotalventa = $request->get('subtotal_venta');
+                $venta->iva = $request->get('iva_venta');
                 $venta->total = $request->get('total_venta');
-
+                $venta->tipocliente = $request->tipocliente;
                 $venta->estado = "Impago";
 
                 $venta->save();
@@ -125,6 +143,7 @@ class VentaController extends Controller
         endif;
 
 
+
     }
 
     public function show($id)
@@ -140,9 +159,11 @@ class VentaController extends Controller
     {
         $pedidos = Venta::orderBy('id', 'DESC')->get();
 
+        $subtotalventas = DB::table("venta")->get()->sum("subtotalventa");
+        $ivatotal = DB::table("venta")->get()->sum("iva");
         $orders = DB::table("venta")->get()->sum("total");
 
-        $pdf = PDF::loadView('pdf.pedidospdf',['pedidos'=>$pedidos,'orders'=>$orders])->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('pdf.pedidospdf',['pedidos'=>$pedidos,'subtotalventas'=>$subtotalventas,'ivatotal'=>$ivatotal,'orders'=>$orders])->setPaper('a4', 'landscape');
 
         return $pdf->stream();
     }

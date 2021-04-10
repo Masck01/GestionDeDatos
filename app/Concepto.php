@@ -13,6 +13,5 @@ class Concepto extends Model
     protected $fillable = [
         'descripcion', 'tipo', 'estado'
     ];
-}
 
-//sa
+}

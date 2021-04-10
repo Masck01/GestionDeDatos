@@ -256,11 +256,21 @@ footer {
                @endforeach
         </tbody>
         <tfoot>
-          <tr>
-            <td colspan="2"></td>
-            <td colspan="2">TOTAL</td>
-            <td style="text-align: center">AR$ {{$pedido->total}}</td>
-          </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="2">SUBTOTAL</td>
+                <td style="text-align: center">AR$ {{$pedido->subtotalcompra}}</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="2">IVA</td>
+                <td style="text-align: center">AR$ {{$pedido->ivacompra}}</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="2">TOTAL</td>
+                <td style="text-align: center">AR$ {{$pedido->total}}</td>
+            </tr>
         </tfoot>
       </table>
     </main>

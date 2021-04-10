@@ -99,6 +99,20 @@
 
                     </div>
                   </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                    <div class="form-group">
+
+                        <label>Estado</label>
+
+                        <select class="form-control select2" style="width: 100%;" id="estado" name="estado">
+                          <option value="Activo"> Activo</option>
+                          <option value="Inactivo">Inactivo</option>
+                        </select>
+
+                    </div>
+
+                </div>
 
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

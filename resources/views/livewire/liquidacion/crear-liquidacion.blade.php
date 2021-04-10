@@ -76,31 +76,26 @@
 
                         </thead>
                         <tbody>
-                            @foreach ($configuracion_categoria as $config)
+                            @foreach ($linea_liquidacion as $l)
                                 <tr>
-                                    @php
-                                        $concepto_categoria = $conceptos->find($config->concepto_id);
-                                        $total_parcial = (($config->montofijo ?? -abs($config->montovariable)) * $config->unidad * $salario_basico) / 100;
-                                        // $total_haberes = ($configuracion_categoria->skip(1)->sum('montofijo') * $salario_basico) / 100;
-                                        // $total_retencion = -abs(($configuracion_categoria->skip(1)->sum('montovariable') * $salario_basico) / 100);
-                                        // $total_neto = $salario_basico + $total_haberes + $total_retencion;
-                                    @endphp
                                     {{-- # --}}
                                     <td>{{ $loop->iteration }}</td>
                                     {{-- Concepto --}}
-                                    <td>{{ $concepto_categoria->descripcion }}</td>
+                                    <td>{{ $l->concepto()->first()->descripcion }}</td>
                                     {{-- Unidades --}}
-                                    <td>{{ $config->unidad }}</td>
+                                    <td>{{ $l->unidad }}</td>
                                     {{-- Haberes --}}
-                                    <td>{{ $config->montofijo }}</td>
-                                    {{-- Retenciones --}}
-                                    <td>{{ $config->montovariable }}</td>
-                                    {{-- Total Parcial --}}
-                                    @if ($loop->first)
+                                    @if ($l->concepto()->first()->tipo == 'Haber')
+                                        <td>{{ $l->montofijo ?? $l->montovariable }}</td>
                                         <td></td>
-                                        @continue
                                     @endif
-                                    <td>{{ $total_parcial }}</td>
+                                    @if ($l->concepto()->first()->tipo == 'Retencion')
+                                        <td></td>
+                                        <td>{{ $l->montovariable }}</td>
+                                    @endif
+                                    {{-- Retenciones --}}
+                                    {{-- Total Parcial --}}
+                                    <td></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -122,7 +117,7 @@
 
     <div class="d-flex justify-content-between mb-4">
         <a class="btn btn-info btn-lg" href="{{ route('liquidacion.index') }}" role="button">Volver</a>
-        <a class="btn btn-success btn-lg text-white" role="button" wire:click="store">Guardar
+        <a class="btn btn-success btn-lg text-white" role="button" wire:click.prevent="store">Guardar
             Liquidacion</a>
     </div>
 </div>
