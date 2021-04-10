@@ -17,7 +17,7 @@
         }
 
         header {
-            height: 50px;
+            height: 105px;
             background-color: rgba(63, 195, 51, 0.472);
             border-radius: 15px;
             text-align: center;
@@ -43,8 +43,18 @@
             background-color: rgba(29, 185, 29, 0.452)
         }
 
+
+
         tr:nth-child(even) {
             background-color: rgba(30, 245, 155, 0.404)
+        }
+        .foto2 {
+        padding: 10px;
+        margin: 10px;
+         border: 2px solid black;
+        float: right; width: 150px; }
+        p#firma {
+            height: 200px;
         }
 
         aside p {
@@ -72,6 +82,8 @@
     <div>
         <header>
             <h3>Farmacia Avellaneda</h3>
+            <h3>Av. Sarmiento 199 | 4000 | Tucumán------CUIT: 20-20433571-1</h3>
+            <h3>Tel / Fax. 0381. 4219399 </h3>
         </header>
         <aside>
             <p>
@@ -147,11 +159,16 @@
                 <th>{{ $liquidacion->salario_neto }}</th>
             </tfoot>
         </table>
+        <p id="firma"><img src="https://i.pinimg.com/474x/8a/18/a6/8a18a624a0c7a5e9dfc2e83b45058b5a.jpg" class="foto2" alt=""></p>
+
         <br>
         <br>
         <hr>
         <header>
             <h3>Farmacia Avellaneda</h3>
+            <h3>Av. Sarmiento 199 | 4000 | Tucumán------CUIT: 20-20433571-1</h3>
+            <h3>Tel / Fax. 0381. 4219399 </h3>
+
             <p>Duplicado</p>
         </header>
         <aside>
@@ -221,14 +238,17 @@
             </tbody>
             <tfoot>
                 <th>Totales</th>
+
                 <th></th>
                 <th></th>
                 <th>{{ $liquidacion->salario_bruto }}</th>
                 <th>{{ $liquidacion->retenciones }}</th>
                 <th>{{ $liquidacion->salario_neto }}</th>
+
             </tfoot>
         </table>
-    </div>
+        <p id="firma"><img src="https://i.pinimg.com/474x/8a/18/a6/8a18a624a0c7a5e9dfc2e83b45058b5a.jpg" class="foto2" alt=""></p>
+
 
 </body>
 
