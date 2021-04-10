@@ -19,6 +19,7 @@ RUN set -xe; apk add --no-cache libzip-dev \
         yes '' | pecl install -of imagick && \
         yes '' | pecl install -of redis && \
         docker-php-ext-install pdo_pgsql && \
+        docker-php-ext-install pdo_mysql && \
         docker-php-ext-install intl && \
         docker-php-ext-enable imagick
 
