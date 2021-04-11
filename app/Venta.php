@@ -10,7 +10,7 @@ class Venta extends Model
     protected $table = "venta";
 
     protected $fillable = [
-        'empleado_id','fecha','hora','total','tipocliente', 'subtotalventa','iva', 'estado'
+        'empleado_id','fecha','hora','total','tipocliente', 'subtotalventa','iva', 'estado','cliente_id'
     ];
 
     public function detalle_pedido()
@@ -23,10 +23,10 @@ class Venta extends Model
         return $this->belongsTo(User::class,'usuario_id','id');
     }
 
-   /* public function cliente()
+    public function cliente()
     {
         return $this->belongsTo(Cliente::class);
-    }*/
+    }
 
     public function getFromDateAttribute($value) {
         return \Carbon\Carbon::parse($value)->format('d/m/Y');

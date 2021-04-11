@@ -22,63 +22,66 @@
     #div3{
       clear:both;
     }
-    
+
     table{
-	    width:100%; 
+	    width:100%;
 	    border-collapse:collapse;
     }
-    
+
     td{
 	    border:2px solid black;
     }
   </style>
-  
+
   <body>
-    
+
     <div id="div1">
 
-      Tienda DHS Tecnologias & Servicios
+     Farmacia Avellaneda Norte
 
     </div>
-    
+
     <div id="div2">
 
       <?php
         echo "Fecha: " . date("d") . "/" . date("m") . "/" . date("Y");
       ?>
-    
+
     </div>
-  
+
   <div id="div3">
   <br>
   <h4> Listado de Productos Registrados </h4>
   <br>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-sm">
     <thead>
       <tr style="background-color: black; color:white">
         <td>#</td>
-        <td>Codigo</td>
         <td>Nombre</td>
-        <td>Precio Lista</td>
-        <td>Precio Lista B</td>
-        <td>Mercado Libre</td>
-        <td>Eccomerce</td>
-        <td>Precio Lista</td>
-        <td>Precio Lista B</td>
+        <td>Marca</td>
+        <td>Categoria</td>
+        <td>Precio Compra</td>
+        <td>Precio Venta</td>
+        <td>Stock</td>
+        <td>Fecha Vencimiento</td>
+        <td>Almacen</td>
+        <td>Proveedor</td>
       </tr>
       </thead>
       <tbody>
         @foreach ($productos as $producto)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{ $producto->codigo }}</td>
             <td>{{ $producto->nombre }}</td>
-            <td>AR$ {{( $producto->costo_p  +  ($producto->costo_p * $producto->p_flete_p )) *  $producto->p_local_1p }} </p>
-            <td>AR$ {{( $producto->costo_p  +  ($producto->costo_p * $producto->p_flete_p )) *  $producto->p_local_2p }} </p>
-            <td>AR$ {{( $producto->costo_p  +  ($producto->costo_p * $producto->p_flete_p )) *  $producto->p_ml_p }} </p>
-            <td>AR$ {{( $producto->costo_p  +  ($producto->costo_p * $producto->p_flete_p )) *  $producto->p_ec_p }} </p>
-            <td>U$D {{( $producto->costo_d  +  ($producto->costo_d * $producto->p_flete_d )) *  $producto->p_local_2d }} </p>
-            <td>U$D {{( $producto->costo_d  +  ($producto->costo_d * $producto->p_flete_d )) *  $producto->p_local_1d }} </p>
+            <td>{{ Arr::get($producto,'marcas.nombre')}}</td>
+            <td>{{ Arr::get($producto,'categoria.nombre')}}</td>
+            <td>{{ $producto->precio_compra }}</td>
+            <td>{{ $producto->precio_venta }}</td>
+            <td>{{ $producto->stock }}</td>
+            <td>{{ $producto->fecha_vencimiento }}</td>
+            <td>{{ Arr::get($producto,'almacen.nombre')}}</td>
+            <td>{{ Arr::get($producto,'proveedor.razon_social')}}</td>
+
         </tr>
         @endforeach
       </tbody>

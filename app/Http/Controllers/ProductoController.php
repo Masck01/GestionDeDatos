@@ -16,6 +16,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
 use App\Sucursal;
+use Barryvdh\DomPDF\Facade as PDF;
+
 use Validator;
 use Str;
 use Session;

@@ -40,6 +40,7 @@ class VentaController extends Controller
 
             $productos = Producto::orderBy('nombre','ASC')->get();
 
+
             $clientes = Cliente::orderBy('id', 'ASC')->get();
 
             return view('admin.ventas.create',["productos"=>$productos, "clientes"=>$clientes]);
@@ -89,6 +90,8 @@ class VentaController extends Controller
 
                 $venta->empleado_id = Auth::user()->id;
 
+                $venta->cliente_id = $request->get('idCliente');
+
                 $venta->fecha = $mytime->toDateTimeString();
 
                 $venta->hora = $mytime->toDateTimeString();
@@ -100,7 +103,7 @@ class VentaController extends Controller
 
                 $venta->save();
 
-                if (count( json_decode($request->productosEnPedidos,true) ) > 0) {
+            if (count( json_decode($request->productosEnPedidos,true) ) > 0) {
 
                    $proEnPedido = json_decode($request->productosEnPedidos,true);
 
@@ -193,7 +196,7 @@ class VentaController extends Controller
 
         $movimiento->caja_id = 1;
 
-        $movimiento->descripcion = 'Venta Nº '. date("Ymd-his");
+        $movimiento->descripcion = 'PV0'.$pedido->empleado_id."-".'0000000'.$pedido->id;
 
         $movimiento->fecha = $mytime->toDateTimeString();
 

@@ -223,6 +223,16 @@ footer {
       </div>
     </header>
     <main>
+
+
+        <div>Id Venta: {{ 'PV0'.$pedido->empleado_id."-".'0000000'.$pedido->id}} </div>
+        <div>Id empleado:{{ $pedido->empleado_id }}</div>
+        <div>Fecha:{{ $pedido->getFromDateAttribute($pedido->fecha)}}</div>
+        <div>Hora:{{ $pedido->getFromHoraAttribute($pedido->hora)}}</div>
+        <div>Cliente:{{ $pedido->tipocliente}}</div>
+        <div>Razon social:{{ Arr::get($pedido,'cliente.razon_social') }}</div>
+
+
       <table border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
@@ -247,7 +257,7 @@ footer {
         <tfoot>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="2">SUBTOTAL</td>
+                <td colspan="2">TOTAL BRUTO</td>
                 <td style="text-align: center">AR$ {{$pedido->subtotalventa}}</td>
             </tr>
             <tr>
@@ -257,7 +267,7 @@ footer {
             </tr>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="2">TOTAL</td>
+                <td colspan="2">TOTAL NETO</td>
                 <td style="text-align: center">AR$ {{$pedido->total}}</td>
             </tr>
         </tfoot>

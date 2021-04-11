@@ -53,15 +53,19 @@
   <br>
   <h2> Listado De Ventas Registradas </h2>
   <br>
-    <table class="table table-bordered">
+    <table class="table table-success table-sm">
     <thead>
       <tr style="background-color: black; color:white">
         <td>#</td>
         <td>Fecha</td>
         <td>Hora</td>
-        <td>Subtotal</td>
+        <td>Codigo Venta</td>
+        <td> Cliente</td>
+        <td>Tipo Cliente</td>
+        <td>Cuit Cliente</td>
+        <td>Total Bruto</td>
         <td>IVA</td>
-        <td>Monto</td>
+        <td>Total Neto</td>
       </tr>
       </thead>
       <tbody>
@@ -70,6 +74,10 @@
             <td>{{$loop->iteration}}</td>
             <td>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</td>
             <td>{{ $pedido->getFromHoraAttribute($pedido->hora) }}</td>
+            <td> {{ 'PV0'.$pedido->empleado_id."-".'0000000'.$pedido->id}}</td>
+            <td> {{ Arr::get($pedido,'cliente.razon_social')}} </td>
+            <td> {{ $pedido->tipocliente }} </td>
+            <td> {{ Arr::get($pedido,'cliente.Cuit' )}} </td>
             <td> AR$ {{ $pedido->subtotalventa }} </td>
             <td> AR$ {{ $pedido->iva }} </td>
             <td> AR$ {{ $pedido->total }} </td>
@@ -80,6 +88,13 @@
         <tr>
             <td></td>
             <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+
+
             <td style="background-color: black; color:white"> Total </td>
             <td style="background-color: black; color:white">  AR$  {{ $subtotalventas }}</td>
             <td style="background-color: black; color:white">  AR$  {{ $ivatotal }}</td>

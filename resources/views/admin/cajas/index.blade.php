@@ -39,9 +39,9 @@
               <div class="row">
                 <div class="col-md-12">
                   <br>
-                  <p><b> Nombre </b>{{$cajas->nombre}}</p>
-                  <p><b> Saldo AR$ </b> {{$cajas->saldo}}</p>
-                  <p><b> Estado </b>{{$cajas->estado}}</p>
+                  <p><b> Nombre: </b>{{$cajas->nombre}}</p>
+
+                  <p><b> Estado: </b>{{$cajas->estado}}</p>
                 </div>
                 <div class="col-lg-6 col-md-6 col-dm-6 col-xs-12" id="guardar1">
                   <div class="form-group">
@@ -83,9 +83,8 @@
                 @endif
                       <th style="text-align:center;">Fecha</th>
                       <th style="text-align:center;">Descripcion</th>
-                      <th style="text-align:center;">Ingreso</th>
-                      <th style="text-align:center;">Egreso</th>
-                      <th style="text-align:center;">Saldo AR$</th>
+                      <th style="text-align:center;">Iva Venta</th>
+                      <th style="text-align:center;">Iva Compra</th>
                 </tr>
               </thead>
               <tbody>
@@ -94,6 +93,8 @@
                     <td style ="text-align:center;">{{$loop->iteration}}</td>
                     <td style ="text-align:center;">{{$movimiento->getFromDateAttribute($movimiento->fecha)}} </td>
                     <td style ="text-align:center;">{{$movimiento->descripcion}} </td>
+
+
                     @if($movimiento->moneda == 'Pesos')
                       <td style="text-align:center;">AR$ {{$movimiento->entrada}} </td>
                     @else
@@ -104,7 +105,6 @@
                     @else
                      <td style="text-align:center;">U$D {{$movimiento->salida}} </td>
                     @endif
-                    <td style="text-align:center;"> AR$ {{$movimiento->saldoparcialpesos}}</td>
               </tr>
               @endforeach
               </tbody>

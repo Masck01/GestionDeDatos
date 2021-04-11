@@ -16,6 +16,7 @@
                 {{-- <p><b>Proveedor: </b> {{ $compra->proveedor->razon_social}} </p> --}}
                 {{-- <p><b>Empleado: </b> {{ $compra->user->apellido}} {{ $compra->user->nombre}} </p> --}}
                 <p><b>Fecha de Alta</b>{{ $compra->getFromDateAttribute($compra->fechaalta) }}</p>
+                <p><b>Codigo Compra</b>{{'PP0'.$compra->proveedor_id."-".'0000000'.$compra->id }}</p>
                 <p><b>Subtotal Compra: </b>$ {{ $compra->subtotalcompra }}</p>
                 <p><b>IVA Compra: </b>$ {{ $compra->ivacompra }}</p>
                 <p><b>Total Compra en Pesos: </b>$ {{ $compra->total }}</p>

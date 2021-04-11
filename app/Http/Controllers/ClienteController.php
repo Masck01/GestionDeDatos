@@ -11,6 +11,8 @@ use App\Pedido;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ClienteExport;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class ClienteController extends Controller
 {
@@ -76,5 +78,15 @@ class ClienteController extends Controller
 
         return redirect()->route('clientes.index')->with('success','Cliente actualizado correctamente');
     }
+
+    public function listadoClientes ()
+    {
+        $clientes = Cliente::orderBy('razon_social', 'ASC')->get();
+
+        $pdf = PDF::loadView('pdf.clientespdf',['clientes'=>$clientes])->setPaper('a4', 'landscape');
+
+        return $pdf->stream();
+    }
+
 
 }
