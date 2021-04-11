@@ -17,43 +17,43 @@ class ConceptoSeeder extends Seeder
         $conceptos = [
             [
                 'descripcion' => 'salario basico',
-                'tipo' => 'haber',
-                'estado' => 'activo'
+                'tipo' => 'Haber',
+                'estado' => 'Activo'
             ],
             [
                 'descripcion' => 'aporte jubilatorio',
-                'tipo' => 'retencion',
-                'estado' => 'activo'
+                'tipo' => 'Retencion',
+                'estado' => 'Activo'
             ],
             [
                 'descripcion' => 'aguinaldo',
-                'tipo' => 'haber',
-                'estado' => 'activo'
+                'tipo' => 'Haber',
+                'estado' => 'Activo'
             ],
             [
                 'descripcion' => 'antiguedad',
-                'tipo' => 'haber',
-                'estado' => 'activo'
+                'tipo' => 'Haber',
+                'estado' => 'Activo'
             ],
             [
                 'descripcion' => 'obra social',
-                'tipo' => 'retencion',
-                'estado' => 'activo'
+                'tipo' => 'Retencion',
+                'estado' => 'Activo'
             ],
             [
                 'descripcion' => 'bonificacion por tiempo pleno',
-                'tipo' => 'haber',
-                'estado' => 'activo'
+                'tipo' => 'Haber',
+                'estado' => 'Activo'
             ],
             [
                 'descripcion' => 'descuento afip',
-                'tipo' => 'retencion',
-                'estado' => 'activo'
+                'tipo' => 'Retencion',
+                'estado' => 'Activo'
             ],
             [
                 'descripcion' => 'inasistencias',
-                'tipo' => 'retencion',
-                'estado' => 'inactivo'
+                'tipo' => 'Retencion',
+                'estado' => 'Inactivo'
             ]
         ];
         collect($conceptos)->each(function ($concepto) {

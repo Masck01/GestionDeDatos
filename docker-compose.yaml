@@ -1,0 +1,45 @@
+version: '3.9'
+services:
+  farmacia-app:
+      build:
+        context: .
+        dockerfile: ./php-fpm/Dockerfile
+      container_name: farmacia-app
+      image: farmacia-app:v1
+      environment:
+          APP_KEY: "base64:E/oCA2KJzSygqS+pAhxp0h+SOGZed18KvDsyWMFp1lg="
+          APP_DEBUG: "false"
+          DB_CONNECTION: pgsql
+          DB_HOST: db-postgres
+          DB_PORT: 5432
+          DB_DATABASE: dbfarmacia
+          DB_USERNAME: gestordb
+          DB_PASSWORD: mypostgresdb
+
+      depends_on:
+        - db-postgres
+
+
+  nginx-laravel:
+      build:
+         context: .
+         dockerfile: ./nginx/Dockerfile
+         args:
+          PHP_UPSTREAM_CONTAINER: "farmacia-app"
+      depends_on:
+         - farmacia-app
+      ports:
+          - "9600:80" 
+      container_name: nginx-laravel
+      image: nginx-laravel:v1
+      environment:
+           - "APP_KEY=base64:E/oCA2KJzSygqS+pAhxp0h+SOGZed18KvDsyWMFp1lg="
+           - "APP_DEBUG=false"
+
+  db-postgres:
+      image: postgres:13.2-alpine
+      environment:
+          POSTGRES_USER: "gestordb"
+          POSTGRES_PASSWORD: "mypostgresdb"
+          POSTGRES_DB: "dbfarmacia"
+      container_name: db-postgres

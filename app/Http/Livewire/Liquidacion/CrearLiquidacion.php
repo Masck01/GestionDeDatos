@@ -59,7 +59,7 @@ class CrearLiquidacion extends Component
     public function store()
     {
         $this->validate();
-        $col_names_liquidacion = Schema::getColumnListing('liquidacion');
+        $col_names_liquidacion = collect(Schema::getColumnListing('liquidacion'))->sort();
         $fecha_desde = $this->fecha->startOfMonth();
         $fecha_hasta = $this->fecha->endOfMonth();
         $periodo_liquidacion = $this->periodo_liquidacion;
@@ -69,14 +69,14 @@ class CrearLiquidacion extends Component
         $estado = 'pagado';
         $valores_liquidacion = collect(
             [
+                $this->id_empleado,
+                $estado,
                 $fecha_desde,
                 $fecha_hasta,
-                $salario_neto,
-                $salario_bruto,
                 $periodo_liquidacion,
                 $retenciones,
-                $estado,
-                $this->id_empleado,
+                $salario_bruto,
+                $salario_neto,
             ]
         );
         $valores_linealiquidacion = $this->valores_linealiquidacion();
