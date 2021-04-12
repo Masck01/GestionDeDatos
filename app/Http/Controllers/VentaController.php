@@ -241,4 +241,71 @@ class VentaController extends Controller
         return redirect()->route('ventas.index');
     }
 
+    public function libroVenta(Request $request){
+
+        $from = $request->searchDate;
+
+        $to = $request->searchDateHasta;
+
+        if($from && $to){
+
+            $ventas = Venta::where('estado','like','Pagado')
+                           ->whereBetween('fecha', [$from, $to])
+                           ->orderBy('id', 'DESC')
+                           ->paginate(30);
+
+            $total = Venta::select( DB::raw('sum(total) as totalVenta'))
+                                           ->where('estado','like','Pagado')
+                                           ->whereBetween('fecha', [$from, $to])
+                                           ->firstOrFail();
+        }
+        else{
+
+            $from = 0;
+
+            $to = 0;
+
+            $ventas = Venta::where('estado','like','Pagado')->orderBy('id', 'DESC')->paginate(15);
+
+            $total = Venta::select( DB::raw('sum(total) as totalVenta'))
+                                           ->where('estado','like','Pagado')
+                                           ->firstOrFail();
+        }
+
+        return view('admin.ventas.libroVenta', compact('ventas','total','from','to'));
+}
+public function libroVentapdf($from,$to){
+
+    if($from !=0 && $to !=0){
+
+        $ventas = Venta::where('estado','like','Pagado')
+                       ->whereBetween('fecha', [$from, $to])
+                       ->orderBy('id', 'DESC')
+                       ->paginate(30);
+
+        $total = Venta::select( DB::raw('sum(total) as total_venta'))
+                                       ->where('estado','like','Pagado')
+                                       ->whereBetween('fecha', [$from, $to])
+                                       ->firstOrFail();
+
+        $from = Carbon::parse($from)->format('d/m/Y');
+
+        $to = Carbon::parse($to)->format('d/m/Y');
+    }
+    else{
+
+        $ventas = Venta::where('estado','like','Pagado')->orderBy('id', 'DESC')->paginate(15);
+
+        $total = Venta::select( DB::raw('sum(total) as total_venta'))
+                                       ->where('estado','like','Pagado')
+                                       ->firstOrFail();
+    }
+
+    $pdf = PDF::loadView('pdf.libroVenta',compact('ventas','total','from','to'))->setPaper('a4', 'landscape');
+
+    return $pdf->stream();
+
+}
+
+
 }

@@ -144,6 +144,17 @@
                                         </a>
                                     </li>
                                 </ul>
+
+                                <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a href="{{ route('ventas.libroVentas') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Libro Iva Ventas</p>
+                                        </a>
+                                    </li>
+                                </ul>
+
                             </li>
                         @endcan
 
@@ -170,6 +181,15 @@
                                             <p>Ingreso</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('compras.libroCompras') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Libro Iva Compra</p>
+                                        </a>
+                                    </li>
+
+
+
                                 </ul>
                             </li>
                         @endcan

@@ -233,7 +233,9 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Empleado' => App\Empleado::class,
         'Cliente' => App\Cliente::class,
-        'ConfiguracionCategoria' => App\ConfiguracionCategoria::class
+        'ConfiguracionCategoria' => App\ConfiguracionCategoria::class,
+        'Venta' => App\Venta::class,
+        'Compra' => App\Compra::class
 
 
     ],

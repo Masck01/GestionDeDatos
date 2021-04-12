@@ -181,6 +181,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('venta/pagos/guardar', [VentaController::class, 'guardarPago'])->name('pago.store');
 
+    Route::get('venta/libroVenta', [VentaController::class,'libroVenta'])->name('ventas.libroVentas');
+
+     Route::get('venta/pdf/libroVenta/{from}/{to}', [VentaController::class,'libroVentapdf'])->name('ventas.libroVentasPdf');
+
     // Depositos
 
     // Route::get('depositos', 'DepositoController@index')->name('depositos.index');
@@ -220,6 +224,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('compra/pdf', [ComprasController::class, 'listadocompras'])->name('compras.downloadPdf');
 
     Route::resource('compras', ComprasController::class);
+
+    Route::get('compra/libroCompra', [ComprasController::class,'libroCompra'])->name('compras.libroCompras');
+
+     Route::get('compra/pdf/libroCompra/{from}/{to}', [ComprasController::class,'libroComprapdf'])->name('compras.libroComprasPdf');
 
     //Liquidacion
 
