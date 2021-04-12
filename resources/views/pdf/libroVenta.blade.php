@@ -151,7 +151,7 @@ p, label, span, table{
 
 				<span class="h2">FARMACIA AVELLANEDA NORTE</span>
 				</br>
-				<p<span class="h2">LIBRO COMPRA</span></p>
+				<p<span class="h2">LIBRO VENTA</span></p>
 				</br>
 					@if($from != 0 && $to != 0)
 					<p><span>Fecha desde {{$from}} hasta {{$to}}</span></p>
@@ -174,9 +174,9 @@ p, label, span, table{
                     <th></th>
 					<th width="100px">Fecha</th>
                     <th class="textcenter">Hora</th>
-                    <th class="textcenter">Codigo Compra</th>
-					<th class="textcenter"width="100x">Tipo Proveedor</th>
-					<th class="textcenter">Proveedor</th>
+                    <th class="textcenter">Codigo Vta</th>
+					<th class="textcenter"width="100x">Tipo Cliente</th>
+					<th class="textcenter">Cliente</th>
                     <th class="textcenter">Domicilio</th>
 					<th class="textcenter" > CUIT </th>
 					<th class="textcenter"> Total bruto </th>
@@ -190,17 +190,17 @@ p, label, span, table{
 				<tr>
 
                     <td style="text-align:center;">{{$loop->iteration}}</td>
-                    <td>{{ $venta->getFromDateAttribute($compra->fecha) }}</td>
-                    <td>{{ $venta->getFromHoraAttribute($compra->hora) }}</td>
-                    <td>{{'000'.$compra->proveedor_id."-".'0000000'.$compra->id}}</td>
-                    <td>{{ $compra->tipocliente}}</td>
-                    <td>{{ Arr::get($compra,'cliente.razon_social')}}</td>
-                    <td>{{ Arr::get($compra,'cliente.direccion')}}</td>
-                    <td>{{ Arr::get($compra,'cliente.Cuit')}}</td>
-                    <td>AR$ {{ $compra->subtotalventa }}  </td>
-                    <td>AR$ {{ $compra->iva }}  </td>
-                    <td> AR$ {{ $compra->total }} </td>
-                    <td>{{ $compra->estado}}</td>
+                    <td>{{ $venta->getFromDateAttribute($venta->fecha) }}</td>
+                    <td>{{ $venta->getFromHoraAttribute($venta->hora) }}</td>
+                    <td>{{'000'.$venta->empleado_id."-".'0000000'.$venta->id}}</td>
+                    <td>{{ $venta->tipocliente}}</td>
+                    <td>{{ Arr::get($venta,'cliente.razon_social')}}</td>
+                    <td>{{ Arr::get($venta,'cliente.direccion')}}</td>
+                    <td>{{ Arr::get($venta,'cliente.Cuit')}}</td>
+                    <td>AR$ {{ $venta->subtotalventa }}  </td>
+                    <td>AR$ {{ $venta->iva }}  </td>
+                    <td> AR$ {{ $venta->total }} </td>
+                    <td>{{ $venta->estado}}</td>
 				</tr>
 				@endforeach
 				<tr>
