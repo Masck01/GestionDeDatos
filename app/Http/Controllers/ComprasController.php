@@ -84,6 +84,7 @@ class ComprasController extends Controller
                 $compra->ivacompra = $request->get('iva_compra');
                 $compra->total = $request->get('total_compra');
                 $compra->fechacompra = $request->fechacompra;
+                $compra->nrofactura= $request->nrofactura;
 
 
 

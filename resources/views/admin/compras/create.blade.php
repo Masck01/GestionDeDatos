@@ -43,6 +43,32 @@
                             </div>
                         </div>
                         </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+
+                            <div class="form-group">
+
+                                <label for="cantidad">Nro Factura</label>
+
+                                <div class="input-group">
+
+                                    <div class="input-group-prepend">
+
+                                        <span class="input-group-text" id="basic-addon1"><i class="far fa-keyboard"></i></span>
+
+
+                                    </div>
+
+                                    <input type="number" name="nrofactura" id="nrofactura" class="form-control" placeholder="XXXX-XXXXXXXX">
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
 						<div class="input-group">
 
 							<input type="text" readonly name="pnombrePro" id="pnombrePro" class="form-control" placeholder="Seleccione un Proveedor">
@@ -147,10 +173,13 @@
 
 								</div>
 
+
 							</div>
 
 
 						</div>
+
+
 
 						<div class="row">
 
@@ -178,6 +207,8 @@
 										<th>Producto</th>
 										<th>Cantidad</th>
 										<th>Costo</th>
+                                        <th>Subtotal</th>
+
 									</thead>
 									<tfoot>
 										<tr>
@@ -400,11 +431,13 @@
 				sub=sub+subtotal[cont];
                 iva= sub*0.21;
                 total=sub+iva;
-				var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td> <td class= "idProducto" style="display:none;"><input type="hidden" name="idProducto[]" value="'+idarticulo+'">'+idarticulo+'</td>  <td  class ="cantidad"><input type="hidden" name="cantidad[]" value="'+cantidad+'">'+cantidad+'</td> <td  class ="precio"><input type="hidden" name="precio[]" value="'+costo+'">'+ costo +'</td> </tr>';
+
+
+				var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td> <td class= "idProducto" style="display:none;"><input type="hidden" name="idProducto[]" value="'+idarticulo+'">'+idarticulo+'</td>  <td  class ="cantidad"><input type="hidden" name="cantidad[]" value="'+cantidad+'">'+cantidad+'</td> <td  class ="precio"><input type="hidden" name="precio[]" value="'+costo+'">'+ costo +'</td> <td> $ '+subtotal[cont]+'</td></tr>';
 				cont++;
-                $('#subtotal').html("$/ " + sub);
+                $('#subtotal').html("$ " + sub);
 		    	$('#subtotal_compra').val(sub);
-                $('#iva').html("$/ " + iva);
+                $('#iva').html("$ " + iva);
 		    	$('#iva_compra').val(iva);
 				$('#total').html("$ " + total);
 				$('#total_compra').val(total);
