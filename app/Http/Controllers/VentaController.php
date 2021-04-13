@@ -20,6 +20,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Empleado;
 
 class VentaController extends Controller
 {
@@ -177,9 +178,14 @@ class VentaController extends Controller
 
         $detalle = $pedido->detalle_pedido()->get();
 
-        $pdf = PDF::loadView('pdf.reciboVenta',['pedido'=>$pedido],['detalle'=>$detalle])->setPaper('a4', 'landscape');
+        if($pedido->tipocliente == 'Consumidor Final'):
+        $pdf = PDF::loadView('pdf.reciboVentaCF',['pedido'=>$pedido],['detalle'=>$detalle])->setPaper('a4', 'landscape');
 
         return $pdf->stream();
+        else:
+        $pdf = PDF::loadView('pdf.reciboVenta',['pedido'=>$pedido],['detalle'=>$detalle])->setPaper('a4', 'landscape');
+        return $pdf->stream();
+        endif;
     }
 
     private function crearLineaCaja(Venta $pedido){
