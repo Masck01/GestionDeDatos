@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Farmacia</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="/img/home.jpg" />
+    <link rel="shortcut icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu5H-Ih4ojE7KqCNSIfYw2UM0TcXeK6S8tWA&usqp=CAU" />
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,9 +63,9 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <div class="brand-link">
-                <img src="{{ asset('img/home.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                <img src="{{ asset('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAlV69m7Ff0drntJWHaNyoXsM8NdtaFjB_Cw&usqp=CAU') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light">Avellaneda Norte</span>
+                <span class="brand-text font-weight-light">Avellaneda N</span>
             </div>
 
             <!-- Sidebar -->
@@ -77,7 +77,7 @@
                             data-accordion="false">
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg') }}"
+                                    <img src="{{ asset('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu5H-Ih4ojE7KqCNSIfYw2UM0TcXeK6S8tWA&usqp=CAU') }}"
                                         class="img-circle elevation-2" alt="User Image">
                                     <p>
                                         &nbsp;{{ Empleado::empleado()->apellido }},
@@ -144,6 +144,17 @@
                                         </a>
                                     </li>
                                 </ul>
+
+                                <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a href="{{ route('ventas.libroVentas') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Libro Iva Ventas</p>
+                                        </a>
+                                    </li>
+                                </ul>
+
                             </li>
                         @endcan
 
@@ -170,6 +181,15 @@
                                             <p>Ingreso</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('compras.libroCompras') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Libro Iva Compra</p>
+                                        </a>
+                                    </li>
+
+
+
                                 </ul>
                             </li>
                         @endcan

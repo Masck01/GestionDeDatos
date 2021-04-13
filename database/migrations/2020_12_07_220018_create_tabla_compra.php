@@ -25,6 +25,7 @@ class CreateTablaCompra extends Migration
             $table->float('ivacompra', 9, 2)->default(0.00);
             $table->enum('tipoproveedor', ['Consumidor Final','Responsable Inscripto'])->default('Consumidor Final');
             $table->bigInteger('proveedor_id')->unsigned()->nullable();
+            $table->bigInteger('nrofactura')->unsigned()->nullable(true);
 
             $table->timestamps();
 

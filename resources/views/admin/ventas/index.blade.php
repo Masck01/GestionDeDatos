@@ -85,7 +85,7 @@
                         <td style="text-align:center;">{{$loop->iteration}}</td>
                         <td>{{ $venta->getFromDateAttribute($venta->fecha) }}</td>
                         <td>{{ $venta->getFromHoraAttribute($venta->hora) }}</td>
-                        <td>{{'PV0'.$venta->empleado_id."-".'0000000'.$venta->id}}</td>
+                        <td>{{'000'.$venta->empleado_id."-".'0000000'.$venta->id}}</td>
                         <td>{{ $venta->tipocliente}}</td>
                         <td>{{ Arr::get($venta,'cliente.razon_social')}}</td>
                         <td>{{ Arr::get($venta,'cliente.Cuit')}}</td>
