@@ -246,8 +246,8 @@ footer {
 
 
           <h2 class="name">Tipo: {{ $pedido->tipoproveedor }}</h2>
-          <h2 class="name">Proveedor: {{ Arr::get($pedido,'proveedor.razon_social') }}</h2>
-          <div class="address">CUIT: {{ Arr::get($pedido,'proveedor.cuit') }} </div>
+          {{-- <h2 class="name">Proveedor: {{ Arr::get($pedido,'proveedor.razon_social') }}</h2>
+          <div class="address">CUIT: {{ Arr::get($pedido,'proveedor.cuit') }} </div> --}}
           {{-- <div class="address">Dirección: {{Arr::get($pedido, 'proveedor.direccion')}} </div> --}}
         </div>
         <div id="invoice">

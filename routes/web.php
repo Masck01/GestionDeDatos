@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('pdf/impimirMovimientoPedido/{pedido}', [PdfController::class, 'movimientoPedido'])->name('pdf.impimirMovimientoPedido');
 
-    Route::get('pdf/remitox/{pedido}', [PdfController::class, 'imprimirRemito'])->name('pdf.imprimirRemito');
+    Route::get('pdf/remitox/{pedido}', [PdfController::class, 'recivo'])->name('pdf.imprimirRemito');
 
     // PRODUCTOS //
 
@@ -222,6 +222,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('compras/{compra}', 'ComprasController@show')->name('compras.show');
 
     Route::get('compra/pdf', [ComprasController::class, 'listadocompras'])->name('compras.downloadPdf');
+
 
     Route::resource('compras', ComprasController::class);
 

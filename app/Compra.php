@@ -33,7 +33,14 @@ class Compra extends Model
         return $this->belongsTo(Proveedor::class,'proveedor_id');
     }
 
+   /*  public functiom empleado()
+    {
+        return $this->belongsTo(Empleado::class,'empleado_id');
+    } */
     public function getFromDateAttribute($value) {
         return \Carbon\Carbon::parse($value)->format('d/m/Y');
+    }
+    public function getFromHoraAttribute($value) {
+        return \Carbon\Carbon::parse($value)->format('H:i:s');
     }
 }

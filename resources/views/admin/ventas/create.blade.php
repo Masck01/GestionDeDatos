@@ -139,16 +139,19 @@
                 <th>Subtotal</th>
                 <th></th>
                 <th></th>
+                <th></th>
                 <th><h4 id="subtotal">$ 00.00</h4> <input type="hidden" name="subtotal_venta" id="subtotal_venta">
             </tr>
             <tr>
                 <th>IVA</th>
                 <th></th>
                 <th></th>
+                <th></th>
                 <th><h4 id="iva">$ 00.00</h4> <input type="hidden" name="iva_venta" id="iva_venta">
             </tr>
             <tr>
                 <th>Total</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th><h4 id="total">$ 00.00</h4> <input type="hidden" name="total_venta" id="total_venta">
