@@ -1,3 +1,8 @@
+# Utilizacion, al crear los servicios ingresar a farmacia-dev y realizar
+# php composer.phar install
+# php artisan migrate
+# Luego brindar permisos 775 o 777 a carpetas bootstrap/cache y storage
+# chmod -R 777 bootstrap/cache storage
 version: '3.8'
 services:
   farmacia-dev:

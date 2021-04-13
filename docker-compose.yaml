@@ -1,3 +1,4 @@
+# Update this file on production
 version: '3.9'
 services:
   farmacia-app:
