@@ -8,6 +8,7 @@
             <div class="row">
               <div class="col-md-10">
                 <h4>Detalle de la Venta</h4>
+                {{$numaletras->toWords(3)}}
               </div>
             </div>
             <div class="row">
@@ -20,6 +21,7 @@
                 <p><b>IVA: </b> AR$ {{ $pedido->iva }} </p>
                 <p><b>Total: </b> AR$ {{ $pedido->total }} </p>
                 <p><b>Estado: </b> {{ $pedido->estado }} </p>
+
               </div>
             </div>
 

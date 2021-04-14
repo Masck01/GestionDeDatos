@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Empleado;
+use Luecano\NumeroALetras\NumeroALetras;
 
 class VentaController extends Controller
 {
@@ -177,13 +178,13 @@ class VentaController extends Controller
         $pedido = Venta::find($id);;
 
         $detalle = $pedido->detalle_pedido()->get();
-
+        $numaletras = new NumeroALetras();
         if($pedido->tipocliente == 'Consumidor Final'):
-        $pdf = PDF::loadView('pdf.reciboVentaCF',['pedido'=>$pedido],['detalle'=>$detalle])->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('pdf.reciboVentaCF',['pedido'=>$pedido,'detalle'=>$detalle,'numaletras'=>$numaletras])->setPaper('a4', 'landscape');
 
         return $pdf->stream();
         else:
-        $pdf = PDF::loadView('pdf.reciboVenta',['pedido'=>$pedido],['detalle'=>$detalle])->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('pdf.reciboVenta',['pedido'=>$pedido,'detalle'=>$detalle, 'numaletras'=>$numaletras])->setPaper('a4', 'landscape');
         return $pdf->stream();
         endif;
     }

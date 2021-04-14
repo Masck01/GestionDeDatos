@@ -337,6 +337,8 @@ footer {
             </tr>
             <tr>
                 <td colspan="2"></td>
+                <p>Son Pesos AR$ {{$numaletras->toWords($pedido->total)}}</p>
+
                 <td colspan="2">TOTAL NETO</td>
                 <td style="text-align: center">AR$ {{$pedido->total}}</td>
             </tr>
