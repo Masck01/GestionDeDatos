@@ -101,7 +101,7 @@
                             <th>Totales</th>
                             <th></th>
                             <th></th>
-                            <th>{{ $linea_liquidacion->first()->liquidacion()->first()->salario_bruto }}</th>
+                            <th>{{ $linea_liquidacion->first()->liquidacion()->first()->salario_neto + $linea_liquidacion->first()->liquidacion()->first()->retenciones}}</th>
                             <th>{{ $linea_liquidacion->first()->liquidacion()->first()->retenciones }}</th>
                             <th>{{ $linea_liquidacion->first()->liquidacion()->first()->salario_neto }}</th>
                         </tfoot>

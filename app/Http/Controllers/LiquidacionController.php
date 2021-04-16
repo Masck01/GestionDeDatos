@@ -41,6 +41,8 @@ class LiquidacionController extends Controller
 
     public function lista_liquidacion($id)
     {
+        $numaletra = new NumeroALetras();
+
         $liquidacion = Liquidacion::findOrFail($id);
 
         $linea_liquidacion = $liquidacion->linea_liquidacion()->get();
@@ -51,7 +53,7 @@ class LiquidacionController extends Controller
 
         $salario_basico = $empleado->categoria()->get()->first()->salario_basico;
 
-        return compact('liquidacion', 'linea_liquidacion', 'empleado', 'conceptos', 'salario_basico');
+        return compact('liquidacion', 'linea_liquidacion', 'empleado', 'conceptos', 'salario_basico','numaletra');
     }
 
 
