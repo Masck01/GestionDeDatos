@@ -17,7 +17,7 @@ use Illuminate\Support\Collection;
 use Luecano\NumeroALetras\NumeroALetras;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
-
+set_time_limit(0);
 
 class LiquidacionController extends Controller
 {

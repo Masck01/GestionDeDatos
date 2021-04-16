@@ -297,7 +297,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('configuracioncategoria/activar/{id}', [ConfiguracionCategoriaController::class, 'activar'])->name('configuracioncategoria.activar');
 
-
+    Route::resource('configuracioncategoria',ConfiguracionCategoriaController::class)->except(['update']);
 
     // SUB CATEGORIAS //
 
