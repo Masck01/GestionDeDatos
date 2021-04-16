@@ -15,7 +15,7 @@ class AlmacenDeMedicamentosSeeder extends Seeder
     public function run()
     {
         AlmacenDeMedicamentos::create([
-            'nombre' => '',
+            'nombre' => 'Almacen Esq Norte',
             'telefono' => 44433434,
             'direccion' => 'Esq Norte 355',
             'ciudad' => 'Tucuman',

@@ -31,6 +31,13 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionsTableSeeder::class);
         $this->call(CajaSeeder::class);
         $this->call(ConfiguracionCategoriaSeeder::class);
+        $this->call(CapacidadSeeder::class);
+        $this->call(CategoriadeProductoSeeder::class);
+        $this->call(MarcaSeeder::class);
+        $this->call(ProveedorSeeder::class);
+        $this->call(ProductoSeeder::class);
+        $this->call(ClienteSeeder::class);
+
 
         // Factorys
         // ConfiguracionCategoria::factory()->count(20)->create();
