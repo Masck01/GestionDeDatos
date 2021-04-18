@@ -161,7 +161,7 @@ class ComprasController extends Controller
 
         $movimiento->caja_id = 1;
 
-        $movimiento->descripcion = 'PP0'.$compra->proveedor_id."-".'0000000'.$compra->id;
+        $movimiento->descripcion = '00'.$compra->proveedor_id."0"."-".'0000000'.$compra->id;
 
         $movimiento->fecha = $mytime->toDateTimeString();
 

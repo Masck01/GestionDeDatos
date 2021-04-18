@@ -72,7 +72,7 @@
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{ $pedido->getFromDateAttribute($pedido->fechaalta) }}</td>
-            <td> {{ 'PP0'.$pedido->proveedor_id."-".'0000000'.$pedido->id}}</td>
+            <td> {{ '00'.$pedido->proveedor_id."0"."-".'0000000'.$pedido->id}}</td>
             <td>{{ Arr::get($pedido,'proveedor.razon_social') }} </td>
             <td>{{ $pedido->tipoproveedor }} </td>
             <td>{{ Arr::get($pedido,'proveedor.cuit')}} </td>
