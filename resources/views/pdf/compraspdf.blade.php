@@ -35,9 +35,10 @@
 
   <body>
 
-    <div id="div1">
-
-    Farmacia Avellaneda Norte ©
+    <div id="div1"><h4 class="name">FARMACIA AVELLANEDA NORTE</h4>
+        <div>Av. Sarmiento 199 | 4000 | Tucumán</div>
+        <div>Tel / Fax. 0381. 4219399 </div>
+        <div><a href="mailto:dhsay@arnet.com.ar">favellanedanorte@arnet.com.ar</a></div>
 
     </div>
 

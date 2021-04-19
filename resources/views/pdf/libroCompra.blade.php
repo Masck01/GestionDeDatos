@@ -149,7 +149,7 @@ p, label, span, table{
 			<td class="info_empresa">
 				<div>
 
-				<span class="h2">FARMACIA AVELLANEDA NORTE</span>
+				<span class="h2">FARMACIA AVELLANEDA NORTE</span><h5>Av Sarmiento 199| 4000 | Tucumán</h5>
 				</br>
 				<p<span class="h2">LIBRO COMPRA</span></p>
 				</br>
