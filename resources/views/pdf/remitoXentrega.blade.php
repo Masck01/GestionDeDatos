@@ -232,7 +232,7 @@ footer {
         <div><a href="mailto:dhsay@arnet.com.ar">favellanedanorte@arnet.com.ar</a></div>
       </div>
         <div id='Nro' class="col-md-8">
-                <div>Remito Nº:: {{ $pedido->nrofactura}} </div>
+                <div>Remito Nº:: {{ $pedido->codigo}} </div>
                 <div>Fecha:{{ $pedido->getFromDateAttribute($pedido->fecha)}}</div>
                 <div>Hora:{{ $pedido->getFromHoraAttribute($pedido->hora)}}</div>
         </div>
