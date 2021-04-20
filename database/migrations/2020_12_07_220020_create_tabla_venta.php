@@ -15,7 +15,7 @@ class CreateTablaVenta extends Migration
     {
         Schema::create('venta', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //$table->string('codigo')->default('0');;
+            $table->string('codigo')->default('0');
             $table->date('fecha');
             $table->time('hora',0);
             $table->float('subtotalventa', 9, 2)->default(0.00);

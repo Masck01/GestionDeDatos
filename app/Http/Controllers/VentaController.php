@@ -105,6 +105,10 @@ class VentaController extends Controller
 
                 $venta->save();
 
+                $venta2 = Venta::find($venta->id);
+                $venta2->codigo='000'.$venta->empleado_id."-".'0000000'.$venta->id;
+                $venta2->save();
+
             if (count( json_decode($request->productosEnPedidos,true) ) > 0) {
 
                    $proEnPedido = json_decode($request->productosEnPedidos,true);
