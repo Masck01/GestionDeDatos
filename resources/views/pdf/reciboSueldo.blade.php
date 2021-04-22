@@ -9,7 +9,7 @@
 
     <style>
         body {
-            margin: -30 0 0 0;
+            margin: -2rem 0 -2rem 0;
         }
 
         div {
@@ -39,6 +39,7 @@
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 10;
             width: 100%;
+            margin-top: -1rem;
         }
 
         th {
@@ -58,7 +59,7 @@
             outline: black 1px solid;
         }
 
-        .imgcontainer__p{
+        .imgcontainer__p {
             display: inline-block;
             position: absolute;
             width: 50%;
@@ -72,8 +73,9 @@
             right: 0;
             padding: 2px;
         }
+
         .asidecontainer {
-            margin-top: -10px;
+            margin-top: -15px;
             width: 100%;
             height: 90px;
         }
@@ -92,27 +94,32 @@
         }
 
 
-        .asidecontainer__pnomyap{
+        .asidecontainer__pnomyap {
             top: 0;
             left: 0;
         }
-        .asidecontainer__pcuit{
+
+        .asidecontainer__pcuit {
             top: 0;
             left: 270px;
         }
-        .asidecontainer__pdescripcion{
+
+        .asidecontainer__pdescripcion {
             top: 0;
             right: 0;
         }
-        .asidecontainer__pid{
-            top: 55px;
+
+        .asidecontainer__pid {
+            top: 2.5rem;
         }
-        .asidecontainer__pliq{
-            top: 55px;
+
+        .asidecontainer__pliq {
+            top: 2.5rem;
             right: 0;
         }
-        .asidecontainer__pcodigo{
-            top: 55px;
+
+        .asidecontainer__pcodigo {
+            top: 2.5rem;
             left: 270px;
         }
     </style>
@@ -125,6 +132,89 @@
             <h3>Farmacia Avellaneda</h3>
             <h3>Av. Sarmiento 199 | 4000 | Tucumán------CUIT: 20-20433571-1</h3>
             <h3>Tel / Fax. 0381. 4219399 </h3>
+        </header>
+        <div class="asidecontainer">
+            <p class="asidecontainer__pnomyap">
+                Nombre y Apellido:
+                {{ $empleado->nombre }} {{ $empleado->apellido }}
+            </p>
+            <p class="asidecontainer__pcuit">
+                Cuit:
+                {{ $empleado->cuit }}
+            </p>
+            <p class="asidecontainer__pdescripcion">
+                Categoria:
+                {{ $empleado->categoria->descripcion }}
+            </p>
+
+            <p class="asidecontainer__pid">
+                Legajo:
+                {{ $empleado->id }}
+            </p>
+            <p class="asidecontainer__pliq">
+                Periodo:
+                {{ $liquidacion->periodo_liquidacion }}
+            </p>
+            <p class="asidecontainer__pcodigo">
+                Caja de Ahorro:
+                {{ $empleado->caja_de_ahorro->codigo }}
+            </p>
+
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Concepto</th>
+                    <th>Unidades</th>
+                    <th>Haberes</th>
+                    <th>Retenciones</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($linea_liquidacion as $l)
+                <tr>
+                    {{-- # --}}
+                    <td>{{ $loop->iteration }}</td>
+                    {{-- Concepto --}}
+                    <td>{{ $conceptos->find($l->concepto_id)->descripcion }}</td>
+                    {{-- Unidades --}}
+                    <td>{{ $l->unidad }}</td>
+                    {{-- Haberes --}}
+                    <td>
+                        @if ($l->concepto()->first()->tipo == 'Haber')
+                        {{ $l->montofijo ?? $l->montovariable }}
+                        @endif
+                    </td>
+                    <td>
+                        @if ($l->concepto()->first()->tipo == 'Retencion')
+                        {{ $l->montovariable ?? $l->montofijo }}
+                        @endif
+                    </td>
+                    {{-- Total Parcial --}}
+                    <td></td>
+                </tr>
+                @endforeach
+            </tbody>
+            <tfoot>
+                <th>Totales</th>
+                <th></th>
+                <th></th>
+                <th>{{ $liquidacion->salario_neto + $liquidacion->retenciones }}</th>
+                <th>{{ $liquidacion->retenciones }}</th>
+                <th>{{ $liquidacion->salario_neto }}</th>
+            </tfoot>
+        </table>
+        <div class="imgcontainer">
+            <p class="imgcontainer__p">SON PESOS: {{$numaletra->toWords($liquidacion->salario_neto)}}</p>
+            <img class="imgcontainer__img" src="{{url('/img/firma.jpg')}}">
+        </div>
+        <header>
+            <h3>Farmacia Avellaneda</h3>
+            <h3>Av. Sarmiento 199 | 4000 | Tucumán------CUIT: 20-20433571-1</h3>
+            <h3>Tel / Fax. 0381. 4219399 </h3>
+            <p>Duplicado</p>
         </header>
         <div class="asidecontainer">
             <p class="asidecontainer__pnomyap">
@@ -176,95 +266,16 @@
                     {{-- Unidades --}}
                     <td>{{ $l->unidad }}</td>
                     {{-- Haberes --}}
-                    @if ($l->concepto()->first()->tipo == 'Haber')
-                    <td>{{ $l->montofijo ?? $l->montovariable }}</td>
-                    <td></td>
-                    @endif
-                    @if ($l->concepto()->first()->tipo == 'Retencion')
-                    <td></td>
-                    <td>{{ $l->montovariable }}</td>
-                    @endif
-                    {{-- Total Parcial --}}
-                    <td></td>
-                </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <th>Totales</th>
-                <th></th>
-                <th></th>
-                <th>{{ $liquidacion->salario_bruto }}</th>
-                <th>{{ $liquidacion->retenciones }}</th>
-                <th>{{ $liquidacion->salario_neto }}</th>
-            </tfoot>
-        </table>
-        <div class="imgcontainer">
-            <p class="imgcontainer__p">SON PESOS: {{$numaletra->toWords($liquidacion->salario_neto)}}</p>
-            <img class="imgcontainer__img" src="{{url('/img/firma.jpg')}}">
-        </div>
-        <header>
-            <h3>Farmacia Avellaneda</h3>
-            <h3>Av. Sarmiento 199 | 4000 | Tucumán------CUIT: 20-20433571-1</h3>
-            <h3>Tel / Fax. 0381. 4219399 </h3>
-            <p>Duplicado</p>
-        </header><div class="asidecontainer">
-            <p class="asidecontainer__pnomyap">
-                Nombre y Apellido:
-                {{ $empleado->nombre }} {{ $empleado->apellido }}
-            </p>
-            <p class="asidecontainer__pcuit">
-                Cuit:
-                {{ $empleado->cuit }}
-            </p>
-            <p class="asidecontainer__pdescripcion">
-                Categoria:
-                {{ $empleado->categoria->descripcion }}
-            </p>
-
-            <p class="asidecontainer__pid">
-                Legajo:
-                {{ $empleado->id }}
-            </p>
-            <p class="asidecontainer__pliq">
-                Periodo:
-                {{ $liquidacion->periodo_liquidacion }}
-            </p>
-            <p class="asidecontainer__pcodigo">
-                Caja de Ahorro:
-                {{ $empleado->caja_de_ahorro->codigo }}
-            </p>
-
-        </div>
-        <table>
-            <thead>
-                <tr>
-
-                    <th>#</th>
-                    <th>Concepto</th>
-                    <th>Unidades</th>
-                    <th>Haberes</th>
-                    <th>Retenciones</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($linea_liquidacion as $l)
-                <tr>
-                    {{-- # --}}
-                    <td>{{ $loop->iteration }}</td>
-                    {{-- Concepto --}}
-                    <td>{{ $conceptos->find($l->concepto_id)->descripcion }}</td>
-                    {{-- Unidades --}}
-                    <td>{{ $l->unidad }}</td>
-                    {{-- Haberes --}}
-                    @if ($l->concepto()->first()->tipo == 'Haber')
-                    <td>{{ $l->montofijo ?? $l->montovariable }}</td>
-                    <td></td>
-                    @endif
-                    @if ($l->concepto()->first()->tipo == 'Retencion')
-                    <td></td>
-                    <td>{{ $l->montovariable }}</td>
-                    @endif
+                    <td>
+                        @if ($l->concepto()->first()->tipo == 'Haber')
+                        {{ $l->montofijo ?? $l->montovariable }}
+                        @endif
+                    </td>
+                    <td>
+                        @if ($l->concepto()->first()->tipo == 'Retencion')
+                        {{ $l->montovariable ?? $l->montofijo}}
+                        @endif
+                    </td>
                     {{-- Total Parcial --}}
                     <td></td>
                 </tr>
