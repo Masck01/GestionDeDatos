@@ -428,7 +428,7 @@
 			cantidad=$("#pcantidad").val();
 			costo = $("#pcosto").val();
 
-        	if (idarticulo!="" && cantidad!="" && cantidad>0 && costo!="")
+        	if (idarticulo!="" && cantidad!="" && cantidad>0 && costo!="" && Number.isInteger(parseFloat(cantidad)) )
         	{
 				subtotal[cont]= costo * cantidad;
 				sub=sub+subtotal[cont];

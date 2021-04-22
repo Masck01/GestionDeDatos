@@ -366,7 +366,7 @@
 			articulo=$("#pdescripcion").val();
 			cantidad=$("#pcantidad").val();
 			precio = document.getElementById('pprecio').value;
-        	if (idarticulo!="" && cantidad!="" && cantidad>0 && precio!="")
+        	if (idarticulo!="" && cantidad!="" && cantidad>0 && precio!="" && Number.isInteger(parseFloat(cantidad)))
         	{
 				subtotal[cont]=(cantidad*precio);
 				sub=sub+subtotal[cont];
