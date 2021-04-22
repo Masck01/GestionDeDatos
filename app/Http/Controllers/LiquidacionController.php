@@ -2,22 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Concepto;
-use App\Detalle_Liquidacion;
 use App\Liquidacion;
-use App\Cajas;
-use App\Categoria;
-use App\ConfiguracionCategoria;
-use App\Empleado;
-use DB;
-use Session;
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Luecano\NumeroALetras\NumeroALetras;
-use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
-
 
 class LiquidacionController extends Controller
 {
@@ -41,6 +29,8 @@ class LiquidacionController extends Controller
 
     public function lista_liquidacion($id)
     {
+        $numaletra = new NumeroALetras();
+
         $liquidacion = Liquidacion::findOrFail($id);
 
         $linea_liquidacion = $liquidacion->linea_liquidacion()->get();
@@ -51,7 +41,7 @@ class LiquidacionController extends Controller
 
         $salario_basico = $empleado->categoria()->get()->first()->salario_basico;
 
-        return compact('liquidacion', 'linea_liquidacion', 'empleado', 'conceptos', 'salario_basico');
+        return compact('liquidacion', 'linea_liquidacion', 'empleado', 'conceptos', 'salario_basico','numaletra');
     }
 
 

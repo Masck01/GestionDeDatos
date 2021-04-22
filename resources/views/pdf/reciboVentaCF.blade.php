@@ -216,7 +216,7 @@ table tfoot tr td:first-child {
   margin-bottom: 50px;
 }
 
-img#FacturaA {
+img#FacturaC {
 text-align: center;
 padding: 20px;
 margin-left: 450px;
@@ -262,7 +262,7 @@ footer {
                 <div><a href="mailto:dhsay@arnet.com.ar">favellanedanorte@arnet.com.ar</a></div>
               </div>
               <div class="col-md-4">
-                <img id="FacturaA" src="https://www.pngkey.com/png/detail/809-8092795_letra-a-arial-black.png" alt="">
+                <img id="FacturaC" src="https://mtsmalta.com/onlineshop/img/p/1/1/2/1/5/11215-tm_home_default.jpg" alt="">
               </div>
               <div id='Nro' class="col-md-8">
                 <div>Factura Nº:: {{ '000'.$pedido->empleado_id."-".'0000000'.$pedido->id}} </div>
@@ -284,10 +284,7 @@ footer {
       <div id="test2" class="row">
         <div id="Client2" class="col-md-8">
             <div>Tipo Cliente:{{ $pedido->tipocliente}}</div>
-            <div>Razon social:{{ Arr::get($pedido,'cliente.razon_social') }}</div>
-            <div>CUIT: {{ Arr::get($pedido,'cliente.Cuit') }}</div>
-            <div>Dirección:{{ Arr::get($pedido,'cliente.direccion') }}</div>
-        </div>
+            </div>
 
         <div id="emp2">
             <div>Forma de pago: Contado</div>
@@ -338,7 +335,6 @@ footer {
             <tr>
                 <td colspan="2"></td>
                 <p>Son Pesos AR$ {{$numaletras->toWords($pedido->total)}}</p>
-
                 <td colspan="2">TOTAL NETO</td>
                 <td style="text-align: center">AR$ {{$pedido->total}}</td>
             </tr>

@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('pdf/impimirMovimientoPedido/{pedido}', [PdfController::class, 'movimientoPedido'])->name('pdf.impimirMovimientoPedido');
 
-    Route::get('pdf/remitox/{pedido}', [PdfController::class, 'imprimirRemito'])->name('pdf.imprimirRemito');
+    Route::get('pdf/remitox/{pedido}', [PdfController::class, 'recivo'])->name('pdf.imprimirRemito');
 
     // PRODUCTOS //
 
@@ -181,6 +181,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('venta/pagos/guardar', [VentaController::class, 'guardarPago'])->name('pago.store');
 
+    Route::get('venta/libroVenta', [VentaController::class,'libroVenta'])->name('ventas.libroVentas');
+
+     Route::get('venta/pdf/libroVenta/{from}/{to}', [VentaController::class,'libroVentapdf'])->name('ventas.libroVentasPdf');
+
     // Depositos
 
     // Route::get('depositos', 'DepositoController@index')->name('depositos.index');
@@ -219,7 +223,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('compra/pdf', [ComprasController::class, 'listadocompras'])->name('compras.downloadPdf');
 
+
     Route::resource('compras', ComprasController::class);
+
+    Route::get('compra/libroCompra', [ComprasController::class,'libroCompra'])->name('compras.libroCompras');
+
+     Route::get('compra/pdf/libroCompra/{from}/{to}', [ComprasController::class,'libroComprapdf'])->name('compras.libroComprasPdf');
 
     //Liquidacion
 
@@ -288,7 +297,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('configuracioncategoria/activar/{id}', [ConfiguracionCategoriaController::class, 'activar'])->name('configuracioncategoria.activar');
 
-
+    Route::resource('configuracioncategoria',ConfiguracionCategoriaController::class)->except(['update']);
 
     // SUB CATEGORIAS //
 

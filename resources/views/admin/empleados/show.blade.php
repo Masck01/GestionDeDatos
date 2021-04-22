@@ -181,18 +181,18 @@
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="row">
-                    <input type="hidden" class="form-control" placeholder="Enter ..." id="idUpdate" name="id" value="{{$grupofamilia->id}}">
+                    <input type="hidden" class="form-control" placeholder="Enter ..." id="idUpdate" name="id" value="{{$grupofamilia->id ?? ''}}">
 
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Nombre</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="nombreUpdate" name="nombre" value={{$grupofamilia->nombre}}>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="nombreUpdate" name="nombre" value={{$grupofamilia->nombre ?? ''}}>
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Apellido</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="apellidoUpdate" name="apellido"  value={{$grupofamilia->apellido}}>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="apellidoUpdate" name="apellido"  value={{$grupofamilia->apellido ?? ''}}>
                     </div>
                   </div>
                 </div>
@@ -202,14 +202,14 @@
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Fecha de Nacimiento</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="fecha_NacimientoUpdate" name="fecha_Nacimiento" value={{$grupofamilia->fecha_nacimiento}}>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="fecha_NacimientoUpdate" name="fecha_Nacimiento" value={{$grupofamilia->fecha_nacimiento ?? ''}}>
                     </div>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="form-group">
                           <label>Parentesco</label>
-                          <select class="form-control select2"  id="parentescoUpdate" name="parentesco" value={{$grupofamilia->parentesco}}>
+                          <select class="form-control select2"  id="parentescoUpdate" name="parentesco" value={{$grupofamilia->parentesco ?? ''}}>
 
                             <option value="Padre">Padre</option>
                             <option value="Madre">Madre</option>
@@ -226,7 +226,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="form-group">
                           <label>Dni</label>
-                          <input type="text" class="form-control" placeholder="Enter ..." id="dniUpdate" name="dni" value={{$grupofamilia->dni}}>
+                          <input type="text" class="form-control" placeholder="Enter ..." id="dniUpdate" name="dni" value={{$grupofamilia->dni ?? ''}}>
                         </div>
                     </div>
                 </div>

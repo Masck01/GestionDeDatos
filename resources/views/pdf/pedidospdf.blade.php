@@ -13,17 +13,21 @@
     #div1{
       float:left;
       width:850px;
+      position: relative;
     }
 
     #div2{
       float:left;
+      text-align: left;
+      position: relative;
     }
+
 
     #div3{
       clear:both;
     }
 
-    table{
+        table{
 	    width:100%;
 	    border-collapse:collapse;
     }
@@ -35,13 +39,16 @@
 
   <body>
 
-    <div id="div1">
+        <div class="row">
 
-    Farmacia Avellaneda Norte ©
+    <div id="div1" class="col-md-4">  <h4 class="name">FARMACIA AVELLANEDA NORTE</h4>
+        <div>Av. Sarmiento 199 | 4000 | Tucumán</div>
+        <div>Tel / Fax. 0381. 4219399 </div>
+        <div><a href="mailto:dhsay@arnet.com.ar">favellanedanorte@arnet.com.ar</a></div>
 
     </div>
 
-    <div id="div2">
+    <div id="div2" class="col-md-8">
 
       <?php
         echo "Fecha: " . date("d") . "/" . date("m") . "/" . date("Y");
@@ -49,9 +56,11 @@
 
     </div>
 
+</div>
+
   <div id="div3">
   <br>
-  <h2> Listado De Ventas Registradas </h2>
+  <h3> Listado De Ventas Registradas </h3>
   <br>
     <table class="table table-success table-sm">
     <thead>
@@ -74,7 +83,7 @@
             <td>{{$loop->iteration}}</td>
             <td>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</td>
             <td>{{ $pedido->getFromHoraAttribute($pedido->hora) }}</td>
-            <td> {{ 'PV0'.$pedido->empleado_id."-".'0000000'.$pedido->id}}</td>
+            <td> {{ '000'.$pedido->empleado_id."-".'0000000'.$pedido->id}}</td>
             <td> {{ Arr::get($pedido,'cliente.razon_social')}} </td>
             <td> {{ $pedido->tipocliente }} </td>
             <td> {{ Arr::get($pedido,'cliente.Cuit' )}} </td>

@@ -37,6 +37,7 @@ header {
   padding: 10px 0;
   margin-bottom: 20px;
   border-bottom: 1px solid #AAAAAA;
+  width: 160%;
 }
 
 #logo {
@@ -50,11 +51,20 @@ header {
 }
 
 #company {
-  float: right;
-  text-align: right;
+  float: left;
+  text-align: left;
+  position: relative;
+  padding-left: 10px;
 }
 
+div#Nro {
 
+font-family: Arial, sans-serif;
+font-size: 18px;
+font-family: SourceSansPro;
+float: right;
+position: relative;
+}
 #details {
   margin-bottom: 50px;
 }
@@ -211,31 +221,40 @@ footer {
 
   <body>
     <header class="clearfix">
-      <div id="logo">
+      <div class="row">
+        <div id="logo">
         <img src="img/home.jpg">
       </div>
-      <div id="company">
+      <div class="col-md-4" id="company">
         <h2 class="name">FARMACIA AVELLANEDA NORTE</h2>
         <div>Av. Sarmiento 199 | 4000 | Tucumán</div>
         <div>Tel / Fax. 0381. 4219399 </div>
         <div><a href="mailto:dhsay@arnet.com.ar">favellanedanorte@arnet.com.ar</a></div>
       </div>
+        <div id='Nro' class="col-md-8">
+                <div>Remito Nº:: {{ $pedido->codigo}} </div>
+                <div>Fecha:{{ $pedido->getFromDateAttribute($pedido->fecha)}}</div>
+                <div>Hora:{{ $pedido->getFromHoraAttribute($pedido->hora)}}</div>
+        </div>
+    </div>
       </div>
     </header>
     <main>
         <div id="details" class="clearfix">
         <div id="client">
-          <h2 class "name"> Compra: {{'PP0'.$pedido->proveedor_id."-".'0000000'.$pedido->id}}</h2>
 
+
+
+          <h2 class="name">Tipo: {{ $pedido->tipoproveedor }}</h2>
           <h2 class="name">Proveedor: {{ Arr::get($pedido,'proveedor.razon_social') }}</h2>
-
-          <div class="adress">Tipo: {{ $pedido->tipoproveedor }}</div>
-
           <div class="address">CUIT: {{ Arr::get($pedido,'proveedor.cuit') }} </div>
+          {{-- <div class="address">Dirección: {{Arr::get($pedido, 'proveedor.direccion')}} </div> --}}
         </div>
         <div id="invoice">
           <h2>- Comprobante de Compra -</h2>
           <div class="date">Fecha de Compra: {{$pedido->getFromDateAttribute($pedido->fechacompra)}}</div>
+          {{-- <div>Empleado: {{Arr::get($pedido,'empleado.apellido')}} {{Arr::get($pedido,'empleado.nombre')}} </div> --}}
+
         </div>
       </div>
       <table border="0" cellspacing="0" cellpadding="0">
@@ -272,6 +291,7 @@ footer {
             </tr>
             <tr>
                 <td colspan="2"></td>
+                <p>Son Pesos AR$ {{$numaletras->toWords($pedido->total)}}</p>
                 <td colspan="2">TOTAL NETO</td>
                 <td style="text-align: center">AR$ {{$pedido->total}}</td>
             </tr>

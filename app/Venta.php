@@ -28,6 +28,11 @@ class Venta extends Model
         return $this->belongsTo(Cliente::class);
     }
 
+    public function empleado()
+    {
+        return $this->belongsTo(Empleado::class);
+    }
+
     public function getFromDateAttribute($value) {
         return \Carbon\Carbon::parse($value)->format('d/m/Y');
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae5727fe683ac1eeaf6e6673557ad8bb",
+    "content-hash": "8a29cd81aa45f1f470863e71fe59a09a",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1411,23 +1411,23 @@
         },
         {
             "name": "luecano/numero-a-letras",
-            "version": "v2.2.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lecano/php-numero-a-letras.git",
-                "reference": "84f682c62d7f91a2e8bd0a1626608410c0d1d2ae"
+                "reference": "bab51e3e81545e38d6a11efccb3e6d568765ba7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lecano/php-numero-a-letras/zipball/84f682c62d7f91a2e8bd0a1626608410c0d1d2ae",
-                "reference": "84f682c62d7f91a2e8bd0a1626608410c0d1d2ae",
+                "url": "https://api.github.com/repos/lecano/php-numero-a-letras/zipball/bab51e3e81545e38d6a11efccb3e6d568765ba7c",
+                "reference": "bab51e3e81545e38d6a11efccb3e6d568765ba7c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": "^7.2|^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "9"
+                "phpunit/phpunit": "^8.5|^9.0"
             },
             "type": "library",
             "autoload": {
@@ -1442,9 +1442,7 @@
             "authors": [
                 {
                     "name": "Luis Cano",
-                    "email": "luecano@gmail.com",
-                    "homepage": "https://github.com/luecano/numero-a-letras",
-                    "role": "Developer"
+                    "homepage": "https://github.com/luecano/numero-a-letras"
                 }
             ],
             "description": "Convierte un número a letras.",
@@ -1458,9 +1456,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lecano/php-numero-a-letras/issues",
-                "source": "https://github.com/lecano/php-numero-a-letras/tree/v2.2.0"
+                "source": "https://github.com/lecano/php-numero-a-letras/tree/v3.0.0"
             },
-            "time": "2020-10-03T21:37:44+00:00"
+            "time": "2021-03-05T15:13:07+00:00"
         },
         {
             "name": "maatwebsite/excel",

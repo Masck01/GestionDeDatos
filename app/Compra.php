@@ -10,7 +10,7 @@ class Compra extends Model
 
 
     protected $fillable = [
-      'proveedor_id','usuario_id','hora','fechaalta', 'fechacompra','tipoproveedor','subtotalcompra','ivacompra','total'
+      'proveedor_id','usuario_id','hora','fechaalta', 'fechacompra','tipoproveedor','subtotalcompra','ivacompra','total','nrofactura'
     ];
 
     public function detalle_compra()
@@ -33,7 +33,14 @@ class Compra extends Model
         return $this->belongsTo(Proveedor::class,'proveedor_id');
     }
 
+   /*  public functiom empleado()
+    {
+        return $this->belongsTo(Empleado::class,'empleado_id');
+    } */
     public function getFromDateAttribute($value) {
         return \Carbon\Carbon::parse($value)->format('d/m/Y');
+    }
+    public function getFromHoraAttribute($value) {
+        return \Carbon\Carbon::parse($value)->format('H:i:s');
     }
 }

@@ -84,10 +84,15 @@ class ComprasController extends Controller
                 $compra->ivacompra = $request->get('iva_compra');
                 $compra->total = $request->get('total_compra');
                 $compra->fechacompra = $request->fechacompra;
+                $compra->nrofactura= $request->nrofactura;
 
 
 
                 $compra->save();
+
+                $compra2 = Compra::find($compra->id);
+                $compra2->codigo='00'.$compra->proveedor_id.'0'."-".'0000000'.$compra->id;
+                $compra2->save();
 
                 if (count( json_decode($request->productosEnCompra,true) ) > 0) {
 
@@ -160,7 +165,7 @@ class ComprasController extends Controller
 
         $movimiento->caja_id = 1;
 
-        $movimiento->descripcion = 'PP0'.$compra->proveedor_id."-".'0000000'.$compra->id;
+        $movimiento->descripcion = '00'.$compra->proveedor_id."0"."-".'0000000'.$compra->id;
 
         $movimiento->fecha = $mytime->toDateTimeString();
 
@@ -200,6 +205,66 @@ class ComprasController extends Controller
         return $pdf->stream();
     }
 
+
+    public function libroCompra(Request $request){
+
+        $from = $request->searchDate;
+
+        $to = $request->searchDateHasta;
+
+        if($from && $to){
+
+            $compras = Compra::whereBetween('fechacompra', [$from, $to])
+                           ->orderBy('id', 'DESC')
+                           ->paginate(30);
+
+            $total = Compra::select( DB::raw('sum(total) as totalCompra'))
+                                           ->whereBetween('fechacompra', [$from, $to])
+                                           ->firstOrFail();
+        }
+        else{
+
+            $from = 0;
+
+            $to = 0;
+
+            $compras = Compra::orderBy('id', 'DESC')->paginate(15);
+
+            $total = Compra::select( DB::raw('sum(total) as totalCompra'))
+                                           ->firstOrFail();
+        }
+
+        return view('admin.compras.libroCompra', compact('compras','total','from','to'));
+}
+public function libroComprapdf($from,$to){
+
+    if($from !=0 && $to !=0){
+
+        $compras = Compra::whereBetween('fechacompra', [$from, $to])
+                       ->orderBy('id', 'DESC')
+                       ->paginate(30);
+
+        $total = Compra::select( DB::raw('sum(total) as total_compra'))
+                                       ->whereBetween('fechacompra', [$from, $to])
+                                       ->firstOrFail();
+
+        $from = Carbon::parse($from)->format('d/m/Y');
+
+        $to = Carbon::parse($to)->format('d/m/Y');
+    }
+    else{
+
+        $compras = Compra::orderBy('id', 'DESC')->paginate(15);
+
+        $total = Compra::select( DB::raw('sum(total) as total_compra'))
+                                       ->firstOrFail();
+    }
+
+    $pdf = PDF::loadView('pdf.libroCompra',compact('compras','total','from','to'))->setPaper('a4', 'landscape');
+
+    return $pdf->stream();
+
+}
 
 
 }

@@ -28,7 +28,7 @@ class ConceptoSeeder extends Seeder
             [
                 'descripcion' => 'aguinaldo',
                 'tipo' => 'Haber',
-                'estado' => 'Activo'
+                'estado' => 'Inactivo'
             ],
             [
                 'descripcion' => 'antiguedad',
@@ -43,7 +43,7 @@ class ConceptoSeeder extends Seeder
             [
                 'descripcion' => 'bonificacion por tiempo pleno',
                 'tipo' => 'Haber',
-                'estado' => 'Activo'
+                'estado' => 'Inactivo'
             ],
             [
                 'descripcion' => 'descuento afip',

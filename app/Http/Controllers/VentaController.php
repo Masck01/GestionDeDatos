@@ -20,6 +20,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Empleado;
+use Luecano\NumeroALetras\NumeroALetras;
 
 class VentaController extends Controller
 {
@@ -103,6 +105,10 @@ class VentaController extends Controller
 
                 $venta->save();
 
+                $venta2 = Venta::find($venta->id);
+                $venta2->codigo='000'.$venta->empleado_id."-".'0000000'.$venta->id;
+                $venta2->save();
+
             if (count( json_decode($request->productosEnPedidos,true) ) > 0) {
 
                    $proEnPedido = json_decode($request->productosEnPedidos,true);
@@ -176,10 +182,15 @@ class VentaController extends Controller
         $pedido = Venta::find($id);;
 
         $detalle = $pedido->detalle_pedido()->get();
-
-        $pdf = PDF::loadView('pdf.reciboVenta',['pedido'=>$pedido],['detalle'=>$detalle])->setPaper('a4', 'landscape');
+        $numaletras = new NumeroALetras();
+        if($pedido->tipocliente == 'Consumidor Final'):
+        $pdf = PDF::loadView('pdf.reciboVentaCF',['pedido'=>$pedido,'detalle'=>$detalle,'numaletras'=>$numaletras])->setPaper('a4', 'landscape');
 
         return $pdf->stream();
+        else:
+        $pdf = PDF::loadView('pdf.reciboVenta',['pedido'=>$pedido,'detalle'=>$detalle, 'numaletras'=>$numaletras])->setPaper('a4', 'landscape');
+        return $pdf->stream();
+        endif;
     }
 
     private function crearLineaCaja(Venta $pedido){
@@ -196,7 +207,7 @@ class VentaController extends Controller
 
         $movimiento->caja_id = 1;
 
-        $movimiento->descripcion = 'PV0'.$pedido->empleado_id."-".'0000000'.$pedido->id;
+        $movimiento->descripcion = '000'.$pedido->empleado_id."-".'0000000'.$pedido->id;
 
         $movimiento->fecha = $mytime->toDateTimeString();
 
@@ -240,5 +251,72 @@ class VentaController extends Controller
 
         return redirect()->route('ventas.index');
     }
+
+    public function libroVenta(Request $request){
+
+        $from = $request->searchDate;
+
+        $to = $request->searchDateHasta;
+
+        if($from && $to){
+
+            $ventas = Venta::where('estado','like','Pagado')
+                           ->whereBetween('fecha', [$from, $to])
+                           ->orderBy('id', 'DESC')
+                           ->paginate(30);
+
+            $total = Venta::select( DB::raw('sum(total) as totalVenta'))
+                                           ->where('estado','like','Pagado')
+                                           ->whereBetween('fecha', [$from, $to])
+                                           ->firstOrFail();
+        }
+        else{
+
+            $from = 0;
+
+            $to = 0;
+
+            $ventas = Venta::where('estado','like','Pagado')->orderBy('id', 'DESC')->paginate(15);
+
+            $total = Venta::select( DB::raw('sum(total) as totalVenta'))
+                                           ->where('estado','like','Pagado')
+                                           ->firstOrFail();
+        }
+
+        return view('admin.ventas.libroVenta', compact('ventas','total','from','to'));
+}
+public function libroVentapdf($from,$to){
+
+    if($from !=0 && $to !=0){
+
+        $ventas = Venta::where('estado','like','Pagado')
+                       ->whereBetween('fecha', [$from, $to])
+                       ->orderBy('id', 'DESC')
+                       ->paginate(30);
+
+        $total = Venta::select( DB::raw('sum(total) as total_venta'))
+                                       ->where('estado','like','Pagado')
+                                       ->whereBetween('fecha', [$from, $to])
+                                       ->firstOrFail();
+
+        $from = Carbon::parse($from)->format('d/m/Y');
+
+        $to = Carbon::parse($to)->format('d/m/Y');
+    }
+    else{
+
+        $ventas = Venta::where('estado','like','Pagado')->orderBy('id', 'DESC')->paginate(15);
+
+        $total = Venta::select( DB::raw('sum(total) as total_venta'))
+                                       ->where('estado','like','Pagado')
+                                       ->firstOrFail();
+    }
+
+    $pdf = PDF::loadView('pdf.libroVenta',compact('ventas','total','from','to'))->setPaper('a4', 'landscape');
+
+    return $pdf->stream();
+
+}
+
 
 }

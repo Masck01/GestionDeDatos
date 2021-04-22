@@ -34,12 +34,10 @@ body {
 }
 
 header {
-  padding: 10px 10px;
+  padding: 10px 0;
   margin-bottom: 20px;
-  border-bottom: 2px solid #AAAAAA;
-  border-top: 2px solid #0087C3;
-  border-right: #0087C3;
-  width: 165%;
+  border-bottom: 1px solid #AAAAAA;
+  width: 160%;
 }
 
 #logo {
@@ -59,7 +57,14 @@ header {
   padding-left: 10px;
 }
 
+div#Nro {
 
+font-family: Arial, sans-serif;
+font-size: 18px;
+font-family: SourceSansPro;
+float: right;
+position: relative;
+}
 #details {
   margin-bottom: 50px;
 }
@@ -72,28 +77,6 @@ header {
 
 #client .to {
   color: #777777;
-}
-
-div#Nro {
-
-font-family: Arial, sans-serif;
-font-size: 18px;
-font-family: SourceSansPro;
-float: right;
-position: relative;
-}
-
-#test2{
-    width: 150%;
-}
-div#client2{
-  float: left;
-  position: relative;
-}
-
-div#emp{
-    float: right;
-    position: relative;
 }
 
 h2.name {
@@ -125,7 +108,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   margin-bottom: 20px;
-  border-top:2px solid grey;
 }
 
 table th,
@@ -216,15 +198,6 @@ table tfoot tr td:first-child {
   margin-bottom: 50px;
 }
 
-img#FacturaA {
-text-align: center;
-padding: 20px;
-margin-left: 450px;
-margin-top: 0px;
-border: 2px solid black;
-float: center; width: 50px;
-position: relative;
-}
 #notices{
   padding-left: 6px;
   border-left: 6px solid #0087C3;
@@ -233,8 +206,6 @@ position: relative;
 #notices .notice {
   font-size: 1.2em;
 }
-
-
 
 footer {
   color: #777777;
@@ -250,77 +221,60 @@ footer {
 
   <body>
     <header class="clearfix">
-
       <div class="row">
-            <div class="col-md-4" id="logo">
-                <img src="img/home.jpg">
-            </div>
-            <div class="col-md-4" id="company">
-                <h2 class="name">FARMACIA AVELLANEDA NORTE</h2>
-                <div>Av. Sarmiento 199 | 4000 | Tucumán</div>
-                <div>Tel / Fax. 0381. 4219399 </div>
-                <div><a href="mailto:dhsay@arnet.com.ar">favellanedanorte@arnet.com.ar</a></div>
-              </div>
-              <div class="col-md-4">
-                <img id="FacturaA" src="https://www.pngkey.com/png/detail/809-8092795_letra-a-arial-black.png" alt="">
-              </div>
-              <div id='Nro' class="col-md-8">
-                <div>Factura Nº:: {{ '000'.$pedido->empleado_id."-".'0000000'.$pedido->id}} </div>
+        <div id="logo">
+        <img src="img/home.jpg">
+      </div>
+      <div class="col-md-4" id="company">
+        <h2 class="name">FARMACIA AVELLANEDA NORTE</h2>
+        <div>Av. Sarmiento 199 | 4000 | Tucumán</div>
+        <div>Tel / Fax. 0381. 4219399 </div>
+        <div><a href="mailto:dhsay@arnet.com.ar">favellanedanorte@arnet.com.ar</a></div>
+      </div>
+        <div id='Nro' class="col-md-8">
+                <div>Remito Nº:: {{ $pedido->codigo}} </div>
                 <div>Fecha:{{ $pedido->getFromDateAttribute($pedido->fecha)}}</div>
                 <div>Hora:{{ $pedido->getFromHoraAttribute($pedido->hora)}}</div>
-              </div>
+        </div>
+    </div>
       </div>
-      <hr>
-
-
-
-
-
     </header>
-
-
     <main>
+        <div id="details" class="clearfix">
+        <div id="client">
 
-      <div id="test2" class="row">
-        <div id="Client2" class="col-md-8">
-            <div>Tipo Cliente:{{ $pedido->tipocliente}}</div>
-            <div>Razon social:{{ Arr::get($pedido,'cliente.razon_social') }}</div>
-            <div>CUIT: {{ Arr::get($pedido,'cliente.Cuit') }}</div>
-            <div>Dirección:{{ Arr::get($pedido,'cliente.direccion') }}</div>
+
+
+          <h2 class="name">Tipo: {{ $pedido->tipoproveedor }}</h2>
+          {{-- <h2 class="name">Proveedor: {{ Arr::get($pedido,'proveedor.razon_social') }}</h2>
+          <div class="address">CUIT: {{ Arr::get($pedido,'proveedor.cuit') }} </div> --}}
+          {{-- <div class="address">Dirección: {{Arr::get($pedido, 'proveedor.direccion')}} </div> --}}
         </div>
+        <div id="invoice">
+          <h2>- Comprobante de Compra -</h2>
+          <div class="date">Fecha de Compra: {{$pedido->getFromDateAttribute($pedido->fechacompra)}}</div>
+          {{-- <div>Empleado: {{Arr::get($pedido,'empleado.apellido')}} {{Arr::get($pedido,'empleado.nombre')}} </div> --}}
 
-        <div id="emp2">
-            <div>Forma de pago: Contado</div>
-            <div>Empleado: {{Arr::get($pedido,'empleado.apellido')}} {{Arr::get($pedido,'empleado.nombre')}} </div>
         </div>
-
       </div>
-
-
-
-
-
-
-
-
       <table border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
             <th class="desc">#</th>
             <th class="desc">PRODUCTO</th>
             <th class="qty">CANTIDAD</th>
-            <th class="qty">PRECIO UNITARIO</th>
+            <th class="qty">COSTO UNITARIO</th>
             <th class="qty">SUBTOTAL</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($detalle as $det)
+                @foreach ($detalle as $det)
                       <tr>
                         <td class="desc">{{$loop->iteration}}</td>
                         <td class="desc">{{ $det->producto->nombre }}</td>
-                        <td class="unit">{{ $det->cantidad }}</td>
-                        <td class="qty"> AR$ {{ $det->producto->precio_venta }} </td>
-                        <td class="qty"> AR$ {{ $det->cantidad * $det->producto->precio_venta}}</td>
+                        <td class="qty">{{ $det->cantidad }}</td>
+                        <td class="qty">AR$ {{ $det->subtotal }}</td>
+                        <td class="qty">AR$ {{ $det->cantidad * $det->subtotal }}</td>
                       </tr>
                @endforeach
         </tbody>
@@ -328,17 +282,16 @@ footer {
             <tr>
                 <td colspan="2"></td>
                 <td colspan="2">TOTAL BRUTO</td>
-                <td style="text-align: center">AR$ {{$pedido->subtotalventa}}</td>
+                <td style="text-align: center">AR$ {{$pedido->subtotalcompra}}</td>
             </tr>
             <tr>
                 <td colspan="2"></td>
                 <td colspan="2">IVA</td>
-                <td style="text-align: center">AR$ {{$pedido->iva}}</td>
+                <td style="text-align: center">AR$ {{$pedido->ivacompra}}</td>
             </tr>
             <tr>
                 <td colspan="2"></td>
                 <p>Son Pesos AR$ {{$numaletras->toWords($pedido->total)}}</p>
-
                 <td colspan="2">TOTAL NETO</td>
                 <td style="text-align: center">AR$ {{$pedido->total}}</td>
             </tr>

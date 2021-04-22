@@ -18,5 +18,10 @@ class CajaDeAhorroSeeder extends Seeder
             'codigo'=>'11111',
             'banco_id'=>'1'
         ]);
+
+        CajaDeAhorro::create([
+            'codigo'=>'22222',
+            'banco_id'=>'1'
+        ]);
     }
 }

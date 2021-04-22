@@ -14,12 +14,13 @@
               <div class="col-md-12">
                 <br>
                 <p><b>Empleado: </b> {{ $pedido->empleado_id}} </p>
-                <p><b>Codigo Venta: </b>{{'PV0'.$pedido->empleado_id."-".'0000000'.$pedido->id}}</td>
+                <p><b>Codigo Venta: </b>{{'000'.$pedido->empleado_id."-".'0000000'.$pedido->id}}</td>
                 <p><b>Fecha: </b>{{ $pedido->getFromDateAttribute($pedido->fecha) }}</p>
-                <p><b>Subtotal: </b> AR$ {{ $pedido->subtotalventa }} </p>
+                <p><b>Total Bruto: </b> AR$ {{ $pedido->subtotalventa }} </p>
                 <p><b>IVA: </b> AR$ {{ $pedido->iva }} </p>
-                <p><b>Total: </b> AR$ {{ $pedido->total }} </p>
+                <p><b>Total Neto: </b> AR$ {{ $pedido->total }} </p>
                 <p><b>Estado: </b> {{ $pedido->estado }} </p>
+
               </div>
             </div>
 
