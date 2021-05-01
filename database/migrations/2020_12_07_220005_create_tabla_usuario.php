@@ -20,7 +20,7 @@ class CreateTablaUsuario extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('username',100)->unique();
             $table->string('password');
-            $table->enum('tipousuario', ['admin','usuario','recusos humanos'])->default('usuario');
+            $table->enum('tipousuario', ['admin','usuario','recusos humanos','ventas'])->default('usuario');
             $table->bigInteger('empleado_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();

@@ -20,6 +20,7 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ConceptoController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\RoleController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -248,17 +249,17 @@ Route::middleware(['auth'])->group(function () {
 
     // ROLES
 
-    // Route::get('roles', 'RoleController@index')->name('roles.index');
+    Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
 
-    // Route::get('roles/create', 'RoleController@create')->name('roles.create');
+    Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
 
-    // Route::post('roles/store', 'RoleController@store')->name('roles.store');
+    Route::post('roles/store', [RoleController::class, 'store'])->name('roles.store');
 
-    // Route::get('roles/{rol}', 'RoleController@show')->name('roles.show');
+    Route::get('roles/{rol}', [RoleController::class, 'show'])->name('roles.show');
 
-    // Route::get('roles/{rol}/edit', 'RoleController@edit')->name('roles.edit');
+    Route::get('roles/{rol}/edit', [RoleController::class, 'edit'])->name('roles.edit');
 
-    // Route::put('roles/{roles}', 'RoleController@update')->name('roles.update');
+    Route::put('roles/{roles}', [RoleController::class, 'update'])->name('roles.update');
 
 
     // CATEGORIAS //

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Empleado;
+use App\RoleUser;
 
 class UsuarioController extends Controller
 {
@@ -70,9 +71,9 @@ class UsuarioController extends Controller
     public function show($id)
     {
         $usuario = Usuario::findOrFail($id);
+        $roles = RoleUser::where('usuario_id','like',$usuario->id)->orderBy('role_id', 'ASC')->paginate(10);
 
-
-        return view('admin.usuarios.show',compact('usuario'));
+        return view('admin.usuarios.show',compact('usuario','roles'));
     }
 
     /**
@@ -102,9 +103,10 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         $user = Usuario::findOrFail($id);
-        $user->apellido = $request->apellido;
+        $user->username = $request->username;
+        $user->password =bcrypt($request->password);
         $user->email = $request->email;
-        $user->categoria_id =  $request->categoria;
+        $user->tipousuario = $request->tipousuario;
         $user->empleado_id = $request->empleado;
         $user->save();
 
