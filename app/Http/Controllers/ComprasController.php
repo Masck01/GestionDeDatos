@@ -90,9 +90,9 @@ class ComprasController extends Controller
 
                 $compra->save();
 
-                $compra2 = Compra::find($compra->id);
-                $compra2->codigo='00'.$compra->proveedor_id.'0'."-".'0000000'.$compra->id;
-                $compra2->save();
+                //$compra2 = Compra::find($compra->id);
+                //$compra2->codigo='00'.$compra->proveedor_id.'0'."-".'0000000'.$compra->id;
+                //$compra2->save();
 
                 if (count( json_decode($request->productosEnCompra,true) ) > 0) {
 

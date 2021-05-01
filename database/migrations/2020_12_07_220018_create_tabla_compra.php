@@ -15,7 +15,7 @@ class CreateTablaCompra extends Migration
     {
         Schema::create('compra', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('codigo')->default('0');
+            //$table->string('codigo')->default('0');
             $table->date('fechaalta');
             $table->date('fechacompra');
             $table->time('hora',0);
