@@ -16,107 +16,76 @@
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                      <label>Nombre</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="nombre" name="nombre">
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Apellido</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="apellido" name="apellido">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
                       <label>Usuario</label>
                       <input type="text" class="form-control" placeholder="Enter ..." id="username" name="username">
+
                     </div>
+
                   </div>
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Contrase&ntilde;a</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="password" name="password">
+
+
+                <div class="form-group row">
+
+                    <label for="email" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">{{ __('E-Mail Address') }}</label>
+
+                    <div class="col-md-6">
+
                     </div>
-                  </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Tel&eacute;fono Celular</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono_celular" name="telefono_celular">
+                <div class="form-group row">
+                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Tel&eacute;fono Fijo</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono_fijo" name="telefono_fijo">
-                    </div>
-                  </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>E-mail</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="email" name="email">
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Domicilio</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="domicilio" name="domicilio">
-                    </div>
-                  </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Cuil/Cuit</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="email" name="cuit_cuil">
-                    </div>
-                  </div>
-                
-                
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-              
+
               <div class="form-group">
-                
-                <label>Categoria</label>
 
-                <select class="form-control select2" style="width: 100%;" id="categoria" name="categoria">
-                
-                    @foreach ($categorias as $categoria)
-                    
-                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
 
-                    @endforeach
+                    <label>Tipo Usuario</label>
 
-                </select>
-              </div>
+                    <select class="form-control select2" style="width: 100%;" id="tipousuario" name="tipousuario">
+                      <option value="usuario">usuario</option>
+                      <option value="admin">admin</option>
+                      <option value="recursoshumanos">recursoshumanos</option>
+
+                    </select>
               </div>
             </div>
 
-                <div class="row">
-                
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Cuenta Bancaria</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="cuenta" name="cuenta">
-                    </div>
-                  </div>
 
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Fecha de Ingreso</label>
-                      <input type="date" class="form-control" placeholder="Enter ..." id="ingreso" name="ingreso">
-                    </div>
+
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                <div class="form-group">
+
+                <label>Empleado</label>
+
+                    <select class="form-control select2" style="width: 100%;" id="empleado" name="empleado">
+
+                     @foreach ($empleados as $empleado)
+
+                      <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
+
+                      @endforeach
+
+                    </select>
+                  </div>
                   </div>
                 </div>
+
+
 
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Empleado;
 
 class UsuarioController extends Controller
 {
@@ -34,9 +35,11 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::orderBy('nombre', 'DESC')->paginate(10);
+    $categorias = Categoria::orderBy('id', 'DESC')->paginate(10);
+    $empleados = Empleado::orderBy('id', 'DESC')->paginate(10);
 
-        return view('admin.usuarios.create',compact('categorias'));
+
+        return view('admin.usuarios.create',compact('categorias','empleados'));
     }
 
     /**
@@ -48,19 +51,11 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $user = new Usuario();
-        $user->nombre = $request->nombre;
-        $user->apellido = $request->apellido;
         $user->username = $request->username;
         $user->password =bcrypt($request->password);
         $user->email = $request->email;
-        $user->telefono_celular = $request->telefono_celular;
-        $user->telefono_fijo = $request->telefono_fijo;
-        $user->domicilio = $request->domicilio;
-        $user->cuil_cuit = $request->cuit_cuil;
-        $user->pagina_principal = 'home';
-        $user->categoria_id =  $request->categoria;
-        $user->cuenta = $request->cuenta;
-        $user->fechaIngreso = $request->ingreso;
+        $user->tipousuario =  $request->tipousuario;
+        $user->empleado_id= $request->empleado;
         $user->save();
 
         return redirect()->route('usuarios.index');
@@ -76,9 +71,8 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::findOrFail($id);
 
-        $clientes = Familiar::where('usuario_id','like',$usuario->id)->orderBy('id', 'ASC')->paginate(10);
 
-        return view('admin.usuarios.show',compact('usuario','clientes'));
+        return view('admin.usuarios.show',compact('usuario'));
     }
 
     /**
@@ -91,7 +85,7 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::findOrFail($id);
 
-        $categorias = Categoria::orderBy('nombre', 'DESC')->paginate(10);
+        $categorias = Categoria::orderBy('id', 'DESC')->paginate(10);
 
         return view('admin.usuarios.edit',compact('usuario','categorias'));
 
@@ -107,17 +101,9 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         $user = Usuario::findOrFail($id);
-        $user->nombre = $request->nombre;
         $user->apellido = $request->apellido;
         $user->email = $request->email;
-        $user->telefono_celular = $request->telefono_celular;
-        $user->telefono_fijo = $request->telefono_fijo;
-        $user->domicilio = $request->domicilio;
-        $user->cuil_cuit = $request->cuit_cuil;
-        $user->pagina_principal = 'home';
         $user->categoria_id =  $request->categoria;
-        $user->cuenta = $request->cuenta;
-        $user->fechaIngreso = $request->ingreso;
         $user->save();
 
         return redirect()->route('usuarios.index')->with('success','Usuario Editado correctamente');
