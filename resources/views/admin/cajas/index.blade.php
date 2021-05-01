@@ -85,6 +85,7 @@
                       <th style="text-align:center;">Descripcion</th>
                       <th style="text-align:center;">Iva Venta</th>
                       <th style="text-align:center;">Iva Compra</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -105,8 +106,15 @@
                     @else
                      <td style="text-align:center;">U$D {{$movimiento->salida}} </td>
                     @endif
+
               </tr>
               @endforeach
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style ="text-align:center;"><strong> Total ARS</strong> {{$movimiento->sum('entrada')}} </td>
+              <td style ="text-align:center;"><strong> Total ARS</strong> {{$movimiento->sum('salida')}} </td>
+
               </tbody>
             </table>
             {{$movimientos->render()}}

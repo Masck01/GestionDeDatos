@@ -171,7 +171,7 @@ class ComprasController extends Controller
 
         $movimiento->entrada = '0';
 
-        $movimiento->salida =  'Nro factura Compra'.$compra->ivacompra;
+        $movimiento->salida = $compra->ivacompra;
 
         $movimiento->moneda = 'Pesos';
 

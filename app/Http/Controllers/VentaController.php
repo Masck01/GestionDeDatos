@@ -211,7 +211,7 @@ class VentaController extends Controller
 
         $movimiento->fecha = $mytime->toDateTimeString();
 
-        $movimiento->entrada = $pedido->total;
+        $movimiento->entrada = $pedido->iva;
 
         $movimiento->salida =  '0';
 
