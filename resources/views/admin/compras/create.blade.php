@@ -427,12 +427,18 @@
 			articulo=$("#pdescripcion").val();
 			cantidad=$("#pcantidad").val();
 			costo = $("#pcosto").val();
+            tipoproveedor=$("#tipoproveedor").val();
 
         	if (idarticulo!="" && cantidad!="" && cantidad>0 && costo!="" && Number.isInteger(parseFloat(cantidad)) )
         	{
 				subtotal[cont]= costo * cantidad;
 				sub=sub+subtotal[cont];
-                iva= sub*0.21;
+                if (tipoproveedor!="Responsable Inscripto"){
+                    iva= 0;
+                }else {
+                    iva= sub*0.21;
+                }
+
                 total=sub+iva;
 
 
