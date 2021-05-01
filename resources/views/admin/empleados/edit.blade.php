@@ -10,7 +10,7 @@
               <h3 class="card-title">Actualizar Empleado</h3>
             </div>
             <!-- /.card-header -->
-            
+
             <div class="card-body">
                 <form method="post" action="{{ route('empleados.update')}}" role="form">
                   {{ csrf_field() }}
@@ -84,18 +84,18 @@
                       <input type="text" class="form-control" placeholder="Enter ..." id="cuitUpdate" name="cuit" value={{$empleado->cuit}}>
                     </div>
                   </div>
-                
-                
+
+
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                
+
                     <label>Categoria</label>
 
                     <select class="form-control select2" style="width: 100%;" id="categoria" name="categoria">
-                    <!-- <option value="$empleado->categorias->id">$empleado->categorias->descripcion</option> -->
-                      @foreach ($categorias as $categoria)
-                    
-                      <option value="{{$categoria->id}}">{{$categoria->descripcion}}</option>
+                      <option value="{{$empleado->categoria->id}}">{{$empleado->categoria->descripcion}}</option>
+                      @foreach ($categorias as $cat)
+
+                      <option value="{{$cat->id}}">{{$cat->descripcion}}</option>
 
                       @endforeach
 
@@ -106,16 +106,16 @@
 
 
                 <div class="row">
-                
+
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-              
+
                     <div class="form-group">
                     <label>Caja de Ahorro</label>
 
                     <select class="form-control select2" style="width: 100%;" id="cajadeahorro" name="cajadeahorro">
-                
+
                       @foreach ($cajasdeahorro as $cajadeahorro)
-                    
+
                       <option value="{{$cajadeahorro->id}}">{{$cajadeahorro->codigo}}</option>
 
                       @endforeach
@@ -125,14 +125,14 @@
                   </div>
 
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-              
+
                     <div class="form-group">
                     <label>Sucursal</label>
 
                     <select class="form-control select2" style="width: 100%;" id="sucursal" name="sucursal">
-                
+
                      @foreach ($sucursales as $sucursal)
-                    
+
                       <option value="{{$sucursal->id}}">{{$sucursal->razon_social}}</option>
 
                       @endforeach
@@ -140,12 +140,12 @@
                     </select>
                   </div>
                   </div>
-                </div> 
+                </div>
 
                 <div class="row">
-                
-                
-               
+
+
+
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
                       <label>Fecha de Ingreso</label>
@@ -153,7 +153,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
@@ -166,7 +166,7 @@
             </div>
             <!-- /.card-body -->
           </div>
-       
+
         </div>
     </div>
 </div>

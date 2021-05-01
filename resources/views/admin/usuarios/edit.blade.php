@@ -15,99 +15,84 @@
                   {{ csrf_field() }}
                   {{ method_field('PUT') }}
 
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Nombre</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="nombre" name="nombre" value="{{$usuario->nombre}}">
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Apellido</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="apellido" name="apellido"  value="{{$usuario->apellido}}">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Tel&eacute;fono Celular</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono_celular" name="telefono_celular"  value="{{$usuario->telefono_celular}}">
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Tel&eacute;fono Fijo</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="telefono_fijo" name="telefono_fijo"  value="{{$usuario->telefono_fijo}}">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>E-mail</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="email" name="email"  value="{{$usuario->email}}">
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Domicilio</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="domicilio" name="domicilio"  value="{{$usuario->domicilio}}">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Cuil/Cuit</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="email" name="cuit_cuil"  value="{{$usuario->cuil_cuit}}">
-                    </div>
-                  </div>
-
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-              
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                       <div class="form-group">
-                        
-                          <label>Categoria</label>
+                        <label>Usuario</label>
+                        <input type="text" class="form-control" placeholder="Enter ..." id="usernameUpdate" name="username" value={{$usuario->username}}>
+                      </div>
+                    </div>
 
-                          <select class="form-control select2" style="width: 100%;" id="categoria" name="categoria">
-                          
-                              <option value="{{$usuario->categorias->id}}">{{$usuario->categorias->nombre}}</option>
-                              
-                              @foreach ($categorias as $categoria)
-                              
-                              <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
 
-                              @endforeach
 
-                          </select>
-                          
-                        </div>
+                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                          <label for="password" >{{ __('Password') }}</label>
+                          <input id="passwordUpdate" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" value={{$usuario->password}}>
+
+                          @error('password')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                      </div>
 
                   </div>
-                
+
+                  <div class="row">
+
+
+                              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                  <label for="email" >{{ __('E-Mail Address') }}</label>
+                                  <input id="emailUpdate" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value={{$usuario->email}} required autocomplete="email" >
+
+                                  @error('email')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                              </div>
+
+                              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                                  <div class="form-group">
+
+
+                                        <label>Tipo Usuario</label>
+
+                                        <select class="form-control select2" style="width: 100%;" id="tipousuario" name="tipousuario">
+                                          <option value="{{$usuario->tipousuario}}">{{$usuario->tipousuario}}</option>
+                                          <option value="usuario">usuario</option>
+                                          <option value="admin">admin</option>
+                                          <option value="recursoshumanos">recursoshumanos</option>
+                                          <option value="ventas">ventas</option>
+                                        </select>
+                                  </div>
                   </div>
 
-                <div class="row">
-                
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Cuenta Bancaria</label>
-                      <input type="text" class="form-control" placeholder="Enter ..." id="cuenta" name="cuenta" value="{{$usuario->cuenta}}">
+
+
+              </div>
+
+
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                  <div class="form-group">
+
+                  <label>Empleado</label>
+
+                      <select class="form-control select2" style="width: 100%;" id="empleado" name="empleado">
+                        {{-- <option value="{{$usuario->empleado->id}}">{{$usuario->empleado->nombre}}</option> --}}
+                       @foreach ($empleados as $emp)
+
+                        <option value="{{$emp->id}}">{{$emp->nombre}}</option>
+
+                        @endforeach
+
+                      </select>
+                    </div>
                     </div>
                   </div>
-
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
-                      <label>Fecha de Ingreso</label>
-                      <input type="date" class="form-control" placeholder="Enter ..." id="ingreso" name="ingreso" value="{{$usuario->fechaIngreso}}">
-                    </div>
-                  </div>
-                </div>
 
 
                 <div class="row">

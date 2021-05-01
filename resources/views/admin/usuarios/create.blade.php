@@ -18,25 +18,13 @@
                     <div class="form-group">
                       <label>Usuario</label>
                       <input type="text" class="form-control" placeholder="Enter ..." id="username" name="username">
-
                     </div>
-
                   </div>
 
 
-                <div class="form-group row">
 
-                    <label for="email" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">{{ __('E-Mail Address') }}</label>
-
-                    <div class="col-md-6">
-
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                    <div class="col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <label for="password" >{{ __('Password') }}</label>
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                         @error('password')
@@ -45,23 +33,41 @@
                             </span>
                         @enderror
                     </div>
+
+                </div>
+
+                <div class="row">
+
+
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <label for="email" >{{ __('E-Mail Address') }}</label>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                                <div class="form-group">
+
+
+                                      <label>Tipo Usuario</label>
+
+                                      <select class="form-control select2" style="width: 100%;" id="tipousuario" name="tipousuario">
+                                        <option value="usuario">usuario</option>
+                                        <option value="admin">admin</option>
+                                        <option value="recursoshumanos">recursoshumanos</option>
+                                        <option value="ventas">ventas</option>
+                                      </select>
+                                </div>
                 </div>
 
 
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 
-              <div class="form-group">
-
-
-                    <label>Tipo Usuario</label>
-
-                    <select class="form-control select2" style="width: 100%;" id="tipousuario" name="tipousuario">
-                      <option value="usuario">usuario</option>
-                      <option value="admin">admin</option>
-                      <option value="recursoshumanos">recursoshumanos</option>
-
-                    </select>
-              </div>
             </div>
 
 

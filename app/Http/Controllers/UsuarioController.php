@@ -35,11 +35,11 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-    $categorias = Categoria::orderBy('id', 'DESC')->paginate(10);
+
     $empleados = Empleado::orderBy('id', 'DESC')->paginate(10);
 
 
-        return view('admin.usuarios.create',compact('categorias','empleados'));
+        return view('admin.usuarios.create',compact('empleados'));
     }
 
     /**
@@ -85,9 +85,10 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::findOrFail($id);
 
-        $categorias = Categoria::orderBy('id', 'DESC')->paginate(10);
 
-        return view('admin.usuarios.edit',compact('usuario','categorias'));
+        $empleados = Empleado::orderBy('id', 'DESC')->paginate(10);
+
+        return view('admin.usuarios.edit',compact('usuario','empleados'));
 
     }
 
@@ -104,6 +105,7 @@ class UsuarioController extends Controller
         $user->apellido = $request->apellido;
         $user->email = $request->email;
         $user->categoria_id =  $request->categoria;
+        $user->empleado_id = $request->empleado;
         $user->save();
 
         return redirect()->route('usuarios.index')->with('success','Usuario Editado correctamente');
