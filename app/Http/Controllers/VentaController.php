@@ -207,7 +207,7 @@ class VentaController extends Controller
 
         $movimiento->caja_id = 1;
 
-        $movimiento->descripcion = '000'.$pedido->empleado_id."-".'0000000'.$pedido->id;
+        $movimiento->descripcion = "Nro Factura Venta: ".'000'.$pedido->empleado_id."-".'0000000'.$pedido->id;
 
         $movimiento->fecha = $mytime->toDateTimeString();
 
