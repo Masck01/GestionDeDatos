@@ -45,7 +45,6 @@
                       <tr>
                       <th style="text-align:center;"><a href="{{ route('compras.create') }}" class="btn btn-link" data-toggle="tooltip" title="Nueva Compra" data-original-title="Generar Presupuesto"><i class="fas fa-plus"></i></a></th>
                           <th>Fecha Alta</th>
-                          <th>Codigo Compra</th>
                           <th>Nro Factura</th>
                           <th>Tipo Proveedor</th>
                           <th>Razon social Proveedor</th>
@@ -63,7 +62,6 @@
                   <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{ $compra->getFromDateAttribute($compra->fecha)}}</td>
-                    <td> {{ '00'.$compra->proveedor_id.'0'."-".'0000000'.$compra->id}}</td>
                     <td>{{ $compra->nrofactura}}</td>
                     <td>{{ $compra->tipoproveedor }}</td>
                     <td>{{ Arr::get($compra,'proveedor.razon_social')}}</td>

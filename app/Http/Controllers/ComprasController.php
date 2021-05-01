@@ -49,7 +49,7 @@ class ComprasController extends Controller
 
     public function store(Request $request)
     {   $rules = [
-        'idProveedor' => 'required_unless:tipoproveedor,Consumidor Final'
+        'idProveedor' => 'required_unless:tipoproveedor,No Inscripto'
 
         ];
         $message = [

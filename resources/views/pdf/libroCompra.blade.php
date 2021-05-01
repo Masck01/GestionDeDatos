@@ -173,7 +173,7 @@ p, label, span, table{
 				<tr>
                     <th></th>
 					<th width="100px">Fecha</th>
-                    <th class="textcenter">Codigo Compra</th>
+                    <th class="textcenter">Nro Factura</th>
 					<th class="textcenter"width="100x">Tipo Proveedor</th>
 					<th class="textcenter">Proveedor</th>
 					<th class="textcenter" > CUIT </th>
@@ -188,7 +188,7 @@ p, label, span, table{
 
                     <td style="text-align:center;">{{$loop->iteration}}</td>
                     <td>{{ $compra->getFromDateAttribute($compra->fechacompra) }}</td>
-                    <td>{{'00'.$compra->proveedor_id.'0'."-".'0000000'.$compra->id}}</td>
+                    <td>{{$compra->nrofactura}}</td>
                     <td>{{ $compra->tipoproveedor}}</td>
                     <td>{{ Arr::get($compra,'proveedor.razon_social')}}</td>
                     <td>{{ Arr::get($compra,'proveedor.cuit')}}</td>
@@ -210,6 +210,19 @@ p, label, span, table{
 					<td></td>
 				</tr>
 			</tbody>
+            <thead>
+                <tr>
+
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+
+                    <th>TOTALES</th>
+                    <th class="textcenter" > ARS {{$compra->sum('subtotalcompra')}}</th>
+                    <th class="textcenter" > ARS {{$compra->sum('ivacompra')}}</th>
+                    <th class="textcenter" >ARS {{$compra->sum('total')}}</th>
 
 		</table>
 

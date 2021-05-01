@@ -217,6 +217,21 @@ p, label, span, table{
 					<td></td>
 					<td></td>
 				</tr>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>TOTALES</th>
+                        <th class="textcenter" > ARS {{$venta->sum('subtotalventa')}}</th>
+                        <th class="textcenter" > ARS {{$venta->sum('iva')}}</th>
+                        <th class="textcenter" >ARS {{$venta->sum('total')}}</th>
+                        <th></th>
+
 			</tbody>
 
 		</table>
