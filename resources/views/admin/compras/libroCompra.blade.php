@@ -75,7 +75,7 @@
                     <tr>
                       <th></th>
                       <th>Fecha Compra</th>
-                      <th>Codigo Compra</th>
+                      <th>Nro Factura</th>
                       <th>Tipo Proveedor</th>
                       <th>Proveedor</th>
                       <th>CUIT</th>
@@ -93,7 +93,7 @@
                     <tr>
                         <td style="text-align:center;">{{$loop->iteration}}</td>
                         <td>{{ $compra->getFromDateAttribute($compra->fechacompra) }}</td>
-                        <td>{{'00'.$compra->proveedor_id.'0'."-".'0000000'.$compra->id}}</td>
+                        <td>{{$compra->nrofactura}}</td>
                         <td>{{ $compra->tipoproveedor}}</td>
                         <td>{{ Arr::get($compra,'proveedor.razon_social')}}</td>
                         <td>{{ Arr::get($compra,'proveedor.cuit')}}</td>

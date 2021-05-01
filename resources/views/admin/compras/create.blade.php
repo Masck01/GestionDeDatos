@@ -29,7 +29,7 @@
                                 <label>Tipo Proveedor</label>
 
                                 <select class="form-control select2" style="width: 100%;" id="tipoproveedor" name="tipoproveedor">
-                                  <option value="Consumidor Final"> Consumidor Final</option>
+                                  <option value="No Inscripto">No Inscripto</option>
                                   <option value="Responsable Inscripto">Responsable Inscripto</option>
                                 </select>
 

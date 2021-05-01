@@ -59,7 +59,7 @@
       <tr style="background-color: black; color:white">
         <td>#</td>
         <td>Fecha Alta</td>
-        <td>Codigo Compra</td>
+        <td>Nro Factura</td>
         <td>Proveedor</td>
         <td>Tipo Proveedor</td>
         <td>Cuit Proveedor</td>
@@ -73,7 +73,7 @@
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{ $pedido->getFromDateAttribute($pedido->fechaalta) }}</td>
-            <td> {{ '00'.$pedido->proveedor_id."0"."-".'0000000'.$pedido->id}}</td>
+            <td> {{$pedido->nrofactura}}</td>
             <td>{{ Arr::get($pedido,'proveedor.razon_social') }} </td>
             <td>{{ $pedido->tipoproveedor }} </td>
             <td>{{ Arr::get($pedido,'proveedor.cuit')}} </td>
