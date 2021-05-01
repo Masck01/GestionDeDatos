@@ -20,7 +20,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::orderBy('apellido', 'ASC')->paginate(10);
+        $usuarios = Usuario::orderBy('username', 'ASC')->paginate(10);
 
 
 

@@ -126,17 +126,17 @@ Route::middleware(['auth'])->group(function () {
 
     // USUARIOS //
 
-    // Route::get('usuarios', 'UsuarioController@index')->name('usuarios.index');
+    Route::get('usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 
-    // Route::get('usuarios/create', 'UsuarioController@create')->name('usuarios.create');
+    Route::get('usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
 
-    // Route::post('usuarios/store', 'UsuarioController@store')->name('usuarios.store');
+    Route::post('usuarios/store', [UsuarioController::class, 'store'])->name('usuarios.store');
 
-    // Route::get('usuarios/{user}/edit', 'UsuarioController@edit')->name('usuarios.edit');
+    Route::get('usuarios/{user}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
 
-    // Route::put('usuarios/{user}', 'UsuarioController@update')->name('usuarios.update');
+    Route::put('usuarios/{user}', [UsuarioController::class, 'update'])->name('usuarios.update');
 
-    // Route::get('usuarios/{usuario}', 'UsuarioController@show')->name('usuarios.show');
+    Route::get('usuarios/{usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
 
     Route::resource('usuarios', UsuarioController::class);
 

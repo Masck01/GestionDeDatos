@@ -285,6 +285,26 @@
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-tasks"></i>
                                     <p>
+                                        Seguridad
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('usuarios.index') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Usuarios</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
+
+                        @can('inventario_list')
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-tasks"></i>
+                                    <p>
                                         Liquidaciones
                                         <i class="fas fa-angle-left right"></i>
                                     </p>
@@ -368,6 +388,7 @@
                                             <p>Sub Categorias</p>
                                         </a>
                                     </li>
+
 
 
                                 </ul>
