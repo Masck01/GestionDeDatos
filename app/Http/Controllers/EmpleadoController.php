@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\CajaDeAhorro;
 use App\Http\Controllers\Controller;
 use App\Empleado;
 use App\Familiar;
 use App\Sucursal;
-use App\CajadeAhorro;
 use App\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +39,7 @@ class EmpleadoController extends Controller
     {
         $categorias = Categoria::orderBy('descripcion', 'DESC')->paginate(10);
         $sucursales = Sucursal::orderBy('razon_social', 'DESC')->paginate(10);
-        $cajasdeahorro = CajadeAhorro::orderby('codigo','DESC')->paginate(10);
+        $cajasdeahorro = CajaDeAhorro::orderby('codigo','DESC')->paginate(10);
 
         return view('admin.empleados.create',compact('categorias','sucursales','cajasdeahorro'));
     }
@@ -78,7 +78,7 @@ class EmpleadoController extends Controller
     public function show($id)
     {
         $empleado = Empleado::findOrFail($id);
-        $grupofamilia = Familiar::findOrFail($id);
+        $grupofamilia = Familiar::find($id);
 
         $grupofamiliares = Familiar::where('empleado_id','like',$empleado->id)->orderBy('id', 'ASC')->paginate(10);
 

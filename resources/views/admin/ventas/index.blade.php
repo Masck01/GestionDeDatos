@@ -66,7 +66,7 @@
                       <th style="text-align:center;"><a href="{{ route('ventas.create') }}" class="btn btn-link" data-toggle="tooltip" title="Nueva Venta" data-original-title="Generar Presupuesto"><i class="fas fa-plus"></i></a></th>
                       <th>Fecha</th>
                       <th>Hora</th>
-                      <th>Codigo Vta</th>
+                      <th>Factura Número</th>
                       <th>Tipo Cliente</th>
                       <th>Razon social Cliente</th>
                       <th>Cuit Cliente</th>

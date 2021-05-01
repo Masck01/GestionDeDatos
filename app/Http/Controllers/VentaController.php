@@ -241,7 +241,14 @@ class VentaController extends Controller
 
         $pago->vuelto =  $request->vuelto;
 
-        $pago->save();
+        if($pago->vuelto < 0):
+            Session::flash('error', 'Error: Ingrese un monto mayor al total');
+            return back()->with('message', 'El monto ingresado es menor al total')->with('typealert', 'danger');
+
+        else:
+            $pago->save();
+        endif;
+
 
         $venta = Venta::find($request->venta_id);
 

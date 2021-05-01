@@ -147,12 +147,22 @@
     function calcularVuelto()
     {
       var monto= document.getElementById("monto").value;
+      if (monto > 0){
+        var total= document.getElementById("total").value;
 
-      var total= document.getElementById("total").value;
+        var vuelto = monto - total;
+        $("#vuelto").val(vuelto);
+      }
+      else{
+        alert("No se permite montos negativos");
+      }
+     /*  if(vuelto > 0){
 
-      var vuelto = monto - total;
 
-      $("#vuelto").val(vuelto);
+        }else{
+            alert("El monto es menor al total");
+        } */
+
 
     }
 

@@ -2,22 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Concepto;
-use App\Detalle_Liquidacion;
 use App\Liquidacion;
-use App\Cajas;
-use App\Categoria;
-use App\ConfiguracionCategoria;
-use App\Empleado;
-use DB;
-use Session;
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Luecano\NumeroALetras\NumeroALetras;
-use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
-set_time_limit(0);
 
 class LiquidacionController extends Controller
 {

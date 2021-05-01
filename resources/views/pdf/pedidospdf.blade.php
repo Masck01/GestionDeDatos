@@ -68,7 +68,7 @@
         <td>#</td>
         <td>Fecha</td>
         <td>Hora</td>
-        <td>Codigo Venta</td>
+        <td>Factura Nº</td>
         <td> Cliente</td>
         <td>Tipo Cliente</td>
         <td>Cuit Cliente</td>

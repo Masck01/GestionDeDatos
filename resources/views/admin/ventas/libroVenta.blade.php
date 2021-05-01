@@ -76,7 +76,7 @@
                       <th></th>
                       <th>Fecha</th>
                       <th>Hora</th>
-                      <th>Codigo Vta</th>
+                      <th>Factura Nº</th>
                       <th>Tipo Cliente</th>
                       <th>Cliente</th>
                       <th>Domicilio</th>
