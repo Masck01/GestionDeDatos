@@ -236,7 +236,7 @@ return [
         'ConfiguracionCategoria' => App\ConfiguracionCategoria::class,
         'Venta' => App\Venta::class,
         'Compra' => App\Compra::class,
-        'Usuario'=>App\Usuario::class
+        'Usuario'=>App\Usuario::class,
 
 
     ],
