@@ -74,7 +74,7 @@ class UsuarioController extends Controller
         $roles = Role::orderBy('name', 'DESC')->paginate(10);
         $rolesusuario = RoleUser::where('usuario_id','like',$user->id)->orderBy('role_id', 'ASC')->paginate(10);
 
-        return view('admin.usuarios.show',compact('usuario','roles','rolesusuario'));
+        return view('admin.usuarios.show',compact('user','roles','rolesusuario'));
     }
 
     /**

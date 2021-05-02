@@ -16,10 +16,10 @@
               <div class="row">
                 <div class="col-md-12">
                   <br>
-                  <p><b>Id usuario: </b>{{$usuario->id}}</p>
-                  <p><b>Tipo de Usuario: </b>{{$usuario->tipousuario}}</p>
-                  <p><b>Password: </b>{{$usuario->password}}</p>
-                  <p><b>Username: </b>{{$usuario->username}}</p>
+                  <p><b>Id usuario: </b>{{$user->id}}</p>
+                  <p><b>Tipo de Usuario: </b>{{$user->tipousuario}}</p>
+                  <p><b>Password: </b>{{$user->password}}</p>
+                  <p><b>Username: </b>{{$user->username}}</p>
 
                   <div class="card card-secondary">
                     <div class="card-header">
