@@ -46,9 +46,9 @@ class RoleUserController extends Controller
     {
 
         $roleuser = new RoleUser();
-        $roleuser->usuario_id = $request->usuario_id;
-        $roleuser->role_id = $request->roless;
-        $roleuser->model_type = "App/Usuario";
+        $roleuser->usuario_id =2;
+        $roleuser->role_id =2;
+        $roleuser->model_type = "App\Usuario";
 
         $roleuser->save();
 
