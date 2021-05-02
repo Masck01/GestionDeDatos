@@ -40,10 +40,10 @@
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($roles as $rol)
+                      @foreach($rolesusuario as $rol)
                       <tr>
-                      <td style="text-align:center;">{{$rol->id}} </td>
-                      <td> {{$rol->id}} </td>
+                      <td style="text-align:center;">{{$rol->role_id}} </td>
+                      <td> {{$rol->role_id}} </td>
                       <td>
                         <button class="btn btn-link" data-toggle="modal" data-target="#ModalClienteUpdate" title="Editar empleado" data-original-title="Editar Producto" style="text-align:center;" ><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
                       </td>
@@ -66,6 +66,53 @@
 </div>
 
 <!-- Modal Agregar Grupo Familiar-->
+<div class="modal fade bd-example-modal-lg" id="ModalCliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="titulo">Asignar Rol</h5>
+               </div>
+            <div class="modal-body">
+                  <div class="card-body">
+
+                <form method="POST" action="{{ route('roleuser.store')}}" role="form">
+                  {{ csrf_field() }}
+                  <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="form-group">
+
+                        <label>Rol</label>
+
+                        <select class="form-control select2" style="width: 100%;" id="rolesusuario" name="rolesusuario">
+
+                          @foreach ($roles as $role)
+
+                          <option value="{{$role->id}}">{{$role->name}}</option>
+
+                          @endforeach
+
+                        </select>
+                      </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </form>
+
+                </div>
+              </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-link" data-dismiss="modal"><i class="fas fa-times" style="color:red; font-size: 30px;"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- FIN Modal Agregar Contacto-->
 

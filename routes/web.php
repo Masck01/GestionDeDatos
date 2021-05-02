@@ -21,6 +21,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ConceptoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RoleUserController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -353,7 +354,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('grupo/update', [FamiliarController::class, 'update'])->name('familias.update');
 
+    //ROLES DE USUARIO//
 
+    Route::post('roleuser/store', [RoleUserController::class, 'store'])->name('roleuser.store');
+
+   // Route::put('roleuser/update', [RoleUserController::class, 'update'])->name('roleuser.update');
 
     // CONCEPTOS //
 

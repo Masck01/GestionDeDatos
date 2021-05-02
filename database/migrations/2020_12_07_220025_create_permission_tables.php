@@ -52,6 +52,7 @@ class CreatePermissionTables extends Migration
 
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames) {
             $table->unsignedBigInteger('role_id');
+            $table->timestamps();
 
             $table->string('model_type');
             $table->unsignedBigInteger($columnNames['model_morph_key']);
@@ -61,7 +62,7 @@ class CreatePermissionTables extends Migration
                 ->references('id')
                 ->on($tableNames['usuario'])
                 ->onDelete('cascade');
-            
+
             $table->foreign('role_id')
                 ->references('id')
                 ->on($tableNames['roles'])

@@ -38,9 +38,9 @@ class UsuarioController extends Controller
     {
 
     $empleados = Empleado::orderBy('id', 'DESC')->paginate(10);
+    $roles = Role::orderBy('id', 'DESC')->paginate(10);
 
-
-        return view('admin.usuarios.create',compact('empleados'));
+        return view('admin.usuarios.create',compact('empleados','roles'));
     }
 
     /**
@@ -70,10 +70,11 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        $usuario = Usuario::findOrFail($id);
-        $roles = RoleUser::where('usuario_id','like',$usuario->id)->orderBy('role_id', 'ASC')->paginate(10);
+        $user = Usuario::findOrFail($id);
+        $roles = Role::orderBy('name', 'DESC')->paginate(10);
+        $rolesusuario = RoleUser::where('usuario_id','like',$user->id)->orderBy('role_id', 'ASC')->paginate(10);
 
-        return view('admin.usuarios.show',compact('usuario','roles'));
+        return view('admin.usuarios.show',compact('usuario','roles','rolesusuario'));
     }
 
     /**
