@@ -31,7 +31,7 @@
                     <thead>
                       <tr>
                       <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 12px;">
-                        <a href="{{ route('usuarios.create') }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Producto" data-original-title="Ver Detalle"><i class="fas fa-plus" style="color: blue; font-size: 20px;"></i></a>
+                        <a href="{{ route('usuarios.create') }}" class="btn btn-link" data-toggle="tooltip" title="Agregar Usuario" data-original-title="Ver Detalle"><i class="fas fa-plus" style="color: blue; font-size: 20px;"></i></a>
                         <a style="display:none;" href="#" class="btn btn-link" data-toggle="modal"  data-target="#ModalImportProduct" title="Importar Archivo Excel" data-original-title="Ver Detalle"><i class="fas fa-cloud-upload-alt" style="color: blue;  font-size: 20px;"></i></a>
                       </th>
                       <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 92px; text-align:center;">Nombre Usuario</th>

@@ -49,12 +49,12 @@
                       @foreach ($roles as $rol)
                         <tr>
                           <td>{{ $rol->name }}</td>
-                          <td style="width: 5%">
+                          {{-- <td style="width: 5%">
                             <a href="{{ route('roles.show', $rol->id) }}" class="btn btn-success btn-block"><i class="far fa-eye"></i></a>
                           </td>
                           <td style="width: 5%">
                             <a href="{{ route('roles.edit', $rol->id) }}" class="btn btn-warning btn-block"><i class="fas fa-pencil-alt" style="color:white"></i></a>
-                          </td>
+                          </td> --}}
                         </tr>
                       @endforeach
                     </tbody>
