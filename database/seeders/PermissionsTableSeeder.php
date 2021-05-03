@@ -21,13 +21,12 @@ class PermissionsTableSeeder extends Seeder
     {
 
         $permissions_admin = [];
-        array_push($permissions_admin, Permission::create(['name' => 'ventas_list']));
-        array_push($permissions_admin, Permission::create(['name' => 'compras_list']));
-        array_push($permissions_admin, Permission::create(['name' => 'inventario_list']));
-        array_push($permissions_admin, Permission::create(['name' => 'tareas_list']));
-        array_push($permissions_admin, Permission::create(['name' => 'caja_list']));
-        array_push($permissions_admin, Permission::create(['name' => 'ajustes_list']));
-        array_push($permissions_admin, Permission::create(['name' => 'ayuda_index']));
+        array_push($permissions_admin, Permission::create(['name' => 'vendedor']));
+        array_push($permissions_admin, Permission::create(['name' => 'compras']));
+        array_push($permissions_admin, Permission::create(['name' => 'inventario']));
+        array_push($permissions_admin, Permission::create(['name' => 'caja']));
+        array_push($permissions_admin, Permission::create(['name' => 'seguridad']));
+        array_push($permissions_admin, Permission::create(['name' => 'contador']));
 
         $role_admin = Role::create(['name' => 'Super Administrador']);
         $role_admin->syncPermissions($permissions_admin);

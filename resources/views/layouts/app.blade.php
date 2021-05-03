@@ -117,7 +117,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                        @can('ventas_list')
+                        @can('vendedor')
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-money-check-alt"></i>
@@ -158,7 +158,7 @@
                             </li>
                         @endcan
 
-                        @can('compras_list')
+                        @can('compras')
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-shopping-cart"></i>
@@ -195,7 +195,7 @@
                         @endcan
 
 
-                        @can('inventario_list')
+                        @can('inventario')
 
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
@@ -240,7 +240,7 @@
 
                         @endcan
 
-                        @can('inventario_list')
+                        @can('caja','contador')
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-tasks"></i>
@@ -260,7 +260,7 @@
                             </li>
                         @endcan
 
-                        @can('inventario_list')
+                        @can('seguridad')
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-tasks"></i>
@@ -280,7 +280,7 @@
                             </li>
                         @endcan
 
-                        @can('inventario_list')
+                        @can('seguridad')
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-tasks"></i>
@@ -308,7 +308,7 @@
                             </li>
                         @endcan
 
-                        @can('inventario_list')
+                        @can('contador')
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-tasks"></i>
@@ -358,7 +358,7 @@
                             </li>
                         @endcan
 
-                        @can('ajustes_list')
+                        @can('inventario','seguridad')
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-cog"></i>
@@ -434,7 +434,7 @@
     <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
 
-    @stack('scripts');
+    @stack('scripts')
 
     <!-- Bootstrap 4 -->
     <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

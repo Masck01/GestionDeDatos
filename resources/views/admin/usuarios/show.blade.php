@@ -42,8 +42,8 @@
                       <tbody>
                       @foreach($rolesusuario as $rol)
                       <tr>
-                      <td style="text-align:center;">{{$rol->role_id}} </td>
-                      <td> {{$rol->role_id}} </td>
+                      <td style="text-align:center;">{{$loop->iteration}} </td>
+                      <td> {{$roles->find($rol->role_id)->name}} </td>
                       <td>
                         <button class="btn btn-link" data-toggle="modal" data-target="#ModalClienteUpdate" title="Editar empleado" data-original-title="Editar Producto" style="text-align:center;" ><i class="fas fa-pencil-alt" style="color:black; font-size: 20px;"></i></a>
                       </td>
@@ -83,6 +83,8 @@
                         <div class="form-group">
 
                         <label>Rol</label>
+
+                        <input type="text" hidden value="{{$user->id}}" name="usuario_id">
 
                         <select class="form-control select2" style="width: 100%;" id="rolesusuario" name="rolesusuario">
 

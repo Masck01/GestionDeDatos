@@ -16,7 +16,7 @@ class RoleUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   /*  public function index()
+    /*  public function index()
     {
         $rolesusuarios = RoleUser::get();
 
@@ -33,7 +33,7 @@ class RoleUserController extends Controller
 
         $roles = Role::orderBy('id', 'DESC')->paginate(10);
 
-        return view('roleuser.create', compact('roles'));//
+        return view('roleuser.create', compact('roles')); //
     }
 
     /**
@@ -46,13 +46,13 @@ class RoleUserController extends Controller
     {
 
         $roleuser = new RoleUser();
-        $roleuser->usuario_id =2;
-        $roleuser->role_id =2;
+        $roleuser->usuario_id = $request->usuario_id;
+        $roleuser->role_id = $request->rolesusuario;
         $roleuser->model_type = "App\Usuario";
 
         $roleuser->save();
 
-        return redirect()->route('usuarios.show',$roleuser->usuario_id);//
+        return redirect()->route('usuarios.show', $roleuser->usuario_id); //
     }
 
     /**

@@ -15,7 +15,7 @@ class Empleado extends Model
 
     public static function empleado()
     {
-        return Empleado::find(Auth::user()->id)->first();
+        return Empleado::find(Auth::user()->id);
     }
 
     public function categoria()

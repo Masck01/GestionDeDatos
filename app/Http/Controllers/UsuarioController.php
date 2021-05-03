@@ -26,7 +26,7 @@ class UsuarioController extends Controller
 
 
 
-        return view('admin.usuarios.index',compact('usuarios'));
+        return view('admin.usuarios.index', compact('usuarios'));
     }
 
     /**
@@ -37,10 +37,10 @@ class UsuarioController extends Controller
     public function create()
     {
 
-    $empleados = Empleado::orderBy('id', 'DESC')->paginate(10);
-    $roles = Role::orderBy('id', 'DESC')->paginate(10);
+        $empleados = Empleado::orderBy('id', 'DESC')->paginate(10);
+        $roles = Role::orderBy('id', 'DESC')->paginate(10);
 
-        return view('admin.usuarios.create',compact('empleados','roles'));
+        return view('admin.usuarios.create', compact('empleados', 'roles'));
     }
 
     /**
@@ -53,10 +53,10 @@ class UsuarioController extends Controller
     {
         $user = new Usuario();
         $user->username = $request->username;
-        $user->password =bcrypt($request->password);
+        $user->password = bcrypt($request->password);
         $user->email = $request->email;
         $user->tipousuario =  $request->tipousuario;
-        $user->empleado_id= $request->empleado;
+        $user->empleado_id = $request->empleado;
         $user->save();
 
         return redirect()->route('usuarios.index');
@@ -72,9 +72,9 @@ class UsuarioController extends Controller
     {
         $user = Usuario::findOrFail($id);
         $roles = Role::orderBy('name', 'DESC')->paginate(10);
-        $rolesusuario = RoleUser::where('usuario_id','like',$user->id)->orderBy('role_id', 'ASC')->paginate(10);
+        $rolesusuario = RoleUser::where('usuario_id', 'like', $user->id)->get();
 
-        return view('admin.usuarios.show',compact('user','roles','rolesusuario'));
+        return view('admin.usuarios.show', compact('user', 'roles', 'rolesusuario'));
     }
 
     /**
@@ -90,8 +90,7 @@ class UsuarioController extends Controller
 
         $empleados = Empleado::orderBy('id', 'DESC')->paginate(10);
 
-        return view('admin.usuarios.edit',compact('usuario','empleados'));
-
+        return view('admin.usuarios.edit', compact('usuario', 'empleados'));
     }
 
     /**
@@ -105,13 +104,13 @@ class UsuarioController extends Controller
     {
         $user = Usuario::findOrFail($id);
         $user->username = $request->username;
-        $user->password =bcrypt($request->password);
+        $user->password = bcrypt($request->password);
         $user->email = $request->email;
         $user->tipousuario = $request->tipousuario;
         $user->empleado_id = $request->empleado;
         $user->save();
 
-        return redirect()->route('usuarios.index')->with('success','Usuario Editado correctamente');
+        return redirect()->route('usuarios.index')->with('success', 'Usuario Editado correctamente');
     }
 
     /**
@@ -124,6 +123,6 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::find($id);
         $usuario->delete();
-        return redirect()->route('usuarios.index')->with('success','Usuario eliminado correctamente');
+        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado correctamente');
     }
 }

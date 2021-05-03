@@ -22,8 +22,8 @@
                             <p><b>Nombre: </b>{{$producto->nombre}}</p>
                             <p><b>Descripcion: </b>{{$producto->descripcion}}</p>
                             <p><b>Marca: </b>{{$producto->marca_id}}</p>
-                            <p><b>Precio de Venta: </b> {{ $producto->precio_compra }}</p>
-                            <p><b>Precio de Compra: </b> {{ $producto->precio_venta }} </p>
+                            <p><b>Precio de Venta: </b> {{ $producto->precio_venta }}</p>
+                            <p><b>Precio de Compra: </b> {{ $producto->precio_compra }} </p>
                             <p><b>Stock: </b> {{ $producto->stock }} </p>
                             <p><b>Categoria: </b> {{ $producto->categoria->nombre }} </p>
                             <p><b>Proveedor: </b> {{ $producto->proveedor_id }} </p>
