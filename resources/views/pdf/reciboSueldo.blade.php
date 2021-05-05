@@ -208,7 +208,7 @@
         </table>
         <div class="imgcontainer">
             <p class="imgcontainer__p">SON PESOS: {{$numaletra->toWords($liquidacion->salario_neto)}}</p>
-            <img class="imgcontainer__img" src="{{url('/img/firma.jpg')}}">
+            <img class="imgcontainer__img" src="{{url('https://4.bp.blogspot.com/-pJo7xYc9V_M/VHoTIXPGglI/AAAAAAAAA0U/1Hh-12mVEs4/s1600/firma%2Bdigital.jpg')}}">
         </div>
         <header>
             <h3>Farmacia Avellaneda</h3>
@@ -294,7 +294,7 @@
         </table>
         <div class="imgcontainer">
             <p class="imgcontainer__p">SON PESOS: {{$numaletra->toWords($liquidacion->salario_neto)}}</p>
-            <img class="imgcontainer__img" src="{{url('/img/firma.jpg')}}">
+            <img class="imgcontainer__img" src="{{url('https://4.bp.blogspot.com/-pJo7xYc9V_M/VHoTIXPGglI/AAAAAAAAA0U/1Hh-12mVEs4/s1600/firma%2Bdigital.jpg')}}">
         </div>
 
 
