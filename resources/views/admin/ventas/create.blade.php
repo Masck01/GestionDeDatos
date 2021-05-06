@@ -364,11 +364,15 @@
 
 			idarticulo=$("#pid").val();
 			articulo=$("#pdescripcion").val();
+            stock=$("#pstock").val();
 			cantidad=$("#pcantidad").val();
             tipocliente=$("#tipocliente").val();
 			precio = document.getElementById('pprecio').value;
         	if (idarticulo!="" && cantidad!="" && cantidad>0 && precio!="" && Number.isInteger(parseFloat(cantidad) ))
         	{
+                if(stock>cantidad)
+                {
+
 				subtotal[cont]=(cantidad*precio);
 				sub=sub+subtotal[cont];
                 if (tipocliente!="Responsable Inscripto"){
@@ -378,6 +382,9 @@
                 }
 
                 total=sub+iva;
+
+
+
 				var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td> <td class= "idProducto" style="display:none;"><input type="hidden" name="idProducto[]" value="'+idarticulo+'">'+idarticulo+'</td>  <td  class ="cantidad"><input type="hidden" name="cantidad[]" value="'+cantidad+'">'+cantidad+'</td> <td  class ="precio"><input type="hidden" name="precio[]" value="'+precio+'">'+ precio +'</td> <td> $ '+subtotal[cont]+'</td></tr>';
 				cont++;
 
@@ -387,14 +394,20 @@
 		    	$('#iva_venta').val(iva);
 		    	$('#total').html("$/ " + total);
 		    	$('#total_venta').val(total);
+
                 $('#detalles').append(fila);
 		  		limpiar();
 				$("#guardar").show();
 				cargar();
+                }
+                else{
+                alert("Error no hay suficiente stock disponible");
+                }
+
 			}
 			else
 			{
-				alert("Error al ingresar el detalle del presuuesto, revise los datos del producto");
+				alert("Error al ingresar el detalle del presupuesto, revise los datos del producto");
 			}
 		}
 
