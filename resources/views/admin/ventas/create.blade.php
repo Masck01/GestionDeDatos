@@ -308,6 +308,7 @@
 		total=0;
 		subtotal=[];
         sub=0;
+        let stock;
         iva=0;
 		var arrProductos = new Array();
         var state =0;
@@ -324,7 +325,7 @@
 
 				$("#pid").val(filaid);
 				$("#pdescripcion").val(filaNombre);
-				$("#pstock").val(filaStock);
+				stock = filaStock;
 				$("#pprecio").val(filaPrecio);
 
 			});
@@ -364,13 +365,13 @@
 
 			idarticulo=$("#pid").val();
 			articulo=$("#pdescripcion").val();
-            stock=$("#pstock").val();
+
 			cantidad=$("#pcantidad").val();
             tipocliente=$("#tipocliente").val();
 			precio = document.getElementById('pprecio').value;
         	if (idarticulo!="" && cantidad!="" && cantidad>0 && precio!="" && Number.isInteger(parseFloat(cantidad) ))
         	{
-                if(stock>cantidad)
+                if(parseInt(stock)>cantidad)
                 {
 
 				subtotal[cont]=(cantidad*precio);
@@ -402,6 +403,7 @@
                 }
                 else{
                 alert("Error no hay suficiente stock disponible");
+
                 }
 
 			}
