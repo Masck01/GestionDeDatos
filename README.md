@@ -20,3 +20,9 @@ Enlace al proyecto : https://avellanedafarmacia.azurewebsites.net/
 ## Documentacion
 La documentacion sera brindada por los alumnos a los docentes.
 Se incluyen los modulos de compra, venta y liquidación de sueldos.
+
+## Correr en docker
+Instalar docker-compose
+docker-compose -f docker-compose.dev.yaml
+correr las migraciones y seed en farmacia-dev
+

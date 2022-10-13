@@ -1,14 +1,14 @@
 #!/bin/bash
-dir_name=$(dirname $(realpath $0))
-# Copy files to run server in dev
-if [ $APP_DEBUG = true ]; then
-    mkdir /etc/nginx/ssl
-    mkdir /etc/nginx/sites-available
-    cp $dir_name/nginx.conf /etc/nginx/
-    cp -R $dir_name/ssl /etc/nginx/ssl
-    cp -R $dir_name/sites/default.conf /etc/nginx/sites-available
-    rm /etc/nginx/conf.d/default.conf
-fi
+# dir_name=$(dirname $(realpath $0))
+# # Copy files to run server in dev
+# if [ $APP_DEBUG = true ]; then
+#     mkdir /etc/nginx/ssl
+#     mkdir /etc/nginx/sites-available
+#     cp $dir_name/nginx.conf /etc/nginx/
+#     cp -R $dir_name/ssl /etc/nginx/ssl
+#     cp -R $dir_name/sites/default.conf /etc/nginx/sites-available
+#     rm /etc/nginx/conf.d/default.conf
+# fi
 
 # Generates ssl default.crt
 if [ ! -f /etc/nginx/ssl/default.crt ]; then

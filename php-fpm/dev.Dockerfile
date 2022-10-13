@@ -23,15 +23,17 @@ RUN set -xe; apk add --no-cache libzip-dev \
         docker-php-ext-install intl && \
         docker-php-ext-enable imagick
 
-# RUN set -xe ; cp php-fpm/laravel.ini /usr/local/etc/php/conf.d/ && \
-# 	cp php-fpm/xlaravel.pool.conf /usr/local/etc/php-fpm.d/ && \
-# 	cp php-fpm/opcache.ini /usr/local/etc/php/conf.d/opcache.ini && \
-# 	cp composer.phar /usr/local/bin/composer && \
-#   composer install
+COPY . /var/www
+
+RUN set -xe ; cp php-fpm/laravel.ini /usr/local/etc/php/conf.d/ && \
+	cp php-fpm/xlaravel.pool.conf /usr/local/etc/php-fpm.d/ && \
+	cp php-fpm/opcache.ini /usr/local/etc/php/conf.d/opcache.ini && \
+	cp composer.phar /usr/local/bin/composer && \
+    composer install
 
 RUN groupmod -o -g 1000 www-data && \
     usermod -o -u 1000 -g www-data www-data && \
-    chown -R www-data:www-data /var/www 
+    chown -R www-data:www-data /var/www/ 
 
 CMD ["php-fpm"]
 
